@@ -1,0 +1,1 @@
+Docker cannot read the project bind mount. Use a Docker-shared directory (Colima: under your home), or configure filesystem sharing.

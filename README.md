@@ -6,7 +6,7 @@ RTL 오류의 원인을 추론하고 최소 패치를 제안한 뒤, **실제 ED
 
 - 자체 제작 RTL 6종: counter, FIFO, round-robin arbiter, FSM controller, ALU, pulse detector.
 - 오류 사례 **30개**: 공개 24개 / holdout 6개. 정상 버전은 모든 검증·회귀 테스트를 통과하고, 오류 버전 30개 모두 실제 실패를 재현했습니다.
-- 단위·EDA 통합·스크립트 기반 E2E 테스트 **84개 통과**.
+- 단위·EDA 통합·스크립트 기반 E2E 테스트 **86개 통과**.
 - 알려진 정답 패치를 공급한 **파이프라인 검증 30/30 통과**. 이는 AI 수리 성공률이 아닙니다.
 - **실제 LLM 데모·AI 벤치마크는 API 키 미설정으로 미실행**입니다. AI 성공률·토큰 비용은 측정하지 않았습니다. [상태 기록](docs/issues/ISSUE-001-live-credentials.md)
 

@@ -20,3 +20,10 @@
 - [ ] Evidence-based live model improvement and public/holdout comparison: requires the live baseline above. Scripted pipeline repeat is not a substitute.
 
 Packaging, clean-clone reproduction and GitHub publication execution results are appended to PROGRESS.md. This checklist does not claim unexecuted live AI work is complete.
+
+## Final executed reproduction
+- [x] Fresh clone, locked installation and Docker image build.
+- [x] Complete suite: 86 passed in 8.93 seconds; lint and format pass.
+- [x] Shipped scripted demo passes with real EDA; unshared-mount error is actionable.
+- [x] Whitelist/secret scan, ZIP integrity and size below 50 MB.
+- [x] Test output and dataset fingerprint preserved in results/verification/.

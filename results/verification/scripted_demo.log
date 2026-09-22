@@ -1,0 +1,44 @@
+SCRIPTED TEST MODE — not live AI
+case_006_fifo_boundary: FIXED; iterations=1; integrity=True
+Evidence: artifacts/runs/20260922T204838-56178b2a/report.md
+# Evidence: case_006_fifo_boundary
+
+**FIXED** — provider `scripted-test-double`, model `not-an-ai-model`.
+
+Category: boundary. Immutable integrity: True.
+Failure reason: none
+
+| Check | Baseline | Attempt 1 |
+|---|---|---|
+| compile | PASS | PASS |
+| simulation | FAIL | PASS |
+| lint | PASS | PASS |
+| synthesis | PASS | PASS |
+
+## Attempt 1
+
+Scripted evaluator proposal (known fix)
+
+Known fix supplied by evaluator to test pipeline only
+
+```diff
+--- a/rtl/fifo.v
++++ b/rtl/fifo.v
+@@ -5,7 +5,7 @@
+ reg [2:0] count;
+ wire push = wr_en && !full;
+ wire pop = rd_en && !empty;
+-assign full = (count == 3'd3);
++assign full = (count == 3'd4);
+ assign empty = (count == 3'd0);
+ always @(posedge clk) begin
+     if (rst) begin
+```
+
+Regression: PASS
+
+Duration: 358 ms; Provider calls: 2; tokens in/out: 0/0.
+Estimated cost: unknown/unconfigured.
+
+Scripted providers and replay output are not live AI benchmark results.
+

@@ -43,3 +43,8 @@ All timestamps use UTC unless specified. Test and benchmark numbers come from ex
 - Actual source/API raw credentials are absent from staging; staged content scan passed.
 - First clean clone under host /tmp: uv install, Docker build, lint and ZIP generation succeeded; runtime EDA tests/demo failed because Colima does not share that host path (ISSUE-007). This attempt is not counted as a successful reproduction.
 - Added a project-mount preflight and moved the clean-clone verification to a shared directory under the user home. Raw runtime logs are retained outside the repository during the repeat.
+- Successful fresh clone under Colima's shared home path: `uv sync --frozen`, clean Docker build, scripted FIFO demo, lint/format, and ZIP generation all passed.
+- Final fresh-clone suite: **86 passed in 8.93s**. Full stdout and corpus fingerprint are committed under `results/verification/`.
+- The unshared-directory wrapper now returns a clear diagnostic and exit 2, verified against the original /tmp reproduction directory.
+- Fresh-clone ZIP: 356 files, 324,726 bytes; final delivery archive is regenerated after publication records. No secrets or excluded environment/cache/build files were found.
+- GitHub namespace/repository lookup confirmed CodingBot000/semidebug_agent did not exist. Live credentials remain unavailable; implementation and deterministic verification are delivered, AI measurements remain explicitly blocked.
