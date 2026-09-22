@@ -1,0 +1,15 @@
+name: validation
+on: [push, pull_request]
+permissions:
+  contents: read
+jobs:
+  evidence:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build reproducible EDA environment
+        run: docker build -t semidebug:dev .
+      - name: Lint and format
+        run: docker run --rm --network none semidebug:dev sh -c 'ruff check src tests evaluator scripts && ruff format --check src tests evaluator scripts'
+      - name: Unit, EDA integration and scripted E2E
+        run: docker run --rm --network none --cpus 2 --memory 2g --pids-limit 128 --cap-drop ALL --security-opt no-new-privileges semidebug:dev pytest -q

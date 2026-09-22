@@ -1,0 +1,212 @@
+[
+  {
+    "id": "case_001_counter_syntax",
+    "path": "public/case_001_counter_syntax",
+    "category": "syntax",
+    "split": "public",
+    "design": "counter"
+  },
+  {
+    "id": "case_002_counter_reset",
+    "path": "public/case_002_counter_reset",
+    "category": "reset",
+    "split": "public",
+    "design": "counter"
+  },
+  {
+    "id": "case_003_counter_boundary",
+    "path": "public/case_003_counter_boundary",
+    "category": "boundary",
+    "split": "public",
+    "design": "counter"
+  },
+  {
+    "id": "case_004_counter_sequential",
+    "path": "public/case_004_counter_sequential",
+    "category": "sequential",
+    "split": "public",
+    "design": "counter"
+  },
+  {
+    "id": "case_005_counter_width_signedness",
+    "path": "hidden/case_005_counter_width_signedness",
+    "category": "width_signedness",
+    "split": "hidden",
+    "design": "counter"
+  },
+  {
+    "id": "case_006_fifo_boundary",
+    "path": "public/case_006_fifo_boundary",
+    "category": "boundary",
+    "split": "public",
+    "design": "fifo"
+  },
+  {
+    "id": "case_007_fifo_connectivity",
+    "path": "public/case_007_fifo_connectivity",
+    "category": "connectivity",
+    "split": "public",
+    "design": "fifo"
+  },
+  {
+    "id": "case_008_fifo_sequential",
+    "path": "public/case_008_fifo_sequential",
+    "category": "sequential",
+    "split": "public",
+    "design": "fifo"
+  },
+  {
+    "id": "case_009_fifo_reset",
+    "path": "public/case_009_fifo_reset",
+    "category": "reset",
+    "split": "public",
+    "design": "fifo"
+  },
+  {
+    "id": "case_010_fifo_boundary",
+    "path": "hidden/case_010_fifo_boundary",
+    "category": "boundary",
+    "split": "hidden",
+    "design": "fifo"
+  },
+  {
+    "id": "case_011_arbiter_connectivity",
+    "path": "public/case_011_arbiter_connectivity",
+    "category": "connectivity",
+    "split": "public",
+    "design": "arbiter"
+  },
+  {
+    "id": "case_012_arbiter_sequential",
+    "path": "public/case_012_arbiter_sequential",
+    "category": "sequential",
+    "split": "public",
+    "design": "arbiter"
+  },
+  {
+    "id": "case_013_arbiter_reset",
+    "path": "public/case_013_arbiter_reset",
+    "category": "reset",
+    "split": "public",
+    "design": "arbiter"
+  },
+  {
+    "id": "case_014_arbiter_combinational",
+    "path": "public/case_014_arbiter_combinational",
+    "category": "combinational",
+    "split": "public",
+    "design": "arbiter"
+  },
+  {
+    "id": "case_015_arbiter_combinational",
+    "path": "hidden/case_015_arbiter_combinational",
+    "category": "combinational",
+    "split": "hidden",
+    "design": "arbiter"
+  },
+  {
+    "id": "case_016_controller_fsm",
+    "path": "public/case_016_controller_fsm",
+    "category": "fsm",
+    "split": "public",
+    "design": "controller"
+  },
+  {
+    "id": "case_017_controller_fsm",
+    "path": "public/case_017_controller_fsm",
+    "category": "fsm",
+    "split": "public",
+    "design": "controller"
+  },
+  {
+    "id": "case_018_controller_reset",
+    "path": "public/case_018_controller_reset",
+    "category": "reset",
+    "split": "public",
+    "design": "controller"
+  },
+  {
+    "id": "case_019_controller_combinational",
+    "path": "public/case_019_controller_combinational",
+    "category": "combinational",
+    "split": "public",
+    "design": "controller"
+  },
+  {
+    "id": "case_020_controller_fsm",
+    "path": "hidden/case_020_controller_fsm",
+    "category": "fsm",
+    "split": "hidden",
+    "design": "controller"
+  },
+  {
+    "id": "case_021_alu_combinational",
+    "path": "public/case_021_alu_combinational",
+    "category": "combinational",
+    "split": "public",
+    "design": "alu"
+  },
+  {
+    "id": "case_022_alu_connectivity",
+    "path": "public/case_022_alu_connectivity",
+    "category": "connectivity",
+    "split": "public",
+    "design": "alu"
+  },
+  {
+    "id": "case_023_alu_width_signedness",
+    "path": "public/case_023_alu_width_signedness",
+    "category": "width_signedness",
+    "split": "public",
+    "design": "alu"
+  },
+  {
+    "id": "case_024_alu_combinational",
+    "path": "public/case_024_alu_combinational",
+    "category": "combinational",
+    "split": "public",
+    "design": "alu"
+  },
+  {
+    "id": "case_025_alu_syntax",
+    "path": "hidden/case_025_alu_syntax",
+    "category": "syntax",
+    "split": "hidden",
+    "design": "alu"
+  },
+  {
+    "id": "case_026_pulse_sequential",
+    "path": "public/case_026_pulse_sequential",
+    "category": "sequential",
+    "split": "public",
+    "design": "pulse"
+  },
+  {
+    "id": "case_027_pulse_combinational",
+    "path": "public/case_027_pulse_combinational",
+    "category": "combinational",
+    "split": "public",
+    "design": "pulse"
+  },
+  {
+    "id": "case_028_pulse_sequential",
+    "path": "public/case_028_pulse_sequential",
+    "category": "sequential",
+    "split": "public",
+    "design": "pulse"
+  },
+  {
+    "id": "case_029_pulse_reset",
+    "path": "public/case_029_pulse_reset",
+    "category": "reset",
+    "split": "public",
+    "design": "pulse"
+  },
+  {
+    "id": "case_030_pulse_connectivity",
+    "path": "hidden/case_030_pulse_connectivity",
+    "category": "connectivity",
+    "split": "hidden",
+    "design": "pulse"
+  }
+]

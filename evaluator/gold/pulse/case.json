@@ -1,0 +1,47 @@
+{
+  "id": "gold_pulse",
+  "category": "gold",
+  "design_top": "pulse",
+  "mutable": [
+    "rtl/pulse.v"
+  ],
+  "immutable": [
+    "tb/pulse_tb.v",
+    "expected/metadata.json"
+  ],
+  "target": {
+    "name": "target",
+    "top": "pulse_tb",
+    "sources": [
+      "tb/pulse_tb.v"
+    ],
+    "plusargs": [
+      "+SEED=7"
+    ]
+  },
+  "regression": [
+    {
+      "name": "regression_17",
+      "top": "pulse_tb",
+      "sources": [
+        "tb/pulse_tb.v"
+      ],
+      "plusargs": [
+        "+REGRESSION",
+        "+SEED=17"
+      ]
+    },
+    {
+      "name": "regression_103",
+      "top": "pulse_tb",
+      "sources": [
+        "tb/pulse_tb.v"
+      ],
+      "plusargs": [
+        "+REGRESSION",
+        "+SEED=103"
+      ]
+    }
+  ],
+  "timeout_sec": 10
+}

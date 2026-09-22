@@ -1,0 +1,26 @@
+[
+  {
+    "hypotheses": [
+      {
+        "summary": "Scripted evaluator proposal (known fix)",
+        "likely_files": [
+          "rtl/fifo.v"
+        ],
+        "likely_lines": [
+          1
+        ],
+        "reasoning": "Pipeline acceptance check, not AI inference",
+        "confidence": 1.0,
+        "evidence_ids": [
+          "baseline:simulation"
+        ]
+      }
+    ]
+  },
+  {
+    "explanation": "Known fix supplied by evaluator to test pipeline only",
+    "unified_diff": "--- a/rtl/fifo.v\n+++ b/rtl/fifo.v\n@@ -5,7 +5,7 @@\n reg [2:0] count;\n wire push = wr_en && !full;\n wire pop = rd_en && !empty;\n-assign full = (count == 3'd3);\n+assign full = (count == 3'd4);\n assign empty = (count == 3'd0);\n always @(posedge clk) begin\n     if (rst) begin\n",
+    "expected_effect": "Restore reference behavior",
+    "risks": []
+  }
+]

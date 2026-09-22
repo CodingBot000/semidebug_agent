@@ -1,0 +1,6 @@
+argv: ["vvp", "-N", ".build/target.vvp", "+SEED=7"]
+status: fail
+exit: 1
+FATAL: tb/counter_tb.v:14: counter cycle=8 expected=9 actual=0
+       Time: 29 Scope: counter_tb.step
+

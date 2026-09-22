@@ -1,0 +1,27 @@
+{
+  "iverilog": {
+    "available": true,
+    "version": "Icarus Verilog version 11.0 (stable) ()"
+  },
+  "vvp": {
+    "available": true,
+    "version": "Icarus Verilog runtime version 11.0 (stable) ()"
+  },
+  "verilator": {
+    "available": true,
+    "version": "Verilator 5.006 2023-01-22 rev (Debian 5.006-3)"
+  },
+  "yosys": {
+    "available": true,
+    "version": "Yosys 0.23 (git sha1 7ce5011c24b)"
+  },
+  "python": "3.12.14",
+  "llm": {
+    "configured": false,
+    "model": null
+  },
+  "docker": {
+    "installed": false,
+    "optional": true
+  }
+}

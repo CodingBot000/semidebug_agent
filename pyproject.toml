@@ -1,0 +1,31 @@
+[build-system]
+requires = ["hatchling>=1.26,<2"]
+build-backend = "hatchling.build"
+
+[project]
+name = "semidebug-agent"
+version = "0.1.0"
+description = "Evidence-driven RTL repair with independent EDA validation"
+requires-python = ">=3.11"
+dependencies = ["pydantic>=2.10,<3", "httpx>=0.28,<1", "python-dotenv>=1.0,<2"]
+
+[project.scripts]
+semidebug = "semidebug.cli:main"
+
+[dependency-groups]
+dev = ["pytest>=8,<10", "ruff>=0.9,<1"]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/semidebug"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+markers = ["integration: requires EDA tools", "e2e: end-to-end real EDA with scripted provider"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B"]
+ignore = ["E501"]

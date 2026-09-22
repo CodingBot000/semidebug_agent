@@ -1,0 +1,47 @@
+{
+  "id": "case_011_arbiter_connectivity",
+  "category": "connectivity",
+  "design_top": "arbiter",
+  "mutable": [
+    "rtl/arbiter.v"
+  ],
+  "immutable": [
+    "tb/arbiter_tb.v",
+    "expected/metadata.json"
+  ],
+  "target": {
+    "name": "target",
+    "top": "arbiter_tb",
+    "sources": [
+      "tb/arbiter_tb.v"
+    ],
+    "plusargs": [
+      "+SEED=7"
+    ]
+  },
+  "regression": [
+    {
+      "name": "regression_17",
+      "top": "arbiter_tb",
+      "sources": [
+        "tb/arbiter_tb.v"
+      ],
+      "plusargs": [
+        "+REGRESSION",
+        "+SEED=17"
+      ]
+    },
+    {
+      "name": "regression_103",
+      "top": "arbiter_tb",
+      "sources": [
+        "tb/arbiter_tb.v"
+      ],
+      "plusargs": [
+        "+REGRESSION",
+        "+SEED=103"
+      ]
+    }
+  ],
+  "timeout_sec": 10
+}

@@ -1,0 +1,47 @@
+{
+  "id": "case_003_counter_boundary",
+  "category": "boundary",
+  "design_top": "counter",
+  "mutable": [
+    "rtl/counter.v"
+  ],
+  "immutable": [
+    "tb/counter_tb.v",
+    "expected/metadata.json"
+  ],
+  "target": {
+    "name": "target",
+    "top": "counter_tb",
+    "sources": [
+      "tb/counter_tb.v"
+    ],
+    "plusargs": [
+      "+SEED=7"
+    ]
+  },
+  "regression": [
+    {
+      "name": "regression_17",
+      "top": "counter_tb",
+      "sources": [
+        "tb/counter_tb.v"
+      ],
+      "plusargs": [
+        "+REGRESSION",
+        "+SEED=17"
+      ]
+    },
+    {
+      "name": "regression_103",
+      "top": "counter_tb",
+      "sources": [
+        "tb/counter_tb.v"
+      ],
+      "plusargs": [
+        "+REGRESSION",
+        "+SEED=103"
+      ]
+    }
+  ],
+  "timeout_sec": 10
+}

@@ -1,0 +1,92 @@
+[
+  {
+    "package": "pydantic",
+    "version": "2.13.5",
+    "license": "MIT"
+  },
+  {
+    "package": "pydantic-core",
+    "version": "2.46.5",
+    "license": "MIT"
+  },
+  {
+    "package": "httpx",
+    "version": "0.28.1",
+    "license": "BSD-3-Clause"
+  },
+  {
+    "package": "httpcore",
+    "version": "1.0.9",
+    "license": "BSD-3-Clause"
+  },
+  {
+    "package": "python-dotenv",
+    "version": "1.2.3",
+    "license": "BSD-3-Clause"
+  },
+  {
+    "package": "anyio",
+    "version": "4.15.1",
+    "license": "MIT"
+  },
+  {
+    "package": "certifi",
+    "version": "2026.7.22",
+    "license": "MPL-2.0"
+  },
+  {
+    "package": "h11",
+    "version": "0.16.0",
+    "license": "MIT"
+  },
+  {
+    "package": "idna",
+    "version": "3.20",
+    "license": "BSD-3-Clause"
+  },
+  {
+    "package": "annotated-types",
+    "version": "0.8.0",
+    "license": "MIT"
+  },
+  {
+    "package": "typing-extensions",
+    "version": "4.16.0",
+    "license": "PSF-2.0"
+  },
+  {
+    "package": "typing-inspection",
+    "version": "0.4.4",
+    "license": "MIT"
+  },
+  {
+    "package": "pytest",
+    "version": "9.1.1",
+    "license": "MIT"
+  },
+  {
+    "package": "ruff",
+    "version": "0.16.8",
+    "license": "MIT"
+  },
+  {
+    "package": "packaging",
+    "version": "26.3",
+    "license": "Apache-2.0 OR BSD-2-Clause"
+  },
+  {
+    "package": "pluggy",
+    "version": "1.6.0",
+    "license": "MIT"
+  },
+  {
+    "package": "iniconfig",
+    "version": "2.3.0",
+    "license": "MIT"
+  },
+  {
+    "package": "pygments",
+    "version": "2.21.0",
+    "license": "BSD-2-Clause"
+  }
+]

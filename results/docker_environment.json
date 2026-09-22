@@ -1,0 +1,7 @@
+{
+  "initial_image_id": "sha256:5bf3983b26ad987e58ea30d05a841969672d85532b0bcc618856f43cd510e476",
+  "base_image_id": "sha256:392307d22300de8b5986851a12d9176dfc0fc073e65bf6523ebd7dcbeb23564e",
+  "base_repo_digests": [
+    "python@sha256:392307d22300de8b5986851a12d9176dfc0fc073e65bf6523ebd7dcbeb23564e"
+  ]
+}

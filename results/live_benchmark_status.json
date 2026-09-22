@@ -1,0 +1,7 @@
+{
+  "status": "BLOCKED",
+  "reason": "No LLM API credentials configured",
+  "live_runs": 0,
+  "repair_success_rate": null,
+  "note": "No live model performance has been measured. Known-fix pipeline tests are not AI benchmarks."
+}

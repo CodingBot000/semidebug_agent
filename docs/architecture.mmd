@@ -1,0 +1,14 @@
+flowchart TD
+    A[Manifest and immutable fingerprints] --> B[Baseline: Icarus + VVP + Verilator + Yosys]
+    B --> C[Evidence and bounded source context]
+    C --> D[Structured hypothesis]
+    D --> E[Minimal unified diff]
+    E --> F{Patch policy and exact context}
+    F -->|reject| C
+    F -->|allow| G[Fresh isolated copy of baseline]
+    G --> H[Compile / target simulation / lint / synthesis]
+    H -->|fail within budget| C
+    H -->|pass| I[Independent regression seeds]
+    I -->|fail within budget| C
+    I -->|pass and immutable hashes equal| J[Accept patch + Evidence Report]
+    C -->|repeat, budget, provider or infrastructure error| K[Safe failure with trace]

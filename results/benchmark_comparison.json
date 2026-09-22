@@ -1,0 +1,10 @@
+{
+  "measurement": "scripted-pipeline-reproducibility-not-ai-improvement",
+  "same_dataset": true,
+  "v1_fixed": 30,
+  "v2_fixed": 30,
+  "success_rate_delta": 0.0,
+  "v1_median_ms": 360.5,
+  "v2_median_ms": 363.5,
+  "interpretation": "No model tuning performed. Timing differences are runtime variation."
+}
