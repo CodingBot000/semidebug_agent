@@ -48,3 +48,12 @@ All timestamps use UTC unless specified. Test and benchmark numbers come from ex
 - The unshared-directory wrapper now returns a clear diagnostic and exit 2, verified against the original /tmp reproduction directory.
 - Fresh-clone ZIP: 356 files, 324,726 bytes; final delivery archive is regenerated after publication records. No secrets or excluded environment/cache/build files were found.
 - GitHub namespace/repository lookup confirmed CodingBot000/semidebug_agent did not exist. Live credentials remain unavailable; implementation and deterministic verification are delivered, AI measurements remain explicitly blocked.
+
+## GitHub publication
+- Created **private** repository https://github.com/CodingBot000/semidebug_agent.
+- Initial publication succeeded: branch `main`, commit `297a0d4376df0f71a41f8313fc9ed121c2bb3679`, upstream `origin/main`.
+- GitHub Actions validation started for that commit. Its final outcome is recorded below after completion.
+- Live API evaluation remains the only externally blocked work; see ISSUE-001. No live-AI success rate or improvement is claimed.
+- GitHub Actions [validation run 35782805742](https://github.com/CodingBot000/semidebug_agent/actions/runs/35782805742) completed successfully: image build, lint/format and the complete test suite passed on GitHub's runner. Machine-readable status: `results/verification/github_ci.json`.
+- Final publication record is a documentation/evidence-only follow-up commit; application/test sources are unchanged from the successful CI commit. The follow-up uses `[skip ci]` to avoid rerunning identical source checks.
+- Final submission ZIP and its SHA256 sidecar are generated in `dist/` after this record; the archive excludes .git, .env, caches and build outputs and remains below 50 MB.

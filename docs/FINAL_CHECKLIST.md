@@ -27,3 +27,5 @@ Packaging, clean-clone reproduction and GitHub publication execution results are
 - [x] Shipped scripted demo passes with real EDA; unshared-mount error is actionable.
 - [x] Whitelist/secret scan, ZIP integrity and size below 50 MB.
 - [x] Test output and dataset fingerprint preserved in results/verification/.
+- [x] GitHub private repository created and main pushed with upstream tracking.
+- [x] GitHub Actions image build, lint/format and complete test suite passed on the published source commit.
