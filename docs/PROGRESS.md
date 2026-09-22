@@ -41,3 +41,5 @@ All timestamps use UTC unless specified. Test and benchmark numbers come from ex
 - Initial package passed whitelist/secret scanning and ZIP integrity checks: 352 files, 321,368 bytes (<50 MB). Final package will be refreshed after delivery records.
 - Post-review Docker suite: 85 passed; then added malformed provider JSON-envelope coverage (ISSUE-005). Targeted provider suite passed; final fresh-clone suite follows.
 - Actual source/API raw credentials are absent from staging; staged content scan passed.
+- First clean clone under host /tmp: uv install, Docker build, lint and ZIP generation succeeded; runtime EDA tests/demo failed because Colima does not share that host path (ISSUE-007). This attempt is not counted as a successful reproduction.
+- Added a project-mount preflight and moved the clean-clone verification to a shared directory under the user home. Raw runtime logs are retained outside the repository during the repeat.

@@ -16,3 +16,5 @@ Canonical tools: Docker, Python 3.12, Icarus 11.0, Verilator 5.006, Yosys 0.23. 
 A successful fix saves the diff, logs, fingerprint maps and corrected RTL under `artifacts/runs/<run-id>/`; it does not overwrite the input project. CLI exit codes: 0 successful operation, 1 unrepaired case/failed validation, 2 configuration or infrastructure error. A benchmark can finish successfully with unfixed cases; inspect summary.json for actual repair rates.
 
 No API key is necessary for scripted tests or replay. Recorded/scripted examples must never be presented as live AI inference.
+
+If you use Colima on macOS, keep the checkout under your home directory (a shared mount). A host `/tmp` checkout may build an image successfully but appear empty at runtime. The wrapper reports this condition; move the checkout to a shared directory or configure Colima mounts.

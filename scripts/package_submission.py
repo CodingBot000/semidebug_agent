@@ -18,6 +18,7 @@ TOP_FILES = {
     ".python-version",
     ".env.example",
     ".gitignore",
+    ".gitattributes",
     ".dockerignore",
     "Dockerfile",
     "Makefile",

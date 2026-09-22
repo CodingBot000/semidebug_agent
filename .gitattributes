@@ -1,0 +1,3 @@
+# CSV uses the standard CRLF record separator; tool logs preserve captured whitespace.
+results/*.csv whitespace=cr-at-eol
+results/**/*.log -whitespace

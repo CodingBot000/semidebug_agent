@@ -15,4 +15,10 @@ fi
 docker run "${options[@]}" --user "$(id -u):$(id -g)" \
   -e PYTHONDONTWRITEBYTECODE=1 -e HOME=/tmp \
   -v "$PWD:/app:ro" -v "$PWD/artifacts:/app/artifacts" \
-  -w /app semidebug:dev "$@"
+  -w /app semidebug:dev sh -c '
+    if [ ! -f /app/pyproject.toml ] || [ ! -d /app/src/semidebug ]; then
+      echo "Docker cannot read the project bind mount. Use a Docker-shared directory (Colima: under your home), or configure filesystem sharing." >&2
+      exit 2
+    fi
+    exec "$@"
+  ' semidebug-command "$@"
