@@ -4,4 +4,4 @@ Exit code: 0
 uv run ruff check src tests evaluator scripts
 All checks passed!
 uv run ruff format --check src tests evaluator scripts
-64 files already formatted
+62 files already formatted

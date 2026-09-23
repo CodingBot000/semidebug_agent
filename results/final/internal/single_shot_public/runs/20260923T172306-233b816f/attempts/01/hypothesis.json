@@ -1,0 +1,17 @@
+{
+  "summary": "The done output decodes the busy state instead of the completion state.",
+  "likely_files": [
+    "rtl/controller.v"
+  ],
+  "likely_lines": [
+    4
+  ],
+  "reasoning": "The reference checks done only when state is 2 (tb/controller_tb.v:16), while RTL line 4 asserts it in state 1. The first failure reports state 1 with done asserted. Compilation, lint, and synthesis pass, suggesting a functional rather than structural defect.",
+  "confidence": 0.98,
+  "evidence_ids": [
+    "baseline:simulation",
+    "baseline:compile",
+    "baseline:lint",
+    "baseline:synthesis"
+  ]
+}

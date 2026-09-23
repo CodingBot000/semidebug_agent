@@ -1,0 +1,15 @@
+{
+  "summary": "The finish transition skips the done state.",
+  "likely_files": [
+    "rtl/controller.v"
+  ],
+  "likely_lines": [
+    9
+  ],
+  "reasoning": "The RTL moves from state 1 directly to state 0 on finish, while the reference expects state 2. The simulation reports reference state 2 with done low (baseline:simulation). The prior proposal was rejected for an invalid diff hunk, not by RTL validation (guard:1); its hunk count is corrected here.",
+  "confidence": 0.99,
+  "evidence_ids": [
+    "baseline:simulation",
+    "guard:1"
+  ]
+}

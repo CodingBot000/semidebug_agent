@@ -1,0 +1,17 @@
+{
+  "summary": "Reset drives pulse_out high instead of low.",
+  "likely_files": [
+    "rtl/pulse.v"
+  ],
+  "likely_lines": [
+    4
+  ],
+  "reasoning": "The first reset clock expects zero, but the RTL assigns one; simulation fails at that clock. Compile, lint, and synthesis pass, indicating a functional rather than structural issue. Evidence: baseline:simulation, baseline:compile, baseline:lint, baseline:synthesis.",
+  "confidence": 0.99,
+  "evidence_ids": [
+    "baseline:simulation",
+    "baseline:compile",
+    "baseline:lint",
+    "baseline:synthesis"
+  ]
+}

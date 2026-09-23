@@ -1,0 +1,20 @@
+argv: ["iverilog", "-g2012", "-Wall", "-s", "counter_tb", "-o", ".build/target.vvp", "rtl/counter.v", "tb/counter_tb.v"]
+status: fail
+exit: 16
+
+rtl/counter.v:7: syntax error
+tb/counter_tb.v:1: error: malformed statement
+tb/counter_tb.v:2: syntax error
+tb/counter_tb.v:2: Syntax in assignment statement l-value.
+tb/counter_tb.v:3: syntax error
+tb/counter_tb.v:3: error: malformed statement
+tb/counter_tb.v:4: syntax error
+tb/counter_tb.v:4: Syntax in assignment statement l-value.
+tb/counter_tb.v:5: syntax error
+tb/counter_tb.v:5: error: malformed statement
+tb/counter_tb.v:6: syntax error
+tb/counter_tb.v:6: error: malformed statement
+tb/counter_tb.v:17: syntax error
+tb/counter_tb.v:19: Syntax in assignment statement l-value.
+tb/counter_tb.v:28: syntax error
+I give up.

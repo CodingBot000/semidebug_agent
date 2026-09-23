@@ -1,0 +1,4 @@
+argv: ["iverilog", "-g2012", "-Wall", "-s", "controller_tb", "-o", ".build/target.vvp", "rtl/controller.v", "tb/controller_tb.v"]
+status: pass
+exit: 0
+

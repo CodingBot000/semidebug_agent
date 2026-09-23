@@ -1,0 +1,18 @@
+{
+  "summary": "The result should be registered when the sixth bit is sampled, rather than decoded from the terminal state.",
+  "likely_files": [
+    "rtl/TopModule.sv"
+  ],
+  "likely_lines": [
+    71,
+    76,
+    80
+  ],
+  "reasoning": "The original output process examines the preceding state, so it reports a completed group on the following edge. Decoding terminal states combinationally was independently rejected by the withheld regression (regression-2:2), although it passed the available smoke simulation and synthesis checks (attempt-2:simulation, attempt-2:synthesis). Registering the result from the fifth-bit state and sixth input is a distinct timing implementation, but the withheld failure details leave its expected timing uncertain.",
+  "confidence": 0.38,
+  "evidence_ids": [
+    "regression-2:2",
+    "attempt-2:simulation",
+    "attempt-2:synthesis"
+  ]
+}

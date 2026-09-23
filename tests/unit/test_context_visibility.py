@@ -1,4 +1,3 @@
-import importlib.util
 import json
 from pathlib import Path
 
@@ -8,17 +7,12 @@ from semidebug.context.selector import evidence_from, select_context
 from semidebug.models import PatchAttempt, ValidationBundle, ValidationResult
 
 ROOT = Path(__file__).resolve().parents[2]
-spec = importlib.util.spec_from_file_location(
-    "build_v2_dataset", ROOT / "evaluator/build_v2_dataset.py"
-)
-dataset_builder = importlib.util.module_from_spec(spec)
-spec.loader.exec_module(dataset_builder)
 
 
-def test_v2_cases_keep_regression_source_out_of_prompt(tmp_path):
-    output = tmp_path / "benchmark_v2"
-    assert dataset_builder.build(ROOT / "benchmark", output) == 30
-    for manifest in sorted(output.glob("*/case_*/case.json")):
+def test_final_cases_keep_regression_source_out_of_prompt(tmp_path):
+    manifests = sorted((ROOT / "benchmark_v2").glob("*/case_*/case.json"))
+    assert len(manifests) == 30
+    for manifest in manifests:
         root = manifest.parent
         case = load_case(root)
         assert set(case.target.sources).isdisjoint(
@@ -26,9 +20,16 @@ def test_v2_cases_keep_regression_source_out_of_prompt(tmp_path):
         )
         assert all(test.top != case.target.top for test in case.regression)
         assert "REGRESSION" not in (root / case.target.sources[0]).read_text()
-        hidden = root / case.regression[0].sources[0]
+        copied = tmp_path / case.id
+        copied.mkdir()
+        for path in root.rglob("*"):
+            if path.is_file():
+                destination = copied / path.relative_to(root)
+                destination.parent.mkdir(parents=True, exist_ok=True)
+                destination.write_bytes(path.read_bytes())
+        hidden = copied / case.regression[0].sources[0]
         hidden.write_text(hidden.read_text() + "\n// HIDDEN_SENTINEL\n")
-        serialized = json.dumps(select_context(root, case, []))
+        serialized = json.dumps(select_context(copied, case, []))
         assert "HIDDEN_SENTINEL" not in serialized
         assert case.regression[0].sources[0] not in serialized
 

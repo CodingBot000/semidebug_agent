@@ -1,0 +1,17 @@
+{
+  "summary": "Idle-to-busy transition tests the wrong polarity of start.",
+  "likely_files": [
+    "rtl/controller.v"
+  ],
+  "likely_lines": [
+    8
+  ],
+  "reasoning": "The reference transitions from idle to busy when start is asserted (tb/controller_tb.v:11), but RTL line 8 requires !start. The first post-reset start pulse produces the reported mismatch (baseline:simulation). Compilation, lint, and synthesis found no structural error (baseline:compile, baseline:lint, baseline:synthesis).",
+  "confidence": 0.99,
+  "evidence_ids": [
+    "baseline:simulation",
+    "baseline:compile",
+    "baseline:lint",
+    "baseline:synthesis"
+  ]
+}

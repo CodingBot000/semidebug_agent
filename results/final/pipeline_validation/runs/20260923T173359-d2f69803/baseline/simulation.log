@@ -1,0 +1,6 @@
+argv: ["vvp", "-N", ".build/target.vvp", "+SEED=7"]
+status: fail
+exit: 1
+FATAL: tb/pulse_tb.v:13: pulse signal=0 enable=0 expected=0 actual=1
+       Time: 2 Scope: pulse_tb.step
+

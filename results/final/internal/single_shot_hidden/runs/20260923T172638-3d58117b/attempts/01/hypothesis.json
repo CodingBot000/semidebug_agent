@@ -1,0 +1,17 @@
+{
+  "summary": "The history register samples enable instead of signal_in.",
+  "likely_files": [
+    "rtl/pulse.v"
+  ],
+  "likely_lines": [
+    6,
+    7
+  ],
+  "reasoning": "At line 7, pulse generation depends on the prior value of previous, but line 6 stores enable. The reference updates its history from signal_in (tb/pulse_tb.v:11), consistent with the observed extra pulse. Compilation and synthesis success indicate a functional rather than structural fault.",
+  "confidence": 0.98,
+  "evidence_ids": [
+    "baseline:simulation",
+    "baseline:compile",
+    "baseline:synthesis"
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "summary": "Reset drives pulse_out high instead of low.",
+  "likely_files": [
+    "rtl/pulse.v"
+  ],
+  "likely_lines": [
+    4
+  ],
+  "reasoning": "The first reset clock expects zero but observes one; the reset assignment explicitly drives one. The non-reset expression matches the reference calculation. Evidence: baseline:simulation and tb/pulse_tb.v:10-13; rtl/pulse.v:4,7.",
+  "confidence": 0.99,
+  "evidence_ids": [
+    "baseline:simulation",
+    "baseline:compile",
+    "baseline:synthesis"
+  ]
+}

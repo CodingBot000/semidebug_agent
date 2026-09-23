@@ -1,0 +1,16 @@
+{
+  "summary": "The three-bit output truncates the count before it reaches nine.",
+  "likely_files": [
+    "rtl/counter.v"
+  ],
+  "likely_lines": [
+    1
+  ],
+  "reasoning": "The test expects eight but observes zero when the three-bit counter wraps [baseline:simulation]. The port-width warning confirms the counter output is narrower than the test connection [baseline:compile]. Widening it to four bits should also resolve the reported expression-width mismatches [baseline:lint]. This has not been independently validated.",
+  "confidence": 0.98,
+  "evidence_ids": [
+    "baseline:simulation",
+    "baseline:compile",
+    "baseline:lint"
+  ]
+}

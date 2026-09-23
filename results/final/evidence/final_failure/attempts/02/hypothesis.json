@@ -1,0 +1,20 @@
+{
+  "summary": "The low-bit comparison is one clock behind the shifted input window.",
+  "likely_files": [
+    "rtl/TopModule.sv"
+  ],
+  "likely_lines": [
+    26,
+    42,
+    45
+  ],
+  "reasoning": "At a rising edge, match_b samples the old a_tem[2:0], while match_f subsequently examines the updated a_tem[8:6]. Comparing {a_tem[1:0], a} at that edge aligns both comparisons with the same nine-bit window. Baseline compilation, simulation, lint, and synthesis pass, so this timing defect is inferred from the RTL and specification rather than a reported functional failure. The prior proposal was not validated because its diff failed the patch guard.",
+  "confidence": 0.78,
+  "evidence_ids": [
+    "baseline:compile",
+    "baseline:simulation",
+    "baseline:lint",
+    "baseline:synthesis",
+    "guard:1"
+  ]
+}

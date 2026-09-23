@@ -1,0 +1,16 @@
+{
+  "summary": "The shift direction is reversed, and match compares the previous register value.",
+  "likely_files": [
+    "rtl/TopModule.sv"
+  ],
+  "likely_lines": [
+    15,
+    31
+  ],
+  "reasoning": "The specification requires a to enter bit 0, but line 31 inserts it at bit 7. Line 15 compares the pre-edge value of a_tem, delaying match by one clock. Synthesis optimizes match to zero, consistent with the reversed shift preventing the pattern from occurring. The previous proposal was rejected by the patch parser, not validated as RTL; this proposal instead retains a registered match and compares the incoming register value.",
+  "confidence": 0.94,
+  "evidence_ids": [
+    "baseline:synthesis",
+    "guard:1"
+  ]
+}

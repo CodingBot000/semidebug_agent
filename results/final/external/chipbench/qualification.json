@@ -1,0 +1,526 @@
+{
+  "measurement": "chipbench-qualification-no-model",
+  "observed_at_utc": "2026-09-23T10:38:54.066274+00:00",
+  "selected": 12,
+  "status_counts": {
+    "compatible": 12
+  },
+  "cases": [
+    {
+      "case_id": "chipbench_arithmetic_Prob001_continuous_input_sequence_detect",
+      "category": "arithmetic",
+      "status": "compatible",
+      "baseline_official": {
+        "official.compile": {
+          "status": "pass",
+          "stderr_tail": ""
+        },
+        "official.simulation": {
+          "status": "fail",
+          "stderr_tail": "\nChipBench official mismatch result did not pass."
+        }
+      },
+      "gold_target": {
+        "compile": {
+          "status": "pass",
+          "stderr_tail": ""
+        },
+        "simulation": {
+          "status": "pass",
+          "stderr_tail": ""
+        },
+        "lint": {
+          "status": "pass",
+          "stderr_tail": ""
+        },
+        "synthesis": {
+          "status": "pass",
+          "stderr_tail": ""
+        }
+      },
+      "gold_official": {
+        "official.compile": {
+          "status": "pass",
+          "stderr_tail": ""
+        },
+        "official.simulation": {
+          "status": "pass",
+          "stderr_tail": ""
+        }
+      }
+    },
+    {
+      "case_id": "chipbench_arithmetic_Prob002_extraneous_items_sequence_detect",
+      "category": "arithmetic",
+      "status": "compatible",
+      "baseline_official": {
+        "official.compile": {
+          "status": "pass",
+          "stderr_tail": ""
+        },
+        "official.simulation": {
+          "status": "fail",
+          "stderr_tail": "\nChipBench official mismatch result did not pass."
+        }
+      },
+      "gold_target": {
+        "compile": {
+          "status": "pass",
+          "stderr_tail": ""
+        },
+        "simulation": {
+          "status": "pass",
+          "stderr_tail": ""
+        },
+        "lint": {
+          "status": "pass",
+          "stderr_tail": ""
+        },
+        "synthesis": {
+          "status": "pass",
+          "stderr_tail": ""
+        }
+      },
+      "gold_official": {
+        "official.compile": {
+          "status": "pass",
+          "stderr_tail": ""
+        },
+        "official.simulation": {
+          "status": "pass",
+          "stderr_tail": ""
+        }
+      }
+    },
+    {
+      "case_id": "chipbench_arithmetic_Prob006_data_serial-to-parallel_circuit",
+      "category": "arithmetic",
+      "status": "compatible",
+      "baseline_official": {
+        "official.compile": {
+          "status": "pass",
+          "stderr_tail": ""
+        },
+        "official.simulation": {
+          "status": "fail",
+          "stderr_tail": "\nChipBench official mismatch result did not pass."
+        }
+      },
+      "gold_target": {
+        "compile": {
+          "status": "pass",
+          "stderr_tail": ""
+        },
+        "simulation": {
+          "status": "pass",
+          "stderr_tail": ""
+        },
+        "lint": {
+          "status": "pass",
+          "stderr_tail": ""
+        },
+        "synthesis": {
+          "status": "pass",
+          "stderr_tail": ""
+        }
+      },
+      "gold_official": {
+        "official.compile": {
+          "status": "pass",
+          "stderr_tail": ""
+        },
+        "official.simulation": {
+          "status": "pass",
+          "stderr_tail": ""
+        }
+      }
+    },
+    {
+      "case_id": "chipbench_assignment_Prob001_continuous_input_sequence_detect",
+      "category": "assignment",
+      "status": "compatible",
+      "baseline_official": {
+        "official.compile": {
+          "status": "pass",
+          "stderr_tail": ""
+        },
+        "official.simulation": {
+          "status": "fail",
+          "stderr_tail": "\nChipBench official mismatch result did not pass."
+        }
+      },
+      "gold_target": {
+        "compile": {
+          "status": "pass",
+          "stderr_tail": ""
+        },
+        "simulation": {
+          "status": "pass",
+          "stderr_tail": ""
+        },
+        "lint": {
+          "status": "pass",
+          "stderr_tail": ""
+        },
+        "synthesis": {
+          "status": "pass",
+          "stderr_tail": ""
+        }
+      },
+      "gold_official": {
+        "official.compile": {
+          "status": "pass",
+          "stderr_tail": ""
+        },
+        "official.simulation": {
+          "status": "pass",
+          "stderr_tail": ""
+        }
+      }
+    },
+    {
+      "case_id": "chipbench_assignment_Prob002_extraneous_items_sequence_detect",
+      "category": "assignment",
+      "status": "compatible",
+      "baseline_official": {
+        "official.compile": {
+          "status": "pass",
+          "stderr_tail": ""
+        },
+        "official.simulation": {
+          "status": "fail",
+          "stderr_tail": "\nChipBench official mismatch result did not pass."
+        }
+      },
+      "gold_target": {
+        "compile": {
+          "status": "pass",
+          "stderr_tail": ""
+        },
+        "simulation": {
+          "status": "pass",
+          "stderr_tail": ""
+        },
+        "lint": {
+          "status": "pass",
+          "stderr_tail": ""
+        },
+        "synthesis": {
+          "status": "pass",
+          "stderr_tail": ""
+        }
+      },
+      "gold_official": {
+        "official.compile": {
+          "status": "pass",
+          "stderr_tail": ""
+        },
+        "official.simulation": {
+          "status": "pass",
+          "stderr_tail": ""
+        }
+      }
+    },
+    {
+      "case_id": "chipbench_assignment_Prob003_non-overlapping_sequence_detect",
+      "category": "assignment",
+      "status": "compatible",
+      "baseline_official": {
+        "official.compile": {
+          "status": "pass",
+          "stderr_tail": ""
+        },
+        "official.simulation": {
+          "status": "fail",
+          "stderr_tail": "\nChipBench official mismatch result did not pass."
+        }
+      },
+      "gold_target": {
+        "compile": {
+          "status": "pass",
+          "stderr_tail": ""
+        },
+        "simulation": {
+          "status": "pass",
+          "stderr_tail": ""
+        },
+        "lint": {
+          "status": "pass",
+          "stderr_tail": ""
+        },
+        "synthesis": {
+          "status": "pass",
+          "stderr_tail": ""
+        }
+      },
+      "gold_official": {
+        "official.compile": {
+          "status": "pass",
+          "stderr_tail": ""
+        },
+        "official.simulation": {
+          "status": "pass",
+          "stderr_tail": ""
+        }
+      }
+    },
+    {
+      "case_id": "chipbench_state_machine_Prob003_non-overlapping_sequence_detect",
+      "category": "state_machine",
+      "status": "compatible",
+      "baseline_official": {
+        "official.compile": {
+          "status": "pass",
+          "stderr_tail": ""
+        },
+        "official.simulation": {
+          "status": "fail",
+          "stderr_tail": "\nChipBench official mismatch result did not pass."
+        }
+      },
+      "gold_target": {
+        "compile": {
+          "status": "pass",
+          "stderr_tail": ""
+        },
+        "simulation": {
+          "status": "pass",
+          "stderr_tail": ""
+        },
+        "lint": {
+          "status": "pass",
+          "stderr_tail": ""
+        },
+        "synthesis": {
+          "status": "pass",
+          "stderr_tail": ""
+        }
+      },
+      "gold_official": {
+        "official.compile": {
+          "status": "pass",
+          "stderr_tail": ""
+        },
+        "official.simulation": {
+          "status": "pass",
+          "stderr_tail": ""
+        }
+      }
+    },
+    {
+      "case_id": "chipbench_state_machine_Prob004_continuous_input_sequence_detect2",
+      "category": "state_machine",
+      "status": "compatible",
+      "baseline_official": {
+        "official.compile": {
+          "status": "pass",
+          "stderr_tail": ""
+        },
+        "official.simulation": {
+          "status": "fail",
+          "stderr_tail": "\nChipBench official mismatch result did not pass."
+        }
+      },
+      "gold_target": {
+        "compile": {
+          "status": "pass",
+          "stderr_tail": ""
+        },
+        "simulation": {
+          "status": "pass",
+          "stderr_tail": ""
+        },
+        "lint": {
+          "status": "pass",
+          "stderr_tail": ""
+        },
+        "synthesis": {
+          "status": "pass",
+          "stderr_tail": ""
+        }
+      },
+      "gold_official": {
+        "official.compile": {
+          "status": "pass",
+          "stderr_tail": ""
+        },
+        "official.simulation": {
+          "status": "pass",
+          "stderr_tail": ""
+        }
+      }
+    },
+    {
+      "case_id": "chipbench_state_machine_Prob012_state_machine_overlapping_sequence_detection",
+      "category": "state_machine",
+      "status": "compatible",
+      "baseline_official": {
+        "official.compile": {
+          "status": "pass",
+          "stderr_tail": ""
+        },
+        "official.simulation": {
+          "status": "fail",
+          "stderr_tail": "\nChipBench official mismatch result did not pass."
+        }
+      },
+      "gold_target": {
+        "compile": {
+          "status": "pass",
+          "stderr_tail": ""
+        },
+        "simulation": {
+          "status": "pass",
+          "stderr_tail": ""
+        },
+        "lint": {
+          "status": "pass",
+          "stderr_tail": ""
+        },
+        "synthesis": {
+          "status": "pass",
+          "stderr_tail": ""
+        }
+      },
+      "gold_official": {
+        "official.compile": {
+          "status": "pass",
+          "stderr_tail": ""
+        },
+        "official.simulation": {
+          "status": "pass",
+          "stderr_tail": ""
+        }
+      }
+    },
+    {
+      "case_id": "chipbench_timing_Prob001_continuous_input_sequence_detect",
+      "category": "timing",
+      "status": "compatible",
+      "baseline_official": {
+        "official.compile": {
+          "status": "pass",
+          "stderr_tail": ""
+        },
+        "official.simulation": {
+          "status": "fail",
+          "stderr_tail": "\nChipBench official mismatch result did not pass."
+        }
+      },
+      "gold_target": {
+        "compile": {
+          "status": "pass",
+          "stderr_tail": ""
+        },
+        "simulation": {
+          "status": "pass",
+          "stderr_tail": ""
+        },
+        "lint": {
+          "status": "pass",
+          "stderr_tail": ""
+        },
+        "synthesis": {
+          "status": "pass",
+          "stderr_tail": ""
+        }
+      },
+      "gold_official": {
+        "official.compile": {
+          "status": "pass",
+          "stderr_tail": ""
+        },
+        "official.simulation": {
+          "status": "pass",
+          "stderr_tail": ""
+        }
+      }
+    },
+    {
+      "case_id": "chipbench_timing_Prob002_extraneous_items_sequence_detect",
+      "category": "timing",
+      "status": "compatible",
+      "baseline_official": {
+        "official.compile": {
+          "status": "pass",
+          "stderr_tail": ""
+        },
+        "official.simulation": {
+          "status": "fail",
+          "stderr_tail": "\nChipBench official mismatch result did not pass."
+        }
+      },
+      "gold_target": {
+        "compile": {
+          "status": "pass",
+          "stderr_tail": ""
+        },
+        "simulation": {
+          "status": "pass",
+          "stderr_tail": ""
+        },
+        "lint": {
+          "status": "pass",
+          "stderr_tail": ""
+        },
+        "synthesis": {
+          "status": "pass",
+          "stderr_tail": ""
+        }
+      },
+      "gold_official": {
+        "official.compile": {
+          "status": "pass",
+          "stderr_tail": ""
+        },
+        "official.simulation": {
+          "status": "pass",
+          "stderr_tail": ""
+        }
+      }
+    },
+    {
+      "case_id": "chipbench_timing_Prob003_non-overlapping_sequence_detect",
+      "category": "timing",
+      "status": "compatible",
+      "baseline_official": {
+        "official.compile": {
+          "status": "pass",
+          "stderr_tail": ""
+        },
+        "official.simulation": {
+          "status": "fail",
+          "stderr_tail": "\nChipBench official mismatch result did not pass."
+        }
+      },
+      "gold_target": {
+        "compile": {
+          "status": "pass",
+          "stderr_tail": ""
+        },
+        "simulation": {
+          "status": "pass",
+          "stderr_tail": ""
+        },
+        "lint": {
+          "status": "pass",
+          "stderr_tail": ""
+        },
+        "synthesis": {
+          "status": "pass",
+          "stderr_tail": ""
+        }
+      },
+      "gold_official": {
+        "official.compile": {
+          "status": "pass",
+          "stderr_tail": ""
+        },
+        "official.simulation": {
+          "status": "pass",
+          "stderr_tail": ""
+        }
+      }
+    }
+  ]
+}

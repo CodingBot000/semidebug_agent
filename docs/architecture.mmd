@@ -1,6 +1,6 @@
 flowchart LR
     A[Case manifest and baseline] --> B[Visible context selector]
-    B --> C[Host Codex CLI: hypothesis and diff]
+    B --> C[Host OpenAI API: hypothesis and diff]
     C --> D[Exact patch guard]
     D -->|allowed| E[Fresh candidate copy]
     D -->|rejected| B

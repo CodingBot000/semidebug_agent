@@ -1,0 +1,15 @@
+{
+  "summary": "The shift register inserts a at the MSB rather than the LSB.",
+  "likely_files": [
+    "rtl/TopModule.sv"
+  ],
+  "likely_lines": [
+    31
+  ],
+  "reasoning": "The specified left shift requires {a_tem[6:0], a}. The existing concatenation instead places a in bit 7; synthesis evidence shows bits being optimized to constants, consistent with the intended pattern never being reached. The withheld regression fails despite the basic simulation passing.",
+  "confidence": 0.98,
+  "evidence_ids": [
+    "baseline:synthesis",
+    "baseline-regression:2"
+  ]
+}

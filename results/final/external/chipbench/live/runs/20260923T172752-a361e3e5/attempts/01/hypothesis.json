@@ -1,0 +1,17 @@
+{
+  "summary": "The shift direction is reversed, and both registered comparisons examine the window from before the current input is shifted in.",
+  "likely_files": [
+    "rtl/TopModule.sv"
+  ],
+  "likely_lines": [
+    17,
+    31,
+    47
+  ],
+  "reasoning": "The specification defines the earliest bit at bit 8 and the latest bit at bit 0, with a sequential output updated on each clock edge (problem.txt:21-32). The current shift puts the newest bit at bit 8, while the comparisons use the previous register value. The withheld regression fails despite successful compilation and synthesis; its specific failing cases are unknown (baseline-regression:2, baseline:synthesis).",
+  "confidence": 0.87,
+  "evidence_ids": [
+    "baseline-regression:2",
+    "baseline:synthesis"
+  ]
+}

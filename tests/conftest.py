@@ -10,12 +10,12 @@ ROOT = Path(__file__).resolve().parents[1]
 
 @pytest.fixture
 def counter():
-    return ROOT / "benchmark/public/case_003_counter_boundary"
+    return ROOT / "benchmark_v2/public/case_003_counter_boundary"
 
 
 @pytest.fixture
 def fifo():
-    return ROOT / "examples/fifo_off_by_one"
+    return ROOT / "examples/fifo_off_by_one_v2"
 
 
 @pytest.fixture

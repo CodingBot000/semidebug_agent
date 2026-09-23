@@ -1,0 +1,14 @@
+{
+  "summary": "The full flag asserts at three entries instead of four.",
+  "likely_files": [
+    "rtl/fifo.v"
+  ],
+  "likely_lines": [
+    8
+  ],
+  "reasoning": "The four-entry memory and testbench both use a capacity of four, but the RTL compares count against three. The baseline failure reports full=1 at occupancy 3. [baseline:simulation]",
+  "confidence": 0.99,
+  "evidence_ids": [
+    "baseline:simulation"
+  ]
+}

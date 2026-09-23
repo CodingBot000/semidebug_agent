@@ -1,0 +1,15 @@
+{
+  "summary": "Subtraction operands are reversed for op 1.",
+  "likely_files": [
+    "rtl/alu.v"
+  ],
+  "likely_lines": [
+    6
+  ],
+  "reasoning": "The RTL computes b-a, while the testbench expects a-b. The reported mismatch (a=0, b=140: expected 116, actual 140) matches that reversal. Other operations have no reported failures, but have not been independently cleared.",
+  "confidence": 0.99,
+  "evidence_ids": [
+    "baseline:simulation",
+    "baseline:compile"
+  ]
+}

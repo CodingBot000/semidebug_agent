@@ -1,0 +1,15 @@
+{
+  "summary": "Done state transitions to busy rather than idle",
+  "likely_files": [
+    "rtl/controller.v"
+  ],
+  "likely_lines": [
+    10
+  ],
+  "reasoning": "The reference transitions from state 2 to 0, but RTL transitions from 2 to 1. The observed idle expectation with busy asserted is consistent with this discrepancy. This is not yet independently validated as a repair.",
+  "confidence": 0.99,
+  "evidence_ids": [
+    "baseline:simulation",
+    "baseline:compile"
+  ]
+}

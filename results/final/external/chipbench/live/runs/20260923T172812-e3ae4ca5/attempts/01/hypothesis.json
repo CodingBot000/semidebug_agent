@@ -1,0 +1,16 @@
+{
+  "summary": "The input counter advances without a valid input bit.",
+  "likely_files": [
+    "rtl/TopModule.sv"
+  ],
+  "likely_lines": [
+    18,
+    19
+  ],
+  "reasoning": "At line 18, the counter can advance when valid_a is low if ready_a is high. That can make a later input bit appear to be the sixth bit. The specification requires counting received valid bits (problem.txt:26-30). The withheld regression fails, although the visible simulation passes; the failing case is unknown.",
+  "confidence": 0.91,
+  "evidence_ids": [
+    "baseline-regression:2",
+    "baseline:simulation"
+  ]
+}

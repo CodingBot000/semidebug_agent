@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Run and preserve final lint, full suite and V2 scripted demo evidence."""
+"""Run and preserve final lint, full suite and scripted demo evidence."""
 
 import hashlib
 import json
@@ -10,8 +10,10 @@ import time
 from datetime import datetime, timezone
 from pathlib import Path
 
+from semidebug.config import Settings
+
 ROOT = Path(__file__).resolve().parents[1]
-OUTPUT = ROOT / "results/v2/verification"
+OUTPUT = ROOT / "results/final/verification"
 
 
 def utc_now() -> str:
@@ -94,7 +96,7 @@ def demo_gates(output: str) -> dict:
         "regression_103.simulation",
     )
     gates = {
-        "case_is_v2_demo": result.get("case_id") == "demo_fifo_off_by_one_v2",
+        "case_is_final_demo": result.get("case_id") == "demo_fifo_off_by_one_v2",
         "scripted_provider": result.get("provider") == "scripted-test-double",
         "baseline_failed": bool(baseline_results)
         and any(check["status"] == "fail" for check in baseline_results.values()),
@@ -118,6 +120,7 @@ def demo_gates(output: str) -> dict:
 
 def main() -> int:
     OUTPUT.mkdir(parents=True, exist_ok=True)
+    settings = Settings.from_env()
     environment = {
         "observed_at_utc": utc_now(),
         "os": platform.system(),
@@ -128,10 +131,12 @@ def main() -> int:
         "uv": probe(["uv", "--version"]),
         "docker_cli": probe(["docker", "--version"]),
         "docker_daemon": probe(["docker", "info", "--format", "{{.ServerVersion}}"]),
-        "codex_cli": probe(["codex", "--version"]),
-        "git_source_commit": subprocess.check_output(
-            ["git", "rev-parse", "HEAD"], cwd=ROOT, text=True
-        ).strip(),
+        "openai_api": {
+            "configured": bool(settings.api_key and settings.model),
+            "model": settings.model or None,
+            "reasoning_effort": settings.reasoning_effort,
+            "endpoint": settings.base_url,
+        },
     }
     (OUTPUT / "environment.json").write_text(json.dumps(environment, indent=2) + "\n")
 
@@ -157,10 +162,9 @@ def main() -> int:
             "status": "NOT_RUN",
             "reason": "Docker unavailable",
         }
-    checks = {"lint": lint, "tests": tests, "scripted_v2_demo": demo}
+    checks = {"lint": lint, "tests": tests, "scripted_pipeline_demo": demo}
     summary = {
         "observed_at_utc": utc_now(),
-        "source_commit": environment["git_source_commit"],
         "status": "PASS" if all(item["status"] == "PASS" for item in checks.values()) else "FAIL",
         "checks": checks,
     }

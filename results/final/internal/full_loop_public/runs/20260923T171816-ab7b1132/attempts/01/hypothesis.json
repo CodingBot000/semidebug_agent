@@ -1,0 +1,17 @@
+{
+  "summary": "The synchronous reset initializes the priority bit to the wrong value.",
+  "likely_files": [
+    "rtl/arbiter.v"
+  ],
+  "likely_lines": [
+    13
+  ],
+  "reasoning": "The testbench resets its reference priority to zero, but the RTL resets priority_bit to one. With both requests asserted immediately after reset, this selects grant 10 instead of 01. The baseline failure reports exactly that mismatch at time 3. This is a likely repair, not a validated result.",
+  "confidence": 0.98,
+  "evidence_ids": [
+    "baseline:simulation",
+    "baseline:compile",
+    "baseline:lint",
+    "baseline:synthesis"
+  ]
+}

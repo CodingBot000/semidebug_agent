@@ -1,0 +1,10 @@
+argv: ["verilator", "--lint-only", "-Wall", "-Wno-fatal", "--top-module", "TopModule", "rtl/TopModule.sv"]
+status: pass
+exit: 0
+
+%Warning-UNUSEDSIGNAL: rtl/TopModule.sv:8:12: Bits of signal are not used: 'a_tem'[8]
+                                            : ... In instance TopModule
+    8 |  reg [8:0] a_tem;
+      |            ^~~~~
+                       ... For warning description see https://verilator.org/warn/UNUSEDSIGNAL?v=5.006
+                       ... Use "/* verilator lint_off UNUSEDSIGNAL */" and lint_on around source to disable this message.

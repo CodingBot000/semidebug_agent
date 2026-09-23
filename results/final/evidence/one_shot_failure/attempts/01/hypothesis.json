@@ -1,0 +1,16 @@
+{
+  "summary": "The full flag asserts at three entries instead of four.",
+  "likely_files": [
+    "rtl/fifo.v"
+  ],
+  "likely_lines": [
+    8
+  ],
+  "reasoning": "The memory and two-bit pointers support four entries, but line 8 marks the FIFO full when count reaches three. The simulation fails at occupancy three because full is already asserted. The testbench expects full only at occupancy four. This is the most likely cause, though the proposed change has not been independently validated.",
+  "confidence": 0.98,
+  "evidence_ids": [
+    "baseline:simulation",
+    "baseline:compile",
+    "baseline:synthesis"
+  ]
+}

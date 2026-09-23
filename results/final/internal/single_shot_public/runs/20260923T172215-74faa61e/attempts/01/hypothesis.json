@@ -1,0 +1,15 @@
+{
+  "summary": "Reset initializes occupancy to one instead of zero.",
+  "likely_files": [
+    "rtl/fifo.v"
+  ],
+  "likely_lines": [
+    12
+  ],
+  "reasoning": "At the first reset step, the reference occupancy is zero but empty is low; count is explicitly reset to one. The other FIFO operations appear consistent with the reference's push/pop rules, though subsequent behavior has not been independently validated.",
+  "confidence": 0.98,
+  "evidence_ids": [
+    "baseline:simulation",
+    "baseline:compile"
+  ]
+}

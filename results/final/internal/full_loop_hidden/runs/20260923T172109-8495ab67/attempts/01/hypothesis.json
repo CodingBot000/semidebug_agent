@@ -1,0 +1,18 @@
+{
+  "summary": "The history register tracks enable instead of signal_in.",
+  "likely_files": [
+    "rtl/pulse.v"
+  ],
+  "likely_lines": [
+    6,
+    7
+  ],
+  "reasoning": "At line 7, pulse_out uses previous to detect a rising signal_in. The reference updates its history from signal_in, but RTL line 6 updates it from enable. This is consistent with the simulation mismatch; compilation, lint, and synthesis reported no structural error. The proposed behavior has not been independently validated.",
+  "confidence": 0.99,
+  "evidence_ids": [
+    "baseline:simulation",
+    "baseline:compile",
+    "baseline:lint",
+    "baseline:synthesis"
+  ]
+}

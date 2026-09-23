@@ -1,0 +1,16 @@
+{
+  "summary": "The comparison uses the wrong 8-bit pattern.",
+  "likely_files": [
+    "rtl/TopModule.sv"
+  ],
+  "likely_lines": [
+    15
+  ],
+  "reasoning": "The specification requires 8'b0111_0001, but line 15 compares against 8'b0111_0011. The baseline regression fails despite compiling and passing structural checks. A one-bit literal correction preserves the existing clocked output behavior; whether the evaluator expects a different output latency remains uncertain.",
+  "confidence": 0.9,
+  "evidence_ids": [
+    "baseline-regression:2",
+    "baseline:compile",
+    "baseline:synthesis"
+  ]
+}

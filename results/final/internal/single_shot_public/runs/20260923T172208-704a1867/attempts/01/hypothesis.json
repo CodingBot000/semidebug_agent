@@ -1,0 +1,15 @@
+{
+  "summary": "The write enable condition is inverted.",
+  "likely_files": [
+    "rtl/fifo.v"
+  ],
+  "likely_lines": [
+    6
+  ],
+  "reasoning": "At the first write, occupancy should become one, but empty remains asserted. Line 6 permits a write only when the FIFO is full, so the initial write cannot occur. The testbench expects writes when occupancy is below four (tb/fifo_tb.v:13).",
+  "confidence": 0.99,
+  "evidence_ids": [
+    "baseline:simulation",
+    "baseline:compile"
+  ]
+}

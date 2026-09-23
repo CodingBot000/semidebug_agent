@@ -1,0 +1,17 @@
+{
+  "summary": "Reset initializes FIFO occupancy to one instead of zero.",
+  "likely_files": [
+    "rtl/fifo.v"
+  ],
+  "likely_lines": [
+    12
+  ],
+  "reasoning": "The first reset step expects empty=1 at occupancy zero, but reports empty=0. Reset assigns count=1, while empty is asserted only when count=0 (rtl/fifo.v:9,12). Compilation, lint and synthesis accept the baseline, so this appears behavioral rather than structural. No independent validation of the proposed change is available.",
+  "confidence": 0.99,
+  "evidence_ids": [
+    "baseline:simulation",
+    "baseline:compile",
+    "baseline:lint",
+    "baseline:synthesis"
+  ]
+}

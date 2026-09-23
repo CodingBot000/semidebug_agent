@@ -1,0 +1,17 @@
+{
+  "summary": "Opcode 0 incorrectly subtracts instead of adding.",
+  "likely_files": [
+    "rtl/alu.v"
+  ],
+  "likely_lines": [
+    5
+  ],
+  "reasoning": "The baseline returns 116 for 0 and 140 at opcode 0, consistent with 8-bit subtraction rather than the testbench's addition. Opcode 1 already implements subtraction. Compile, lint, and synthesis passed, so this appears to be a functional error rather than a structural one.",
+  "confidence": 0.99,
+  "evidence_ids": [
+    "baseline:simulation",
+    "baseline:compile",
+    "baseline:lint",
+    "baseline:synthesis"
+  ]
+}

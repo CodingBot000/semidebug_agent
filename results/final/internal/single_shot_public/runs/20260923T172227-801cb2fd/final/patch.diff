@@ -1,0 +1,11 @@
+--- a/rtl/arbiter.v
++++ b/rtl/arbiter.v
+@@ -11,7 +11,7 @@
+ end
+ always @(posedge clk) begin
+     if (rst) priority_bit <= 1'b0;
+-    else if (grant[0]) priority_bit <= 1'b0;
++    else if (grant[0]) priority_bit <= 1'b1;
+     else if (grant[1]) priority_bit <= 1'b0;
+ end
+ endmodule

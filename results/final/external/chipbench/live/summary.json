@@ -1,0 +1,68 @@
+{
+  "measurement": "live-ai-repair",
+  "total": 12,
+  "fixed": 6,
+  "repair_success_rate": 0.5,
+  "first_attempt_fix_rate": 0.08333333333333333,
+  "first_attempt_success_rate": 0.08333333333333333,
+  "final_success_rate": 0.5,
+  "retry_rescue_count": 5,
+  "semantic_retry_rescue_count": 3,
+  "format_retry_rescue_count": 2,
+  "regression_rejection_count": 5,
+  "retry_reason_counts": {
+    "PATCH_PARSE_RETRY": 14,
+    "REGRESSION_RETRY": 5,
+    "PATCH_GUARD_RETRY": 1
+  },
+  "average_attempts": 2.1666666666666665,
+  "median_attempts": 2.0,
+  "regression_integrity_rate": 1.0,
+  "patch_attempts": 26,
+  "invalid_patch_attempts": 15,
+  "invalid_patch_rate": 0.5769230769230769,
+  "average_retry_count": 1.1666666666666667,
+  "median_repair_time_ms": 21559.0,
+  "median_latency_ms": 21559.0,
+  "average_llm_calls": 2.1666666666666665,
+  "input_tokens": 131937,
+  "cached_input_tokens": 28392,
+  "models": [
+    "gpt-6-sol"
+  ],
+  "reasoning_efforts": [
+    "low"
+  ],
+  "billing_modes": [
+    "openai-api"
+  ],
+  "output_tokens": 16695,
+  "estimated_cost": 0.3797184,
+  "failure_breakdown": {
+    "PATCH_REJECTED": 4,
+    "MAX_RETRY": 2
+  },
+  "categories": {
+    "arithmetic": {
+      "total": 3,
+      "fixed": 2
+    },
+    "assignment": {
+      "total": 3,
+      "fixed": 2
+    },
+    "state_machine": {
+      "total": 3,
+      "fixed": 2
+    },
+    "timing": {
+      "total": 3,
+      "fixed": 0
+    }
+  },
+  "retry_distribution": {
+    "2": 3,
+    "1": 8,
+    "0": 1
+  }
+}

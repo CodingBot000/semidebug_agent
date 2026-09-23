@@ -1,0 +1,10 @@
+--- a/rtl/fifo.v
++++ b/rtl/fifo.v
+@@ -4,6 +4,6 @@
+ reg [1:0] wr_ptr, rd_ptr;
+ reg [2:0] count;
+-wire push = wr_en && full;
++wire push = wr_en && !full;
+ wire pop = rd_en && !empty;
+ assign full = (count == 3'd4);
+ assign empty = (count == 3'd0);

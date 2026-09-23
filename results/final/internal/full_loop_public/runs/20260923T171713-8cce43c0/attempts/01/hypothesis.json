@@ -1,0 +1,17 @@
+{
+  "summary": "The enable condition is inverted.",
+  "likely_files": [
+    "rtl/counter.v"
+  ],
+  "likely_lines": [
+    4
+  ],
+  "reasoning": "The counter advances only when en is low, whereas the testbench advances its expected count when en is high. The first enabled cycle remains at zero in the baseline simulation. Compilation, lint, and synthesis report no structural errors; this is a behavioral hypothesis, not a validated repair.",
+  "confidence": 0.99,
+  "evidence_ids": [
+    "baseline:simulation",
+    "baseline:compile",
+    "baseline:lint",
+    "baseline:synthesis"
+  ]
+}

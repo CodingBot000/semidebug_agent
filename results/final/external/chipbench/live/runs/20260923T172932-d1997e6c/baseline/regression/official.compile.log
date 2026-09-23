@@ -1,0 +1,9 @@
+argv: ["iverilog", "-g2012", "-Wall", "-s", "tb", "-o", ".build/official.vvp", "rtl/TopModule.sv", "tb/ref.sv", "tb/test.sv"]
+status: pass
+exit: 0
+
+warning: Some design elements have no explicit time unit and/or
+       : time precision. This may cause confusing timing results.
+       : Affected design elements are:
+       :   -- module RefModule declared here: tb/ref.sv:2
+       :   -- module TopModule declared here: rtl/TopModule.sv:1

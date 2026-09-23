@@ -1,0 +1,17 @@
+{
+  "summary": "Missing statement terminator after the increment assignment",
+  "likely_files": [
+    "rtl/counter.v"
+  ],
+  "likely_lines": [
+    6,
+    7
+  ],
+  "reasoning": "The assignment at line 6 lacks a semicolon, so the following end is parsed unexpectedly. All three baseline tools report a syntax failure at line 7. Adding the terminator is the smallest plausible repair; it has not been independently validated.",
+  "confidence": 0.99,
+  "evidence_ids": [
+    "baseline:compile",
+    "baseline:lint",
+    "baseline:synthesis"
+  ]
+}

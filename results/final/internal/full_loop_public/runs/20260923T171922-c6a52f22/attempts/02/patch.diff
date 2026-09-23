@@ -1,0 +1,11 @@
+--- a/rtl/alu.v
++++ b/rtl/alu.v
+@@ -8,6 +8,6 @@
+         3'd3: result = a | b;
+         3'd4: result = a ^ b;
+         3'd5: result = a << b[2:0];
+-        3'd6: result = {7'd0, (a < b)};
++        3'd6: result = {7'd0, ((a[7] != b[7]) ? a[7] : (a < b))};
+         default: result = a;
+     endcase
+ end

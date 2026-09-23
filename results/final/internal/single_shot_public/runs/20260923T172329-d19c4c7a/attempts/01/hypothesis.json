@@ -1,0 +1,17 @@
+{
+  "summary": "Opcode 5 shifts in the wrong direction.",
+  "likely_files": [
+    "rtl/alu.v"
+  ],
+  "likely_lines": [
+    10
+  ],
+  "reasoning": "The baseline uses right shift, while the testbench specifies left shift. For a=90 and b[2:0]=4, left shift truncates to 160; right shift gives the observed 5. Compilation, lint, and synthesis do not identify a structural issue. This is a strong but unvalidated repair hypothesis.",
+  "confidence": 0.99,
+  "evidence_ids": [
+    "baseline:simulation",
+    "baseline:compile",
+    "baseline:lint",
+    "baseline:synthesis"
+  ]
+}

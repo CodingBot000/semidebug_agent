@@ -1,0 +1,17 @@
+{
+  "summary": "After a failed group, the FSM assumes the next group's first bit is zero.",
+  "likely_files": [
+    "rtl/TopModule.sv"
+  ],
+  "likely_lines": [
+    64,
+    65
+  ],
+  "reasoning": "The unconditional sf6-to-s1 transition ignores data, whereas the s6 transition classifies that bit. A one at the start of the next group can therefore be treated as the required initial zero, contrary to the non-overlapping group rule. Baseline checks passed, so this behavioral fault is not established by those checks. The prior proposal was rejected as an invalid diff, not evaluated for behavior.",
+  "confidence": 0.8,
+  "evidence_ids": [
+    "baseline:simulation",
+    "baseline:synthesis",
+    "guard:1"
+  ]
+}

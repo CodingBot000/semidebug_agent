@@ -1,0 +1,15 @@
+{
+  "summary": "The prefix comparator uses 001 instead of the required 011; the registered comparison timing should remain unchanged.",
+  "likely_files": [
+    "rtl/TopModule.sv"
+  ],
+  "likely_lines": [
+    17
+  ],
+  "reasoning": "The specified prefix is 011 (problem.txt:11-25), while line 17 compares against 001. The previous proposal also changed comparison timing and failed the withheld regression, so this proposal isolates the prefix correction against the original baseline. The regression does not reveal whether this timing interpretation is correct.",
+  "confidence": 0.73,
+  "evidence_ids": [
+    "regression-1:2",
+    "attempt-1:simulation"
+  ]
+}

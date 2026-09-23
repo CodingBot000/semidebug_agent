@@ -1,0 +1,18 @@
+{
+  "summary": "The output is combinational rather than clocked.",
+  "likely_files": [
+    "rtl/TopModule.sv"
+  ],
+  "likely_lines": [
+    10,
+    19,
+    22,
+    26
+  ],
+  "reasoning": "Synthesis reports a flip-flop for a_tem but none for match (baseline:synthesis). The requirement that the design operate synchronously suggests match may need a clocked, asynchronously reset output. This is uncertain: the stated matching behavior also describes the baseline combinational comparison, and the regression failure does not disclose its cause (baseline-regression:2).",
+  "confidence": 0.46,
+  "evidence_ids": [
+    "baseline:synthesis",
+    "baseline-regression:2"
+  ]
+}

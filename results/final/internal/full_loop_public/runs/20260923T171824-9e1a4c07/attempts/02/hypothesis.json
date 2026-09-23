@@ -1,0 +1,15 @@
+{
+  "summary": "The simultaneous-request grant choices are reversed.",
+  "likely_files": [
+    "rtl/arbiter.v"
+  ],
+  "likely_lines": [
+    8
+  ],
+  "reasoning": "With req=11 and priority_bit=0, line 8 selects 10, but the reference expects 01. The previous proposal was rejected because its diff hunk was malformed, not because the RTL change failed validation. The corrected patch has not been independently tested.",
+  "confidence": 0.98,
+  "evidence_ids": [
+    "baseline:simulation",
+    "guard:1"
+  ]
+}

@@ -1,0 +1,7 @@
+case_id,bug_category,success,status,iterations,llm_calls,regression_pass,integrity_pass,invalid_patch_attempts,retry_reasons,duration_ms,input_tokens,output_tokens,estimated_cost,compile_pass,simulation_pass,lint_pass,synthesis_pass
+case_005_counter_width_signedness,width_signedness,True,FIXED,1,1,True,True,0,,6991,3437,350,0.0041928,True,True,True,True
+case_010_fifo_boundary,boundary,False,MAX_RETRY,1,1,False,True,1,PATCH_PARSE_RETRY,7044,4864,395,0.0049282,True,False,True,True
+case_015_arbiter_combinational,combinational,False,MAX_RETRY,1,1,False,True,1,PATCH_PARSE_RETRY,5776,3482,323,0.0039318,True,False,True,True
+case_020_controller_fsm,fsm,False,MAX_RETRY,1,1,False,True,1,PATCH_PARSE_RETRY,4901,3169,294,0.0035792,True,False,True,True
+case_025_alu_syntax,syntax,True,FIXED,1,1,True,True,0,,6177,3233,336,0.004012,True,True,True,True
+case_030_pulse_connectivity,connectivity,True,FIXED,1,1,True,True,0,,6770,3119,316,0.0037892,True,True,True,True

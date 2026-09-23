@@ -1,0 +1,16 @@
+{
+  "summary": "The pulse condition detects a sustained high rather than a rising edge.",
+  "likely_files": [
+    "rtl/pulse.v"
+  ],
+  "likely_lines": [
+    7
+  ],
+  "reasoning": "The reference expects signal_in && !previous_ref (tb/pulse_tb.v:11), but RTL uses previous. The first enabled rising edge therefore produces 0, matching the simulation failure (baseline:simulation). Compilation and synthesis succeeded, so this appears to be a logic error rather than a structural one (baseline:compile, baseline:synthesis).",
+  "confidence": 0.98,
+  "evidence_ids": [
+    "baseline:simulation",
+    "baseline:compile",
+    "baseline:synthesis"
+  ]
+}

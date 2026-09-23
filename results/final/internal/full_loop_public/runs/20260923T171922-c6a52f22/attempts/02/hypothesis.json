@@ -1,0 +1,15 @@
+{
+  "summary": "Opcode 6 uses an unsigned comparison where signed 8-bit comparison is expected.",
+  "likely_files": [
+    "rtl/alu.v"
+  ],
+  "likely_lines": [
+    11
+  ],
+  "reasoning": "At a=0 and b=140, the unsigned comparison produces 1, but treating b as negative produces the expected 0. The testbench converts both operands to signed values before comparing them. The previous proposal was rejected by the patch guard as an invalid hunk, so it provides no validation of the intended RTL behavior.",
+  "confidence": 0.98,
+  "evidence_ids": [
+    "baseline:simulation",
+    "guard:1"
+  ]
+}

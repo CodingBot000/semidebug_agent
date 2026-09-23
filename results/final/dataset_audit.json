@@ -1,0 +1,430 @@
+{
+  "measurement": "final-dataset-qualification-no-model",
+  "observed_at_utc": "2026-09-23T17:47:12.470169+00:00",
+  "total_cases": 30,
+  "broken_reproduced": 30,
+  "gold_passed": 6,
+  "gold_total": 6,
+  "gold": {
+    "counter": {
+      "target": {
+        "compile": "pass",
+        "simulation": "pass",
+        "lint": "pass",
+        "synthesis": "pass"
+      },
+      "regression": {
+        "regression_17.compile": "pass",
+        "regression_17.simulation": "pass",
+        "regression_103.compile": "pass",
+        "regression_103.simulation": "pass"
+      },
+      "passed": true
+    },
+    "fifo": {
+      "target": {
+        "compile": "pass",
+        "simulation": "pass",
+        "lint": "pass",
+        "synthesis": "pass"
+      },
+      "regression": {
+        "regression_17.compile": "pass",
+        "regression_17.simulation": "pass",
+        "regression_103.compile": "pass",
+        "regression_103.simulation": "pass"
+      },
+      "passed": true
+    },
+    "arbiter": {
+      "target": {
+        "compile": "pass",
+        "simulation": "pass",
+        "lint": "pass",
+        "synthesis": "pass"
+      },
+      "regression": {
+        "regression_17.compile": "pass",
+        "regression_17.simulation": "pass",
+        "regression_103.compile": "pass",
+        "regression_103.simulation": "pass"
+      },
+      "passed": true
+    },
+    "controller": {
+      "target": {
+        "compile": "pass",
+        "simulation": "pass",
+        "lint": "pass",
+        "synthesis": "pass"
+      },
+      "regression": {
+        "regression_17.compile": "pass",
+        "regression_17.simulation": "pass",
+        "regression_103.compile": "pass",
+        "regression_103.simulation": "pass"
+      },
+      "passed": true
+    },
+    "alu": {
+      "target": {
+        "compile": "pass",
+        "simulation": "pass",
+        "lint": "pass",
+        "synthesis": "pass"
+      },
+      "regression": {
+        "regression_17.compile": "pass",
+        "regression_17.simulation": "pass",
+        "regression_103.compile": "pass",
+        "regression_103.simulation": "pass"
+      },
+      "passed": true
+    },
+    "pulse": {
+      "target": {
+        "compile": "pass",
+        "simulation": "pass",
+        "lint": "pass",
+        "synthesis": "pass"
+      },
+      "regression": {
+        "regression_17.compile": "pass",
+        "regression_17.simulation": "pass",
+        "regression_103.compile": "pass",
+        "regression_103.simulation": "pass"
+      },
+      "passed": true
+    }
+  },
+  "cases": [
+    {
+      "case_id": "case_005_counter_width_signedness",
+      "target": {
+        "compile": "pass",
+        "simulation": "fail",
+        "lint": "fail",
+        "synthesis": "pass"
+      },
+      "regression": null,
+      "failure_reproduced": true
+    },
+    {
+      "case_id": "case_010_fifo_boundary",
+      "target": {
+        "compile": "pass",
+        "simulation": "fail",
+        "lint": "pass",
+        "synthesis": "pass"
+      },
+      "regression": null,
+      "failure_reproduced": true
+    },
+    {
+      "case_id": "case_015_arbiter_combinational",
+      "target": {
+        "compile": "pass",
+        "simulation": "fail",
+        "lint": "pass",
+        "synthesis": "pass"
+      },
+      "regression": null,
+      "failure_reproduced": true
+    },
+    {
+      "case_id": "case_020_controller_fsm",
+      "target": {
+        "compile": "pass",
+        "simulation": "fail",
+        "lint": "pass",
+        "synthesis": "pass"
+      },
+      "regression": null,
+      "failure_reproduced": true
+    },
+    {
+      "case_id": "case_025_alu_syntax",
+      "target": {
+        "compile": "fail",
+        "lint": "fail",
+        "synthesis": "fail"
+      },
+      "regression": null,
+      "failure_reproduced": true
+    },
+    {
+      "case_id": "case_030_pulse_connectivity",
+      "target": {
+        "compile": "pass",
+        "simulation": "fail",
+        "lint": "pass",
+        "synthesis": "pass"
+      },
+      "regression": null,
+      "failure_reproduced": true
+    },
+    {
+      "case_id": "case_001_counter_syntax",
+      "target": {
+        "compile": "fail",
+        "lint": "fail",
+        "synthesis": "fail"
+      },
+      "regression": null,
+      "failure_reproduced": true
+    },
+    {
+      "case_id": "case_002_counter_reset",
+      "target": {
+        "compile": "pass",
+        "simulation": "fail",
+        "lint": "pass",
+        "synthesis": "pass"
+      },
+      "regression": null,
+      "failure_reproduced": true
+    },
+    {
+      "case_id": "case_003_counter_boundary",
+      "target": {
+        "compile": "pass",
+        "simulation": "fail",
+        "lint": "pass",
+        "synthesis": "pass"
+      },
+      "regression": null,
+      "failure_reproduced": true
+    },
+    {
+      "case_id": "case_004_counter_sequential",
+      "target": {
+        "compile": "pass",
+        "simulation": "fail",
+        "lint": "pass",
+        "synthesis": "pass"
+      },
+      "regression": null,
+      "failure_reproduced": true
+    },
+    {
+      "case_id": "case_006_fifo_boundary",
+      "target": {
+        "compile": "pass",
+        "simulation": "fail",
+        "lint": "pass",
+        "synthesis": "pass"
+      },
+      "regression": null,
+      "failure_reproduced": true
+    },
+    {
+      "case_id": "case_007_fifo_connectivity",
+      "target": {
+        "compile": "pass",
+        "simulation": "fail",
+        "lint": "pass",
+        "synthesis": "pass"
+      },
+      "regression": null,
+      "failure_reproduced": true
+    },
+    {
+      "case_id": "case_008_fifo_sequential",
+      "target": {
+        "compile": "pass",
+        "simulation": "fail",
+        "lint": "pass",
+        "synthesis": "pass"
+      },
+      "regression": null,
+      "failure_reproduced": true
+    },
+    {
+      "case_id": "case_009_fifo_reset",
+      "target": {
+        "compile": "pass",
+        "simulation": "fail",
+        "lint": "pass",
+        "synthesis": "pass"
+      },
+      "regression": null,
+      "failure_reproduced": true
+    },
+    {
+      "case_id": "case_011_arbiter_connectivity",
+      "target": {
+        "compile": "pass",
+        "simulation": "fail",
+        "lint": "pass",
+        "synthesis": "pass"
+      },
+      "regression": null,
+      "failure_reproduced": true
+    },
+    {
+      "case_id": "case_012_arbiter_sequential",
+      "target": {
+        "compile": "pass",
+        "simulation": "fail",
+        "lint": "pass",
+        "synthesis": "pass"
+      },
+      "regression": null,
+      "failure_reproduced": true
+    },
+    {
+      "case_id": "case_013_arbiter_reset",
+      "target": {
+        "compile": "pass",
+        "simulation": "fail",
+        "lint": "pass",
+        "synthesis": "pass"
+      },
+      "regression": null,
+      "failure_reproduced": true
+    },
+    {
+      "case_id": "case_014_arbiter_combinational",
+      "target": {
+        "compile": "pass",
+        "simulation": "fail",
+        "lint": "pass",
+        "synthesis": "pass"
+      },
+      "regression": null,
+      "failure_reproduced": true
+    },
+    {
+      "case_id": "case_016_controller_fsm",
+      "target": {
+        "compile": "pass",
+        "simulation": "fail",
+        "lint": "pass",
+        "synthesis": "pass"
+      },
+      "regression": null,
+      "failure_reproduced": true
+    },
+    {
+      "case_id": "case_017_controller_fsm",
+      "target": {
+        "compile": "pass",
+        "simulation": "fail",
+        "lint": "pass",
+        "synthesis": "pass"
+      },
+      "regression": null,
+      "failure_reproduced": true
+    },
+    {
+      "case_id": "case_018_controller_reset",
+      "target": {
+        "compile": "pass",
+        "simulation": "fail",
+        "lint": "pass",
+        "synthesis": "pass"
+      },
+      "regression": null,
+      "failure_reproduced": true
+    },
+    {
+      "case_id": "case_019_controller_combinational",
+      "target": {
+        "compile": "pass",
+        "simulation": "fail",
+        "lint": "pass",
+        "synthesis": "pass"
+      },
+      "regression": null,
+      "failure_reproduced": true
+    },
+    {
+      "case_id": "case_021_alu_combinational",
+      "target": {
+        "compile": "pass",
+        "simulation": "fail",
+        "lint": "pass",
+        "synthesis": "pass"
+      },
+      "regression": null,
+      "failure_reproduced": true
+    },
+    {
+      "case_id": "case_022_alu_connectivity",
+      "target": {
+        "compile": "pass",
+        "simulation": "fail",
+        "lint": "pass",
+        "synthesis": "pass"
+      },
+      "regression": null,
+      "failure_reproduced": true
+    },
+    {
+      "case_id": "case_023_alu_width_signedness",
+      "target": {
+        "compile": "pass",
+        "simulation": "fail",
+        "lint": "pass",
+        "synthesis": "pass"
+      },
+      "regression": null,
+      "failure_reproduced": true
+    },
+    {
+      "case_id": "case_024_alu_combinational",
+      "target": {
+        "compile": "pass",
+        "simulation": "fail",
+        "lint": "pass",
+        "synthesis": "pass"
+      },
+      "regression": null,
+      "failure_reproduced": true
+    },
+    {
+      "case_id": "case_026_pulse_sequential",
+      "target": {
+        "compile": "pass",
+        "simulation": "fail",
+        "lint": "fail",
+        "synthesis": "pass"
+      },
+      "regression": null,
+      "failure_reproduced": true
+    },
+    {
+      "case_id": "case_027_pulse_combinational",
+      "target": {
+        "compile": "pass",
+        "simulation": "fail",
+        "lint": "pass",
+        "synthesis": "pass"
+      },
+      "regression": null,
+      "failure_reproduced": true
+    },
+    {
+      "case_id": "case_028_pulse_sequential",
+      "target": {
+        "compile": "pass",
+        "simulation": "fail",
+        "lint": "pass",
+        "synthesis": "pass"
+      },
+      "regression": null,
+      "failure_reproduced": true
+    },
+    {
+      "case_id": "case_029_pulse_reset",
+      "target": {
+        "compile": "pass",
+        "simulation": "fail",
+        "lint": "pass",
+        "synthesis": "pass"
+      },
+      "regression": null,
+      "failure_reproduced": true
+    }
+  ]
+}

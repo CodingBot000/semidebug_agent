@@ -1,0 +1,17 @@
+{
+  "summary": "The enable condition is inverted.",
+  "likely_files": [
+    "rtl/counter.v"
+  ],
+  "likely_lines": [
+    4
+  ],
+  "reasoning": "The testbench increments its expected value when en is high (tb/counter_tb.v:10-12), but the RTL increments only when en is low. The baseline simulation reports expected 1 and actual 0 on the first enabled cycle. Compilation, lint, and synthesis did not report structural problems.",
+  "confidence": 0.99,
+  "evidence_ids": [
+    "baseline:simulation",
+    "baseline:compile",
+    "baseline:lint",
+    "baseline:synthesis"
+  ]
+}

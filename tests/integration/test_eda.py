@@ -1,4 +1,3 @@
-import json
 from pathlib import Path
 
 import pytest
@@ -21,11 +20,14 @@ def test_gold(design, tmp_path):
     assert regress(root, case).passed
 
 
-@pytest.mark.parametrize(
-    "entry", json.loads((ROOT / "benchmark/manifest.json").read_text()), ids=lambda e: e["id"]
+FINAL_CASES = sorted((ROOT / "benchmark_v2/public").glob("case_*/case.json")) + sorted(
+    (ROOT / "benchmark_v2/hidden").glob("case_*/case.json")
 )
-def test_mutation_reproduced(entry, tmp_path):
-    source = ROOT / "benchmark" / entry["path"]
+
+
+@pytest.mark.parametrize("manifest", FINAL_CASES, ids=lambda path: path.parent.name)
+def test_mutation_reproduced(manifest, tmp_path):
+    source = manifest.parent
     case = load_case(source)
     root = tmp_path / "project"
     copy_project(source, root, case.mutable + case.immutable + ["case.json"])

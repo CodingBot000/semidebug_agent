@@ -1,0 +1,17 @@
+--- a/rtl/TopModule.sv
++++ b/rtl/TopModule.sv
+@@ -62,13 +62,13 @@
+         sf5:
+             nstate=sf6;
+         sf6:
+-			nstate=s1;
++			nstate=data?sf1:s1;
+         default:
+             nstate=idle;
+         endcase
+ end
+ 
+-always @(pstate or data or rst_n)
++always @(*)
+ begin
+     if(!rst_n==1) 

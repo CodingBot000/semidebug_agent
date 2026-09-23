@@ -1,0 +1,20 @@
+{
+  "summary": "The output must register the complete comparison of the stored nine-bit window.",
+  "likely_files": [
+    "rtl/TopModule.sv"
+  ],
+  "likely_lines": [
+    12,
+    15,
+    21,
+    26,
+    45
+  ],
+  "reasoning": "The specification says match is updated sequentially (problem.txt:28-32), but the baseline ANDs a registered low-bit comparison with a combinational high-bit comparison. Aligning the low-bit comparison to the incoming bit did not satisfy the withheld regression, so the remaining likely discrepancy is that the entire predicate must be sampled at the clock edge. The regression does not disclose its expected timing.",
+  "confidence": 0.66,
+  "evidence_ids": [
+    "regression-2:2",
+    "attempt-2:simulation",
+    "attempt-2:synthesis"
+  ]
+}

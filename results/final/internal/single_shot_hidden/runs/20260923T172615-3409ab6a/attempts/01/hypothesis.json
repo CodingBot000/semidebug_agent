@@ -1,0 +1,17 @@
+{
+  "summary": "Pop-only operations increment occupancy instead of decrementing it.",
+  "likely_files": [
+    "rtl/fifo.v"
+  ],
+  "likely_lines": [
+    18
+  ],
+  "reasoning": "The pop-only case adds one to count. After filling the FIFO, the first read therefore makes full deassert despite the reference occupancy remaining four at the reported step. The simulation fails on full while data_out matches; compilation, lint, and synthesis do not report structural errors. [baseline:simulation, baseline:compile, baseline:lint, baseline:synthesis]",
+  "confidence": 0.98,
+  "evidence_ids": [
+    "baseline:simulation",
+    "baseline:compile",
+    "baseline:lint",
+    "baseline:synthesis"
+  ]
+}

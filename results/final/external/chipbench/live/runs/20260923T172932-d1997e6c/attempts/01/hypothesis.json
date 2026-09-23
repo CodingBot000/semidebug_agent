@@ -1,0 +1,18 @@
+{
+  "summary": "Invalid samples incorrectly discard partial and complete matches; a subsequent 1 after 0110 also loses an overlapping 01 prefix.",
+  "likely_files": [
+    "rtl/TopModule.sv"
+  ],
+  "likely_lines": [
+    54,
+    59,
+    61
+  ],
+  "reasoning": "Invalid data must be ignored (problem.txt:13-16), but the s3 and s4 invalid branches reset to idle. After valid 01101, the final 01 is a prefix of another 0110, yet line 59 resets to idle. The withheld regression fails despite baseline compilation and basic simulation passing; its exact failing case is unknown.",
+  "confidence": 0.84,
+  "evidence_ids": [
+    "baseline-regression:2",
+    "baseline:simulation",
+    "baseline:compile"
+  ]
+}

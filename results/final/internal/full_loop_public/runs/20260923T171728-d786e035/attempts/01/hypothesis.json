@@ -1,0 +1,17 @@
+{
+  "summary": "The pop operation reads the write pointer instead of the read pointer.",
+  "likely_files": [
+    "rtl/fifo.v"
+  ],
+  "likely_lines": [
+    15
+  ],
+  "reasoning": "Line 15 advances rd_ptr but indexes mem with wr_ptr. This can return an older value rather than the FIFO head, consistent with the observed expected 12 versus actual 11 mismatch. Compilation, lint, and synthesis succeeded, so the evidence points to a functional error rather than a tool rejection. [baseline:simulation, baseline:compile, baseline:lint, baseline:synthesis]",
+  "confidence": 0.97,
+  "evidence_ids": [
+    "baseline:simulation",
+    "baseline:compile",
+    "baseline:lint",
+    "baseline:synthesis"
+  ]
+}

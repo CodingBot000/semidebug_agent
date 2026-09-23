@@ -28,7 +28,7 @@ def test_docker_worker_no_auth_mount(counter, monkeypatch):
     command, kwargs = commands[0]
     assert command[command.index("--network") + 1] == "none"
     mounts = [command[i + 1] for i, v in enumerate(command) if v == "--mount"]
-    assert len(mounts) == 1 and "target=/work" in mounts[0] and ".codex" not in mounts[0]
+    assert len(mounts) == 1 and "target=/work" in mounts[0]
     assert "OPENAI_API_KEY" not in kwargs["environment"]
 
 

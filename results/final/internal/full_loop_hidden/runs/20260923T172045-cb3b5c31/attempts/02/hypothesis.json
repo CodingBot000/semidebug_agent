@@ -1,0 +1,15 @@
+{
+  "summary": "The no-request case incorrectly grants requester 0.",
+  "likely_files": [
+    "rtl/arbiter.v"
+  ],
+  "likely_lines": [
+    9
+  ],
+  "reasoning": "The simulation reports req=00, expected=00, got=01, matching the default assignment at line 9. The previous proposal was rejected because its diff hunk was malformed, not because validation disproved the RTL change. This proposal corrects the hunk counts; its behavior remains unvalidated.",
+  "confidence": 0.99,
+  "evidence_ids": [
+    "baseline:simulation",
+    "guard:1"
+  ]
+}

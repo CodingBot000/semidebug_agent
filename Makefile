@@ -19,4 +19,4 @@ demo:
 benchmark:
 	./scripts/run_benchmark.sh
 package:
-	uv run python scripts/package_v2_submission.py
+	uv run python scripts/package_submission.py

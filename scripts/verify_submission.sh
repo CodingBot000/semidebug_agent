@@ -21,7 +21,7 @@ run_step() {
 
 run_step bootstrap ./scripts/bootstrap.sh
 run_step replay ./scripts/run_demo.sh --replay
-run_step scripted_v2_demo ./scripts/run_demo.sh --scripted
+run_step scripted_pipeline_demo ./scripts/run_demo.sh --scripted
 run_step lint make lint
 run_step test_all make test-all
 printf 'All submission checks passed. Logs: %s\n' "$verification_dir"

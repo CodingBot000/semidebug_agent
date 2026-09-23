@@ -1,0 +1,16 @@
+{
+  "summary": "Synchronous reset selects busy instead of idle",
+  "likely_files": [
+    "rtl/controller.v"
+  ],
+  "likely_lines": [
+    6
+  ],
+  "reasoning": "The reference resets to state 0, while the RTL sets state 1, directly explaining busy=1 at the first reset step. Compilation and synthesis report no structural errors; behavioral validation remains necessary.",
+  "confidence": 0.99,
+  "evidence_ids": [
+    "baseline:simulation",
+    "baseline:compile",
+    "baseline:synthesis"
+  ]
+}

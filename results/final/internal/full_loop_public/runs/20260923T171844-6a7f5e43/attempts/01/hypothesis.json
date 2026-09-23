@@ -1,0 +1,16 @@
+{
+  "summary": "Finish transitions directly to idle instead of the done state.",
+  "likely_files": [
+    "rtl/controller.v"
+  ],
+  "likely_lines": [
+    9
+  ],
+  "reasoning": "The reference enters state 2 when finish is asserted in state 1, but the RTL enters state 0, so done stays low. The simulation fails with reference state 2 and done=0; compilation and synthesis report no structural error. Evidence: baseline:simulation, baseline:compile, baseline:synthesis.",
+  "confidence": 0.99,
+  "evidence_ids": [
+    "baseline:simulation",
+    "baseline:compile",
+    "baseline:synthesis"
+  ]
+}

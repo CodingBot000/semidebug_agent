@@ -1,0 +1,15 @@
+{
+  "summary": "The FIFO accepts writes only when full, instead of when space is available.",
+  "likely_files": [
+    "rtl/fifo.v"
+  ],
+  "likely_lines": [
+    6
+  ],
+  "reasoning": "At the first write, the testbench expects occupancy 1 but empty remains asserted (baseline:simulation). The line 6 push condition is false while the FIFO is empty. The previous proposal was rejected for an invalid diff hunk, not for a demonstrated RTL failure (guard:1).",
+  "confidence": 0.99,
+  "evidence_ids": [
+    "baseline:simulation",
+    "guard:1"
+  ]
+}

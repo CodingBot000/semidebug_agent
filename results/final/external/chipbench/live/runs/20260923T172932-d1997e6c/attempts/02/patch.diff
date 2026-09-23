@@ -1,0 +1,17 @@
+--- a/rtl/TopModule.sv
++++ b/rtl/TopModule.sv
+@@ -51,14 +51,14 @@
+ 					if (!data) nstate = s4_d0110;		//Data valid and is 0, first four bits 0110 matched, next state is s4_d0110
+ 					else nstate = idle;					//Data valid but is 1, no match, next state is idle
+ 				end
+-			else nstate = idle;					//Data invalid, stay in s3_d011
++			else nstate = s3_d011;					//Data invalid, stay in s3_d011
+         s4_d0110:
+             if (data_valid)
+ 				begin	
+ 					if (!data) nstate = s1_d0;		//Data valid and is 0, matches first bit 0 of target sequence, next state is s1_d0
+ 					else nstate = idle;			//Data valid but is 1, does not match target sequence, next state is idle
+ 				end
+-			else nstate = idle;					//Data invalid, next state is idle
++			else nstate = s4_d0110;				//Data invalid, retain completed match
+         default:

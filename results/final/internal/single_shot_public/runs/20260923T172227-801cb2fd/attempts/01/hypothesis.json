@@ -1,0 +1,17 @@
+{
+  "summary": "Granting requester 0 fails to rotate priority.",
+  "likely_files": [
+    "rtl/arbiter.v"
+  ],
+  "likely_lines": [
+    14
+  ],
+  "reasoning": "The reference sets priority to 1 after grant 01, but line 14 sets it to 0. This explains the repeated 01 grant when both requests remain asserted (baseline:simulation). Compilation, lint, and synthesis passed, so the evidence points to behavior rather than a tool error (baseline:compile, baseline:lint, baseline:synthesis).",
+  "confidence": 0.98,
+  "evidence_ids": [
+    "baseline:simulation",
+    "baseline:compile",
+    "baseline:lint",
+    "baseline:synthesis"
+  ]
+}

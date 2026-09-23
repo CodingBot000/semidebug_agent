@@ -1,0 +1,16 @@
+{
+  "summary": "The synchronous reset uses the opposite polarity from the testbench.",
+  "likely_files": [
+    "rtl/counter.v"
+  ],
+  "likely_lines": [
+    3
+  ],
+  "reasoning": "The testbench expects count to become zero when rst is high on the first clock edge (tb/counter_tb.v:8-14, 21), but the RTL resets only when rst is low (rtl/counter.v:3). This explains the first-cycle unknown count; the baseline compiles and synthesizes, so the observed issue is behavioral. No independent validation of the proposed change is available.",
+  "confidence": 0.98,
+  "evidence_ids": [
+    "baseline:simulation",
+    "baseline:compile",
+    "baseline:synthesis"
+  ]
+}

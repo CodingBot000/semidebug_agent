@@ -1,0 +1,4 @@
+argv: ["verilator", "--lint-only", "-Wall", "-Wno-fatal", "--top-module", "arbiter", "rtl/arbiter.v"]
+status: pass
+exit: 0
+

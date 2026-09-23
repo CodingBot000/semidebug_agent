@@ -1,0 +1,16 @@
+{
+  "summary": "Pop-only cycles incorrectly increment FIFO occupancy.",
+  "likely_files": [
+    "rtl/fifo.v"
+  ],
+  "likely_lines": [
+    18
+  ],
+  "reasoning": "The pop-only case adds one to count instead of subtracting one. This explains the full flag remaining incorrect after the first read from a full FIFO: the baseline failure reports occupancy 4 but full=0 (baseline:simulation). Compilation and synthesis passed, so the evidence points to behavior rather than syntax (baseline:compile, baseline:synthesis).",
+  "confidence": 0.99,
+  "evidence_ids": [
+    "baseline:simulation",
+    "baseline:compile",
+    "baseline:synthesis"
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "summary": "The transition after receiving 0 in S3 discards a valid overlapping prefix.",
+  "likely_files": [
+    "rtl/TopModule.sv"
+  ],
+  "likely_lines": [
+    26
+  ],
+  "reasoning": "S3 represents the prefix 101. Appending 0 produces 1010, whose suffix 10 is the prefix represented by S2. Returning to S0 can miss a subsequent 11. The withheld regression fails, while baseline compilation and synthesis pass; its specific failing input is unknown. [baseline-regression:2, baseline:compile, baseline:synthesis]",
+  "confidence": 0.9,
+  "evidence_ids": [
+    "baseline-regression:2",
+    "baseline:compile",
+    "baseline:synthesis"
+  ]
+}

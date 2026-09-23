@@ -11,7 +11,7 @@ Frozen on 2026-09-23. No ChipBench model call was made before this selection and
 
 ## Visibility and acceptance
 
-- The model may see the problem statement, buggy `TopModule` source and non-answer-bearing baseline diagnostics. It must not see `RefModule`, `_ref.sv`, `_test.sv`, the reference solution, official mismatch details or the Git history.
+- The model may see the problem statement, buggy `TopModule` source and non-answer-bearing baseline diagnostics. It must not see `RefModule`, `_ref.sv`, `_test.sv`, the reference solution, official mismatch details or upstream development history that could reveal a solution.
 - The adapter must extract the buggy `TopModule` from the prompt into a mutable RTL file without changing its content. The prompt, source and evaluator file hashes must match the frozen manifest.
 - An independent validator compiles the candidate with the selected upstream `_ref.sv` and `_test.sv` using Icarus `-g2012`, runs VVP, and parses the upstream test's `Mismatches: N in S samples` result. Acceptance requires compilation and simulation exit zero, exactly one result line, `N=0`, `S>0`, no timeout marker, an allowed exact RTL patch and unchanged evaluator files. Local lint/synthesis checks are additional where the selected design supports them; report any skipped check.
 - Qualification occurs before inference. A selected triplet whose reference cannot pass the pinned simulator is `unsupported`; a buggy baseline that already passes is `baseline_pass`. Neither is quietly removed or replaced.
@@ -20,5 +20,3 @@ Frozen on 2026-09-23. No ChipBench model call was made before this selection and
 ## Reproduction and redistribution
 
 Clone ChipBench at the exact commit, rerun `scripts/freeze_chipbench_selection.py`, and compare all 36 SHA256 values with the manifest before importing. The submission ZIP ships this manifest and adapter, not the full external dataset or reference files. The upstream license and commit must appear in `docs/THIRD_PARTY.md`.
-
-HWE-bench is a separate, repository-scale feasibility step after this 12-case path. Its exact upstream and asset licenses, disk/image requirements and official validation must be recorded before selecting or running any HWE cases.

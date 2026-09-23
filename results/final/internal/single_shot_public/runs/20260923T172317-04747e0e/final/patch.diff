@@ -1,0 +1,11 @@
+--- a/rtl/alu.v
++++ b/rtl/alu.v
+@@ -3,7 +3,7 @@
+     result = 8'd0;
+     case (op)
+         3'd0: result = a + b;
+-        3'd1: result = b - a;
++        3'd1: result = a - b;
+         3'd2: result = a & b;
+         3'd3: result = a | b;
+         3'd4: result = a ^ b;

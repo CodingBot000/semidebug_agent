@@ -1,0 +1,19 @@
+{
+  "summary": "The output may need a clocked implementation rather than a combinational one.",
+  "likely_files": [
+    "rtl/TopModule.sv"
+  ],
+  "likely_lines": [
+    10,
+    13,
+    19,
+    26
+  ],
+  "reasoning": "The specification says the design operates synchronously, while synthesis identifies a register for a_tem but not match (baseline:synthesis). However, the baseline simulation passes (baseline:simulation), and the earlier proposal was rejected only for a malformed diff, not functionally evaluated (guard:1). The intended output timing is therefore uncertain.",
+  "confidence": 0.3,
+  "evidence_ids": [
+    "baseline:synthesis",
+    "baseline:simulation",
+    "guard:1"
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "summary": "The XOR operation references an undeclared signal instead of input b.",
+  "likely_files": [
+    "rtl/alu.v"
+  ],
+  "likely_lines": [
+    9
+  ],
+  "reasoning": "Both elaboration and lint identify `nonexistent` at line 9; synthesis reports it as undriven. The immutable testbench specifies a ^ b for operation 4. This is the most likely correction, but it has not been independently validated.",
+  "confidence": 0.99,
+  "evidence_ids": [
+    "baseline:compile",
+    "baseline:lint",
+    "baseline:synthesis"
+  ]
+}

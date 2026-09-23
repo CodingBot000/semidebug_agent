@@ -1,0 +1,11 @@
+{
+  "record_type": "representative_evidence_origin",
+  "measurement": "live-ai-repair",
+  "source_run": "results/final/internal/single_shot_public/runs/20260923T172154-82a20931",
+  "case_id": "case_006_fifo_boundary",
+  "final_status": "MAX_RETRY",
+  "model": "gpt-6-sol",
+  "retry_reasons": [
+    "PATCH_PARSE_RETRY"
+  ]
+}

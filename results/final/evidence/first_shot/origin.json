@@ -1,0 +1,11 @@
+{
+  "record_type": "representative_evidence_origin",
+  "measurement": "live-ai-repair",
+  "source_run": "results/final/internal/full_loop_public/runs/20260923T171650-6c6401c4",
+  "case_id": "case_001_counter_syntax",
+  "final_status": "FIXED",
+  "model": "gpt-6-sol",
+  "retry_reasons": [
+    null
+  ]
+}

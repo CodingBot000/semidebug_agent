@@ -1,0 +1,10 @@
+--- a/rtl/TopModule.sv
++++ b/rtl/TopModule.sv
+@@ -21,7 +21,7 @@
+            sf3=4'd9,
+            sf4=4'd10,
+            sf5=4'd11,
+-           sf6=4'd20;
++           sf6=4'd12;
+ 
+ always @(posedge clk or negedge rst_n)

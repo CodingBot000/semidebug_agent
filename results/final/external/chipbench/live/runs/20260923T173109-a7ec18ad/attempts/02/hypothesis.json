@@ -1,0 +1,18 @@
+{
+  "summary": "Registered output decoding reports each six-bit result one clock late.",
+  "likely_files": [
+    "rtl/TopModule.sv"
+  ],
+  "likely_lines": [
+    71,
+    76,
+    80
+  ],
+  "reasoning": "The sixth sampled bit moves the FSM into s6 or sf6, but the output registers inspect the preceding state on that edge. Combinational decoding would expose the result after the sixth edge and follows the output-logic requirement at problem.txt:19-23. The earlier proposal was rejected for an invalid diff hunk, not by RTL validation; the baseline simulation reported a pass, so the behavioral need for this change remains uncertain.",
+  "confidence": 0.65,
+  "evidence_ids": [
+    "guard:1",
+    "baseline:simulation",
+    "baseline:synthesis"
+  ]
+}

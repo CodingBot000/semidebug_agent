@@ -1,0 +1,20 @@
+{
+  "summary": "The registered detection uses the previous shift-register contents rather than the nine bits present after the clock edge.",
+  "likely_files": [
+    "rtl/TopModule.sv"
+  ],
+  "likely_lines": [
+    12,
+    21,
+    26,
+    42,
+    45
+  ],
+  "reasoning": "At a rising edge, a_tem shifts in a, but match_b tests the old low three bits while match_f tests the newly shifted high three bits. The output therefore combines bits from different nine-bit windows. Registering the complete predicate for the incoming nine-bit window should align both comparisons with the updated shift register. The specification calls for a sequentially updated output; the withheld regression failure does not reveal its exact timing expectation.",
+  "confidence": 0.82,
+  "evidence_ids": [
+    "baseline-regression:2",
+    "baseline:simulation",
+    "baseline:synthesis"
+  ]
+}

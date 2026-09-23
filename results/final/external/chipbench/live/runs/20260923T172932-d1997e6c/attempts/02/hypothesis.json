@@ -1,0 +1,16 @@
+{
+  "summary": "Invalid samples discard partial or completed sequence progress.",
+  "likely_files": [
+    "rtl/TopModule.sv"
+  ],
+  "likely_lines": [
+    54,
+    61
+  ],
+  "reasoning": "The specification says invalid data must be ignored, but both branches transition to idle. This patch addresses those transitions only. The prior proposal was rejected as an invalid diff, not evaluated for RTL behavior; the baseline simulation passed, so the failing behavior remains uncertain.",
+  "confidence": 0.82,
+  "evidence_ids": [
+    "guard:1",
+    "baseline:simulation"
+  ]
+}

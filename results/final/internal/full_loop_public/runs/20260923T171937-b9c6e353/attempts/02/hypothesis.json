@@ -1,0 +1,15 @@
+{
+  "summary": "Opcode 5 shifts in the wrong direction.",
+  "likely_files": [
+    "rtl/alu.v"
+  ],
+  "likely_lines": [
+    10
+  ],
+  "reasoning": "The baseline right shift produces 5 for the reported inputs, while the test expects 160 from an eight-bit left shift. The previous proposal was rejected for an invalid diff hunk, not by RTL validation; its hunk count is corrected here.",
+  "confidence": 0.99,
+  "evidence_ids": [
+    "baseline:simulation",
+    "guard:1"
+  ]
+}

@@ -11,9 +11,8 @@ from semidebug.benchmark.loader import load_case
 from semidebug.benchmark.runner import run_benchmark
 from semidebug.config import Settings
 from semidebug.llm.base import ProviderError
-from semidebug.llm.codex import CodexCLIProvider, codex_auth_status
 from semidebug.llm.fake import ScriptedProvider
-from semidebug.llm.provider import OpenAICompatibleProvider
+from semidebug.llm.provider import OpenAIAPIProvider
 from semidebug.models import RunState
 from semidebug.report.renderer import render_run
 from semidebug.tools.process import run_process
@@ -54,15 +53,11 @@ def doctor(runtime="native"):
             checks["docker_error"] = "Build semidebug:dev and start Docker"
     checks["python"] = sys.version.split()[0]
     checks["eda_runtime"] = runtime
-    checks["codex"] = {
-        "installed": bool(shutil.which("codex")),
-        "chatgpt_authenticated": codex_auth_status(),
-        "model": settings.codex_model,
-        "reasoning_effort": settings.reasoning_effort,
-    }
-    checks["llm"] = {
+    checks["openai_api"] = {
         "configured": bool(settings.api_key and settings.model),
         "model": settings.model or None,
+        "reasoning_effort": settings.reasoning_effort,
+        "endpoint": settings.base_url,
     }
     checks["docker"] = {"installed": bool(shutil.which("docker")), "optional": True}
     print(json.dumps(checks, indent=2))
@@ -81,7 +76,7 @@ def main(argv=None):
     for command in ["fix", "benchmark"]:
         p = sub.add_parser(command)
         p.add_argument("path", type=Path)
-        p.add_argument("--provider", choices=["codex", "live", "scripted"], default="codex")
+        p.add_argument("--provider", choices=["api", "scripted"], default="api")
         p.add_argument(
             "--responses", type=Path, help="Explicit scripted test responses, never gold lookup"
         )
@@ -122,17 +117,11 @@ def main(argv=None):
                 return 0 if bundle.passed else 1
         settings = Settings.from_env()
         if args.model:
-            settings = replace(
-                settings, **{"codex_model" if args.provider == "codex" else "model": args.model}
-            )
+            settings = replace(settings, model=args.model)
         if args.reasoning_effort:
             settings = replace(settings, reasoning_effort=args.reasoning_effort)
         if args.eda_runtime:
             settings = replace(settings, eda_runtime=args.eda_runtime)
-        elif args.provider == "codex" and not all(
-            shutil.which(t) for t in ["iverilog", "vvp", "verilator", "yosys"]
-        ):
-            settings = replace(settings, eda_runtime="docker")
         if args.max_iterations is not None:
             settings = replace(settings, max_iterations=args.max_iterations)
         if not 1 <= settings.max_iterations <= 10:
@@ -142,14 +131,12 @@ def main(argv=None):
                 raise ValueError("Scripted mode requires --responses and is not an AI benchmark")
             provider = ScriptedProvider(json.loads(args.responses.read_text()))
             print("SCRIPTED TEST MODE — not live AI")
-        elif args.provider == "codex":
-            provider = CodexCLIProvider(settings)
+        else:
+            provider = OpenAIAPIProvider(settings)
             print(
-                f"LIVE CODEX CLI — {provider.model}, reasoning={provider.reasoning_effort}, ChatGPT subscription",
+                f"LIVE OPENAI API — {provider.model}, reasoning={provider.reasoning_effort}",
                 flush=True,
             )
-        else:
-            provider = OpenAICompatibleProvider(settings)
         if args.command == "fix":
             state = repair(args.path, provider, args.output or Path("artifacts/runs"), settings)
             print(
@@ -178,7 +165,7 @@ def main(argv=None):
         print(f"ERROR: {exc}", file=sys.stderr)
         return 2
     finally:
-        if isinstance(provider, OpenAICompatibleProvider):
+        if isinstance(provider, OpenAIAPIProvider):
             provider.close()
 
 

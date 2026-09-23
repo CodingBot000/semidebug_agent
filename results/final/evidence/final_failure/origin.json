@@ -1,0 +1,13 @@
+{
+  "record_type": "representative_evidence_origin",
+  "measurement": "live-ai-repair",
+  "source_run": "results/final/external/chipbench/live/runs/20260923T173037-8fc0c522",
+  "case_id": "chipbench_timing_Prob002_extraneous_items_sequence_detect",
+  "final_status": "MAX_RETRY",
+  "model": "gpt-6-sol",
+  "retry_reasons": [
+    "PATCH_PARSE_RETRY",
+    "REGRESSION_RETRY",
+    "PATCH_PARSE_RETRY"
+  ]
+}

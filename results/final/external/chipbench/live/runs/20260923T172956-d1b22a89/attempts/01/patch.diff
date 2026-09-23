@@ -1,0 +1,10 @@
+--- a/rtl/TopModule.sv
++++ b/rtl/TopModule.sv
+@@ -23,7 +23,7 @@
+                 S0     : nstate <= data? S1: S0;
+                 S1     : nstate <= data? S1: S2;
+                 S2     : nstate <= data? S3: S0;
+-                S3     : nstate <= data? S4: S0;
++                S3     : nstate <= data? S4: S2;
+                 S4     : nstate <= data? S1: S2;
+                 default: nstate <= S0;

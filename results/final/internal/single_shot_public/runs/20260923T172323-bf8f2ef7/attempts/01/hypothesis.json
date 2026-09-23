@@ -1,0 +1,17 @@
+{
+  "summary": "Opcode 6 compares unsigned operands instead of signed operands.",
+  "likely_files": [
+    "rtl/alu.v"
+  ],
+  "likely_lines": [
+    11
+  ],
+  "reasoning": "The testbench interprets both operands as signed 8-bit values for opcode 6. With a=0 and b=140 (\u2212116 signed), it expects false, while the unsigned RTL comparison returns true. Compilation, lint, and synthesis passed, indicating a behavioral rather than structural mismatch.",
+  "confidence": 0.98,
+  "evidence_ids": [
+    "baseline:simulation",
+    "baseline:compile",
+    "baseline:lint",
+    "baseline:synthesis"
+  ]
+}

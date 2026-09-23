@@ -1,0 +1,17 @@
+{
+  "summary": "The enable condition is inverted in the pulse-generation expression.",
+  "likely_files": [
+    "rtl/pulse.v"
+  ],
+  "likely_lines": [
+    7
+  ],
+  "reasoning": "The reference expects a pulse when enable is high and signal_in rises (tb/pulse_tb.v:11), but RTL line 7 requires enable low. The first enabled rising edge fails accordingly. Compilation, lint, and synthesis pass, so the evidence points to a functional polarity error rather than invalid RTL.",
+  "confidence": 0.99,
+  "evidence_ids": [
+    "baseline:simulation",
+    "baseline:compile",
+    "baseline:lint",
+    "baseline:synthesis"
+  ]
+}

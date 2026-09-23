@@ -1,0 +1,16 @@
+{
+  "summary": "The three-bit count output truncates the value eight before the counter can reach nine.",
+  "likely_files": [
+    "rtl/counter.v"
+  ],
+  "likely_lines": [
+    1
+  ],
+  "reasoning": "Simulation first fails when eight is expected but zero is observed; the compiler reports that the three-bit output is padded to the testbench's four-bit connection. Widening the register should also eliminate the reported width mismatches on lines 3, 5, and 6. This has not been independently validated.",
+  "confidence": 0.98,
+  "evidence_ids": [
+    "baseline:simulation",
+    "baseline:compile",
+    "baseline:lint"
+  ]
+}

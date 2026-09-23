@@ -1,0 +1,11 @@
+--- a/rtl/arbiter.v
++++ b/rtl/arbiter.v
+@@ -5,7 +5,7 @@
+     case (req)
+         2'b01: grant = 2'b01;
+         2'b10: grant = 2'b10;
+-        2'b11: grant = priority_bit ? 2'b01 : 2'b10;
++        2'b11: grant = priority_bit ? 2'b10 : 2'b01;
+         default: grant = 2'b00;
+     endcase
+ end

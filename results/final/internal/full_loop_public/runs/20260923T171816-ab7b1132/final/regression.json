@@ -1,0 +1,70 @@
+{
+  "results": {
+    "regression_17.compile": {
+      "tool": "iverilog",
+      "command": [
+        "iverilog",
+        "-g2012",
+        "-Wall",
+        "-s",
+        "arbiter_hidden_tb",
+        "-o",
+        ".build/regression_17.vvp",
+        "rtl/arbiter.v",
+        "tb/arbiter_tb_hidden.v"
+      ],
+      "exit_code": 0,
+      "status": "pass",
+      "stdout": "",
+      "stderr": "",
+      "duration_ms": 11
+    },
+    "regression_17.simulation": {
+      "tool": "vvp",
+      "command": [
+        "vvp",
+        "-N",
+        ".build/regression_17.vvp",
+        "+SEED=17"
+      ],
+      "exit_code": 0,
+      "status": "pass",
+      "stdout": "SEMIDEBUG_PASS\n",
+      "stderr": "",
+      "duration_ms": 11
+    },
+    "regression_103.compile": {
+      "tool": "iverilog",
+      "command": [
+        "iverilog",
+        "-g2012",
+        "-Wall",
+        "-s",
+        "arbiter_hidden_tb",
+        "-o",
+        ".build/regression_103.vvp",
+        "rtl/arbiter.v",
+        "tb/arbiter_tb_hidden.v"
+      ],
+      "exit_code": 0,
+      "status": "pass",
+      "stdout": "",
+      "stderr": "",
+      "duration_ms": 11
+    },
+    "regression_103.simulation": {
+      "tool": "vvp",
+      "command": [
+        "vvp",
+        "-N",
+        ".build/regression_103.vvp",
+        "+SEED=103"
+      ],
+      "exit_code": 0,
+      "status": "pass",
+      "stdout": "SEMIDEBUG_PASS\n",
+      "stderr": "",
+      "duration_ms": 11
+    }
+  }
+}

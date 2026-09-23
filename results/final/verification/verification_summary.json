@@ -1,0 +1,55 @@
+{
+  "observed_at_utc": "2026-09-23T17:46:03.680731+00:00",
+  "status": "PASS",
+  "checks": {
+    "lint": {
+      "command": [
+        "make",
+        "lint"
+      ],
+      "exit_code": 0,
+      "duration_ms": 57,
+      "log": "results/final/verification/lint.log",
+      "log_sha256": "d28a04812319fcacb57ba49d3648903ec4d4a2e435039e171401f010003131b9",
+      "status": "PASS"
+    },
+    "tests": {
+      "command": [
+        "make",
+        "test-all"
+      ],
+      "exit_code": 0,
+      "duration_ms": 6708,
+      "log": "results/final/verification/test_all.log",
+      "log_sha256": "25f337925bd9a9080867d4a0f55e8f0f374319cece32e34ad0c6b80c146de5b3",
+      "passed_count": 104,
+      "status": "PASS"
+    },
+    "scripted_pipeline_demo": {
+      "command": [
+        "./scripts/run_demo.sh",
+        "--scripted"
+      ],
+      "exit_code": 0,
+      "duration_ms": 537,
+      "log": "results/final/verification/scripted_demo.log",
+      "log_sha256": "37e31f5c339a2cabb1b15cd5598e793b1bc8cdec552189dc29ac5b51ebd482e3",
+      "status": "PASS",
+      "result": "results/final/verification/scripted_demo_result.json",
+      "report": "results/final/verification/scripted_demo_report.md",
+      "gates": {
+        "case_is_final_demo": true,
+        "scripted_provider": true,
+        "baseline_failed": true,
+        "patch_accepted": true,
+        "compile_pass": true,
+        "simulation_pass": true,
+        "lint_pass": true,
+        "synthesis_pass": true,
+        "hidden_regression_pass": true,
+        "integrity_pass": true,
+        "final_fixed": true
+      }
+    }
+  }
+}

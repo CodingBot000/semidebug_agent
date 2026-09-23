@@ -1,0 +1,17 @@
+{
+  "summary": "The single-request case for requester 0 grants requester 1 instead.",
+  "likely_files": [
+    "rtl/arbiter.v"
+  ],
+  "likely_lines": [
+    6
+  ],
+  "reasoning": "The baseline failure reports req=01, expected=01, got=10; line 6 explicitly produces 10 for that request. The priority update already uses the grant bits consistently with the reference model. Compile, lint, and synthesis pass, but no repair has been validated.",
+  "confidence": 0.98,
+  "evidence_ids": [
+    "baseline:simulation",
+    "baseline:compile",
+    "baseline:lint",
+    "baseline:synthesis"
+  ]
+}

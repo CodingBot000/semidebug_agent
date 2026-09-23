@@ -1,0 +1,29 @@
+--- a/rtl/TopModule.sv
++++ b/rtl/TopModule.sv
+@@ -14,7 +14,7 @@
+ 			begin 
+ 				match_f <= 1'b0;
+ 			end
+-		else if (a_tem[8:6] == 3'b011)
++		else if (a_tem[7:5] == 3'b011)
+ 			begin
+ 				match_f <= 1'b1;
+ 			end
+@@ -28,7 +28,7 @@
+ 			begin 
+ 				match_b <= 1'b0;
+ 			end
+-		else if (a_tem[2:0] == 3'b110)
++		else if ({a_tem[1:0], a} == 3'b110)
+ 			begin
+ 				match_b <= 1'b1;
+ 			end
+@@ -44,7 +44,7 @@
+ 			end
+ 		else 
+ 			begin
+-				a_tem <= {a, a_tem[7:0]};
++				a_tem <= {a_tem[7:0], a};
+ 			end
+ 			
+ 	assign match = match_b && match_f;

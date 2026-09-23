@@ -1,0 +1,14 @@
+{
+  "summary": "The two-request grant selection is reversed.",
+  "likely_files": [
+    "rtl/arbiter.v"
+  ],
+  "likely_lines": [
+    8
+  ],
+  "reasoning": "At req=11 and priority=0, the RTL selects grant=10, while the reference expects 01; the failure occurs at the first such check. Swapping the two branches aligns selection with the reference while retaining the existing priority updates. This has not been independently validated. [baseline:simulation]",
+  "confidence": 0.98,
+  "evidence_ids": [
+    "baseline:simulation"
+  ]
+}

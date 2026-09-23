@@ -1,0 +1,17 @@
+{
+  "summary": "Pulse detection uses the wrong polarity of the prior sample.",
+  "likely_files": [
+    "rtl/pulse.v"
+  ],
+  "likely_lines": [
+    7
+  ],
+  "reasoning": "The RTL requires previous to be high, while the reference expects it low for a rising edge. The first enabled high sample fails with actual 0 versus expected 1; compilation, lint, and synthesis pass. This is a behavioral hypothesis, not a validated repair.",
+  "confidence": 0.99,
+  "evidence_ids": [
+    "baseline:simulation",
+    "baseline:compile",
+    "baseline:lint",
+    "baseline:synthesis"
+  ]
+}

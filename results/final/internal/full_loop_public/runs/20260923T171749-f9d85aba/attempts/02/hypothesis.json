@@ -1,0 +1,15 @@
+{
+  "summary": "Reset initializes FIFO occupancy to one instead of zero.",
+  "likely_files": [
+    "rtl/fifo.v"
+  ],
+  "likely_lines": [
+    12
+  ],
+  "reasoning": "The reset step expects empty=1 at occupancy zero, but reports empty=0. Line 12 resets count to one, while line 9 asserts empty only when count is zero. The previous proposal was rejected for an invalid diff hunk, not by RTL validation; this proposal corrects the hunk against the original source.",
+  "confidence": 0.99,
+  "evidence_ids": [
+    "baseline:simulation",
+    "guard:1"
+  ]
+}

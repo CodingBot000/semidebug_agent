@@ -1,0 +1,29 @@
+{
+  "observed_at_utc": "2026-09-23T17:45:55.789476+00:00",
+  "os": "Darwin",
+  "os_release": "25.5.0",
+  "architecture": "arm64",
+  "host_python": "3.12.13",
+  "project_python": {
+    "available": true,
+    "detail": "Python 3.12.13"
+  },
+  "uv": {
+    "available": true,
+    "detail": "uv 0.11.19 (Homebrew 2026-06-03 aarch64-apple-darwin)"
+  },
+  "docker_cli": {
+    "available": true,
+    "detail": "Docker version 29.1.3, build f52814d"
+  },
+  "docker_daemon": {
+    "available": true,
+    "detail": "29.1.3"
+  },
+  "openai_api": {
+    "configured": true,
+    "model": "gpt-6-sol",
+    "reasoning_effort": "low",
+    "endpoint": "https://api.openai.com/v1"
+  }
+}

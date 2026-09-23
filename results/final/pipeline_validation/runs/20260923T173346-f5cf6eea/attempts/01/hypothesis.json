@@ -1,0 +1,14 @@
+{
+  "summary": "Scripted evaluator proposal (known fix)",
+  "likely_files": [
+    "rtl/arbiter.v"
+  ],
+  "likely_lines": [
+    1
+  ],
+  "reasoning": "Pipeline acceptance check, not AI inference",
+  "confidence": 1.0,
+  "evidence_ids": [
+    "baseline:simulation"
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "summary": "The FIFO rejects writes when it is not full.",
+  "likely_files": [
+    "rtl/fifo.v"
+  ],
+  "likely_lines": [
+    6
+  ],
+  "reasoning": "Line 6 qualifies push with full rather than !full. On the first write, the testbench expects occupancy 1, but empty remains asserted, consistent with the write being rejected (baseline:simulation). Compilation, lint, and synthesis pass, so the evidence points to a functional condition error rather than a tool failure (baseline:compile, baseline:lint, baseline:synthesis).",
+  "confidence": 0.99,
+  "evidence_ids": [
+    "baseline:simulation",
+    "baseline:compile",
+    "baseline:lint",
+    "baseline:synthesis"
+  ]
+}

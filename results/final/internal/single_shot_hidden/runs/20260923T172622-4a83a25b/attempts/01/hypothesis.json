@@ -1,0 +1,17 @@
+{
+  "summary": "The no-request case incorrectly grants requester 0.",
+  "likely_files": [
+    "rtl/arbiter.v"
+  ],
+  "likely_lines": [
+    9
+  ],
+  "reasoning": "The simulation reports req=00 with expected grant=00 but observed 01. The default case assigns 01, whereas the testbench expects 00 for req=00. Changing that assignment preserves the explicit cases and prevents an idle grant from updating priority. This is not yet independently validated.",
+  "confidence": 0.98,
+  "evidence_ids": [
+    "baseline:simulation",
+    "baseline:compile",
+    "baseline:lint",
+    "baseline:synthesis"
+  ]
+}

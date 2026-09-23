@@ -1,0 +1,18 @@
+{
+  "summary": "Registered output decoding delays each six-bit result by one clock edge.",
+  "likely_files": [
+    "rtl/TopModule.sv"
+  ],
+  "likely_lines": [
+    71,
+    76,
+    80
+  ],
+  "reasoning": "The sixth bit moves the FSM into s6 or sf6, but the output registers inspect the previous pstate on that same edge. Combinational decoding of the terminal states should expose the result after the sixth edge, as specified in problem.txt:16-23. The baseline compiles and synthesizes but fails the withheld regression; its exact failing checks are unknown.",
+  "confidence": 0.84,
+  "evidence_ids": [
+    "baseline-regression:2",
+    "baseline:compile",
+    "baseline:synthesis"
+  ]
+}

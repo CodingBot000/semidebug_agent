@@ -1,0 +1,17 @@
+{
+  "summary": "The single-request case for requester 0 drives the wrong grant bit.",
+  "likely_files": [
+    "rtl/arbiter.v"
+  ],
+  "likely_lines": [
+    6
+  ],
+  "reasoning": "At rtl/arbiter.v:6, req=2'b01 produces grant=2'b10, but the reference expects 2'b01 (tb/arbiter_tb.v:13). The baseline failure reports exactly this mismatch. Compilation, lint, and synthesis passing do not establish functional correctness.",
+  "confidence": 0.98,
+  "evidence_ids": [
+    "baseline:simulation",
+    "baseline:compile",
+    "baseline:lint",
+    "baseline:synthesis"
+  ]
+}

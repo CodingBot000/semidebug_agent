@@ -1,0 +1,12 @@
+{
+  "record_type": "representative_evidence_origin",
+  "measurement": "live-ai-repair",
+  "source_run": "results/final/internal/full_loop_public/runs/20260923T171735-f833c405",
+  "case_id": "case_008_fifo_sequential",
+  "final_status": "FIXED",
+  "model": "gpt-6-sol",
+  "retry_reasons": [
+    "PATCH_PARSE_RETRY",
+    null
+  ]
+}

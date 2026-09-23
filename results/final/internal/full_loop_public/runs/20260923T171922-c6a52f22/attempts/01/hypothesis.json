@@ -1,0 +1,17 @@
+{
+  "summary": "Opcode 6 compares unsigned operands instead of signed 8-bit values.",
+  "likely_files": [
+    "rtl/alu.v"
+  ],
+  "likely_lines": [
+    11
+  ],
+  "reasoning": "For a=0 and b=140, unsigned comparison yields 1 while signed comparison yields 0, matching the observed discrepancy. The testbench converts both operands to signed values before comparison (tb/alu_tb.v:10-12,20). Compilation, lint, and synthesis already pass, so the change can be limited to comparison semantics.",
+  "confidence": 0.98,
+  "evidence_ids": [
+    "baseline:simulation",
+    "baseline:compile",
+    "baseline:lint",
+    "baseline:synthesis"
+  ]
+}

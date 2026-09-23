@@ -1,0 +1,15 @@
+{
+  "summary": "Pop-only cycles incorrectly increment occupancy.",
+  "likely_files": [
+    "rtl/fifo.v"
+  ],
+  "likely_lines": [
+    18
+  ],
+  "reasoning": "At line 18, a read without a write increases count instead of decreasing it. The simulation reports an incorrect full flag after reads (baseline:simulation). The prior proposal was rejected for an invalid diff hunk, not by RTL validation (guard:1).",
+  "confidence": 0.99,
+  "evidence_ids": [
+    "baseline:simulation",
+    "guard:1"
+  ]
+}

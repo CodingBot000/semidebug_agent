@@ -1,0 +1,8 @@
+argv: ["verilator", "--lint-only", "-Wall", "-Wno-fatal", "--top-module", "counter", "rtl/counter.v"]
+status: fail
+exit: 1
+
+%Error: rtl/counter.v:7:5: syntax error, unexpected end
+    7 |     end
+      |     ^~~
+%Error: Cannot continue

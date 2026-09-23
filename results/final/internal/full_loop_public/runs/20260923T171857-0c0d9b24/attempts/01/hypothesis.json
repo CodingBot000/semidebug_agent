@@ -1,0 +1,17 @@
+{
+  "summary": "Reset assigns the busy state instead of idle.",
+  "likely_files": [
+    "rtl/controller.v"
+  ],
+  "likely_lines": [
+    6
+  ],
+  "reasoning": "The first checked reset edge expects state 0, but busy is asserted; the RTL assigns state 1 on reset. Compilation, lint, and synthesis found no structural issue, so this appears to be a functional reset-value error. [baseline:simulation, baseline:compile, baseline:lint, baseline:synthesis]",
+  "confidence": 0.98,
+  "evidence_ids": [
+    "baseline:simulation",
+    "baseline:compile",
+    "baseline:lint",
+    "baseline:synthesis"
+  ]
+}

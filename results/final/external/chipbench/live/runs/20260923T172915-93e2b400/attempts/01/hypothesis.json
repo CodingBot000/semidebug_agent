@@ -1,0 +1,17 @@
+{
+  "summary": "The first bit of the next group is ignored after a failed group.",
+  "likely_files": [
+    "rtl/TopModule.sv"
+  ],
+  "likely_lines": [
+    64,
+    65
+  ],
+  "reasoning": "After sf6 reports a failed six-bit group, its unconditional transition to s1 treats the next input bit as a matching 0 even when it is 1. The s6 transition already checks that bit. This conflicts with the non-overlapping group rule in problem.txt:14-17. The baseline compiles and synthesizes, but the withheld regression fails; its specific failing case is unknown.",
+  "confidence": 0.84,
+  "evidence_ids": [
+    "baseline-regression:2",
+    "baseline:compile",
+    "baseline:synthesis"
+  ]
+}

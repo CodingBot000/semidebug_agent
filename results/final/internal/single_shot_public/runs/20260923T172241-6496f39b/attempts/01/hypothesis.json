@@ -1,0 +1,17 @@
+{
+  "summary": "The simultaneous-request grant selection is reversed.",
+  "likely_files": [
+    "rtl/arbiter.v"
+  ],
+  "likely_lines": [
+    8
+  ],
+  "reasoning": "At req=11 with reset priority 0, the baseline grants 10, while the reference expects 01 (baseline:simulation). Swapping the two choices at line 8 aligns the grant with the reference; the priority updates at lines 13\u201315 already match its transitions. This has not been independently validated.",
+  "confidence": 0.98,
+  "evidence_ids": [
+    "baseline:simulation",
+    "baseline:compile",
+    "baseline:lint",
+    "baseline:synthesis"
+  ]
+}

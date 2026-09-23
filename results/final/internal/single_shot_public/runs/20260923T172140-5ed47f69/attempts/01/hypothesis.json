@@ -1,0 +1,17 @@
+{
+  "summary": "The counter wraps one count too early.",
+  "likely_files": [
+    "rtl/counter.v"
+  ],
+  "likely_lines": [
+    5
+  ],
+  "reasoning": "The baseline resets count when its current value is 8, whereas the test expects 8 to advance to 9 and 9 to wrap to 0. The first observed failure is expected 9, actual 0 [baseline:simulation]. Compilation, lint, and synthesis report no structural error [baseline:compile, baseline:lint, baseline:synthesis].",
+  "confidence": 0.98,
+  "evidence_ids": [
+    "baseline:simulation",
+    "baseline:compile",
+    "baseline:lint",
+    "baseline:synthesis"
+  ]
+}

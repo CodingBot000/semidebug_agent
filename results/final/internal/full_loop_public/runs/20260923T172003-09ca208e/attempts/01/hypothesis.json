@@ -1,0 +1,17 @@
+{
+  "summary": "The enable condition is inverted in the pulse expression.",
+  "likely_files": [
+    "rtl/pulse.v"
+  ],
+  "likely_lines": [
+    7
+  ],
+  "reasoning": "The reference expects a pulse when enable is high, but line 7 requires it to be low. The first enabled rising edge fails with expected 1 and actual 0. Compilation, lint, and synthesis pass, so the evidence points to a functional polarity error rather than a tool error. [baseline:simulation, baseline:compile, baseline:lint, baseline:synthesis]",
+  "confidence": 0.99,
+  "evidence_ids": [
+    "baseline:simulation",
+    "baseline:compile",
+    "baseline:lint",
+    "baseline:synthesis"
+  ]
+}

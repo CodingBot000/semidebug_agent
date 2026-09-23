@@ -1,0 +1,17 @@
+{
+  "summary": "Missing semicolon after the increment assignment",
+  "likely_files": [
+    "rtl/counter.v"
+  ],
+  "likely_lines": [
+    6,
+    7
+  ],
+  "reasoning": "Line 6 lacks the semicolon required before the end on line 7. All three baseline tools report a syntax error at line 7; the subsequent testbench parser errors may be cascading effects. No prior repair has been validated, so the outcome remains uncertain.",
+  "confidence": 0.99,
+  "evidence_ids": [
+    "baseline:compile",
+    "baseline:lint",
+    "baseline:synthesis"
+  ]
+}

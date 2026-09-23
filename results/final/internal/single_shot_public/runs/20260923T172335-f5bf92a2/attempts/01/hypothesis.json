@@ -1,0 +1,17 @@
+{
+  "summary": "Blocking update overwrites the prior sample before edge detection",
+  "likely_files": [
+    "rtl/pulse.v"
+  ],
+  "likely_lines": [
+    6,
+    7
+  ],
+  "reasoning": "At line 6, previous immediately becomes signal_in, so line 7 cannot detect a rising edge. A nonblocking update retains the old sample for the pulse expression and removes the mixed assignment style reported by lint. Baseline simulation fails on the first enabled rising edge; independent validation of this change is still needed.",
+  "confidence": 0.98,
+  "evidence_ids": [
+    "baseline:simulation",
+    "baseline:lint",
+    "baseline:compile"
+  ]
+}

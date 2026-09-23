@@ -1,0 +1,18 @@
+{
+  "summary": "The final non-matching state has an out-of-range encoding that aliases another state.",
+  "likely_files": [
+    "rtl/TopModule.sv"
+  ],
+  "likely_lines": [
+    24,
+    64,
+    83
+  ],
+  "reasoning": "At line 24, 4'd20 truncates to 4, the encoding of s4. This makes the sf6 case overlap and prevents the intended non-match output from reliably representing a completed six-bit group. A distinct four-bit encoding should preserve the existing group-counting transitions. The cause is strongly supported, but the repair has not been independently validated.",
+  "confidence": 0.95,
+  "evidence_ids": [
+    "baseline:compile",
+    "baseline:lint",
+    "baseline:synthesis"
+  ]
+}

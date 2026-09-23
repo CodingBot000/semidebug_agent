@@ -35,7 +35,7 @@ Known fix supplied only for the V2 hidden-regression demo
 
 Regression: PASS
 
-Duration: 226 ms; Provider calls: 2; tokens in/out: 0/0.
+Duration: 213 ms; Provider calls: 2; tokens in/out: 0/0.
 Estimated cost: unknown/unconfigured.
 
 Scripted providers and replay output are not live AI benchmark results.

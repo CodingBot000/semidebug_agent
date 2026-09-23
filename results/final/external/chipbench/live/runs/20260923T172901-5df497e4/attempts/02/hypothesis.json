@@ -1,0 +1,21 @@
+{
+  "summary": "The sf6 encoding truncates to the encoding of s4.",
+  "likely_files": [
+    "rtl/TopModule.sv"
+  ],
+  "likely_lines": [
+    24,
+    48,
+    64,
+    83
+  ],
+  "reasoning": "The value 4'd20 at line 24 truncates to 4, making sf6 overlap s4. The lint and synthesis evidence identify the overlap, which can prevent the intended completed-group transition and not_match indication. The prior proposal was rejected because its diff hunk was malformed, not because the repair was tested. The baseline simulation passes, so the behavioral impact remains uncertain.",
+  "confidence": 0.95,
+  "evidence_ids": [
+    "baseline:compile",
+    "baseline:lint",
+    "baseline:synthesis",
+    "baseline:simulation",
+    "guard:1"
+  ]
+}

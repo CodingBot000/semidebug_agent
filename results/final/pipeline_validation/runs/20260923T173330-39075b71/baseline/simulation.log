@@ -1,0 +1,6 @@
+argv: ["vvp", "-N", ".build/target.vvp", "+SEED=7"]
+status: fail
+exit: 1
+FATAL: tb/arbiter_tb.v:17: arbiter req=00 priority=0 expected=00 got=01
+       Time: 33 Scope: arbiter_tb.check_grant
+

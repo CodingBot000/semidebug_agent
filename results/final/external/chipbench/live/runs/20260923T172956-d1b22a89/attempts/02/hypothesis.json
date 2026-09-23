@@ -1,0 +1,15 @@
+{
+  "summary": "The S3-to-S0 transition on a zero loses an overlapping prefix.",
+  "likely_files": [
+    "rtl/TopModule.sv"
+  ],
+  "likely_lines": [
+    26
+  ],
+  "reasoning": "S3 represents 101. Appending 0 yields 1010, whose suffix 10 is represented by S2; returning to S0 can miss a subsequent 11. The baseline simulation passed, so this case is not confirmed by that test. The prior proposal was rejected for an invalid diff hunk, not by RTL validation. [baseline:simulation, guard:1]",
+  "confidence": 0.85,
+  "evidence_ids": [
+    "baseline:simulation",
+    "guard:1"
+  ]
+}

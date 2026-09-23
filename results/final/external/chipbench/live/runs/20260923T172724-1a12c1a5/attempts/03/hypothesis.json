@@ -1,0 +1,17 @@
+{
+  "summary": "The shift direction is wrong, but the registered match should retain its original one-cycle comparison timing.",
+  "likely_files": [
+    "rtl/TopModule.sv"
+  ],
+  "likely_lines": [
+    15,
+    31
+  ],
+  "reasoning": "Line 31 inserts a at bit 7, contrary to problem.txt:17. The edge-aligned match change in attempt 2 compiled and passed the smoke simulation but failed the withheld regression (regression-2:2). That suggests preserving the original comparison of the pre-edge a_tem at line 15 while correcting only the shift direction. The withheld test details are unavailable, so the expected match timing remains uncertain.",
+  "confidence": 0.7,
+  "evidence_ids": [
+    "attempt-2:compile",
+    "attempt-2:simulation",
+    "regression-2:2"
+  ]
+}

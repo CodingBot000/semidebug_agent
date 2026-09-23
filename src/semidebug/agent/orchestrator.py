@@ -331,13 +331,16 @@ def repair(
             else {}
         )
         if (
-            state.billing_mode != "chatgpt-subscription"
+            state.billing_mode == "openai-api"
             and settings.input_price is not None
+            and settings.cached_input_price is not None
             and settings.output_price is not None
             and settings.price_source
         ):
+            uncached_input_tokens = max(0, state.input_tokens - state.cached_input_tokens)
             state.estimated_cost = (
-                state.input_tokens * settings.input_price
+                uncached_input_tokens * settings.input_price
+                + state.cached_input_tokens * settings.cached_input_price
                 + state.output_tokens * settings.output_price
             ) / 1_000_000
             state.price_source = settings.price_source

@@ -1,0 +1,17 @@
+{
+  "summary": "Opcode 0 incorrectly subtracts instead of adding.",
+  "likely_files": [
+    "rtl/alu.v"
+  ],
+  "likely_lines": [
+    5
+  ],
+  "reasoning": "The baseline computes 0-140 as 116 modulo 256, while the test expects 140 for opcode 0. Opcode 1 already handles subtraction. The proposed change is limited to opcode 0; independent validation is still needed.",
+  "confidence": 0.99,
+  "evidence_ids": [
+    "baseline:simulation",
+    "baseline:compile",
+    "baseline:lint",
+    "baseline:synthesis"
+  ]
+}

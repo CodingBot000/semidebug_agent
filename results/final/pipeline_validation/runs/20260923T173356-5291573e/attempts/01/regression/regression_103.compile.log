@@ -1,0 +1,4 @@
+argv: ["iverilog", "-g2012", "-Wall", "-s", "pulse_hidden_tb", "-o", ".build/regression_103.vvp", "rtl/pulse.v", "tb/pulse_tb_hidden.v"]
+status: pass
+exit: 0
+

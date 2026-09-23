@@ -1,0 +1,445 @@
+{
+  "run_id": "20260923T171749-f9d85aba",
+  "case_id": "case_009_fifo_reset",
+  "category": "reset",
+  "provider": "live-openai-api",
+  "model": "gpt-6-sol",
+  "reasoning_effort": "low",
+  "billing_mode": "openai-api",
+  "cached_input_tokens": 2184,
+  "provider_metadata": {},
+  "iteration": 2,
+  "max_iterations": 3,
+  "project_root": "case_009_fifo_reset",
+  "mutable_files": [
+    "rtl/fifo.v"
+  ],
+  "immutable_files": [
+    "case.json",
+    "expected/metadata.json",
+    "tb/fifo_tb.v",
+    "tb/fifo_tb_hidden.v"
+  ],
+  "baseline": {
+    "results": {
+      "compile": {
+        "tool": "iverilog",
+        "command": [
+          "iverilog",
+          "-g2012",
+          "-Wall",
+          "-s",
+          "fifo_tb",
+          "-o",
+          ".build/target.vvp",
+          "rtl/fifo.v",
+          "tb/fifo_tb.v"
+        ],
+        "exit_code": 0,
+        "status": "pass",
+        "stdout": "",
+        "stderr": "",
+        "duration_ms": 11
+      },
+      "simulation": {
+        "tool": "vvp",
+        "command": [
+          "vvp",
+          "-N",
+          ".build/target.vvp",
+          "+SEED=7"
+        ],
+        "exit_code": 1,
+        "status": "fail",
+        "stdout": "FATAL: tb/fifo_tb.v:23: FIFO step=0 occupancy=0 full=0 empty=0 expected_out=0 actual=0\n       Time: 2 Scope: fifo_tb.step\n",
+        "stderr": "",
+        "duration_ms": 11
+      },
+      "lint": {
+        "tool": "verilator",
+        "command": [
+          "verilator",
+          "--lint-only",
+          "-Wall",
+          "-Wno-fatal",
+          "--top-module",
+          "fifo",
+          "rtl/fifo.v"
+        ],
+        "exit_code": 0,
+        "status": "pass",
+        "stdout": "",
+        "stderr": "",
+        "duration_ms": 43
+      },
+      "synthesis": {
+        "tool": "yosys",
+        "command": [
+          "yosys",
+          "-Q",
+          "-T",
+          "-p",
+          "read_verilog -sv rtl/fifo.v; hierarchy -check -top fifo; proc; opt; check -assert"
+        ],
+        "exit_code": 0,
+        "status": "pass",
+        "stdout": "\n-- Running command `read_verilog -sv rtl/fifo.v; hierarchy -check -top fifo; proc; opt; check -assert' --\n\n1. Executing Verilog-2005 frontend: rtl/fifo.v\nParsing SystemVerilog input from `rtl/fifo.v' to AST representation.\nGenerating RTLIL representation for module `\\fifo'.\nSuccessfully finished Verilog frontend.\n\n2. Executing HIERARCHY pass (managing design hierarchy).\n\n2.1. Analyzing design hierarchy..\nTop module:  \\fifo\n\n2.2. Analyzing design hierarchy..\nTop module:  \\fifo\nRemoved 0 unused modules.\n\n3. Executing PROC pass (convert processes to netlists).\n\n3.1. Executing PROC_CLEAN pass (remove empty switches from decision trees).\nCleaned up 0 empty switches.\n\n3.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).\nMarked 3 switch rules as full_case in process $proc$rtl/fifo.v:10$8 in module fifo.\nRemoved a total of 0 dead cases.\n\n3.3. Executing PROC_PRUNE pass (remove redundant assignments in processes).\nRemoved 1 redundant assignment.\nPromoted 3 assignments to connections.\n\n3.4. Executing PROC_INIT pass (extract init attributes).\n\n3.5. Executing PROC_ARST pass (detect async resets in processes).\n\n3.6. Executing PROC_ROM pass (convert switches to ROMs).\nConverted 0 switches.\n<suppressed ~4 debug messages>\n\n3.7. Executing PROC_MUX pass (convert decision trees to multiplexers).\nCreating decoders for process `\\fifo.$proc$rtl/fifo.v:10$8'.\n     1/10: $2$memwr$\\mem$rtl/fifo.v:14$1_EN[7:0]$17\n     2/10: $2$memwr$\\mem$rtl/fifo.v:14$1_DATA[7:0]$16\n     3/10: $2$memwr$\\mem$rtl/fifo.v:14$1_ADDR[1:0]$15\n     4/10: $0\\count[2:0]\n     5/10: $1$memwr$\\mem$rtl/fifo.v:14$1_EN[7:0]$14\n     6/10: $1$memwr$\\mem$rtl/fifo.v:14$1_DATA[7:0]$13\n     7/10: $1$memwr$\\mem$rtl/fifo.v:14$1_ADDR[1:0]$12\n     8/10: $0\\rd_ptr[1:0]\n     9/10: $0\\wr_ptr[1:0]\n    10/10: $0\\data_out[7:0]\n\n3.8. Executing PROC_DLATCH pass (convert process syncs to latches).\n\n3.9. Executing PROC_DFF pass (convert process syncs to FFs).\nCreating register for signal `\\fifo.\\data_out' using process `\\fifo.$proc$rtl/fifo.v:10$8'.\n  created $dff cell `$procdff$73' with positive edge clock.\nCreating register for signal `\\fifo.\\wr_ptr' using process `\\fifo.$proc$rtl/fifo.v:10$8'.\n  created $dff cell `$procdff$74' with positive edge clock.\nCreating register for signal `\\fifo.\\rd_ptr' using process `\\fifo.$proc$rtl/fifo.v:10$8'.\n  created $dff cell `$procdff$75' with positive edge clock.\nCreating register for signal `\\fifo.\\count' using process `\\fifo.$proc$rtl/fifo.v:10$8'.\n  created $dff cell `$procdff$76' with positive edge clock.\nCreating register for signal `\\fifo.$memwr$\\mem$rtl/fifo.v:14$1_ADDR' using process `\\fifo.$proc$rtl/fifo.v:10$8'.\n  created $dff cell `$procdff$77' with positive edge clock.\nCreating register for signal `\\fifo.$memwr$\\mem$rtl/fifo.v:14$1_DATA' using process `\\fifo.$proc$rtl/fifo.v:10$8'.\n  created $dff cell `$procdff$78' with positive edge clock.\nCreating register for signal `\\fifo.$memwr$\\mem$rtl/fifo.v:14$1_EN' using process `\\fifo.$proc$rtl/fifo.v:10$8'.\n  created $dff cell `$procdff$79' with positive edge clock.\n\n3.10. Executing PROC_MEMWR pass (convert process memory writes to cells).\n\n3.11. Executing PROC_CLEAN pass (remove empty switches from decision trees).\nFound and cleaned up 4 empty switches in `\\fifo.$proc$rtl/fifo.v:10$8'.\nRemoving empty process `fifo.$proc$rtl/fifo.v:10$8'.\nCleaned up 4 empty switches.\n\n3.12. Executing OPT_EXPR pass (perform const folding).\nOptimizing module fifo.\n<suppressed ~1 debug messages>\n\n4. Executing OPT pass (performing simple optimizations).\n\n4.1. Executing OPT_EXPR pass (perform const folding).\nOptimizing module fifo.\n\n4.2. Executing OPT_MERGE pass (detect identical cells).\nFinding identical cells in module `\\fifo'.\nRemoved a total of 0 cells.\n\n4.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).\nRunning muxtree optimizer on module \\fifo..\n  Creating internal representation of mux trees.\n  Evaluating internal representation of mux trees.\n  Analyzing evaluation results.\n    dead port 1/2 on $mux $procmux$39.\n    dead port 1/2 on $mux $procmux$33.\n    dead port 1/2 on $mux $procmux$27.\nRemoved 3 multiplexer ports.\n<suppressed ~7 debug messages>\n\n4.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).\n  Optimizing cells in module \\fifo.\n    Consolidated identical input bits for $mux cell $procmux$24:\n      Old ports: A=8'00000000, B=8'11111111, Y=$procmux$24_Y\n      New ports: A=1'0, B=1'1, Y=$procmux$24_Y [0]\n      New connections: $procmux$24_Y [7:1] = { $procmux$24_Y [0] $procmux$24_Y [0] $procmux$24_Y [0] $procmux$24_Y [0] $procmux$24_Y [0] $procmux$24_Y [0] $procmux$24_Y [0] }\n  Optimizing cells in module \\fifo.\n    Consolidated identical input bits for $mux cell $procmux$49:\n      Old ports: A=$2$memwr$\\mem$rtl/fifo.v:14$1_EN[7:0]$17, B=8'00000000, Y=$procmux$49_Y\n      New ports: A=$procmux$24_Y [0], B=1'0, Y=$procmux$49_Y [0]\n      New connections: $procmux$49_Y [7:1] = { $procmux$49_Y [0] $procmux$49_Y [0] $procmux$49_Y [0] $procmux$49_Y [0] $procmux$49_Y [0] $procmux$49_Y [0] $procmux$49_Y [0] }\n  Optimizing cells in module \\fifo.\nPerformed a total of 2 changes.\n\n4.5. Executing OPT_MERGE pass (detect identical cells).\nFinding identical cells in module `\\fifo'.\nRemoved a total of 0 cells.\n\n4.6. Executing OPT_DFF pass (perform DFF optimizations).\nAdding SRST signal on $procdff$73 ($dff) from module fifo (D = $procmux$68_Y, Q = \\data_out, rval = 8'00000000).\nAdding EN signal on $auto$ff.cc:266:slice$81 ($sdff) from module fifo (D = $memrd$\\mem$rtl/fifo.v:15$19_DATA, Q = \\data_out).\nAdding SRST signal on $procdff$74 ($dff) from module fifo (D = $procmux$63_Y, Q = \\wr_ptr, rval = 2'00).\nAdding EN signal on $auto$ff.cc:266:slice$83 ($sdff) from module fifo (D = $add$rtl/fifo.v:14$18_Y, Q = \\wr_ptr).\nAdding SRST signal on $procdff$75 ($dff) from module fifo (D = $procmux$57_Y, Q = \\rd_ptr, rval = 2'00).\nAdding EN signal on $auto$ff.cc:266:slice$85 ($sdff) from module fifo (D = $add$rtl/fifo.v:15$20_Y, Q = \\rd_ptr).\nAdding SRST signal on $procdff$76 ($dff) from module fifo (D = $procmux$42_Y, Q = \\count, rval = 3'001).\nAdding EN signal on $auto$ff.cc:266:slice$87 ($sdff) from module fifo (D = $procmux$42_Y, Q = \\count).\n\n4.7. Executing OPT_CLEAN pass (remove unused cells and wires).\nFinding unused cells or wires in module \\fifo..\nRemoved 10 unused cells and 46 unused wires.\n<suppressed ~11 debug messages>\n\n4.8. Executing OPT_EXPR pass (perform const folding).\nOptimizing module fifo.\n<suppressed ~1 debug messages>\n\n4.9. Rerunning OPT passes. (Maybe there is more to do..)\n\n4.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).\nRunning muxtree optimizer on module \\fifo..\n  Creating internal representation of mux trees.\n  Evaluating internal representation of mux trees.\n  Analyzing evaluation results.\nRemoved 0 multiplexer ports.\n<suppressed ~4 debug messages>\n\n4.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).\n  Optimizing cells in module \\fifo.\nPerformed a total of 0 changes.\n\n4.12. Executing OPT_MERGE pass (detect identical cells).\nFinding identical cells in module `\\fifo'.\nRemoved a total of 0 cells.\n\n4.13. Executing OPT_DFF pass (perform DFF optimizations).\n\n4.14. Executing OPT_CLEAN pass (remove unused cells and wires).\nFinding unused cells or wires in module \\fifo..\n\n4.15. Executing OPT_EXPR pass (perform const folding).\nOptimizing module fifo.\n\n4.16. Finished OPT passes. (There is nothing left to do.)\n\n5. Executing CHECK pass (checking for obvious problems).\nChecking module fifo...\nFound and reported 0 problems.\n",
+        "stderr": "",
+        "duration_ms": 21
+      }
+    }
+  },
+  "current_validation": {
+    "results": {
+      "compile": {
+        "tool": "iverilog",
+        "command": [
+          "iverilog",
+          "-g2012",
+          "-Wall",
+          "-s",
+          "fifo_tb",
+          "-o",
+          ".build/target.vvp",
+          "rtl/fifo.v",
+          "tb/fifo_tb.v"
+        ],
+        "exit_code": 0,
+        "status": "pass",
+        "stdout": "",
+        "stderr": "",
+        "duration_ms": 11
+      },
+      "simulation": {
+        "tool": "vvp",
+        "command": [
+          "vvp",
+          "-N",
+          ".build/target.vvp",
+          "+SEED=7"
+        ],
+        "exit_code": 0,
+        "status": "pass",
+        "stdout": "SEMIDEBUG_PASS\n",
+        "stderr": "",
+        "duration_ms": 11
+      },
+      "lint": {
+        "tool": "verilator",
+        "command": [
+          "verilator",
+          "--lint-only",
+          "-Wall",
+          "-Wno-fatal",
+          "--top-module",
+          "fifo",
+          "rtl/fifo.v"
+        ],
+        "exit_code": 0,
+        "status": "pass",
+        "stdout": "",
+        "stderr": "",
+        "duration_ms": 43
+      },
+      "synthesis": {
+        "tool": "yosys",
+        "command": [
+          "yosys",
+          "-Q",
+          "-T",
+          "-p",
+          "read_verilog -sv rtl/fifo.v; hierarchy -check -top fifo; proc; opt; check -assert"
+        ],
+        "exit_code": 0,
+        "status": "pass",
+        "stdout": "\n-- Running command `read_verilog -sv rtl/fifo.v; hierarchy -check -top fifo; proc; opt; check -assert' --\n\n1. Executing Verilog-2005 frontend: rtl/fifo.v\nParsing SystemVerilog input from `rtl/fifo.v' to AST representation.\nGenerating RTLIL representation for module `\\fifo'.\nSuccessfully finished Verilog frontend.\n\n2. Executing HIERARCHY pass (managing design hierarchy).\n\n2.1. Analyzing design hierarchy..\nTop module:  \\fifo\n\n2.2. Analyzing design hierarchy..\nTop module:  \\fifo\nRemoved 0 unused modules.\n\n3. Executing PROC pass (convert processes to netlists).\n\n3.1. Executing PROC_CLEAN pass (remove empty switches from decision trees).\nCleaned up 0 empty switches.\n\n3.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).\nMarked 3 switch rules as full_case in process $proc$rtl/fifo.v:10$8 in module fifo.\nRemoved a total of 0 dead cases.\n\n3.3. Executing PROC_PRUNE pass (remove redundant assignments in processes).\nRemoved 1 redundant assignment.\nPromoted 3 assignments to connections.\n\n3.4. Executing PROC_INIT pass (extract init attributes).\n\n3.5. Executing PROC_ARST pass (detect async resets in processes).\n\n3.6. Executing PROC_ROM pass (convert switches to ROMs).\nConverted 0 switches.\n<suppressed ~4 debug messages>\n\n3.7. Executing PROC_MUX pass (convert decision trees to multiplexers).\nCreating decoders for process `\\fifo.$proc$rtl/fifo.v:10$8'.\n     1/10: $2$memwr$\\mem$rtl/fifo.v:14$1_EN[7:0]$17\n     2/10: $2$memwr$\\mem$rtl/fifo.v:14$1_DATA[7:0]$16\n     3/10: $2$memwr$\\mem$rtl/fifo.v:14$1_ADDR[1:0]$15\n     4/10: $0\\count[2:0]\n     5/10: $1$memwr$\\mem$rtl/fifo.v:14$1_EN[7:0]$14\n     6/10: $1$memwr$\\mem$rtl/fifo.v:14$1_DATA[7:0]$13\n     7/10: $1$memwr$\\mem$rtl/fifo.v:14$1_ADDR[1:0]$12\n     8/10: $0\\rd_ptr[1:0]\n     9/10: $0\\wr_ptr[1:0]\n    10/10: $0\\data_out[7:0]\n\n3.8. Executing PROC_DLATCH pass (convert process syncs to latches).\n\n3.9. Executing PROC_DFF pass (convert process syncs to FFs).\nCreating register for signal `\\fifo.\\data_out' using process `\\fifo.$proc$rtl/fifo.v:10$8'.\n  created $dff cell `$procdff$73' with positive edge clock.\nCreating register for signal `\\fifo.\\wr_ptr' using process `\\fifo.$proc$rtl/fifo.v:10$8'.\n  created $dff cell `$procdff$74' with positive edge clock.\nCreating register for signal `\\fifo.\\rd_ptr' using process `\\fifo.$proc$rtl/fifo.v:10$8'.\n  created $dff cell `$procdff$75' with positive edge clock.\nCreating register for signal `\\fifo.\\count' using process `\\fifo.$proc$rtl/fifo.v:10$8'.\n  created $dff cell `$procdff$76' with positive edge clock.\nCreating register for signal `\\fifo.$memwr$\\mem$rtl/fifo.v:14$1_ADDR' using process `\\fifo.$proc$rtl/fifo.v:10$8'.\n  created $dff cell `$procdff$77' with positive edge clock.\nCreating register for signal `\\fifo.$memwr$\\mem$rtl/fifo.v:14$1_DATA' using process `\\fifo.$proc$rtl/fifo.v:10$8'.\n  created $dff cell `$procdff$78' with positive edge clock.\nCreating register for signal `\\fifo.$memwr$\\mem$rtl/fifo.v:14$1_EN' using process `\\fifo.$proc$rtl/fifo.v:10$8'.\n  created $dff cell `$procdff$79' with positive edge clock.\n\n3.10. Executing PROC_MEMWR pass (convert process memory writes to cells).\n\n3.11. Executing PROC_CLEAN pass (remove empty switches from decision trees).\nFound and cleaned up 4 empty switches in `\\fifo.$proc$rtl/fifo.v:10$8'.\nRemoving empty process `fifo.$proc$rtl/fifo.v:10$8'.\nCleaned up 4 empty switches.\n\n3.12. Executing OPT_EXPR pass (perform const folding).\nOptimizing module fifo.\n<suppressed ~1 debug messages>\n\n4. Executing OPT pass (performing simple optimizations).\n\n4.1. Executing OPT_EXPR pass (perform const folding).\nOptimizing module fifo.\n\n4.2. Executing OPT_MERGE pass (detect identical cells).\nFinding identical cells in module `\\fifo'.\nRemoved a total of 0 cells.\n\n4.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).\nRunning muxtree optimizer on module \\fifo..\n  Creating internal representation of mux trees.\n  Evaluating internal representation of mux trees.\n  Analyzing evaluation results.\n    dead port 1/2 on $mux $procmux$39.\n    dead port 1/2 on $mux $procmux$33.\n    dead port 1/2 on $mux $procmux$27.\nRemoved 3 multiplexer ports.\n<suppressed ~7 debug messages>\n\n4.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).\n  Optimizing cells in module \\fifo.\n    Consolidated identical input bits for $mux cell $procmux$24:\n      Old ports: A=8'00000000, B=8'11111111, Y=$procmux$24_Y\n      New ports: A=1'0, B=1'1, Y=$procmux$24_Y [0]\n      New connections: $procmux$24_Y [7:1] = { $procmux$24_Y [0] $procmux$24_Y [0] $procmux$24_Y [0] $procmux$24_Y [0] $procmux$24_Y [0] $procmux$24_Y [0] $procmux$24_Y [0] }\n  Optimizing cells in module \\fifo.\n    Consolidated identical input bits for $mux cell $procmux$49:\n      Old ports: A=$2$memwr$\\mem$rtl/fifo.v:14$1_EN[7:0]$17, B=8'00000000, Y=$procmux$49_Y\n      New ports: A=$procmux$24_Y [0], B=1'0, Y=$procmux$49_Y [0]\n      New connections: $procmux$49_Y [7:1] = { $procmux$49_Y [0] $procmux$49_Y [0] $procmux$49_Y [0] $procmux$49_Y [0] $procmux$49_Y [0] $procmux$49_Y [0] $procmux$49_Y [0] }\n  Optimizing cells in module \\fifo.\nPerformed a total of 2 changes.\n\n4.5. Executing OPT_MERGE pass (detect identical cells).\nFinding identical cells in module `\\fifo'.\nRemoved a total of 0 cells.\n\n4.6. Executing OPT_DFF pass (perform DFF optimizations).\nAdding SRST signal on $procdff$73 ($dff) from module fifo (D = $procmux$68_Y, Q = \\data_out, rval = 8'00000000).\nAdding EN signal on $auto$ff.cc:266:slice$81 ($sdff) from module fifo (D = $memrd$\\mem$rtl/fifo.v:15$19_DATA, Q = \\data_out).\nAdding SRST signal on $procdff$74 ($dff) from module fifo (D = $procmux$63_Y, Q = \\wr_ptr, rval = 2'00).\nAdding EN signal on $auto$ff.cc:266:slice$83 ($sdff) from module fifo (D = $add$rtl/fifo.v:14$18_Y, Q = \\wr_ptr).\nAdding SRST signal on $procdff$75 ($dff) from module fifo (D = $procmux$57_Y, Q = \\rd_ptr, rval = 2'00).\nAdding EN signal on $auto$ff.cc:266:slice$85 ($sdff) from module fifo (D = $add$rtl/fifo.v:15$20_Y, Q = \\rd_ptr).\nAdding SRST signal on $procdff$76 ($dff) from module fifo (D = $procmux$42_Y, Q = \\count, rval = 3'000).\nAdding EN signal on $auto$ff.cc:266:slice$87 ($sdff) from module fifo (D = $procmux$42_Y, Q = \\count).\n\n4.7. Executing OPT_CLEAN pass (remove unused cells and wires).\nFinding unused cells or wires in module \\fifo..\nRemoved 10 unused cells and 46 unused wires.\n<suppressed ~11 debug messages>\n\n4.8. Executing OPT_EXPR pass (perform const folding).\nOptimizing module fifo.\n<suppressed ~1 debug messages>\n\n4.9. Rerunning OPT passes. (Maybe there is more to do..)\n\n4.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).\nRunning muxtree optimizer on module \\fifo..\n  Creating internal representation of mux trees.\n  Evaluating internal representation of mux trees.\n  Analyzing evaluation results.\nRemoved 0 multiplexer ports.\n<suppressed ~4 debug messages>\n\n4.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).\n  Optimizing cells in module \\fifo.\nPerformed a total of 0 changes.\n\n4.12. Executing OPT_MERGE pass (detect identical cells).\nFinding identical cells in module `\\fifo'.\nRemoved a total of 0 cells.\n\n4.13. Executing OPT_DFF pass (perform DFF optimizations).\n\n4.14. Executing OPT_CLEAN pass (remove unused cells and wires).\nFinding unused cells or wires in module \\fifo..\n\n4.15. Executing OPT_EXPR pass (perform const folding).\nOptimizing module fifo.\n\n4.16. Finished OPT passes. (There is nothing left to do.)\n\n5. Executing CHECK pass (checking for obvious problems).\nChecking module fifo...\nFound and reported 0 problems.\n",
+        "stderr": "",
+        "duration_ms": 23
+      }
+    }
+  },
+  "evidence": [
+    {
+      "id": "attempt-2:compile",
+      "tool": "iverilog",
+      "status": "pass",
+      "message": "\n"
+    },
+    {
+      "id": "attempt-2:simulation",
+      "tool": "vvp",
+      "status": "pass",
+      "message": "SEMIDEBUG_PASS\n\n"
+    },
+    {
+      "id": "attempt-2:lint",
+      "tool": "verilator",
+      "status": "pass",
+      "message": "\n"
+    },
+    {
+      "id": "attempt-2:synthesis",
+      "tool": "yosys",
+      "status": "pass",
+      "message": "\n-- Running command `read_verilog -sv rtl/fifo.v; hierarchy -check -top fifo; proc; opt; check -assert' --\n\n1. Executing Verilog-2005 frontend: rtl/fifo.v\nParsing SystemVerilog input from `rtl/fifo.v' to AST representation.\nGenerating RTLIL representation for module `\\fifo'.\nSuccessfully finished Verilog frontend.\n\n2. Executing HIERARCHY pass (managing design hierarchy).\n\n2.1. Analyzing design hierarchy..\nTop module:  \\fifo\n\n2.2. Analyzing design hierarchy..\nTop module:  \\fifo\nRemoved 0 unused modules.\n\n3. Executing PROC pass (convert processes to netlists).\n\n3.1. Executing PROC_CLEAN pass (remove empty switches from decision trees).\nCleaned up 0 empty switches.\n\n3.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).\nMarked 3 switch rules as full_case in process $proc$rtl/fifo.v:10$8 in module fifo.\nRemoved a total of 0 dead cases.\n\n3.3. Executing PROC_PRUNE pass (remove redundant assignments in processes).\nRemoved 1 redundant assignment.\nPromoted 3 assignments to connections.\n\n3.4. Executing PROC_INIT pass (extract init attributes).\n\n3.5. Executing PROC_ARST pass (detect async resets in processes).\n\n3.6. Executing PROC_ROM pass (convert switches to ROMs).\nConverted 0 switches.\n<suppressed ~4 debug messages>\n\n3.7. Executing PROC_MUX pass (convert decision trees to multiplexers).\nCreating decoders for process `\\fifo.$proc$rtl/fifo.v:10$8'.\n     1/10: $2$memwr$\\mem$rtl/fifo.v:14$1_EN[7:0]$17\n     2/10: $2$memwr$\\mem$rtl/fifo.v:14$1_DATA[7:0]$16\n     3/10: $2$memwr$\\mem$rtl/fifo.v:14$1_ADDR[1:0]$15\n     4/10: $0\\count[2:0]\n     5/10: $1$memwr$\\mem$rtl/fifo.v:14$1_EN[7:0]$14\n     6/10: $1$memwr$\\mem$rtl/fifo.v:14$1_DATA[7:0]$13\n     7/10: $1$memwr$\\mem$rtl/fifo.v:14$1_ADDR[1:0]$12\n     8/10: $0\\rd_ptr[1:0]\n     9/10: $0\\wr_ptr[1:0]\n    10/10: $0\\data_out[7:0]\n\n3.8. Executing PROC_DLATCH pass (convert process syncs to latches).\n\n3.9. Executing PROC_DFF pass (convert process syncs to FFs).\nCreating register for signal `\\fifo.\\data_out' using process `\\fifo.$proc$rtl/fifo.v:10$8'.\n  created $dff cell `$procdff$73' with positive edge clock.\nCreating register for signal `\\fifo.\\wr_ptr' using process `\\fifo.$proc$rtl/fifo.v:10$8'.\n  created $dff cell `$procdff$74' with positive edge clock.\nCreating register for signal `\\fifo.\\rd_ptr' using process `\\fifo.$proc$rtl/fifo.v:10$8'.\n  created $dff cell `$procdff$75' with positive edge clock.\nCreating register for signal `\\fifo.\\count' using process `\\fifo.$proc$rtl/fifo.v:10$8'.\n  created $dff cell `$procdff$76' with positive edge clock.\nCreating register for signal `\\fifo.$memwr$\\mem$rtl/fifo.v:14$1_ADDR' using process `\\fifo.$proc$rtl/fifo.v:10$8'.\n  created $dff cell `$procdff$77' with positive edge clock.\nCreating register for signal `\\fifo.$memwr$\\mem$rtl/fifo.v:14$1_DATA' using process `\\fifo.$proc$rtl/fifo.v:10$8'.\n  created $dff cell `$procdff$78' with positive edge clock.\nCreating register for signal `\\fifo.$memwr$\\mem$rtl/fifo.v:14$1_EN' using process `\\fifo.$proc$rtl/fifo.v:10$8'.\n  created $dff cell `$procdff$79' with positive edge clock.\n\n3.10. Executing PROC_MEMWR pass (convert process memory writes to cells).\n\n3.11. Executing PROC_CLEAN pass (remove empty switches from decision trees).\nFound and cleaned up 4 empty switches in `\\fifo.$proc$rtl/fifo.v:10$8'.\nRemoving empty process `fifo.$proc$rtl/fifo.v:10$8'.\nCleaned up 4 empty switches.\n\n3.12. Executing OPT_EXPR pass (perform const folding).\nOptimizing module fifo.\n<suppressed ~1 debug messages>\n\n4. Executing OPT pass (performing simple optimizations).\n\n4.1. Executing OPT_EXPR pass (perform const folding).\nOptimizing module fifo.\n\n4.2. Executing OPT_MERGE pass (detect identical cells).\nFinding identical cells in module `\\fifo'.\nRemoved a total of 0 cells.\n\n4.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).\nRunning muxtree optimizer on module \\fifo..\n  Creating internal representation of mux trees.\n  Evaluating internal representation of mux trees.\n  Analyzing evaluation results.\n    dead port 1/2 on $mux $procmux$39.\n    dead port 1/2 on $mux $procmux$33.\n    dead port 1/2 on $mux $procmux$27.\nRemoved 3 multiplexer ports.\n<suppressed ~7 debug messages>\n\n4.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).\n  Optimizing cells in module \\fifo.\n    Consolidated identical input bits for $mux cell $procmux$24:\n      Old ports: A=8'00000000, B=8'11111111, Y=$procmux$24_Y\n      New ports: A=1'0, B=1'1, Y=$procmux$24_Y [0]\n      New connections: $procmux$24_Y [7:1] = { $procmux$24_Y [0] $procmux$24_Y [0] $procmux$24_Y [0] $procmux$24_Y [0] $procmux$24_Y [0] $procmux$24_Y [0] $procmux$24_Y [0] }\n  Optimizing cells in module \\fifo.\n    Consolidated identical input bits for $mux cell $procmux$49:\n      Old ports: A=$2$memwr$\\mem$rtl/fifo.v:14$1_EN[7:0]$17, B=8'00000000, Y=$procmux$49_Y\n      New ports: A=$procmux$24_Y [0], B=1'0, Y=$procmux$49_Y [0]\n      New connections: $procmux$49_Y [7:1] = { $procmux$49_Y [0] $procmux$49_Y [0] $procmux$49_Y [0] $procmux$49_Y [0] $procmux$49_Y [0] $procmux$49_Y [0] $procmux$49_Y [0] }\n  Optimizing cells in module \\fifo.\nPerformed a total of 2 changes.\n\n4.5. Executing OPT_MERGE pass (detect identical cells).\nFinding identical cells in module `\\fifo'.\nRemoved a total of 0 cells.\n\n4.6. Executing OPT_DFF pass (perform DFF optimizations).\nAdding SRST signal on $procdff$73 ($dff) from module fifo (D = $procmux$68_Y, Q = \\data_out, rval = 8'00000000).\nAdding EN signal on $auto$ff.cc:266:slice$81 ($sdff) from module fifo (D = $memrd$\\mem$rtl/fifo.v:15$19_DATA, Q = \\data_out).\nAdding SRST signal on $procdff$74 ($dff) from module fifo (D = $procmux$63_Y, Q = \\wr_ptr, rval = 2'00).\nAdding EN signal on $auto$ff.cc:266:slice$83 ($sdff) from module fifo (D = $add$rtl/fifo.v:14$18_Y, Q = \\wr_ptr).\nAdding SRST signal on $procdff$75 ($dff) from module fifo (D = $procmux$57_Y, Q = \\rd_ptr, rval = 2'00).\nAdding EN signal on $auto$ff.cc:266:slice$85 ($sdff) from module fifo (D = $add$rtl/fifo.v:15$20_Y, Q = \\rd_ptr).\nAdding SRST signal on $procdff$76 ($dff) from module fifo (D = $procmux$42_Y, Q = \\count, rval = 3'000).\nAdding EN signal on $auto$ff.cc:266:slice$87 ($sdff) from module fifo (D = $procmux$42_Y, Q = \\count).\n\n4.7. Executing OPT_CLEAN pass (remove unused cells and wires).\nFinding unused cells or wires in module \\fifo..\nRemoved 10 unused cells and 46 unused wires.\n<suppressed ~11 debug messages>\n\n4.8. Executing OPT_EXPR pass (perform const folding).\nOptimizing module fifo.\n<suppressed ~1 debug messages>\n\n4.9. Rerunning OPT passes. (Maybe there is more to do..)\n\n4.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).\nRunning muxtree optimizer on module \\fifo..\n  Creating internal representation of mux trees.\n  Evaluating internal representation of mux trees.\n  Analyzing evaluation results.\nRemoved 0 multiplexer ports.\n<suppressed ~4 debug messages>\n\n4.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).\n  Optimizing cells in module \\fifo.\nPerformed a total of 0 changes.\n\n4.12. Executing OPT_MERGE pass (detect identical cells).\nFinding identical cells in module `\\fifo'.\nRemoved a total of 0 cells.\n\n4.13. Executing OPT_DFF pass (perform DFF optimizations).\n\n4.14. Executing OPT_CLEAN pass (remove unused cells and wires).\nFinding unused cells or wires in module \\fifo..\n\n4.15. Executing OPT_EXPR pass (perform const folding).\nOptimizing module fifo.\n\n4.16. Finished OPT passes. (There is nothing left to do.)\n\n5. Executing CHECK pass (checking for obvious problems).\nChecking module fifo...\nFound and reported 0 problems.\n\n"
+    }
+  ],
+  "hypotheses": [
+    {
+      "summary": "Reset initializes FIFO occupancy to one instead of zero.",
+      "likely_files": [
+        "rtl/fifo.v"
+      ],
+      "likely_lines": [
+        12
+      ],
+      "reasoning": "The first reset step expects empty=1 at occupancy zero, but reports empty=0. Reset assigns count=1, while empty is asserted only when count=0 (rtl/fifo.v:9,12). Compilation, lint and synthesis accept the baseline, so this appears behavioral rather than structural. No independent validation of the proposed change is available.",
+      "confidence": 0.99,
+      "evidence_ids": [
+        "baseline:simulation",
+        "baseline:compile",
+        "baseline:lint",
+        "baseline:synthesis"
+      ]
+    },
+    {
+      "summary": "Reset initializes FIFO occupancy to one instead of zero.",
+      "likely_files": [
+        "rtl/fifo.v"
+      ],
+      "likely_lines": [
+        12
+      ],
+      "reasoning": "The reset step expects empty=1 at occupancy zero, but reports empty=0. Line 12 resets count to one, while line 9 asserts empty only when count is zero. The previous proposal was rejected for an invalid diff hunk, not by RTL validation; this proposal corrects the hunk against the original source.",
+      "confidence": 0.99,
+      "evidence_ids": [
+        "baseline:simulation",
+        "guard:1"
+      ]
+    }
+  ],
+  "patch_attempts": [
+    {
+      "iteration": 1,
+      "hypothesis": {
+        "summary": "Reset initializes FIFO occupancy to one instead of zero.",
+        "likely_files": [
+          "rtl/fifo.v"
+        ],
+        "likely_lines": [
+          12
+        ],
+        "reasoning": "The first reset step expects empty=1 at occupancy zero, but reports empty=0. Reset assigns count=1, while empty is asserted only when count=0 (rtl/fifo.v:9,12). Compilation, lint and synthesis accept the baseline, so this appears behavioral rather than structural. No independent validation of the proposed change is available.",
+        "confidence": 0.99,
+        "evidence_ids": [
+          "baseline:simulation",
+          "baseline:compile",
+          "baseline:lint",
+          "baseline:synthesis"
+        ]
+      },
+      "proposal": {
+        "explanation": "Initialize the occupancy counter to zero on reset, matching the reset pointers and empty indication.",
+        "unified_diff": "--- a/rtl/fifo.v\n+++ b/rtl/fifo.v\n@@ -9,7 +9,7 @@\n assign empty = (count == 3'd0);\n always @(posedge clk) begin\n     if (rst) begin\n-        wr_ptr <= 2'd0; rd_ptr <= 2'd0; count <= 3'd1; data_out <= 8'd0;\n+        wr_ptr <= 2'd0; rd_ptr <= 2'd0; count <= 3'd0; data_out <= 8'd0;\n     end else begin\n         if (push) begin mem[wr_ptr] <= data_in; wr_ptr <= wr_ptr + 2'd1; end\n",
+        "expected_effect": "After reset, empty should assert and subsequent push/pop eligibility should track an initially empty FIFO.",
+        "risks": [
+          "Later behavior has not been independently validated; additional defects may remain."
+        ]
+      },
+      "guard_error": "Hunk truncated or invalid",
+      "validation": null,
+      "regression": null,
+      "retry_reason": "PATCH_PARSE_RETRY"
+    },
+    {
+      "iteration": 2,
+      "hypothesis": {
+        "summary": "Reset initializes FIFO occupancy to one instead of zero.",
+        "likely_files": [
+          "rtl/fifo.v"
+        ],
+        "likely_lines": [
+          12
+        ],
+        "reasoning": "The reset step expects empty=1 at occupancy zero, but reports empty=0. Line 12 resets count to one, while line 9 asserts empty only when count is zero. The previous proposal was rejected for an invalid diff hunk, not by RTL validation; this proposal corrects the hunk against the original source.",
+        "confidence": 0.99,
+        "evidence_ids": [
+          "baseline:simulation",
+          "guard:1"
+        ]
+      },
+      "proposal": {
+        "explanation": "Reset the occupancy counter to zero so it agrees with the reset pointers and empty indication. The previous diff had an incorrect hunk line count.",
+        "unified_diff": "--- a/rtl/fifo.v\n+++ b/rtl/fifo.v\n@@ -9,6 +9,6 @@\n assign empty = (count == 3'd0);\n always @(posedge clk) begin\n     if (rst) begin\n-        wr_ptr <= 2'd0; rd_ptr <= 2'd0; count <= 3'd1; data_out <= 8'd0;\n+        wr_ptr <= 2'd0; rd_ptr <= 2'd0; count <= 3'd0; data_out <= 8'd0;\n     end else begin\n         if (push) begin mem[wr_ptr] <= data_in; wr_ptr <= wr_ptr + 2'd1; end\n",
+        "expected_effect": "After reset, empty should assert and occupancy should start at zero.",
+        "risks": [
+          "The corrected patch has not been independently validated; later behavior may reveal other defects."
+        ]
+      },
+      "guard_error": null,
+      "validation": {
+        "results": {
+          "compile": {
+            "tool": "iverilog",
+            "command": [
+              "iverilog",
+              "-g2012",
+              "-Wall",
+              "-s",
+              "fifo_tb",
+              "-o",
+              ".build/target.vvp",
+              "rtl/fifo.v",
+              "tb/fifo_tb.v"
+            ],
+            "exit_code": 0,
+            "status": "pass",
+            "stdout": "",
+            "stderr": "",
+            "duration_ms": 11
+          },
+          "simulation": {
+            "tool": "vvp",
+            "command": [
+              "vvp",
+              "-N",
+              ".build/target.vvp",
+              "+SEED=7"
+            ],
+            "exit_code": 0,
+            "status": "pass",
+            "stdout": "SEMIDEBUG_PASS\n",
+            "stderr": "",
+            "duration_ms": 11
+          },
+          "lint": {
+            "tool": "verilator",
+            "command": [
+              "verilator",
+              "--lint-only",
+              "-Wall",
+              "-Wno-fatal",
+              "--top-module",
+              "fifo",
+              "rtl/fifo.v"
+            ],
+            "exit_code": 0,
+            "status": "pass",
+            "stdout": "",
+            "stderr": "",
+            "duration_ms": 43
+          },
+          "synthesis": {
+            "tool": "yosys",
+            "command": [
+              "yosys",
+              "-Q",
+              "-T",
+              "-p",
+              "read_verilog -sv rtl/fifo.v; hierarchy -check -top fifo; proc; opt; check -assert"
+            ],
+            "exit_code": 0,
+            "status": "pass",
+            "stdout": "\n-- Running command `read_verilog -sv rtl/fifo.v; hierarchy -check -top fifo; proc; opt; check -assert' --\n\n1. Executing Verilog-2005 frontend: rtl/fifo.v\nParsing SystemVerilog input from `rtl/fifo.v' to AST representation.\nGenerating RTLIL representation for module `\\fifo'.\nSuccessfully finished Verilog frontend.\n\n2. Executing HIERARCHY pass (managing design hierarchy).\n\n2.1. Analyzing design hierarchy..\nTop module:  \\fifo\n\n2.2. Analyzing design hierarchy..\nTop module:  \\fifo\nRemoved 0 unused modules.\n\n3. Executing PROC pass (convert processes to netlists).\n\n3.1. Executing PROC_CLEAN pass (remove empty switches from decision trees).\nCleaned up 0 empty switches.\n\n3.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).\nMarked 3 switch rules as full_case in process $proc$rtl/fifo.v:10$8 in module fifo.\nRemoved a total of 0 dead cases.\n\n3.3. Executing PROC_PRUNE pass (remove redundant assignments in processes).\nRemoved 1 redundant assignment.\nPromoted 3 assignments to connections.\n\n3.4. Executing PROC_INIT pass (extract init attributes).\n\n3.5. Executing PROC_ARST pass (detect async resets in processes).\n\n3.6. Executing PROC_ROM pass (convert switches to ROMs).\nConverted 0 switches.\n<suppressed ~4 debug messages>\n\n3.7. Executing PROC_MUX pass (convert decision trees to multiplexers).\nCreating decoders for process `\\fifo.$proc$rtl/fifo.v:10$8'.\n     1/10: $2$memwr$\\mem$rtl/fifo.v:14$1_EN[7:0]$17\n     2/10: $2$memwr$\\mem$rtl/fifo.v:14$1_DATA[7:0]$16\n     3/10: $2$memwr$\\mem$rtl/fifo.v:14$1_ADDR[1:0]$15\n     4/10: $0\\count[2:0]\n     5/10: $1$memwr$\\mem$rtl/fifo.v:14$1_EN[7:0]$14\n     6/10: $1$memwr$\\mem$rtl/fifo.v:14$1_DATA[7:0]$13\n     7/10: $1$memwr$\\mem$rtl/fifo.v:14$1_ADDR[1:0]$12\n     8/10: $0\\rd_ptr[1:0]\n     9/10: $0\\wr_ptr[1:0]\n    10/10: $0\\data_out[7:0]\n\n3.8. Executing PROC_DLATCH pass (convert process syncs to latches).\n\n3.9. Executing PROC_DFF pass (convert process syncs to FFs).\nCreating register for signal `\\fifo.\\data_out' using process `\\fifo.$proc$rtl/fifo.v:10$8'.\n  created $dff cell `$procdff$73' with positive edge clock.\nCreating register for signal `\\fifo.\\wr_ptr' using process `\\fifo.$proc$rtl/fifo.v:10$8'.\n  created $dff cell `$procdff$74' with positive edge clock.\nCreating register for signal `\\fifo.\\rd_ptr' using process `\\fifo.$proc$rtl/fifo.v:10$8'.\n  created $dff cell `$procdff$75' with positive edge clock.\nCreating register for signal `\\fifo.\\count' using process `\\fifo.$proc$rtl/fifo.v:10$8'.\n  created $dff cell `$procdff$76' with positive edge clock.\nCreating register for signal `\\fifo.$memwr$\\mem$rtl/fifo.v:14$1_ADDR' using process `\\fifo.$proc$rtl/fifo.v:10$8'.\n  created $dff cell `$procdff$77' with positive edge clock.\nCreating register for signal `\\fifo.$memwr$\\mem$rtl/fifo.v:14$1_DATA' using process `\\fifo.$proc$rtl/fifo.v:10$8'.\n  created $dff cell `$procdff$78' with positive edge clock.\nCreating register for signal `\\fifo.$memwr$\\mem$rtl/fifo.v:14$1_EN' using process `\\fifo.$proc$rtl/fifo.v:10$8'.\n  created $dff cell `$procdff$79' with positive edge clock.\n\n3.10. Executing PROC_MEMWR pass (convert process memory writes to cells).\n\n3.11. Executing PROC_CLEAN pass (remove empty switches from decision trees).\nFound and cleaned up 4 empty switches in `\\fifo.$proc$rtl/fifo.v:10$8'.\nRemoving empty process `fifo.$proc$rtl/fifo.v:10$8'.\nCleaned up 4 empty switches.\n\n3.12. Executing OPT_EXPR pass (perform const folding).\nOptimizing module fifo.\n<suppressed ~1 debug messages>\n\n4. Executing OPT pass (performing simple optimizations).\n\n4.1. Executing OPT_EXPR pass (perform const folding).\nOptimizing module fifo.\n\n4.2. Executing OPT_MERGE pass (detect identical cells).\nFinding identical cells in module `\\fifo'.\nRemoved a total of 0 cells.\n\n4.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).\nRunning muxtree optimizer on module \\fifo..\n  Creating internal representation of mux trees.\n  Evaluating internal representation of mux trees.\n  Analyzing evaluation results.\n    dead port 1/2 on $mux $procmux$39.\n    dead port 1/2 on $mux $procmux$33.\n    dead port 1/2 on $mux $procmux$27.\nRemoved 3 multiplexer ports.\n<suppressed ~7 debug messages>\n\n4.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).\n  Optimizing cells in module \\fifo.\n    Consolidated identical input bits for $mux cell $procmux$24:\n      Old ports: A=8'00000000, B=8'11111111, Y=$procmux$24_Y\n      New ports: A=1'0, B=1'1, Y=$procmux$24_Y [0]\n      New connections: $procmux$24_Y [7:1] = { $procmux$24_Y [0] $procmux$24_Y [0] $procmux$24_Y [0] $procmux$24_Y [0] $procmux$24_Y [0] $procmux$24_Y [0] $procmux$24_Y [0] }\n  Optimizing cells in module \\fifo.\n    Consolidated identical input bits for $mux cell $procmux$49:\n      Old ports: A=$2$memwr$\\mem$rtl/fifo.v:14$1_EN[7:0]$17, B=8'00000000, Y=$procmux$49_Y\n      New ports: A=$procmux$24_Y [0], B=1'0, Y=$procmux$49_Y [0]\n      New connections: $procmux$49_Y [7:1] = { $procmux$49_Y [0] $procmux$49_Y [0] $procmux$49_Y [0] $procmux$49_Y [0] $procmux$49_Y [0] $procmux$49_Y [0] $procmux$49_Y [0] }\n  Optimizing cells in module \\fifo.\nPerformed a total of 2 changes.\n\n4.5. Executing OPT_MERGE pass (detect identical cells).\nFinding identical cells in module `\\fifo'.\nRemoved a total of 0 cells.\n\n4.6. Executing OPT_DFF pass (perform DFF optimizations).\nAdding SRST signal on $procdff$73 ($dff) from module fifo (D = $procmux$68_Y, Q = \\data_out, rval = 8'00000000).\nAdding EN signal on $auto$ff.cc:266:slice$81 ($sdff) from module fifo (D = $memrd$\\mem$rtl/fifo.v:15$19_DATA, Q = \\data_out).\nAdding SRST signal on $procdff$74 ($dff) from module fifo (D = $procmux$63_Y, Q = \\wr_ptr, rval = 2'00).\nAdding EN signal on $auto$ff.cc:266:slice$83 ($sdff) from module fifo (D = $add$rtl/fifo.v:14$18_Y, Q = \\wr_ptr).\nAdding SRST signal on $procdff$75 ($dff) from module fifo (D = $procmux$57_Y, Q = \\rd_ptr, rval = 2'00).\nAdding EN signal on $auto$ff.cc:266:slice$85 ($sdff) from module fifo (D = $add$rtl/fifo.v:15$20_Y, Q = \\rd_ptr).\nAdding SRST signal on $procdff$76 ($dff) from module fifo (D = $procmux$42_Y, Q = \\count, rval = 3'000).\nAdding EN signal on $auto$ff.cc:266:slice$87 ($sdff) from module fifo (D = $procmux$42_Y, Q = \\count).\n\n4.7. Executing OPT_CLEAN pass (remove unused cells and wires).\nFinding unused cells or wires in module \\fifo..\nRemoved 10 unused cells and 46 unused wires.\n<suppressed ~11 debug messages>\n\n4.8. Executing OPT_EXPR pass (perform const folding).\nOptimizing module fifo.\n<suppressed ~1 debug messages>\n\n4.9. Rerunning OPT passes. (Maybe there is more to do..)\n\n4.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).\nRunning muxtree optimizer on module \\fifo..\n  Creating internal representation of mux trees.\n  Evaluating internal representation of mux trees.\n  Analyzing evaluation results.\nRemoved 0 multiplexer ports.\n<suppressed ~4 debug messages>\n\n4.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).\n  Optimizing cells in module \\fifo.\nPerformed a total of 0 changes.\n\n4.12. Executing OPT_MERGE pass (detect identical cells).\nFinding identical cells in module `\\fifo'.\nRemoved a total of 0 cells.\n\n4.13. Executing OPT_DFF pass (perform DFF optimizations).\n\n4.14. Executing OPT_CLEAN pass (remove unused cells and wires).\nFinding unused cells or wires in module \\fifo..\n\n4.15. Executing OPT_EXPR pass (perform const folding).\nOptimizing module fifo.\n\n4.16. Finished OPT passes. (There is nothing left to do.)\n\n5. Executing CHECK pass (checking for obvious problems).\nChecking module fifo...\nFound and reported 0 problems.\n",
+            "stderr": "",
+            "duration_ms": 23
+          }
+        }
+      },
+      "regression": {
+        "results": {
+          "regression_17.compile": {
+            "tool": "iverilog",
+            "command": [
+              "iverilog",
+              "-g2012",
+              "-Wall",
+              "-s",
+              "fifo_hidden_tb",
+              "-o",
+              ".build/regression_17.vvp",
+              "rtl/fifo.v",
+              "tb/fifo_tb_hidden.v"
+            ],
+            "exit_code": 0,
+            "status": "pass",
+            "stdout": "",
+            "stderr": "",
+            "duration_ms": 11
+          },
+          "regression_17.simulation": {
+            "tool": "vvp",
+            "command": [
+              "vvp",
+              "-N",
+              ".build/regression_17.vvp",
+              "+SEED=17"
+            ],
+            "exit_code": 0,
+            "status": "pass",
+            "stdout": "SEMIDEBUG_PASS\n",
+            "stderr": "",
+            "duration_ms": 10
+          },
+          "regression_103.compile": {
+            "tool": "iverilog",
+            "command": [
+              "iverilog",
+              "-g2012",
+              "-Wall",
+              "-s",
+              "fifo_hidden_tb",
+              "-o",
+              ".build/regression_103.vvp",
+              "rtl/fifo.v",
+              "tb/fifo_tb_hidden.v"
+            ],
+            "exit_code": 0,
+            "status": "pass",
+            "stdout": "",
+            "stderr": "",
+            "duration_ms": 11
+          },
+          "regression_103.simulation": {
+            "tool": "vvp",
+            "command": [
+              "vvp",
+              "-N",
+              ".build/regression_103.vvp",
+              "+SEED=103"
+            ],
+            "exit_code": 0,
+            "status": "pass",
+            "stdout": "SEMIDEBUG_PASS\n",
+            "stderr": "",
+            "duration_ms": 10
+          }
+        }
+      },
+      "retry_reason": null
+    }
+  ],
+  "final_status": "FIXED",
+  "failure_reason": null,
+  "immutable_before": {
+    "case.json": "8d09615203de832eb667e2bc172d1c92a547aedbb5daa38b8f44ad935ebc4a53",
+    "expected/metadata.json": "debb84aa5767c2399e45855c7cca0e2991a23bb6e122eff53fac346c84ab59f7",
+    "tb/fifo_tb.v": "cd74239dac5b4194d83824fb0d5173eeeebf6db424b9691f932c5f99128656fe",
+    "tb/fifo_tb_hidden.v": "dba8215b99dc70f7110fece523ff1ff901c7f93e92ab05bc8c36eb661a4bbb80"
+  },
+  "immutable_after": {
+    "case.json": "8d09615203de832eb667e2bc172d1c92a547aedbb5daa38b8f44ad935ebc4a53",
+    "expected/metadata.json": "debb84aa5767c2399e45855c7cca0e2991a23bb6e122eff53fac346c84ab59f7",
+    "tb/fifo_tb.v": "cd74239dac5b4194d83824fb0d5173eeeebf6db424b9691f932c5f99128656fe",
+    "tb/fifo_tb_hidden.v": "dba8215b99dc70f7110fece523ff1ff901c7f93e92ab05bc8c36eb661a4bbb80"
+  },
+  "integrity_pass": true,
+  "success": true,
+  "regression_pass": true,
+  "duration_ms": 13299,
+  "llm_calls": 2,
+  "input_tokens": 10097,
+  "output_tokens": 772,
+  "estimated_cost": 0.0239828,
+  "price_source": "OpenAI gpt-6-sol pricing 2026-09-24"
+}

@@ -1,0 +1,16 @@
+{
+  "summary": "FIFO reads from the write pointer instead of the read pointer.",
+  "likely_files": [
+    "rtl/fifo.v"
+  ],
+  "likely_lines": [
+    15
+  ],
+  "reasoning": "Line 15 advances rd_ptr on a pop but indexes mem with wr_ptr. That can return the wrong queued byte, consistent with the data mismatch in baseline:simulation. The baseline compiles and synthesizes, so this appears functional rather than structural (baseline:compile, baseline:synthesis).",
+  "confidence": 0.97,
+  "evidence_ids": [
+    "baseline:simulation",
+    "baseline:compile",
+    "baseline:synthesis"
+  ]
+}

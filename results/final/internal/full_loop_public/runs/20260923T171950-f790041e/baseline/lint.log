@@ -1,0 +1,20 @@
+argv: ["verilator", "--lint-only", "-Wall", "-Wno-fatal", "--top-module", "pulse", "rtl/pulse.v"]
+status: fail
+exit: 1
+
+%Warning-BLKSEQ: rtl/pulse.v:6:18: Blocking assignment '=' in sequential logic process
+                                 : ... Suggest using delayed assignment '<='
+    6 |         previous = signal_in;
+      |                  ^
+                 ... For warning description see https://verilator.org/warn/BLKSEQ?v=5.006
+                 ... Use "/* verilator lint_off BLKSEQ */" and lint_on around source to disable this message.
+%Error-BLKANDNBLK: rtl/pulse.v:2:5: Unsupported: Blocked and non-blocking assignments to same variable: 'pulse.previous'
+    2 | reg previous;
+      |     ^~~~~~~~
+                   rtl/pulse.v:6:18: ... Location of blocking assignment
+    6 |         previous = signal_in;
+      |                  ^
+                   rtl/pulse.v:4:20: ... Location of nonblocking assignment
+    4 |     if (rst) begin previous <= 1'b0; pulse_out <= 1'b0; end
+      |                    ^~~~~~~~
+%Error: Exiting due to 1 error(s)

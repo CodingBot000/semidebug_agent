@@ -1,0 +1,11 @@
+--- a/rtl/TopModule.sv
++++ b/rtl/TopModule.sv
+@@ -44,7 +44,7 @@
+ 			end
+ 		else 
+ 			begin
+-				a_tem <= {a, a_tem[7:0]};
++				a_tem <= {a_tem[7:0], a};
+ 			end
+ 			
+ 	assign match = match_b && match_f;

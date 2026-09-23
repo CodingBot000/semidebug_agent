@@ -1,0 +1,17 @@
+{
+  "summary": "The subtraction operands are reversed for operation 1.",
+  "likely_files": [
+    "rtl/alu.v"
+  ],
+  "likely_lines": [
+    6
+  ],
+  "reasoning": "The baseline computes b-a, while the testbench expects a-b. For a=0 and b=140, b-a gives the observed 140 and a-b wraps to the expected 116. Compile, lint, and synthesis passing do not address this functional mismatch.",
+  "confidence": 0.99,
+  "evidence_ids": [
+    "baseline:simulation",
+    "baseline:compile",
+    "baseline:lint",
+    "baseline:synthesis"
+  ]
+}

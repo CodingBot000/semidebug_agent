@@ -1,4 +1,4 @@
-"""Host orchestration, network-disabled EDA containers; no CLI credentials mounted."""
+"""Host orchestration for network-disabled EDA containers with no model credentials."""
 
 import os
 import uuid

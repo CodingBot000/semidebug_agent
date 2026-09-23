@@ -1,6 +1,6 @@
 # Benchmark methodology and measured results
 
-This document records the original V1 corpus and historical measurements. The changed hidden-test protocol, independent one-shot comparison and external selected cases are reported in [V2 evaluation](V2_EVALUATION.md).
+This document records the initial corpus and historical measurements. The final hidden-test protocol, independent one-shot comparison and external selected cases are reported in the [evaluation](EVALUATION.md).
 
 ## Dataset
 

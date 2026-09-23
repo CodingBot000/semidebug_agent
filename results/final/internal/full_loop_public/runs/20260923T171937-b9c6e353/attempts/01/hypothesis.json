@@ -1,0 +1,16 @@
+{
+  "summary": "Opcode 5 shifts in the wrong direction.",
+  "likely_files": [
+    "rtl/alu.v"
+  ],
+  "likely_lines": [
+    10
+  ],
+  "reasoning": "The baseline uses right shift, while the reference check uses left shift; the reported 90 shifted by 4 gives 5 rightward but 160 leftward after truncation. Compilation and synthesis passing indicate a behavioral rather than structural mismatch. No independent validation of this patch is available.",
+  "confidence": 0.99,
+  "evidence_ids": [
+    "baseline:simulation",
+    "baseline:compile",
+    "baseline:synthesis"
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "summary": "A grant to requester 0 should give requester 1 priority next.",
+  "likely_files": [
+    "rtl/arbiter.v"
+  ],
+  "likely_lines": [
+    14
+  ],
+  "reasoning": "Line 14 clears priority_bit after grant[0], so consecutive requests from both requesters keep granting requester 0. The reference advances priority after a grant of 01, matching the reported failure at time 4. This is the most likely cause, though the proposed change has not been independently validated.",
+  "confidence": 0.98,
+  "evidence_ids": [
+    "baseline:simulation",
+    "baseline:compile"
+  ]
+}

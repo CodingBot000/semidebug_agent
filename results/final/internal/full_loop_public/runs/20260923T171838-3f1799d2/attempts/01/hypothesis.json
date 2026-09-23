@@ -1,0 +1,16 @@
+{
+  "summary": "The idle-to-busy transition uses inverted start polarity.",
+  "likely_files": [
+    "rtl/controller.v"
+  ],
+  "likely_lines": [
+    8
+  ],
+  "reasoning": "The reference advances from idle when start is asserted (tb/controller_tb.v:11), but the RTL advances when start is deasserted. The first simulation mismatch occurs after start is set to 1 (tb/controller_tb.v:24). Compilation and synthesis succeeded, so the evidence points to a functional condition error rather than an elaboration issue.",
+  "confidence": 0.99,
+  "evidence_ids": [
+    "baseline:simulation",
+    "baseline:compile",
+    "baseline:synthesis"
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "summary": "The busy state exits directly to idle instead of entering the done state.",
+  "likely_files": [
+    "rtl/controller.v"
+  ],
+  "likely_lines": [
+    9
+  ],
+  "reasoning": "The reference transitions from state 1 to state 2 on finish (tb/controller_tb.v:12), while RTL line 9 transitions to state 0. The first simulation failure reports expected state 2 but done=0; compilation, lint, and synthesis do not identify a structural problem. Evidence: baseline:simulation, baseline:compile, baseline:lint, baseline:synthesis.",
+  "confidence": 0.98,
+  "evidence_ids": [
+    "baseline:simulation",
+    "baseline:compile",
+    "baseline:lint",
+    "baseline:synthesis"
+  ]
+}

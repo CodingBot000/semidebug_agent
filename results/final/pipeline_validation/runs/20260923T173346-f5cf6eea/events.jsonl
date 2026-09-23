@@ -1,0 +1,10 @@
+{"timestamp": "2026-09-23T17:33:46.115981+00:00", "run_id": "20260923T173346-f5cf6eea", "case_id": "case_013_arbiter_reset", "iteration": 0, "event_type": "LOAD_PROJECT", "status": null, "summary": ""}
+{"timestamp": "2026-09-23T17:33:46.117570+00:00", "run_id": "20260923T173346-f5cf6eea", "case_id": "case_013_arbiter_reset", "iteration": 0, "event_type": "BASELINE", "status": null, "summary": ""}
+{"timestamp": "2026-09-23T17:33:46.453912+00:00", "run_id": "20260923T173346-f5cf6eea", "case_id": "case_013_arbiter_reset", "iteration": 1, "event_type": "COLLECT_EVIDENCE", "status": null, "summary": ""}
+{"timestamp": "2026-09-23T17:33:46.454418+00:00", "run_id": "20260923T173346-f5cf6eea", "case_id": "case_013_arbiter_reset", "iteration": 1, "event_type": "ANALYZE", "status": null, "summary": ""}
+{"timestamp": "2026-09-23T17:33:46.454816+00:00", "run_id": "20260923T173346-f5cf6eea", "case_id": "case_013_arbiter_reset", "iteration": 1, "event_type": "GENERATE_PATCH", "status": null, "summary": ""}
+{"timestamp": "2026-09-23T17:33:46.456463+00:00", "run_id": "20260923T173346-f5cf6eea", "case_id": "case_013_arbiter_reset", "iteration": 1, "event_type": "GUARD_PATCH", "status": null, "summary": ""}
+{"timestamp": "2026-09-23T17:33:46.457143+00:00", "run_id": "20260923T173346-f5cf6eea", "case_id": "case_013_arbiter_reset", "iteration": 1, "event_type": "APPLY_PATCH", "status": null, "summary": ""}
+{"timestamp": "2026-09-23T17:33:46.458379+00:00", "run_id": "20260923T173346-f5cf6eea", "case_id": "case_013_arbiter_reset", "iteration": 1, "event_type": "VALIDATE_TARGET", "status": null, "summary": ""}
+{"timestamp": "2026-09-23T17:33:46.828734+00:00", "run_id": "20260923T173346-f5cf6eea", "case_id": "case_013_arbiter_reset", "iteration": 1, "event_type": "VALIDATE_REGRESSION", "status": null, "summary": ""}
+{"timestamp": "2026-09-23T17:33:47.153751+00:00", "run_id": "20260923T173346-f5cf6eea", "case_id": "case_013_arbiter_reset", "iteration": 1, "event_type": "SUCCESS", "status": null, "summary": "All independent validators and regression passed"}

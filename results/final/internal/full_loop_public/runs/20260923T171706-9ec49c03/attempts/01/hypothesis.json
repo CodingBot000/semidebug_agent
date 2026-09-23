@@ -1,0 +1,17 @@
+{
+  "summary": "Counter wraps one count too early",
+  "likely_files": [
+    "rtl/counter.v"
+  ],
+  "likely_lines": [
+    5
+  ],
+  "reasoning": "The RTL resets at count 8, while the test expects count 9 before wrapping. The first simulation mismatch is expected 9 versus actual 0; compilation, lint, and synthesis report no structural issue. This is not independently validated as a repair.",
+  "confidence": 0.98,
+  "evidence_ids": [
+    "baseline:simulation",
+    "baseline:compile",
+    "baseline:lint",
+    "baseline:synthesis"
+  ]
+}

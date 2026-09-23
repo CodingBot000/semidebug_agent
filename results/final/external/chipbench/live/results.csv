@@ -1,0 +1,13 @@
+case_id,bug_category,success,status,iterations,llm_calls,regression_pass,integrity_pass,invalid_patch_attempts,retry_reasons,duration_ms,input_tokens,output_tokens,estimated_cost,compile_pass,simulation_pass,lint_pass,synthesis_pass
+chipbench_arithmetic_Prob001_continuous_input_sequence_detect,arithmetic,True,FIXED,3,3,True,True,1,PATCH_PARSE_RETRY;REGRESSION_RETRY;,27177,15343,1618,0.0409692,True,True,True,True
+chipbench_arithmetic_Prob002_extraneous_items_sequence_detect,arithmetic,True,FIXED,2,2,True,True,0,REGRESSION_RETRY;,20087,11067,1209,0.030292799999999998,True,True,True,True
+chipbench_arithmetic_Prob006_data_serial-to-parallel_circuit,arithmetic,False,PATCH_REJECTED,2,2,False,True,2,PATCH_PARSE_RETRY;PATCH_PARSE_RETRY,24196,9846,1821,0.0339708,True,True,True,True
+chipbench_assignment_Prob001_continuous_input_sequence_detect,assignment,True,FIXED,1,1,True,True,0,,7238,3623,400,0.0092804,True,True,True,True
+chipbench_assignment_Prob002_extraneous_items_sequence_detect,assignment,True,FIXED,2,2,True,True,0,REGRESSION_RETRY;,18063,10366,1017,0.0269708,True,True,True,True
+chipbench_assignment_Prob003_non-overlapping_sequence_detect,assignment,False,PATCH_REJECTED,2,2,False,True,2,PATCH_PARSE_RETRY;PATCH_GUARD_RETRY,13330,11120,851,0.0268188,True,True,False,True
+chipbench_state_machine_Prob003_non-overlapping_sequence_detect,state_machine,True,FIXED,2,2,True,True,1,PATCH_PARSE_RETRY;,17901,10741,1108,0.028630799999999998,True,True,True,True
+chipbench_state_machine_Prob004_continuous_input_sequence_detect2,state_machine,False,PATCH_REJECTED,2,2,False,True,2,PATCH_PARSE_RETRY;PATCH_PARSE_RETRY,23799,10515,1603,0.0331288,True,True,True,True
+chipbench_state_machine_Prob012_state_machine_overlapping_sequence_detection,state_machine,True,FIXED,2,2,True,True,1,PATCH_PARSE_RETRY;,17742,8596,1063,0.0238908,True,True,True,True
+chipbench_timing_Prob001_continuous_input_sequence_detect,timing,False,PATCH_REJECTED,2,2,False,True,2,PATCH_PARSE_RETRY;PATCH_PARSE_RETRY,23031,7637,1492,0.0262628,True,True,True,True
+chipbench_timing_Prob002_extraneous_items_sequence_detect,timing,False,MAX_RETRY,3,3,False,True,2,PATCH_PARSE_RETRY;REGRESSION_RETRY;PATCH_PARSE_RETRY,31769,15280,2151,0.0461732,True,True,True,True
+chipbench_timing_Prob003_non-overlapping_sequence_detect,timing,False,MAX_RETRY,3,3,False,True,2,PATCH_PARSE_RETRY;REGRESSION_RETRY;PATCH_PARSE_RETRY,36592,17803,2362,0.0533292,True,True,True,True

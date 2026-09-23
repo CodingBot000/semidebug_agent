@@ -1,0 +1,9 @@
+{"timestamp": "2026-09-23T17:26:27.858583+00:00", "run_id": "20260923T172627-9b468445", "case_id": "case_020_controller_fsm", "iteration": 0, "event_type": "LOAD_PROJECT", "status": null, "summary": ""}
+{"timestamp": "2026-09-23T17:26:27.860916+00:00", "run_id": "20260923T172627-9b468445", "case_id": "case_020_controller_fsm", "iteration": 0, "event_type": "BASELINE", "status": null, "summary": ""}
+{"timestamp": "2026-09-23T17:26:28.336767+00:00", "run_id": "20260923T172627-9b468445", "case_id": "case_020_controller_fsm", "iteration": 1, "event_type": "COLLECT_EVIDENCE", "status": null, "summary": ""}
+{"timestamp": "2026-09-23T17:26:28.338123+00:00", "run_id": "20260923T172627-9b468445", "case_id": "case_020_controller_fsm", "iteration": 1, "event_type": "ANALYZE", "status": null, "summary": ""}
+{"timestamp": "2026-09-23T17:26:32.748039+00:00", "run_id": "20260923T172627-9b468445", "case_id": "case_020_controller_fsm", "iteration": 1, "event_type": "GENERATE_PATCH", "status": null, "summary": ""}
+{"timestamp": "2026-09-23T17:26:32.752243+00:00", "run_id": "20260923T172627-9b468445", "case_id": "case_020_controller_fsm", "iteration": 1, "event_type": "GUARD_PATCH", "status": null, "summary": ""}
+{"timestamp": "2026-09-23T17:26:32.752817+00:00", "run_id": "20260923T172627-9b468445", "case_id": "case_020_controller_fsm", "iteration": 1, "event_type": "PATCH_REJECTED", "status": null, "summary": "Hunk truncated or invalid"}
+{"timestamp": "2026-09-23T17:26:32.753265+00:00", "run_id": "20260923T172627-9b468445", "case_id": "case_020_controller_fsm", "iteration": 1, "event_type": "SHOULD_RETRY", "status": null, "summary": "Patch rejected; baseline remains unchanged"}
+{"timestamp": "2026-09-23T17:26:32.758249+00:00", "run_id": "20260923T172627-9b468445", "case_id": "case_020_controller_fsm", "iteration": 1, "event_type": "FAILED", "status": "MAX_RETRY", "summary": "Iteration budget exhausted"}

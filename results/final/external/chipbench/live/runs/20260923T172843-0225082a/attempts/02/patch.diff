@@ -1,0 +1,11 @@
+--- a/rtl/TopModule.sv
++++ b/rtl/TopModule.sv
+@@ -14,7 +14,7 @@
+ 			begin 
+ 				match_f <= 1'b0;
+ 			end
+-		else if (a_tem[8:6] == 3'b001)
++		else if (a_tem[8:6] == 3'b011)
+ 			begin
+ 				match_f <= 1'b1;
+ 			end

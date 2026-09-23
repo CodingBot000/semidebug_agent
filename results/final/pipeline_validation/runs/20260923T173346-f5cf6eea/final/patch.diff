@@ -1,0 +1,11 @@
+--- a/rtl/arbiter.v
++++ b/rtl/arbiter.v
+@@ -10,7 +10,7 @@
+     endcase
+ end
+ always @(posedge clk) begin
+-    if (rst) priority_bit <= 1'b1;
++    if (rst) priority_bit <= 1'b0;
+     else if (grant[0]) priority_bit <= 1'b1;
+     else if (grant[1]) priority_bit <= 1'b0;
+ end
