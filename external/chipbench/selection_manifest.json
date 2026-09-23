@@ -1,0 +1,227 @@
+{
+  "benchmark": "ChipBench Verilog Debugging zero-shot",
+  "upstream": "https://github.com/zhongkaiyu/ChipBench.git",
+  "commit": "b4ba3a06759804ec88c26c3cf15b28b9a90b3443",
+  "license": "MIT; retain upstream license if redistributing files",
+  "selected_at_utc": "2026-09-23T10:17:41.267200+00:00",
+  "selection_rule": "For each timing, assignment, arithmetic and state_machine zero-shot directory, take the first three *_prompt.txt filenames in bytewise lexicographic order. Require matching *_ref.sv and *_test.sv; abort if any selected triplet is incomplete. No result-based substitution or post-selection exclusion.",
+  "selected_count": 12,
+  "selected": [
+    {
+      "category": "timing",
+      "case_id": "timing_Prob001_continuous_input_sequence_detect",
+      "files": {
+        "prompt": {
+          "path": "Verilog Debugging/dataset_debug_zero_shot_timing/Prob001_continuous_input_sequence_detect_prompt.txt",
+          "sha256": "00dfa549f518c10b0c5061b7773ac9cd550b92d6a7a072bf3ea745e7d471ea57"
+        },
+        "ref": {
+          "path": "Verilog Debugging/dataset_debug_zero_shot_timing/Prob001_continuous_input_sequence_detect_ref.sv",
+          "sha256": "2d89253dc526b4fce0534149038f9693d0fac8ef6fcbd4aa1bcea45a7710ee1d"
+        },
+        "test": {
+          "path": "Verilog Debugging/dataset_debug_zero_shot_timing/Prob001_continuous_input_sequence_detect_test.sv",
+          "sha256": "e125f12d26b10d6568064a41c3d1cb1461edf7092ef979e426ad3df11d04149b"
+        }
+      }
+    },
+    {
+      "category": "timing",
+      "case_id": "timing_Prob002_extraneous_items_sequence_detect",
+      "files": {
+        "prompt": {
+          "path": "Verilog Debugging/dataset_debug_zero_shot_timing/Prob002_extraneous_items_sequence_detect_prompt.txt",
+          "sha256": "0d5eee90f6944fa81409bc81cbe4ef693062552bb774df0aaccbbebe21270f44"
+        },
+        "ref": {
+          "path": "Verilog Debugging/dataset_debug_zero_shot_timing/Prob002_extraneous_items_sequence_detect_ref.sv",
+          "sha256": "17c2abd55801a0ce4ec87fe07df687082458f6fcec151739114bd4bbedcc0bc1"
+        },
+        "test": {
+          "path": "Verilog Debugging/dataset_debug_zero_shot_timing/Prob002_extraneous_items_sequence_detect_test.sv",
+          "sha256": "a2e922e9c0955e6b45a212e1f069979ed11184a9ead8c71c424d69bc5d37f666"
+        }
+      }
+    },
+    {
+      "category": "timing",
+      "case_id": "timing_Prob003_non-overlapping_sequence_detect",
+      "files": {
+        "prompt": {
+          "path": "Verilog Debugging/dataset_debug_zero_shot_timing/Prob003_non-overlapping_sequence_detect_prompt.txt",
+          "sha256": "a722ada1ec1b39a3276aa8bc045d70bb177f50c2054a02f701c3b5138fd5fceb"
+        },
+        "ref": {
+          "path": "Verilog Debugging/dataset_debug_zero_shot_timing/Prob003_non-overlapping_sequence_detect_ref.sv",
+          "sha256": "f73f713064fd45282ea7965d2aac606c5a217780fdc8df85b06f8eab3e66c535"
+        },
+        "test": {
+          "path": "Verilog Debugging/dataset_debug_zero_shot_timing/Prob003_non-overlapping_sequence_detect_test.sv",
+          "sha256": "82bcd5907be8edc07183bca8c3ab30d35be66d208d957c3e170691dba2d6738c"
+        }
+      }
+    },
+    {
+      "category": "assignment",
+      "case_id": "assignment_Prob001_continuous_input_sequence_detect",
+      "files": {
+        "prompt": {
+          "path": "Verilog Debugging/dataset_debug_zero_shot_assignment/Prob001_continuous_input_sequence_detect_prompt.txt",
+          "sha256": "fa84f1c5d6e2d62a0b503916db59ab1e7cb945015889274c17916cacf9428d6a"
+        },
+        "ref": {
+          "path": "Verilog Debugging/dataset_debug_zero_shot_assignment/Prob001_continuous_input_sequence_detect_ref.sv",
+          "sha256": "2d89253dc526b4fce0534149038f9693d0fac8ef6fcbd4aa1bcea45a7710ee1d"
+        },
+        "test": {
+          "path": "Verilog Debugging/dataset_debug_zero_shot_assignment/Prob001_continuous_input_sequence_detect_test.sv",
+          "sha256": "e125f12d26b10d6568064a41c3d1cb1461edf7092ef979e426ad3df11d04149b"
+        }
+      }
+    },
+    {
+      "category": "assignment",
+      "case_id": "assignment_Prob002_extraneous_items_sequence_detect",
+      "files": {
+        "prompt": {
+          "path": "Verilog Debugging/dataset_debug_zero_shot_assignment/Prob002_extraneous_items_sequence_detect_prompt.txt",
+          "sha256": "ce58e23a50055d6543e5df14dec0cfbd10d4be6e6c5f43f6fa527c5ce78df174"
+        },
+        "ref": {
+          "path": "Verilog Debugging/dataset_debug_zero_shot_assignment/Prob002_extraneous_items_sequence_detect_ref.sv",
+          "sha256": "17c2abd55801a0ce4ec87fe07df687082458f6fcec151739114bd4bbedcc0bc1"
+        },
+        "test": {
+          "path": "Verilog Debugging/dataset_debug_zero_shot_assignment/Prob002_extraneous_items_sequence_detect_test.sv",
+          "sha256": "a2e922e9c0955e6b45a212e1f069979ed11184a9ead8c71c424d69bc5d37f666"
+        }
+      }
+    },
+    {
+      "category": "assignment",
+      "case_id": "assignment_Prob003_non-overlapping_sequence_detect",
+      "files": {
+        "prompt": {
+          "path": "Verilog Debugging/dataset_debug_zero_shot_assignment/Prob003_non-overlapping_sequence_detect_prompt.txt",
+          "sha256": "86ae95ae82f9c41dba0bf148c3ae8f0fcae5f47dcca5f69e5ce878c9e8290e92"
+        },
+        "ref": {
+          "path": "Verilog Debugging/dataset_debug_zero_shot_assignment/Prob003_non-overlapping_sequence_detect_ref.sv",
+          "sha256": "f73f713064fd45282ea7965d2aac606c5a217780fdc8df85b06f8eab3e66c535"
+        },
+        "test": {
+          "path": "Verilog Debugging/dataset_debug_zero_shot_assignment/Prob003_non-overlapping_sequence_detect_test.sv",
+          "sha256": "82bcd5907be8edc07183bca8c3ab30d35be66d208d957c3e170691dba2d6738c"
+        }
+      }
+    },
+    {
+      "category": "arithmetic",
+      "case_id": "arithmetic_Prob001_continuous_input_sequence_detect",
+      "files": {
+        "prompt": {
+          "path": "Verilog Debugging/dataset_debug_zero_shot_arithmetic/Prob001_continuous_input_sequence_detect_prompt.txt",
+          "sha256": "bcb9eedc2df29d47da99d48929061dfaf84ff0e197a284f618087f8e4591f202"
+        },
+        "ref": {
+          "path": "Verilog Debugging/dataset_debug_zero_shot_arithmetic/Prob001_continuous_input_sequence_detect_ref.sv",
+          "sha256": "2d89253dc526b4fce0534149038f9693d0fac8ef6fcbd4aa1bcea45a7710ee1d"
+        },
+        "test": {
+          "path": "Verilog Debugging/dataset_debug_zero_shot_arithmetic/Prob001_continuous_input_sequence_detect_test.sv",
+          "sha256": "e125f12d26b10d6568064a41c3d1cb1461edf7092ef979e426ad3df11d04149b"
+        }
+      }
+    },
+    {
+      "category": "arithmetic",
+      "case_id": "arithmetic_Prob002_extraneous_items_sequence_detect",
+      "files": {
+        "prompt": {
+          "path": "Verilog Debugging/dataset_debug_zero_shot_arithmetic/Prob002_extraneous_items_sequence_detect_prompt.txt",
+          "sha256": "c02969aaa5c5c5cb6dfb60e512ce13249daa622f8311c4cb47dc9057259afd04"
+        },
+        "ref": {
+          "path": "Verilog Debugging/dataset_debug_zero_shot_arithmetic/Prob002_extraneous_items_sequence_detect_ref.sv",
+          "sha256": "17c2abd55801a0ce4ec87fe07df687082458f6fcec151739114bd4bbedcc0bc1"
+        },
+        "test": {
+          "path": "Verilog Debugging/dataset_debug_zero_shot_arithmetic/Prob002_extraneous_items_sequence_detect_test.sv",
+          "sha256": "a2e922e9c0955e6b45a212e1f069979ed11184a9ead8c71c424d69bc5d37f666"
+        }
+      }
+    },
+    {
+      "category": "arithmetic",
+      "case_id": "arithmetic_Prob006_data_serial-to-parallel_circuit",
+      "files": {
+        "prompt": {
+          "path": "Verilog Debugging/dataset_debug_zero_shot_arithmetic/Prob006_data_serial-to-parallel_circuit_prompt.txt",
+          "sha256": "41abe1de15e6a54ac0e0a166ce2ec1da3972caf1bcf56135b20ce181a41e6899"
+        },
+        "ref": {
+          "path": "Verilog Debugging/dataset_debug_zero_shot_arithmetic/Prob006_data_serial-to-parallel_circuit_ref.sv",
+          "sha256": "612a1b3f8d00bf6b1491dffd0e6e7b759bae9f77dc4758f66490d4c5cd53509d"
+        },
+        "test": {
+          "path": "Verilog Debugging/dataset_debug_zero_shot_arithmetic/Prob006_data_serial-to-parallel_circuit_test.sv",
+          "sha256": "4776f8717c833f570327b21afc2570a3cfbe0d99c4377b6294feb3b44a71762d"
+        }
+      }
+    },
+    {
+      "category": "state_machine",
+      "case_id": "state_machine_Prob003_non-overlapping_sequence_detect",
+      "files": {
+        "prompt": {
+          "path": "Verilog Debugging/dataset_debug_zero_shot_state_machine/Prob003_non-overlapping_sequence_detect_prompt.txt",
+          "sha256": "1a81a087d5f519f4811ba18827a2eb99311ca31fed4a7f897d84ab886cf06d42"
+        },
+        "ref": {
+          "path": "Verilog Debugging/dataset_debug_zero_shot_state_machine/Prob003_non-overlapping_sequence_detect_ref.sv",
+          "sha256": "f73f713064fd45282ea7965d2aac606c5a217780fdc8df85b06f8eab3e66c535"
+        },
+        "test": {
+          "path": "Verilog Debugging/dataset_debug_zero_shot_state_machine/Prob003_non-overlapping_sequence_detect_test.sv",
+          "sha256": "82bcd5907be8edc07183bca8c3ab30d35be66d208d957c3e170691dba2d6738c"
+        }
+      }
+    },
+    {
+      "category": "state_machine",
+      "case_id": "state_machine_Prob004_continuous_input_sequence_detect2",
+      "files": {
+        "prompt": {
+          "path": "Verilog Debugging/dataset_debug_zero_shot_state_machine/Prob004_continuous_input_sequence_detect2_prompt.txt",
+          "sha256": "7f704ee45f4b6fdffb47d0c02534f089b922e84cc599e260ba4b61c06b14a7fc"
+        },
+        "ref": {
+          "path": "Verilog Debugging/dataset_debug_zero_shot_state_machine/Prob004_continuous_input_sequence_detect2_ref.sv",
+          "sha256": "349876eeda3949c33ad946f4495c8d67be994bb278c5fea64e08917e617ef02a"
+        },
+        "test": {
+          "path": "Verilog Debugging/dataset_debug_zero_shot_state_machine/Prob004_continuous_input_sequence_detect2_test.sv",
+          "sha256": "5cbf2a4dd83568d8ba7fd7e21cf9f8f4545e384bbafe4ea2370eb0a94f1d7a75"
+        }
+      }
+    },
+    {
+      "category": "state_machine",
+      "case_id": "state_machine_Prob012_state_machine_overlapping_sequence_detection",
+      "files": {
+        "prompt": {
+          "path": "Verilog Debugging/dataset_debug_zero_shot_state_machine/Prob012_state_machine_overlapping_sequence_detection_prompt.txt",
+          "sha256": "f4eac993bc948a4075ac090542a3db4bcc76512ed9abccccf43a849d56c751d1"
+        },
+        "ref": {
+          "path": "Verilog Debugging/dataset_debug_zero_shot_state_machine/Prob012_state_machine_overlapping_sequence_detection_ref.sv",
+          "sha256": "e4c7ab708664d612cf3c4ed163329d236c01719171c533d17623e718d47e2a0e"
+        },
+        "test": {
+          "path": "Verilog Debugging/dataset_debug_zero_shot_state_machine/Prob012_state_machine_overlapping_sequence_detection_test.sv",
+          "sha256": "238d4d7b89936a3f6abb522da8e8bc9f318d06f88ad1d4c3b2b6dda4a559a214"
+        }
+      }
+    }
+  ]
+}
