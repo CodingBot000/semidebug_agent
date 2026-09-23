@@ -1,0 +1,6 @@
+argv: ["iverilog", "-g2012", "-Wall", "-s", "alu_tb", "-o", ".build/target.vvp", "rtl/alu.v", "tb/alu_tb.v"]
+status: fail
+exit: 1
+
+rtl/alu.v:9: error: Unable to bind wire/reg/memory `nonexistent' in `alu_tb.dut'
+1 error(s) during elaboration.

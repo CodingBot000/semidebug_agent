@@ -1,0 +1,79 @@
+{
+  "measurement": "live-ai-repair",
+  "total": 24,
+  "fixed": 22,
+  "repair_success_rate": 0.9166666666666666,
+  "first_attempt_fix_rate": 0.9166666666666666,
+  "first_attempt_success_rate": 0.9166666666666666,
+  "final_success_rate": 0.9166666666666666,
+  "retry_rescue_count": 0,
+  "semantic_retry_rescue_count": 0,
+  "format_retry_rescue_count": 0,
+  "regression_rejection_count": 0,
+  "retry_reason_counts": {
+    "PATCH_PARSE_RETRY": 2
+  },
+  "average_attempts": 1,
+  "median_attempts": 1.0,
+  "regression_integrity_rate": 1.0,
+  "patch_attempts": 24,
+  "invalid_patch_attempts": 2,
+  "invalid_patch_rate": 0.08333333333333333,
+  "average_retry_count": 0,
+  "median_repair_time_ms": 11036.5,
+  "median_latency_ms": 11036.5,
+  "average_llm_calls": 1,
+  "input_tokens": 149147,
+  "cached_input_tokens": 68096,
+  "models": [
+    "gpt-6-sol"
+  ],
+  "reasoning_efforts": [
+    "low"
+  ],
+  "billing_modes": [
+    "chatgpt-subscription"
+  ],
+  "output_tokens": 7727,
+  "estimated_cost": null,
+  "failure_breakdown": {
+    "MAX_RETRY": 2
+  },
+  "categories": {
+    "boundary": {
+      "total": 2,
+      "fixed": 2
+    },
+    "combinational": {
+      "total": 5,
+      "fixed": 4
+    },
+    "connectivity": {
+      "total": 3,
+      "fixed": 3
+    },
+    "fsm": {
+      "total": 2,
+      "fixed": 2
+    },
+    "reset": {
+      "total": 5,
+      "fixed": 5
+    },
+    "sequential": {
+      "total": 5,
+      "fixed": 5
+    },
+    "syntax": {
+      "total": 1,
+      "fixed": 1
+    },
+    "width_signedness": {
+      "total": 1,
+      "fixed": 0
+    }
+  },
+  "retry_distribution": {
+    "0": 24
+  }
+}

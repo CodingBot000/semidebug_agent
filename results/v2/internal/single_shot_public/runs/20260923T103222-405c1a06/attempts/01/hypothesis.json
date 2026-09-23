@@ -1,0 +1,14 @@
+{
+  "summary": "The pop path reads from the write pointer instead of the read pointer.",
+  "likely_files": [
+    "rtl/fifo.v"
+  ],
+  "likely_lines": [
+    15
+  ],
+  "reasoning": "Line 15 uses mem[wr_ptr] while advancing rd_ptr. A FIFO pop should return the oldest entry at rd_ptr. The reported output mismatch is consistent with selecting the wrong slot, although the supplied testbench's step/occupancy details do not independently establish the exact cycle sequence.",
+  "confidence": 0.95,
+  "evidence_ids": [
+    "baseline:simulation"
+  ]
+}

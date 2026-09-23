@@ -1,0 +1,14 @@
+{
+  "summary": "The FIFO write enable is inverted: writes are accepted only when full.",
+  "likely_files": [
+    "rtl/fifo.v"
+  ],
+  "likely_lines": [
+    6
+  ],
+  "reasoning": "At the first write after reset, the testbench expects occupancy 1, but empty remains asserted. With count 0, full is false, so `wr_en && full` blocks the write and count increment. This is the most direct explanation, though no patched validation is available.",
+  "confidence": 0.98,
+  "evidence_ids": [
+    "baseline:simulation"
+  ]
+}

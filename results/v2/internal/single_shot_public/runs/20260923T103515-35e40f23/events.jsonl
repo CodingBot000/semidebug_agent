@@ -1,0 +1,10 @@
+{"timestamp": "2026-09-23T10:35:15.873188+00:00", "run_id": "20260923T103515-35e40f23", "case_id": "case_026_pulse_sequential", "iteration": 0, "event_type": "LOAD_PROJECT", "status": null, "summary": ""}
+{"timestamp": "2026-09-23T10:35:15.874906+00:00", "run_id": "20260923T103515-35e40f23", "case_id": "case_026_pulse_sequential", "iteration": 0, "event_type": "BASELINE", "status": null, "summary": ""}
+{"timestamp": "2026-09-23T10:35:16.238549+00:00", "run_id": "20260923T103515-35e40f23", "case_id": "case_026_pulse_sequential", "iteration": 1, "event_type": "COLLECT_EVIDENCE", "status": null, "summary": ""}
+{"timestamp": "2026-09-23T10:35:16.239497+00:00", "run_id": "20260923T103515-35e40f23", "case_id": "case_026_pulse_sequential", "iteration": 1, "event_type": "ANALYZE", "status": null, "summary": ""}
+{"timestamp": "2026-09-23T10:35:28.043556+00:00", "run_id": "20260923T103515-35e40f23", "case_id": "case_026_pulse_sequential", "iteration": 1, "event_type": "GENERATE_PATCH", "status": null, "summary": ""}
+{"timestamp": "2026-09-23T10:35:28.048211+00:00", "run_id": "20260923T103515-35e40f23", "case_id": "case_026_pulse_sequential", "iteration": 1, "event_type": "GUARD_PATCH", "status": null, "summary": ""}
+{"timestamp": "2026-09-23T10:35:28.048901+00:00", "run_id": "20260923T103515-35e40f23", "case_id": "case_026_pulse_sequential", "iteration": 1, "event_type": "APPLY_PATCH", "status": null, "summary": ""}
+{"timestamp": "2026-09-23T10:35:28.050671+00:00", "run_id": "20260923T103515-35e40f23", "case_id": "case_026_pulse_sequential", "iteration": 1, "event_type": "VALIDATE_TARGET", "status": null, "summary": ""}
+{"timestamp": "2026-09-23T10:35:28.384253+00:00", "run_id": "20260923T103515-35e40f23", "case_id": "case_026_pulse_sequential", "iteration": 1, "event_type": "VALIDATE_REGRESSION", "status": null, "summary": ""}
+{"timestamp": "2026-09-23T10:35:28.709207+00:00", "run_id": "20260923T103515-35e40f23", "case_id": "case_026_pulse_sequential", "iteration": 1, "event_type": "SUCCESS", "status": null, "summary": "All independent validators and regression passed"}

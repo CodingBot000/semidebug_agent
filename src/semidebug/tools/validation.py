@@ -31,9 +31,20 @@ def simulate(root: Path, case: Case, test: TestSpec) -> ValidationBundle:
     results = {"compile": compile_result}
     if compile_result.status == "pass":
         sim = run_process(["vvp", "-N", output, *test.plusargs], root, case.timeout_sec, "vvp")
-        if sim.status == "pass" and "SEMIDEBUG_PASS" not in sim.stdout.splitlines():
-            sim.status = "fail"
-            sim.stderr += "\nMissing trusted testbench completion marker."
+        if sim.status == "pass" and test.success_mode == "semidebug_pass":
+            if "SEMIDEBUG_PASS" not in sim.stdout.splitlines():
+                sim.status = "fail"
+                sim.stderr += "\nMissing trusted testbench completion marker."
+        if sim.status == "pass" and test.success_mode == "chipbench_mismatches":
+            matches = re.findall(r"^Mismatches: (\d+) in (\d+) samples$", sim.stdout, re.MULTILINE)
+            if (
+                len(matches) != 1
+                or int(matches[0][0]) != 0
+                or int(matches[0][1]) <= 0
+                or "TIMEOUT" in sim.stdout
+            ):
+                sim.status = "fail"
+                sim.stderr += "\nChipBench official mismatch result did not pass."
         results["simulation"] = sim
     return ValidationBundle(results=results)
 

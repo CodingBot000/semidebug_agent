@@ -1,0 +1,14 @@
+{
+  "summary": "Opcode 6 uses an unsigned comparison, but the expected behavior is signed comparison.",
+  "likely_files": [
+    "rtl/alu.v"
+  ],
+  "likely_lines": [
+    11
+  ],
+  "reasoning": "For a=0 and b=140, unsigned 0<140 is true, while signed 0<-116 is false, matching the observed mismatch. The testbench explicitly converts both operands to signed values before comparing them.",
+  "confidence": 0.99,
+  "evidence_ids": [
+    "baseline:simulation"
+  ]
+}

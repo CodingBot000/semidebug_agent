@@ -1,0 +1,5 @@
+--- a/rtl/pulse.v
++++ b/rtl/pulse.v
+@@ -4,1 +4,1 @@
+-    if (rst) begin previous <= 1'b0; pulse_out <= 1'b1; end
++    if (rst) begin previous <= 1'b0; pulse_out <= 1'b0; end

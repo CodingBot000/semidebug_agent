@@ -1,0 +1,14 @@
+{
+  "summary": "The pulse condition detects a sustained high level instead of a rising edge.",
+  "likely_files": [
+    "rtl/pulse.v"
+  ],
+  "likely_lines": [
+    7
+  ],
+  "reasoning": "At the first enabled high sample, previous is still 0, so the current expression produces 0. The reference expects a pulse when signal_in is high and previous_ref is low. This matches the baseline simulation failure. [baseline:simulation]",
+  "confidence": 0.99,
+  "evidence_ids": [
+    "baseline:simulation"
+  ]
+}

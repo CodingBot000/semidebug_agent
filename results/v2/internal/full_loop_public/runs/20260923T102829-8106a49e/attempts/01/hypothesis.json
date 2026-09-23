@@ -1,0 +1,17 @@
+{
+  "summary": "The pulse condition uses the previous high level rather than detecting a low-to-high transition.",
+  "likely_files": [
+    "rtl/pulse.v"
+  ],
+  "likely_lines": [
+    7
+  ],
+  "reasoning": "Line 7 requires previous=1, suppressing the first high sample. The reference requires !previous_ref, and simulation fails on that first high sample. Compile, lint, and synthesis passing do not establish functional correctness.",
+  "confidence": 0.98,
+  "evidence_ids": [
+    "baseline:simulation",
+    "baseline:compile",
+    "baseline:lint",
+    "baseline:synthesis"
+  ]
+}

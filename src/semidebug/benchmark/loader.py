@@ -23,6 +23,15 @@ def load_case(root: Path) -> Case:
         p = safe_path(root, name)
         if not p.is_file() or p.stat().st_size > 1_000_000:
             raise ValueError(f"Missing/oversize source: {name}")
+    if case.prompt_visible is not None:
+        visible = set(case.prompt_visible)
+        hidden_regression = {source for test in case.regression for source in test.sources} - set(
+            case.target.sources
+        )
+        if not visible or not visible <= mutable | immutable or visible & hidden_regression:
+            raise ValueError("Prompt visibility includes missing or evaluator-only files")
+        if not mutable <= visible:
+            raise ValueError("Prompt visibility must include mutable RTL")
     names = [t.name for t in [case.target, *case.regression]]
     if len(names) != len(set(names)):
         raise ValueError("Test names must be unique")

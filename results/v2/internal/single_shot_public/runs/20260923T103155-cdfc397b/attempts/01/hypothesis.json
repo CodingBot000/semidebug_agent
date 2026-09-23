@@ -1,0 +1,15 @@
+{
+  "summary": "The enable condition is inverted, so the counter holds when en is asserted.",
+  "likely_files": [
+    "rtl/counter.v"
+  ],
+  "likely_lines": [
+    4
+  ],
+  "reasoning": "The RTL increments under !en, while the testbench increments under en. After reset, the first enabled step expects 1 but observes 0. This is the most likely cause, though no patched validation is available.",
+  "confidence": 0.99,
+  "evidence_ids": [
+    "baseline:simulation",
+    "baseline:compile"
+  ]
+}

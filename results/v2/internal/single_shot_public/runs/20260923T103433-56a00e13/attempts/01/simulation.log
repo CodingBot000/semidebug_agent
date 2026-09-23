@@ -1,0 +1,5 @@
+argv: ["vvp", "-N", ".build/target.vvp", "+SEED=7"]
+status: pass
+exit: 0
+SEMIDEBUG_PASS
+

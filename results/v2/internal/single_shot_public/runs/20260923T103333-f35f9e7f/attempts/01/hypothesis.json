@@ -1,0 +1,15 @@
+{
+  "summary": "The both-request grant selection is reversed relative to the priority state.",
+  "likely_files": [
+    "rtl/arbiter.v"
+  ],
+  "likely_lines": [
+    8
+  ],
+  "reasoning": "After reset, priority_bit is 0. For req=11, the RTL grants 10, while the reference expects 01; the simulation fails on exactly this case. Swapping the two grant choices matches the reference's alternating priority behavior. No prior patch has tested this hypothesis.",
+  "confidence": 0.98,
+  "evidence_ids": [
+    "baseline:simulation",
+    "baseline:compile"
+  ]
+}

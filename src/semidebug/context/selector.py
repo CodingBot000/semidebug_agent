@@ -29,7 +29,11 @@ def select_context(
     # The evaluator runs regression sources, but only target sources enter a model request.
     logs = "\n".join(e.message for e in evidence)
     sources = {}
-    files = list(case.mutable) + list(dict.fromkeys(case.target.sources))
+    files = (
+        list(dict.fromkeys(case.prompt_visible))
+        if case.prompt_visible is not None
+        else list(case.mutable) + list(dict.fromkeys(case.target.sources))
+    )
     files.sort(key=lambda name: (name not in logs, name not in case.mutable))
     remaining = limit
     for name in files:
@@ -48,7 +52,7 @@ def select_context(
         remaining -= len(sources[name])
     return {
         "mutable": case.mutable,
-        "immutable": case.target.sources,
+        "immutable": [name for name in files if name in case.immutable],
         "sources_with_line_numbers": sources,
         "evidence": [e.model_dump() for e in evidence],
     }

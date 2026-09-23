@@ -1,0 +1,16 @@
+{
+  "summary": "The no-request case falls through to a grant of requester 0.",
+  "likely_files": [
+    "rtl/arbiter.v"
+  ],
+  "likely_lines": [
+    5,
+    9
+  ],
+  "reasoning": "For req=00, no explicit case arm matches and the default assigns 01. The testbench expects 00, matching the observed failure. The earlier proposal was rejected for an invalid diff hunk, not by simulation; this proposal uses a distinct explicit case arm with valid hunk counts.",
+  "confidence": 0.99,
+  "evidence_ids": [
+    "baseline:simulation",
+    "guard:1"
+  ]
+}

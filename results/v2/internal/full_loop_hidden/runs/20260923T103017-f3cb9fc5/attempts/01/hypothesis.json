@@ -1,0 +1,17 @@
+{
+  "summary": "The done state incorrectly transitions to busy instead of idle.",
+  "likely_files": [
+    "rtl/controller.v"
+  ],
+  "likely_lines": [
+    10
+  ],
+  "reasoning": "The reference FSM moves from state 2 to state 0 (tb/controller_tb.v:13), but the RTL moves to state 1. The reported state=0, busy=1 mismatch is consistent with that transition. Compile, lint, and synthesis passed, so this appears functional rather than structural.",
+  "confidence": 0.99,
+  "evidence_ids": [
+    "baseline:simulation",
+    "baseline:compile",
+    "baseline:lint",
+    "baseline:synthesis"
+  ]
+}

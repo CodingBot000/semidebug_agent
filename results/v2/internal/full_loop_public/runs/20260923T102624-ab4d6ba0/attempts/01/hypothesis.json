@@ -1,0 +1,14 @@
+{
+  "summary": "The busy state transitions directly to idle on finish, skipping the done state.",
+  "likely_files": [
+    "rtl/controller.v"
+  ],
+  "likely_lines": [
+    9
+  ],
+  "reasoning": "The reference transitions from state 1 to state 2 when finish is asserted (tb/controller_tb.v:12), but the RTL transitions to state 0. The reported state=2, busy=0, done=0 mismatch is consistent with this error. Evidence: baseline:simulation.",
+  "confidence": 0.99,
+  "evidence_ids": [
+    "baseline:simulation"
+  ]
+}

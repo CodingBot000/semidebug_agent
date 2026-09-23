@@ -1,0 +1,14 @@
+{
+  "summary": "Reset assigns pulse_out high, but the reference expects it low.",
+  "likely_files": [
+    "rtl/pulse.v"
+  ],
+  "likely_lines": [
+    4
+  ],
+  "reasoning": "The first reset step expects 0 (tb/pulse_tb.v:10), while simulation observes 1 at time 2. The RTL explicitly assigns 1 on reset. This is the likely cause; no other mismatch is evidenced.",
+  "confidence": 0.99,
+  "evidence_ids": [
+    "baseline:simulation"
+  ]
+}

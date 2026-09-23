@@ -1,0 +1,15 @@
+{
+  "summary": "The busy-to-done transition incorrectly goes to idle instead of the done state.",
+  "likely_files": [
+    "rtl/controller.v"
+  ],
+  "likely_lines": [
+    9
+  ],
+  "reasoning": "The reference FSM enters state 2 when finish is asserted in state 1 (tb/controller_tb.v:12), while the RTL enters state 0. The resulting done=0 matches the reported failure. This is the most likely cause, though no patched validation is available.",
+  "confidence": 0.99,
+  "evidence_ids": [
+    "baseline:simulation",
+    "baseline:compile"
+  ]
+}

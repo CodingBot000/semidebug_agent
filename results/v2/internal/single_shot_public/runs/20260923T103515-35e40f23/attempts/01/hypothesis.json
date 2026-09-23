@@ -1,0 +1,16 @@
+{
+  "summary": "The blocking update to `previous` overwrites the prior sampled value before the pulse condition is evaluated.",
+  "likely_files": [
+    "rtl/pulse.v"
+  ],
+  "likely_lines": [
+    6,
+    7
+  ],
+  "reasoning": "At the first enabled rising input, the condition sees the newly assigned `previous=1`, suppressing the pulse. Changing that assignment to nonblocking preserves the old value for the condition and makes both assignments to `previous` nonblocking. This is the most likely repair, but it has not been validated.",
+  "confidence": 0.98,
+  "evidence_ids": [
+    "baseline:simulation",
+    "baseline:lint"
+  ]
+}

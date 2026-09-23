@@ -1,0 +1,10 @@
+{"timestamp": "2026-09-23T10:33:55.750405+00:00", "run_id": "20260923T103355-638d1f76", "case_id": "case_017_controller_fsm", "iteration": 0, "event_type": "LOAD_PROJECT", "status": null, "summary": ""}
+{"timestamp": "2026-09-23T10:33:55.751965+00:00", "run_id": "20260923T103355-638d1f76", "case_id": "case_017_controller_fsm", "iteration": 0, "event_type": "BASELINE", "status": null, "summary": ""}
+{"timestamp": "2026-09-23T10:33:56.126690+00:00", "run_id": "20260923T103355-638d1f76", "case_id": "case_017_controller_fsm", "iteration": 1, "event_type": "COLLECT_EVIDENCE", "status": null, "summary": ""}
+{"timestamp": "2026-09-23T10:33:56.127759+00:00", "run_id": "20260923T103355-638d1f76", "case_id": "case_017_controller_fsm", "iteration": 1, "event_type": "ANALYZE", "status": null, "summary": ""}
+{"timestamp": "2026-09-23T10:34:05.313523+00:00", "run_id": "20260923T103355-638d1f76", "case_id": "case_017_controller_fsm", "iteration": 1, "event_type": "GENERATE_PATCH", "status": null, "summary": ""}
+{"timestamp": "2026-09-23T10:34:05.316554+00:00", "run_id": "20260923T103355-638d1f76", "case_id": "case_017_controller_fsm", "iteration": 1, "event_type": "GUARD_PATCH", "status": null, "summary": ""}
+{"timestamp": "2026-09-23T10:34:05.316930+00:00", "run_id": "20260923T103355-638d1f76", "case_id": "case_017_controller_fsm", "iteration": 1, "event_type": "APPLY_PATCH", "status": null, "summary": ""}
+{"timestamp": "2026-09-23T10:34:05.317984+00:00", "run_id": "20260923T103355-638d1f76", "case_id": "case_017_controller_fsm", "iteration": 1, "event_type": "VALIDATE_TARGET", "status": null, "summary": ""}
+{"timestamp": "2026-09-23T10:34:05.639685+00:00", "run_id": "20260923T103355-638d1f76", "case_id": "case_017_controller_fsm", "iteration": 1, "event_type": "VALIDATE_REGRESSION", "status": null, "summary": ""}
+{"timestamp": "2026-09-23T10:34:05.977959+00:00", "run_id": "20260923T103355-638d1f76", "case_id": "case_017_controller_fsm", "iteration": 1, "event_type": "SUCCESS", "status": null, "summary": "All independent validators and regression passed"}

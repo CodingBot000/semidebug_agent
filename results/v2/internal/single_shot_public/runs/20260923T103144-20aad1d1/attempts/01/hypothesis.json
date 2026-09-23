@@ -1,0 +1,14 @@
+{
+  "summary": "The counter wraps one count too early.",
+  "likely_files": [
+    "rtl/counter.v"
+  ],
+  "likely_lines": [
+    5
+  ],
+  "reasoning": "The RTL resets at 8, while the reference sequence advances from 8 to 9 and wraps on the next enabled step. The first simulation failure reports expected 9, actual 0. This is the most likely defect, though the patch has not been independently validated.",
+  "confidence": 0.99,
+  "evidence_ids": [
+    "baseline:simulation"
+  ]
+}

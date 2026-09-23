@@ -1,0 +1,16 @@
+{
+  "summary": "A blocking update overwrites the prior sampled input before the rising-edge test.",
+  "likely_files": [
+    "rtl/pulse.v"
+  ],
+  "likely_lines": [
+    6,
+    7
+  ],
+  "reasoning": "At the first enabled rising input, `previous = signal_in` makes `!previous` false in the same clock event. Changing that update to nonblocking preserves the old sample for the pulse calculation and also avoids mixing blocking and nonblocking assignments to `previous`.",
+  "confidence": 0.99,
+  "evidence_ids": [
+    "baseline:simulation",
+    "baseline:lint"
+  ]
+}

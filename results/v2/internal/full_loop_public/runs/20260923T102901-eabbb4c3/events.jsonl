@@ -1,0 +1,10 @@
+{"timestamp": "2026-09-23T10:29:01.471814+00:00", "run_id": "20260923T102901-eabbb4c3", "case_id": "case_029_pulse_reset", "iteration": 0, "event_type": "LOAD_PROJECT", "status": null, "summary": ""}
+{"timestamp": "2026-09-23T10:29:01.473529+00:00", "run_id": "20260923T102901-eabbb4c3", "case_id": "case_029_pulse_reset", "iteration": 0, "event_type": "BASELINE", "status": null, "summary": ""}
+{"timestamp": "2026-09-23T10:29:01.848685+00:00", "run_id": "20260923T102901-eabbb4c3", "case_id": "case_029_pulse_reset", "iteration": 1, "event_type": "COLLECT_EVIDENCE", "status": null, "summary": ""}
+{"timestamp": "2026-09-23T10:29:01.849201+00:00", "run_id": "20260923T102901-eabbb4c3", "case_id": "case_029_pulse_reset", "iteration": 1, "event_type": "ANALYZE", "status": null, "summary": ""}
+{"timestamp": "2026-09-23T10:29:12.134569+00:00", "run_id": "20260923T102901-eabbb4c3", "case_id": "case_029_pulse_reset", "iteration": 1, "event_type": "GENERATE_PATCH", "status": null, "summary": ""}
+{"timestamp": "2026-09-23T10:29:12.136872+00:00", "run_id": "20260923T102901-eabbb4c3", "case_id": "case_029_pulse_reset", "iteration": 1, "event_type": "GUARD_PATCH", "status": null, "summary": ""}
+{"timestamp": "2026-09-23T10:29:12.137240+00:00", "run_id": "20260923T102901-eabbb4c3", "case_id": "case_029_pulse_reset", "iteration": 1, "event_type": "APPLY_PATCH", "status": null, "summary": ""}
+{"timestamp": "2026-09-23T10:29:12.138275+00:00", "run_id": "20260923T102901-eabbb4c3", "case_id": "case_029_pulse_reset", "iteration": 1, "event_type": "VALIDATE_TARGET", "status": null, "summary": ""}
+{"timestamp": "2026-09-23T10:29:12.503829+00:00", "run_id": "20260923T102901-eabbb4c3", "case_id": "case_029_pulse_reset", "iteration": 1, "event_type": "VALIDATE_REGRESSION", "status": null, "summary": ""}
+{"timestamp": "2026-09-23T10:29:12.968017+00:00", "run_id": "20260923T102901-eabbb4c3", "case_id": "case_029_pulse_reset", "iteration": 1, "event_type": "SUCCESS", "status": null, "summary": "All independent validators and regression passed"}

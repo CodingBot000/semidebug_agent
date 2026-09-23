@@ -1,0 +1,15 @@
+{
+  "summary": "The pulse condition checks for a previously high input instead of a rising edge.",
+  "likely_files": [
+    "rtl/pulse.v"
+  ],
+  "likely_lines": [
+    7
+  ],
+  "reasoning": "The reference uses !previous_ref, and simulation fails on the first enabled high sample. The prior proposal was rejected for an invalid diff hunk, not by RTL validation.",
+  "confidence": 0.98,
+  "evidence_ids": [
+    "baseline:simulation",
+    "guard:1"
+  ]
+}

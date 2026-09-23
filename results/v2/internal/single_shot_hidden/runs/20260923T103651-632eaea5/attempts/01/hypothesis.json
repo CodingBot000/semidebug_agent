@@ -1,0 +1,16 @@
+{
+  "summary": "The XOR operation references an undeclared identifier instead of operand b.",
+  "likely_files": [
+    "rtl/alu.v"
+  ],
+  "likely_lines": [
+    9
+  ],
+  "reasoning": "Both compilation and lint identify `nonexistent` at line 9 as undefined; synthesis reports it undriven. The testbench expects `a ^ b` for op 4. This is the most likely defect, though the proposed repair has not been validated.",
+  "confidence": 0.99,
+  "evidence_ids": [
+    "baseline:compile",
+    "baseline:lint",
+    "baseline:synthesis"
+  ]
+}

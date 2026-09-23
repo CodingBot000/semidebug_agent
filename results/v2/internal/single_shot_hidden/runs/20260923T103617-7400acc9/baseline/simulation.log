@@ -1,0 +1,6 @@
+argv: ["vvp", "-N", ".build/target.vvp", "+SEED=7"]
+status: fail
+exit: 1
+FATAL: tb/fifo_tb.v:23: FIFO step=7 occupancy=4 full=0 empty=0 expected_out=163 actual=163
+       Time: 62 Scope: fifo_tb.step
+

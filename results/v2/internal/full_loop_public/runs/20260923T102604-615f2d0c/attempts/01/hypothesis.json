@@ -1,0 +1,15 @@
+{
+  "summary": "The simultaneous-request grant selection has reversed priority polarity.",
+  "likely_files": [
+    "rtl/arbiter.v"
+  ],
+  "likely_lines": [
+    8
+  ],
+  "reasoning": "The reference expects grant 01 when the priority bit is 0 and grant 10 when it is 1, but line 8 selects the opposite. The baseline simulation fails on req=11 with expected=01 and got=10. This is the most likely cause, though the proposed change has not been validated.",
+  "confidence": 0.99,
+  "evidence_ids": [
+    "baseline:simulation",
+    "baseline:compile"
+  ]
+}

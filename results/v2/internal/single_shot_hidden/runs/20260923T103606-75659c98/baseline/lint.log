@@ -1,0 +1,24 @@
+argv: ["verilator", "--lint-only", "-Wall", "-Wno-fatal", "--top-module", "counter", "rtl/counter.v"]
+status: fail
+exit: 0
+
+%Warning-WIDTH: rtl/counter.v:3:20: Operator ASSIGNDLY expects 3 bits on the Assign RHS, but Assign RHS's CONST '4'h0' generates 4 bits.
+                                  : ... In instance counter
+    3 |     if (rst) count <= 4'd0;
+      |                    ^~
+                ... For warning description see https://verilator.org/warn/WIDTH?v=5.006
+                ... Use "/* verilator lint_off WIDTH */" and lint_on around source to disable this message.
+%Warning-WIDTH: rtl/counter.v:5:34: Operator ASSIGNDLY expects 3 bits on the Assign RHS, but Assign RHS's CONST '4'h0' generates 4 bits.
+                                  : ... In instance counter
+    5 |         if (count == 4'd9) count <= 4'd0;
+      |                                  ^~
+%Warning-WIDTH: rtl/counter.v:6:20: Operator ASSIGNDLY expects 3 bits on the Assign RHS, but Assign RHS's ADD generates 4 bits.
+                                  : ... In instance counter
+    6 |         else count <= count + 4'd1;
+      |                    ^~
+%Warning-WIDTH: rtl/counter.v:5:19: Operator EQ expects 4 bits on the LHS, but LHS's VARREF 'count' generates 3 bits.
+                                  : ... In instance counter
+    5 |         if (count == 4'd9) count <= 4'd0;
+      |                   ^~
+
+Critical lint policy: WIDTH

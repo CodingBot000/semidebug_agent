@@ -1,0 +1,16 @@
+{
+  "summary": "The RTL tracks the previous value of enable instead of signal_in, causing an extra pulse when signal_in remains high.",
+  "likely_files": [
+    "rtl/pulse.v"
+  ],
+  "likely_lines": [
+    6,
+    7
+  ],
+  "reasoning": "The reference updates previous_ref from signal_in (tb/pulse_tb.v:11), while the RTL updates previous from enable (rtl/pulse.v:6). On the second consecutive high signal_in cycle, the reference expects no pulse; the reported mismatch is consistent with this state-tracking error. The single-line change is likely sufficient, but it has not been independently validated.",
+  "confidence": 0.98,
+  "evidence_ids": [
+    "baseline:simulation",
+    "baseline:compile"
+  ]
+}

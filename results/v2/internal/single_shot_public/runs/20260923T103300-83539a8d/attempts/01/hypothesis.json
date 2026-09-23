@@ -1,0 +1,14 @@
+{
+  "summary": "The single-request case for req=2'b01 grants requester 1 instead of requester 0.",
+  "likely_files": [
+    "rtl/arbiter.v"
+  ],
+  "likely_lines": [
+    6
+  ],
+  "reasoning": "The simulation reports req=01, expected=01, got=10. Line 6 directly produces 10 for that input. The reference behavior in the supplied testbench also expects 01. This is the most direct explanation, though validation of the proposed change has not been provided.",
+  "confidence": 0.99,
+  "evidence_ids": [
+    "baseline:simulation"
+  ]
+}

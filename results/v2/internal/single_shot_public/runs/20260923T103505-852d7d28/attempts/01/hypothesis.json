@@ -1,0 +1,15 @@
+{
+  "summary": "Opcode 5 shifts right instead of left.",
+  "likely_files": [
+    "rtl/alu.v"
+  ],
+  "likely_lines": [
+    10
+  ],
+  "reasoning": "The RTL uses >>, while the testbench expects <<. For a=90 and b[2:0]=4, left shift yields 160 and right shift yields 5, matching the reported mismatch. This is the most likely cause, though no patched validation is available.",
+  "confidence": 0.99,
+  "evidence_ids": [
+    "baseline:simulation",
+    "baseline:compile"
+  ]
+}

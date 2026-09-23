@@ -1,0 +1,11 @@
+--- a/rtl/fifo.v
++++ b/rtl/fifo.v
+@@ -14,7 +14,7 @@
+         if (push) begin mem[wr_ptr] <= data_in; wr_ptr <= wr_ptr + 2'd1; end
+         if (pop) begin data_out <= mem[rd_ptr]; rd_ptr <= rd_ptr + 2'd1; end
+         case ({push,pop})
+             2'b10: count <= count + 3'd1;
+-            2'b01: count <= count + 3'd1;
++            2'b01: count <= count - 3'd1;
+             default: count <= count;
+         endcase

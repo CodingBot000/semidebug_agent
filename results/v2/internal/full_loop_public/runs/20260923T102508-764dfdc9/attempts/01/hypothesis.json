@@ -1,0 +1,14 @@
+{
+  "summary": "The FIFO accepts writes only when full, rather than when space is available.",
+  "likely_files": [
+    "rtl/fifo.v"
+  ],
+  "likely_lines": [
+    6
+  ],
+  "reasoning": "At the first write, the testbench expects occupancy 1, but the FIFO remains empty. The push condition is false when full is false, preventing that write. This is the most likely cause, though the proposed change has not been validated.",
+  "confidence": 0.99,
+  "evidence_ids": [
+    "baseline:simulation"
+  ]
+}

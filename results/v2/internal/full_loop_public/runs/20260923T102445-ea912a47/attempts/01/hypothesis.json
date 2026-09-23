@@ -1,0 +1,15 @@
+{
+  "summary": "The FIFO asserts full at three entries instead of its four-entry capacity.",
+  "likely_files": [
+    "rtl/fifo.v"
+  ],
+  "likely_lines": [
+    3,
+    8
+  ],
+  "reasoning": "The memory has four slots (line 3), but full is asserted when count reaches 3 (line 8). The simulation reports full=1 at occupancy 3, where the test expects full=0. This is the most likely cause, though the proposed change has not been validated.",
+  "confidence": 0.99,
+  "evidence_ids": [
+    "baseline:simulation"
+  ]
+}

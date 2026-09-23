@@ -1,0 +1,15 @@
+{
+  "summary": "The done output decodes the busy state rather than the completion state.",
+  "likely_files": [
+    "rtl/controller.v"
+  ],
+  "likely_lines": [
+    4
+  ],
+  "reasoning": "Line 4 asserts done in state 1, while the testbench expects done only in state 2 (tb/controller_tb.v:16). The simulation fails in state 1 with done=1. The state transitions already match the testbench reference model, so a one-line decode correction is the most likely repair.",
+  "confidence": 0.98,
+  "evidence_ids": [
+    "baseline:simulation",
+    "baseline:compile"
+  ]
+}

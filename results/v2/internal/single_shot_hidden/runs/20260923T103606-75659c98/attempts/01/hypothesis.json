@@ -1,0 +1,15 @@
+{
+  "summary": "The counter output is declared 3 bits wide, so it wraps at 7 instead of counting through 9.",
+  "likely_files": [
+    "rtl/counter.v"
+  ],
+  "likely_lines": [
+    1
+  ],
+  "reasoning": "The simulation reports expected 8 but actual 0 at cycle 7. A 3-bit register cannot represent 8 or 9. The lint warnings also identify the width mismatch. This is the most likely cause, though the proposed change has not been validated.",
+  "confidence": 0.99,
+  "evidence_ids": [
+    "baseline:simulation",
+    "baseline:lint"
+  ]
+}

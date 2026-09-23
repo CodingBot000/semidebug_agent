@@ -1,0 +1,17 @@
+{
+  "summary": "The pop operation reads from the write pointer instead of the read pointer.",
+  "likely_files": [
+    "rtl/fifo.v"
+  ],
+  "likely_lines": [
+    15
+  ],
+  "reasoning": "The FIFO advances rd_ptr on a pop but uses wr_ptr to select the output data. This can return the wrong queued entry, consistent with the data mismatch in the baseline simulation. Compilation, lint, and synthesis passing do not establish functional correctness.",
+  "confidence": 0.98,
+  "evidence_ids": [
+    "baseline:simulation",
+    "baseline:compile",
+    "baseline:lint",
+    "baseline:synthesis"
+  ]
+}

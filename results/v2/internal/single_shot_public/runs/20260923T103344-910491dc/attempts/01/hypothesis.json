@@ -1,0 +1,15 @@
+{
+  "summary": "The idle-to-busy transition uses the opposite start polarity from the reference model.",
+  "likely_files": [
+    "rtl/controller.v"
+  ],
+  "likely_lines": [
+    8
+  ],
+  "reasoning": "Line 8 advances when start is low, while the testbench advances when start is high (line 11). The directed sequence sets start=1 after reset and fails with expected busy=1 but observed busy=0 at time 5. This is the most likely cause, though no repaired design has been validated.",
+  "confidence": 0.98,
+  "evidence_ids": [
+    "baseline:simulation",
+    "baseline:compile"
+  ]
+}

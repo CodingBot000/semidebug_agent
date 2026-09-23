@@ -1,0 +1,14 @@
+{
+  "summary": "The subtraction operands are reversed for op 1.",
+  "likely_files": [
+    "rtl/alu.v"
+  ],
+  "likely_lines": [
+    6
+  ],
+  "reasoning": "RTL line 6 computes b-a, while the testbench specifies a-b at tb/alu_tb.v:15. For a=0 and b=140, a-b truncates to 8 bits as 116, matching the reported expectation; b-a produces the reported 140. The fix is strongly indicated, though it has not been independently validated.",
+  "confidence": 0.99,
+  "evidence_ids": [
+    "baseline:simulation"
+  ]
+}

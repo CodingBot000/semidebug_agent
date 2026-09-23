@@ -1,0 +1,14 @@
+{
+  "summary": "Reset initializes the FIFO occupancy to one instead of zero.",
+  "likely_files": [
+    "rtl/fifo.v"
+  ],
+  "likely_lines": [
+    12
+  ],
+  "reasoning": "At the first reset step, the testbench expects occupancy zero and empty asserted, but the DUT reports empty deasserted. Initializing count to 1 directly explains the mismatch. This is the most likely cause, though no post-patch validation is available.",
+  "confidence": 0.99,
+  "evidence_ids": [
+    "baseline:simulation"
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "summary": "A missing semicolon after the increment assignment causes the RTL syntax error.",
+  "likely_files": [
+    "rtl/counter.v"
+  ],
+  "likely_lines": [
+    6,
+    7
+  ],
+  "reasoning": "Line 6 ends with `count <= count + 4'd1` without a semicolon, so parsers report the following `end` as unexpected. The testbench errors may be cascading parse errors. This is the most likely cause, though no repaired-source validation is available.",
+  "confidence": 0.99,
+  "evidence_ids": [
+    "baseline:compile",
+    "baseline:lint",
+    "baseline:synthesis"
+  ]
+}

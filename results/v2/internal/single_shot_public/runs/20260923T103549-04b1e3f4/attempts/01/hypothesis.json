@@ -1,0 +1,14 @@
+{
+  "summary": "Reset drives pulse_out high, but the reference expects it low.",
+  "likely_files": [
+    "rtl/pulse.v"
+  ],
+  "likely_lines": [
+    4
+  ],
+  "reasoning": "The first step asserts reset; the testbench sets expected=0 at line 10, while RTL assigns pulse_out=1 at line 4. The simulation fails at time 2 with actual=1 and expected=0. This is the likely cause, though no patched result has been validated.",
+  "confidence": 0.99,
+  "evidence_ids": [
+    "baseline:simulation"
+  ]
+}

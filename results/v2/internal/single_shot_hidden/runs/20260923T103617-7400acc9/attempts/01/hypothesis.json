@@ -1,0 +1,14 @@
+{
+  "summary": "A pop increments occupancy instead of decrementing it.",
+  "likely_files": [
+    "rtl/fifo.v"
+  ],
+  "likely_lines": [
+    18
+  ],
+  "reasoning": "The pop-only case adds one to count, so reads can make the occupancy and full flag incorrect. The reported failure has full=0 at expected occupancy 4; this is consistent with count having wrapped after erroneous increments. This is the most direct defect visible in the RTL, though the exact failing sequence is not fully shown.",
+  "confidence": 0.98,
+  "evidence_ids": [
+    "baseline:simulation"
+  ]
+}

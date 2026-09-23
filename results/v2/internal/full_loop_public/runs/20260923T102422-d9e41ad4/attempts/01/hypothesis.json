@@ -1,0 +1,15 @@
+{
+  "summary": "The counter wraps one enabled cycle too early: it resets at 8, but the expected sequence includes 9 before returning to 0.",
+  "likely_files": [
+    "rtl/counter.v"
+  ],
+  "likely_lines": [
+    5
+  ],
+  "reasoning": "The baseline failure reports expected=9 and actual=0 at cycle 8. The RTL resets when count is 8, while the testbench model resets when expected is 9. This is the most likely mismatch, though the proposed change has not been independently validated.",
+  "confidence": 0.98,
+  "evidence_ids": [
+    "baseline:simulation",
+    "baseline:compile"
+  ]
+}

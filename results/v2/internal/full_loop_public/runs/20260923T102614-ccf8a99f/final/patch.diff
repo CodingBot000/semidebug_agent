@@ -1,0 +1,5 @@
+--- a/rtl/controller.v
++++ b/rtl/controller.v
+@@ -8,1 +8,1 @@
+-        2'd0: if (!start) state <= 2'd1;
++        2'd0: if (start) state <= 2'd1;

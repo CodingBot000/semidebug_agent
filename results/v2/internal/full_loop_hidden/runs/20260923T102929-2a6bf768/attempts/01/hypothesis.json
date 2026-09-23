@@ -1,0 +1,15 @@
+{
+  "summary": "A pop without a push increments the occupancy count instead of decrementing it.",
+  "likely_files": [
+    "rtl/fifo.v"
+  ],
+  "likely_lines": [
+    18
+  ],
+  "reasoning": "The 2'b01 case represents pop only, but line 18 adds one. After the FIFO fills, the first read leaves full asserted incorrectly; the reported step-7 full mismatch is consistent with this defect. The diagnosis is not independently confirmed by a patched run.",
+  "confidence": 0.99,
+  "evidence_ids": [
+    "baseline:simulation",
+    "baseline:compile"
+  ]
+}

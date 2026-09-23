@@ -1,0 +1,14 @@
+{
+  "summary": "The priority bit fails to advance after granting requester 0.",
+  "likely_files": [
+    "rtl/arbiter.v"
+  ],
+  "likely_lines": [
+    14
+  ],
+  "reasoning": "Line 14 writes 0 after grant[0], but the reference advances priority to 1 after a grant of 01. The resulting repeated grant of 01 under req=11 matches the observed failure. This is the most likely cause, though no patch validation is available.",
+  "confidence": 0.98,
+  "evidence_ids": [
+    "baseline:simulation"
+  ]
+}

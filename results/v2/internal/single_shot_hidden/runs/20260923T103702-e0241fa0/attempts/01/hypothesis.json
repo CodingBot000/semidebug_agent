@@ -1,0 +1,16 @@
+{
+  "summary": "The edge-history register samples enable rather than signal_in, causing an extra pulse while signal_in remains high.",
+  "likely_files": [
+    "rtl/pulse.v"
+  ],
+  "likely_lines": [
+    6,
+    7
+  ],
+  "reasoning": "The reference updates previous_ref from signal_in (tb/pulse_tb.v:11). In the RTL, previous instead takes enable, so its next-cycle value can disagree with the reference. The reported mismatch has expected=0 and actual=1, consistent with stale low signal history. This is the most likely cause, though no patched simulation is available.",
+  "confidence": 0.98,
+  "evidence_ids": [
+    "baseline:simulation",
+    "baseline:compile"
+  ]
+}

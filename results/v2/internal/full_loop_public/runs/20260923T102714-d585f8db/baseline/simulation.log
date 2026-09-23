@@ -1,0 +1,6 @@
+argv: ["vvp", "-N", ".build/target.vvp", "+SEED=7"]
+status: fail
+exit: 1
+FATAL: tb/alu_tb.v:24: ALU op=1 a=0 b=140 expected=116 actual=140
+       Time: 2 Scope: alu_tb.check
+

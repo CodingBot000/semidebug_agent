@@ -1,0 +1,14 @@
+{
+  "summary": "The FIFO asserts full at three entries instead of four.",
+  "likely_files": [
+    "rtl/fifo.v"
+  ],
+  "likely_lines": [
+    8
+  ],
+  "reasoning": "The memory has four entries, and the testbench expects full only when occupancy reaches four. The simulation fails with occupancy 3 and full=1. This is the most likely cause, though the proposed change has not been validated. Evidence: baseline:simulation; rtl/fifo.v lines 3, 8; tb/fifo_tb.v lines 13, 22.",
+  "confidence": 0.99,
+  "evidence_ids": [
+    "baseline:simulation"
+  ]
+}

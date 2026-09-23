@@ -1,0 +1,15 @@
+{
+  "summary": "Opcode 5 shifts right instead of left.",
+  "likely_files": [
+    "rtl/alu.v"
+  ],
+  "likely_lines": [
+    10
+  ],
+  "reasoning": "The RTL uses >>, while the testbench expects <<. For the failing case, 90 >> 4 is 5 and the 8-bit result of 90 << 4 is 160. The previous proposal was rejected for an invalid hunk, not a demonstrated functional failure.",
+  "confidence": 0.99,
+  "evidence_ids": [
+    "baseline:simulation",
+    "guard:1"
+  ]
+}

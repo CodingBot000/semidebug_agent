@@ -1,0 +1,14 @@
+{
+  "summary": "The idle-to-busy transition uses inverted start polarity.",
+  "likely_files": [
+    "rtl/controller.v"
+  ],
+  "likely_lines": [
+    8
+  ],
+  "reasoning": "At the first step after reset is released, start is 1, so the reference enters state 1, but busy remains 0. The RTL advances only when start is 0. This is the most direct explanation; no prior patch has been tested.",
+  "confidence": 0.98,
+  "evidence_ids": [
+    "baseline:simulation"
+  ]
+}

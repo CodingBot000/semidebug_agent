@@ -1,0 +1,14 @@
+{
+  "summary": "The single-request case for requester 0 drives the wrong grant bit.",
+  "likely_files": [
+    "rtl/arbiter.v"
+  ],
+  "likely_lines": [
+    6
+  ],
+  "reasoning": "For req=01, the RTL assigns grant=10, while the reference expects 01. The simulation fails on exactly that mismatch. The priority update already uses grant[0] for requester 0, so the decode appears to be the isolated error.",
+  "confidence": 0.98,
+  "evidence_ids": [
+    "baseline:simulation"
+  ]
+}

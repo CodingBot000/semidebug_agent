@@ -1,0 +1,14 @@
+{
+  "summary": "The reset condition has the wrong polarity.",
+  "likely_files": [
+    "rtl/counter.v"
+  ],
+  "likely_lines": [
+    3
+  ],
+  "reasoning": "The testbench starts with rst=1 and expects count=0 on the first clock edge, but the RTL resets only when rst=0. This leaves count unknown at the first comparison. Evidence: baseline:simulation and tb/counter_tb.v lines 2, 9, 14, and 21. The polarity change is the most likely repair, though it has not been validated.",
+  "confidence": 0.99,
+  "evidence_ids": [
+    "baseline:simulation"
+  ]
+}

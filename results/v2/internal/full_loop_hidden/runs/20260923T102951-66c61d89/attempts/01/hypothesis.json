@@ -1,0 +1,14 @@
+{
+  "summary": "The no-request case incorrectly grants requester 0.",
+  "likely_files": [
+    "rtl/arbiter.v"
+  ],
+  "likely_lines": [
+    9
+  ],
+  "reasoning": "For req=00, none of the explicit case arms match, so the default assigns 01. The testbench expects 00, matching the simulation failure. This is the most likely cause, though no patched run is available.",
+  "confidence": 0.99,
+  "evidence_ids": [
+    "baseline:simulation"
+  ]
+}

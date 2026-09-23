@@ -1,0 +1,17 @@
+{
+  "summary": "The increment assignment is missing a semicolon, causing the parser to reject the following `end`.",
+  "likely_files": [
+    "rtl/counter.v"
+  ],
+  "likely_lines": [
+    6,
+    7
+  ],
+  "reasoning": "Line 6 ends with `count + 4'd1` without a semicolon. All three baseline tools report a syntax error at line 7, consistent with the parser expecting the assignment terminator. The testbench errors are likely cascading, but validation has not been rerun.",
+  "confidence": 0.99,
+  "evidence_ids": [
+    "baseline:compile",
+    "baseline:lint",
+    "baseline:synthesis"
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "summary": "Opcode 0 incorrectly subtracts instead of adding.",
+  "likely_files": [
+    "rtl/alu.v"
+  ],
+  "likely_lines": [
+    5
+  ],
+  "reasoning": "The RTL assigns a - b for both opcodes 0 and 1, while the testbench expects addition for opcode 0. The failing case reports 116, which is 0 - 140 modulo 256, rather than 140. No prior patches were attempted.",
+  "confidence": 0.99,
+  "evidence_ids": [
+    "baseline:simulation",
+    "baseline:compile"
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "summary": "The XOR case references an undeclared identifier instead of input b.",
+  "likely_files": [
+    "rtl/alu.v"
+  ],
+  "likely_lines": [
+    9
+  ],
+  "reasoning": "Compile and lint fail at `nonexistent`; synthesis reports it undriven. The testbench expects op 4 to compute `a ^ b`. The prior proposal was rejected for an invalid hunk, not for RTL behavior.",
+  "confidence": 0.99,
+  "evidence_ids": [
+    "baseline:compile",
+    "baseline:lint",
+    "baseline:synthesis",
+    "guard:1"
+  ]
+}

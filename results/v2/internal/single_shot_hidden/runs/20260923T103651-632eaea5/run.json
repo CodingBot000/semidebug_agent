@@ -1,0 +1,253 @@
+{
+  "run_id": "20260923T103651-632eaea5",
+  "case_id": "case_025_alu_syntax",
+  "category": "syntax",
+  "provider": "live-codex-cli",
+  "model": "gpt-6-sol",
+  "reasoning_effort": "low",
+  "billing_mode": "chatgpt-subscription",
+  "cached_input_tokens": 3584,
+  "provider_metadata": {
+    "invocations": [
+      {
+        "model": "gpt-6-sol",
+        "cli_version": "codex-cli 0.156.1",
+        "prompt_characters": 8723,
+        "reasoning_effort": "low",
+        "billing_mode": "chatgpt-subscription",
+        "duration_ms": 10144,
+        "process_status": "pass",
+        "tool_events": 0,
+        "item_types": [
+          "error",
+          "agent_message"
+        ],
+        "input_tokens": 7499,
+        "cached_input_tokens": 3584,
+        "output_tokens": 311
+      }
+    ]
+  },
+  "iteration": 1,
+  "max_iterations": 1,
+  "project_root": "case_025_alu_syntax",
+  "mutable_files": [
+    "rtl/alu.v"
+  ],
+  "immutable_files": [
+    "case.json",
+    "expected/metadata.json",
+    "tb/alu_tb.v",
+    "tb/alu_tb_hidden.v"
+  ],
+  "baseline": {
+    "results": {
+      "compile": {
+        "tool": "iverilog",
+        "command": [
+          "iverilog",
+          "-g2012",
+          "-Wall",
+          "-s",
+          "alu_tb",
+          "-o",
+          ".build/target.vvp",
+          "rtl/alu.v",
+          "tb/alu_tb.v"
+        ],
+        "exit_code": 1,
+        "status": "fail",
+        "stdout": "",
+        "stderr": "rtl/alu.v:9: error: Unable to bind wire/reg/memory `nonexistent' in `alu_tb.dut'\n1 error(s) during elaboration.\n",
+        "duration_ms": 11
+      },
+      "lint": {
+        "tool": "verilator",
+        "command": [
+          "verilator",
+          "--lint-only",
+          "-Wall",
+          "-Wno-fatal",
+          "--top-module",
+          "alu",
+          "rtl/alu.v"
+        ],
+        "exit_code": 1,
+        "status": "fail",
+        "stdout": "",
+        "stderr": "%Error: rtl/alu.v:9:28: Can't find definition of variable: 'nonexistent'\n    9 |         3'd4: result = a ^ nonexistent;\n      |                            ^~~~~~~~~~~\n%Error: Exiting due to 1 error(s)\n",
+        "duration_ms": 32
+      },
+      "synthesis": {
+        "tool": "yosys",
+        "command": [
+          "yosys",
+          "-Q",
+          "-T",
+          "-p",
+          "read_verilog -sv rtl/alu.v; hierarchy -check -top alu; proc; opt; check -assert"
+        ],
+        "exit_code": 1,
+        "status": "fail",
+        "stdout": "\n-- Running command `read_verilog -sv rtl/alu.v; hierarchy -check -top alu; proc; opt; check -assert' --\n\n1. Executing Verilog-2005 frontend: rtl/alu.v\nParsing SystemVerilog input from `rtl/alu.v' to AST representation.\nGenerating RTLIL representation for module `\\alu'.\nrtl/alu.v:9: Warning: Identifier `\\nonexistent' is implicitly declared.\nSuccessfully finished Verilog frontend.\n\n2. Executing HIERARCHY pass (managing design hierarchy).\n\n2.1. Analyzing design hierarchy..\nTop module:  \\alu\n\n2.2. Analyzing design hierarchy..\nTop module:  \\alu\nRemoved 0 unused modules.\n\n3. Executing PROC pass (convert processes to netlists).\n\n3.1. Executing PROC_CLEAN pass (remove empty switches from decision trees).\nCleaned up 0 empty switches.\n\n3.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).\nMarked 1 switch rules as full_case in process $proc$rtl/alu.v:2$1 in module alu.\nRemoved a total of 0 dead cases.\n\n3.3. Executing PROC_PRUNE pass (remove redundant assignments in processes).\nRemoved 0 redundant assignments.\nPromoted 1 assignment to connection.\n\n3.4. Executing PROC_INIT pass (extract init attributes).\n\n3.5. Executing PROC_ARST pass (detect async resets in processes).\n\n3.6. Executing PROC_ROM pass (convert switches to ROMs).\nConverted 0 switches.\n<suppressed ~1 debug messages>\n\n3.7. Executing PROC_MUX pass (convert decision trees to multiplexers).\nCreating decoders for process `\\alu.$proc$rtl/alu.v:2$1'.\n     1/1: $1\\result[7:0]\n\n3.8. Executing PROC_DLATCH pass (convert process syncs to latches).\nNo latch inferred for signal `\\alu.\\result' from process `\\alu.$proc$rtl/alu.v:2$1'.\n\n3.9. Executing PROC_DFF pass (convert process syncs to FFs).\n\n3.10. Executing PROC_MEMWR pass (convert process memory writes to cells).\n\n3.11. Executing PROC_CLEAN pass (remove empty switches from decision trees).\nFound and cleaned up 1 empty switch in `\\alu.$proc$rtl/alu.v:2$1'.\nRemoving empty process `alu.$proc$rtl/alu.v:2$1'.\nCleaned up 1 empty switch.\n\n3.12. Executing OPT_EXPR pass (perform const folding).\nOptimizing module alu.\n<suppressed ~1 debug messages>\n\n4. Executing OPT pass (performing simple optimizations).\n\n4.1. Executing OPT_EXPR pass (perform const folding).\nOptimizing module alu.\n\n4.2. Executing OPT_MERGE pass (detect identical cells).\nFinding identical cells in module `\\alu'.\nRemoved a total of 0 cells.\n\n4.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).\nRunning muxtree optimizer on module \\alu..\n  Creating internal representation of mux trees.\n  Evaluating internal representation of mux trees.\n  Analyzing evaluation results.\nRemoved 0 multiplexer ports.\n<suppressed ~1 debug messages>\n\n4.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).\n  Optimizing cells in module \\alu.\nPerformed a total of 0 changes.\n\n4.5. Executing OPT_MERGE pass (detect identical cells).\nFinding identical cells in module `\\alu'.\nRemoved a total of 0 cells.\n\n4.6. Executing OPT_DFF pass (perform DFF optimizations).\n\n4.7. Executing OPT_CLEAN pass (remove unused cells and wires).\nFinding unused cells or wires in module \\alu..\nRemoved 0 unused cells and 3 unused wires.\n<suppressed ~1 debug messages>\n\n4.8. Executing OPT_EXPR pass (perform const folding).\nOptimizing module alu.\n\n4.9. Rerunning OPT passes. (Maybe there is more to do..)\n\n4.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).\nRunning muxtree optimizer on module \\alu..\n  Creating internal representation of mux trees.\n  Evaluating internal representation of mux trees.\n  Analyzing evaluation results.\nRemoved 0 multiplexer ports.\n<suppressed ~1 debug messages>\n\n4.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).\n  Optimizing cells in module \\alu.\nPerformed a total of 0 changes.\n\n4.12. Executing OPT_MERGE pass (detect identical cells).\nFinding identical cells in module `\\alu'.\nRemoved a total of 0 cells.\n\n4.13. Executing OPT_DFF pass (perform DFF optimizations).\n\n4.14. Executing OPT_CLEAN pass (remove unused cells and wires).\nFinding unused cells or wires in module \\alu..\n\n4.15. Executing OPT_EXPR pass (perform const folding).\nOptimizing module alu.\n\n4.16. Finished OPT passes. (There is nothing left to do.)\n\n5. Executing CHECK pass (checking for obvious problems).\nChecking module alu...\nWarning: Wire alu.\\nonexistent is used but has no driver.\n",
+        "stderr": "ERROR: Found 1 problems in 'check -assert'.\n",
+        "duration_ms": 12
+      }
+    }
+  },
+  "current_validation": {
+    "results": {
+      "compile": {
+        "tool": "iverilog",
+        "command": [
+          "iverilog",
+          "-g2012",
+          "-Wall",
+          "-s",
+          "alu_tb",
+          "-o",
+          ".build/target.vvp",
+          "rtl/alu.v",
+          "tb/alu_tb.v"
+        ],
+        "exit_code": 1,
+        "status": "fail",
+        "stdout": "",
+        "stderr": "rtl/alu.v:9: error: Unable to bind wire/reg/memory `nonexistent' in `alu_tb.dut'\n1 error(s) during elaboration.\n",
+        "duration_ms": 11
+      },
+      "lint": {
+        "tool": "verilator",
+        "command": [
+          "verilator",
+          "--lint-only",
+          "-Wall",
+          "-Wno-fatal",
+          "--top-module",
+          "alu",
+          "rtl/alu.v"
+        ],
+        "exit_code": 1,
+        "status": "fail",
+        "stdout": "",
+        "stderr": "%Error: rtl/alu.v:9:28: Can't find definition of variable: 'nonexistent'\n    9 |         3'd4: result = a ^ nonexistent;\n      |                            ^~~~~~~~~~~\n%Error: Exiting due to 1 error(s)\n",
+        "duration_ms": 32
+      },
+      "synthesis": {
+        "tool": "yosys",
+        "command": [
+          "yosys",
+          "-Q",
+          "-T",
+          "-p",
+          "read_verilog -sv rtl/alu.v; hierarchy -check -top alu; proc; opt; check -assert"
+        ],
+        "exit_code": 1,
+        "status": "fail",
+        "stdout": "\n-- Running command `read_verilog -sv rtl/alu.v; hierarchy -check -top alu; proc; opt; check -assert' --\n\n1. Executing Verilog-2005 frontend: rtl/alu.v\nParsing SystemVerilog input from `rtl/alu.v' to AST representation.\nGenerating RTLIL representation for module `\\alu'.\nrtl/alu.v:9: Warning: Identifier `\\nonexistent' is implicitly declared.\nSuccessfully finished Verilog frontend.\n\n2. Executing HIERARCHY pass (managing design hierarchy).\n\n2.1. Analyzing design hierarchy..\nTop module:  \\alu\n\n2.2. Analyzing design hierarchy..\nTop module:  \\alu\nRemoved 0 unused modules.\n\n3. Executing PROC pass (convert processes to netlists).\n\n3.1. Executing PROC_CLEAN pass (remove empty switches from decision trees).\nCleaned up 0 empty switches.\n\n3.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).\nMarked 1 switch rules as full_case in process $proc$rtl/alu.v:2$1 in module alu.\nRemoved a total of 0 dead cases.\n\n3.3. Executing PROC_PRUNE pass (remove redundant assignments in processes).\nRemoved 0 redundant assignments.\nPromoted 1 assignment to connection.\n\n3.4. Executing PROC_INIT pass (extract init attributes).\n\n3.5. Executing PROC_ARST pass (detect async resets in processes).\n\n3.6. Executing PROC_ROM pass (convert switches to ROMs).\nConverted 0 switches.\n<suppressed ~1 debug messages>\n\n3.7. Executing PROC_MUX pass (convert decision trees to multiplexers).\nCreating decoders for process `\\alu.$proc$rtl/alu.v:2$1'.\n     1/1: $1\\result[7:0]\n\n3.8. Executing PROC_DLATCH pass (convert process syncs to latches).\nNo latch inferred for signal `\\alu.\\result' from process `\\alu.$proc$rtl/alu.v:2$1'.\n\n3.9. Executing PROC_DFF pass (convert process syncs to FFs).\n\n3.10. Executing PROC_MEMWR pass (convert process memory writes to cells).\n\n3.11. Executing PROC_CLEAN pass (remove empty switches from decision trees).\nFound and cleaned up 1 empty switch in `\\alu.$proc$rtl/alu.v:2$1'.\nRemoving empty process `alu.$proc$rtl/alu.v:2$1'.\nCleaned up 1 empty switch.\n\n3.12. Executing OPT_EXPR pass (perform const folding).\nOptimizing module alu.\n<suppressed ~1 debug messages>\n\n4. Executing OPT pass (performing simple optimizations).\n\n4.1. Executing OPT_EXPR pass (perform const folding).\nOptimizing module alu.\n\n4.2. Executing OPT_MERGE pass (detect identical cells).\nFinding identical cells in module `\\alu'.\nRemoved a total of 0 cells.\n\n4.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).\nRunning muxtree optimizer on module \\alu..\n  Creating internal representation of mux trees.\n  Evaluating internal representation of mux trees.\n  Analyzing evaluation results.\nRemoved 0 multiplexer ports.\n<suppressed ~1 debug messages>\n\n4.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).\n  Optimizing cells in module \\alu.\nPerformed a total of 0 changes.\n\n4.5. Executing OPT_MERGE pass (detect identical cells).\nFinding identical cells in module `\\alu'.\nRemoved a total of 0 cells.\n\n4.6. Executing OPT_DFF pass (perform DFF optimizations).\n\n4.7. Executing OPT_CLEAN pass (remove unused cells and wires).\nFinding unused cells or wires in module \\alu..\nRemoved 0 unused cells and 3 unused wires.\n<suppressed ~1 debug messages>\n\n4.8. Executing OPT_EXPR pass (perform const folding).\nOptimizing module alu.\n\n4.9. Rerunning OPT passes. (Maybe there is more to do..)\n\n4.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).\nRunning muxtree optimizer on module \\alu..\n  Creating internal representation of mux trees.\n  Evaluating internal representation of mux trees.\n  Analyzing evaluation results.\nRemoved 0 multiplexer ports.\n<suppressed ~1 debug messages>\n\n4.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).\n  Optimizing cells in module \\alu.\nPerformed a total of 0 changes.\n\n4.12. Executing OPT_MERGE pass (detect identical cells).\nFinding identical cells in module `\\alu'.\nRemoved a total of 0 cells.\n\n4.13. Executing OPT_DFF pass (perform DFF optimizations).\n\n4.14. Executing OPT_CLEAN pass (remove unused cells and wires).\nFinding unused cells or wires in module \\alu..\n\n4.15. Executing OPT_EXPR pass (perform const folding).\nOptimizing module alu.\n\n4.16. Finished OPT passes. (There is nothing left to do.)\n\n5. Executing CHECK pass (checking for obvious problems).\nChecking module alu...\nWarning: Wire alu.\\nonexistent is used but has no driver.\n",
+        "stderr": "ERROR: Found 1 problems in 'check -assert'.\n",
+        "duration_ms": 12
+      }
+    }
+  },
+  "evidence": [
+    {
+      "id": "baseline:compile",
+      "tool": "iverilog",
+      "status": "fail",
+      "message": "\nrtl/alu.v:9: error: Unable to bind wire/reg/memory `nonexistent' in `alu_tb.dut'\n1 error(s) during elaboration.\n"
+    },
+    {
+      "id": "baseline:lint",
+      "tool": "verilator",
+      "status": "fail",
+      "message": "\n%Error: rtl/alu.v:9:28: Can't find definition of variable: 'nonexistent'\n    9 |         3'd4: result = a ^ nonexistent;\n      |                            ^~~~~~~~~~~\n%Error: Exiting due to 1 error(s)\n"
+    },
+    {
+      "id": "baseline:synthesis",
+      "tool": "yosys",
+      "status": "fail",
+      "message": "\n-- Running command `read_verilog -sv rtl/alu.v; hierarchy -check -top alu; proc; opt; check -assert' --\n\n1. Executing Verilog-2005 frontend: rtl/alu.v\nParsing SystemVerilog input from `rtl/alu.v' to AST representation.\nGenerating RTLIL representation for module `\\alu'.\nrtl/alu.v:9: Warning: Identifier `\\nonexistent' is implicitly declared.\nSuccessfully finished Verilog frontend.\n\n2. Executing HIERARCHY pass (managing design hierarchy).\n\n2.1. Analyzing design hierarchy..\nTop module:  \\alu\n\n2.2. Analyzing design hierarchy..\nTop module:  \\alu\nRemoved 0 unused modules.\n\n3. Executing PROC pass (convert processes to netlists).\n\n3.1. Executing PROC_CLEAN pass (remove empty switches from decision trees).\nCleaned up 0 empty switches.\n\n3.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).\nMarked 1 switch rules as full_case in process $proc$rtl/alu.v:2$1 in module alu.\nRemoved a total of 0 dead cases.\n\n3.3. Executing PROC_PRUNE pass (remove redundant assignments in processes).\nRemoved 0 redundant assignments.\nPromoted 1 assignment to connection.\n\n3.4. Executing PROC_INIT pass (extract init attributes).\n\n3.5. Executing PROC_ARST pass (detect async resets in processes).\n\n3.6. Executing PROC_ROM pass (convert switches to ROMs).\nConverted 0 switches.\n<suppressed ~1 debug messages>\n\n3.7. Executing PROC_MUX pass (convert decision trees to multiplexers).\nCreating decoders for process `\\alu.$proc$rtl/alu.v:2$1'.\n     1/1: $1\\result[7:0]\n\n3.8. Executing PROC_DLATCH pass (convert process syncs to latches).\nNo latch inferred for signal `\\alu.\\result' from process `\\alu.$proc$rtl/alu.v:2$1'.\n\n3.9. Executing PROC_DFF pass (convert process syncs to FFs).\n\n3.10. Executing PROC_MEMWR pass (convert process memory writes to cells).\n\n3.11. Executing PROC_CLEAN pass (remove empty switches from decision trees).\nFound and cleaned up 1 empty switch in `\\alu.$proc$rtl/alu.v:2$1'.\nRemoving empty process `alu.$proc$rtl/alu.v:2$1'.\nCleaned up 1 empty switch.\n\n3.12. Executing OPT_EXPR pass (perform const folding).\nOptimizing module alu.\n<suppressed ~1 debug messages>\n\n4. Executing OPT pass (performing simple optimizations).\n\n4.1. Executing OPT_EXPR pass (perform const folding).\nOptimizing module alu.\n\n4.2. Executing OPT_MERGE pass (detect identical cells).\nFinding identical cells in module `\\alu'.\nRemoved a total of 0 cells.\n\n4.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).\nRunning muxtree optimizer on module \\alu..\n  Creating internal representation of mux trees.\n  Evaluating internal representation of mux trees.\n  Analyzing evaluation results.\nRemoved 0 multiplexer ports.\n<suppressed ~1 debug messages>\n\n4.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).\n  Optimizing cells in module \\alu.\nPerformed a total of 0 changes.\n\n4.5. Executing OPT_MERGE pass (detect identical cells).\nFinding identical cells in module `\\alu'.\nRemoved a total of 0 cells.\n\n4.6. Executing OPT_DFF pass (perform DFF optimizations).\n\n4.7. Executing OPT_CLEAN pass (remove unused cells and wires).\nFinding unused cells or wires in module \\alu..\nRemoved 0 unused cells and 3 unused wires.\n<suppressed ~1 debug messages>\n\n4.8. Executing OPT_EXPR pass (perform const folding).\nOptimizing module alu.\n\n4.9. Rerunning OPT passes. (Maybe there is more to do..)\n\n4.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).\nRunning muxtree optimizer on module \\alu..\n  Creating internal representation of mux trees.\n  Evaluating internal representation of mux trees.\n  Analyzing evaluation results.\nRemoved 0 multiplexer ports.\n<suppressed ~1 debug messages>\n\n4.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).\n  Optimizing cells in module \\alu.\nPerformed a total of 0 changes.\n\n4.12. Executing OPT_MERGE pass (detect identical cells).\nFinding identical cells in module `\\alu'.\nRemoved a total of 0 cells.\n\n4.13. Executing OPT_DFF pass (perform DFF optimizations).\n\n4.14. Executing OPT_CLEAN pass (remove unused cells and wires).\nFinding unused cells or wires in module \\alu..\n\n4.15. Executing OPT_EXPR pass (perform const folding).\nOptimizing module alu.\n\n4.16. Finished OPT passes. (There is nothing left to do.)\n\n5. Executing CHECK pass (checking for obvious problems).\nChecking module alu...\nWarning: Wire alu.\\nonexistent is used but has no driver.\n\nERROR: Found 1 problems in 'check -assert'.\n"
+    },
+    {
+      "id": "guard:1",
+      "tool": "patch_guard",
+      "status": "fail",
+      "message": "Hunk truncated or invalid"
+    }
+  ],
+  "hypotheses": [
+    {
+      "summary": "The XOR operation references an undeclared identifier instead of operand b.",
+      "likely_files": [
+        "rtl/alu.v"
+      ],
+      "likely_lines": [
+        9
+      ],
+      "reasoning": "Both compilation and lint identify `nonexistent` at line 9 as undefined; synthesis reports it undriven. The testbench expects `a ^ b` for op 4. This is the most likely defect, though the proposed repair has not been validated.",
+      "confidence": 0.99,
+      "evidence_ids": [
+        "baseline:compile",
+        "baseline:lint",
+        "baseline:synthesis"
+      ]
+    }
+  ],
+  "patch_attempts": [
+    {
+      "iteration": 1,
+      "hypothesis": {
+        "summary": "The XOR operation references an undeclared identifier instead of operand b.",
+        "likely_files": [
+          "rtl/alu.v"
+        ],
+        "likely_lines": [
+          9
+        ],
+        "reasoning": "Both compilation and lint identify `nonexistent` at line 9 as undefined; synthesis reports it undriven. The testbench expects `a ^ b` for op 4. This is the most likely defect, though the proposed repair has not been validated.",
+        "confidence": 0.99,
+        "evidence_ids": [
+          "baseline:compile",
+          "baseline:lint",
+          "baseline:synthesis"
+        ]
+      },
+      "proposal": {
+        "explanation": "Use the declared operand b for the XOR operation.",
+        "unified_diff": "--- a/rtl/alu.v\n+++ b/rtl/alu.v\n@@ -7,7 +7,7 @@\n         3'd2: result = a & b;\n         3'd3: result = a | b;\n-        3'd4: result = a ^ nonexistent;\n+        3'd4: result = a ^ b;\n         3'd5: result = a << b[2:0];\n         3'd6: result = {7'd0, ($signed(a) < $signed(b))};\n",
+        "expected_effect": "Eliminates the undefined signal and makes op 4 compute the testbench's expected XOR result.",
+        "risks": [
+          "No independent post-patch validation evidence is available."
+        ]
+      },
+      "guard_error": "Hunk truncated or invalid",
+      "validation": null,
+      "regression": null,
+      "retry_reason": "PATCH_PARSE_RETRY"
+    }
+  ],
+  "final_status": "MAX_RETRY",
+  "failure_reason": "Iteration budget exhausted",
+  "immutable_before": {
+    "case.json": "59749da738a61f8cd43191086b982661e937b847ca616417cd574ff215c03443",
+    "expected/metadata.json": "debb84aa5767c2399e45855c7cca0e2991a23bb6e122eff53fac346c84ab59f7",
+    "tb/alu_tb.v": "1fd49a8916a3a75c4d569491d289b1a2cecba5c1272dfb2b5754b04edd460000",
+    "tb/alu_tb_hidden.v": "4bf85d7782a918def3b6292a7db2b1138b0069a716186ad8447be075b564e56e"
+  },
+  "immutable_after": {
+    "case.json": "59749da738a61f8cd43191086b982661e937b847ca616417cd574ff215c03443",
+    "expected/metadata.json": "debb84aa5767c2399e45855c7cca0e2991a23bb6e122eff53fac346c84ab59f7",
+    "tb/alu_tb.v": "1fd49a8916a3a75c4d569491d289b1a2cecba5c1272dfb2b5754b04edd460000",
+    "tb/alu_tb_hidden.v": "4bf85d7782a918def3b6292a7db2b1138b0069a716186ad8447be075b564e56e"
+  },
+  "integrity_pass": true,
+  "success": false,
+  "regression_pass": false,
+  "duration_ms": 10483,
+  "llm_calls": 1,
+  "input_tokens": 7499,
+  "output_tokens": 311,
+  "estimated_cost": null,
+  "price_source": null
+}

@@ -1,0 +1,55 @@
+{
+  "results": {
+    "compile": {
+      "tool": "iverilog",
+      "command": [
+        "iverilog",
+        "-g2012",
+        "-Wall",
+        "-s",
+        "counter_tb",
+        "-o",
+        ".build/target.vvp",
+        "rtl/counter.v",
+        "tb/counter_tb.v"
+      ],
+      "exit_code": 16,
+      "status": "fail",
+      "stdout": "",
+      "stderr": "rtl/counter.v:7: syntax error\ntb/counter_tb.v:1: error: malformed statement\ntb/counter_tb.v:2: syntax error\ntb/counter_tb.v:2: Syntax in assignment statement l-value.\ntb/counter_tb.v:3: syntax error\ntb/counter_tb.v:3: error: malformed statement\ntb/counter_tb.v:4: syntax error\ntb/counter_tb.v:4: Syntax in assignment statement l-value.\ntb/counter_tb.v:5: syntax error\ntb/counter_tb.v:5: error: malformed statement\ntb/counter_tb.v:6: syntax error\ntb/counter_tb.v:6: error: malformed statement\ntb/counter_tb.v:17: syntax error\ntb/counter_tb.v:19: Syntax in assignment statement l-value.\ntb/counter_tb.v:28: syntax error\nI give up.\n",
+      "duration_ms": 11
+    },
+    "lint": {
+      "tool": "verilator",
+      "command": [
+        "verilator",
+        "--lint-only",
+        "-Wall",
+        "-Wno-fatal",
+        "--top-module",
+        "counter",
+        "rtl/counter.v"
+      ],
+      "exit_code": 1,
+      "status": "fail",
+      "stdout": "",
+      "stderr": "%Error: rtl/counter.v:7:5: syntax error, unexpected end\n    7 |     end\n      |     ^~~\n%Error: Cannot continue\n",
+      "duration_ms": 32
+    },
+    "synthesis": {
+      "tool": "yosys",
+      "command": [
+        "yosys",
+        "-Q",
+        "-T",
+        "-p",
+        "read_verilog -sv rtl/counter.v; hierarchy -check -top counter; proc; opt; check -assert"
+      ],
+      "exit_code": 1,
+      "status": "fail",
+      "stdout": "\n-- Running command `read_verilog -sv rtl/counter.v; hierarchy -check -top counter; proc; opt; check -assert' --\n\n1. Executing Verilog-2005 frontend: rtl/counter.v\n",
+      "stderr": "rtl/counter.v:7: ERROR: syntax error, unexpected TOK_END\n",
+      "duration_ms": 10
+    }
+  }
+}

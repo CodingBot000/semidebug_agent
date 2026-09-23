@@ -1,0 +1,4 @@
+argv: ["iverilog", "-g2012", "-Wall", "-s", "alu_tb", "-o", ".build/target.vvp", "rtl/alu.v", "tb/alu_tb.v"]
+status: pass
+exit: 0
+

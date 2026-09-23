@@ -36,6 +36,7 @@ class TestSpec(Model):
     top: str = Field(pattern=r"^[A-Za-z_][A-Za-z0-9_]*$")
     sources: list[str] = Field(min_length=1)
     plusargs: list[str] = Field(default_factory=list)
+    success_mode: Literal["semidebug_pass", "chipbench_mismatches"] = "semidebug_pass"
 
 
 class Case(Model):
@@ -44,6 +45,7 @@ class Case(Model):
     design_top: str = Field(pattern=r"^[A-Za-z_][A-Za-z0-9_]*$")
     mutable: list[str] = Field(min_length=1, max_length=20)
     immutable: list[str] = Field(min_length=1)
+    prompt_visible: list[str] | None = None
     target: TestSpec
     regression: list[TestSpec] = Field(min_length=1)
     timeout_sec: float = Field(default=10, gt=0, le=120)

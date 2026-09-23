@@ -1,0 +1,4 @@
+argv: ["iverilog", "-g2012", "-Wall", "-s", "fifo_hidden_tb", "-o", ".build/regression_103.vvp", "rtl/fifo.v", "tb/fifo_tb_hidden.v"]
+status: pass
+exit: 0
+

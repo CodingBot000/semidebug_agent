@@ -1,0 +1,15 @@
+{
+  "summary": "The reset value of priority_bit is inverted relative to the reference behavior.",
+  "likely_files": [
+    "rtl/arbiter.v"
+  ],
+  "likely_lines": [
+    13
+  ],
+  "reasoning": "After reset, the testbench expects priority 0, so req=11 should grant 01. The RTL resets priority_bit to 1 and grants 10 instead. The first simulation failure matches this discrepancy; the reset assignment is the most likely cause, though no patched validation is available.",
+  "confidence": 0.98,
+  "evidence_ids": [
+    "baseline:simulation",
+    "baseline:compile"
+  ]
+}

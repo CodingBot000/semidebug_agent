@@ -1,0 +1,17 @@
+{
+  "summary": "The priority bit does not advance after granting requester 0.",
+  "likely_files": [
+    "rtl/arbiter.v"
+  ],
+  "likely_lines": [
+    14
+  ],
+  "reasoning": "The reference sets priority to 1 after grant 01 (testbench line 24), but RTL line 14 sets it to 0. With req=11, this causes the next grant to remain 01 rather than alternate to 10, matching the simulation failure. Compile, lint, and synthesis passed, so this appears to be a functional rather than structural defect.",
+  "confidence": 0.98,
+  "evidence_ids": [
+    "baseline:simulation",
+    "baseline:compile",
+    "baseline:lint",
+    "baseline:synthesis"
+  ]
+}

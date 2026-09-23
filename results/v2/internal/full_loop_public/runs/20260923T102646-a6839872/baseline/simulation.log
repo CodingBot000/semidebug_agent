@@ -1,0 +1,6 @@
+argv: ["vvp", "-N", ".build/target.vvp", "+SEED=7"]
+status: fail
+exit: 1
+FATAL: tb/controller_tb.v:17: FSM state=1 busy=1 done=1
+       Time: 5 Scope: controller_tb.step
+

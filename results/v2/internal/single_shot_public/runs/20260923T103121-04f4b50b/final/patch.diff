@@ -1,0 +1,11 @@
+--- a/rtl/counter.v
++++ b/rtl/counter.v
+@@ -3,7 +3,7 @@
+     if (rst) count <= 4'd0;
+     else if (en) begin
+         if (count == 4'd9) count <= 4'd0;
+-        else count <= count + 4'd1
++        else count <= count + 4'd1;
+     end
+ end
+ endmodule

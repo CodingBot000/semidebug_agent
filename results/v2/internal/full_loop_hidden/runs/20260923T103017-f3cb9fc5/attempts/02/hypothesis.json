@@ -1,0 +1,15 @@
+{
+  "summary": "The done state transitions to busy instead of idle.",
+  "likely_files": [
+    "rtl/controller.v"
+  ],
+  "likely_lines": [
+    10
+  ],
+  "reasoning": "The reference FSM transitions from state 2 to state 0 at tb/controller_tb.v:13, while the RTL transitions to state 1. This matches the reported state=0, busy=1 failure. The previous proposal was rejected because its diff hunk was malformed, not because validation disproved the diagnosis.",
+  "confidence": 0.99,
+  "evidence_ids": [
+    "baseline:simulation",
+    "guard:1"
+  ]
+}

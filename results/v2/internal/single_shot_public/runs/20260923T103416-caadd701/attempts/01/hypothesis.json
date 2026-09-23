@@ -1,0 +1,17 @@
+{
+  "summary": "The done output decodes the busy state instead of the completion state.",
+  "likely_files": [
+    "rtl/controller.v"
+  ],
+  "likely_lines": [
+    4
+  ],
+  "reasoning": "Line 4 asserts done when state is 1, but the testbench expects done only when the reference state is 2 (line 16). The first simulation failure reports state 1 with done=1. The FSM already transitions to state 2 on finish, so changing only the done decode is the likely repair. This has not been independently validated.",
+  "confidence": 0.98,
+  "evidence_ids": [
+    "baseline:simulation",
+    "baseline:compile",
+    "baseline:lint",
+    "baseline:synthesis"
+  ]
+}

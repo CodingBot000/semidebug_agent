@@ -1,0 +1,17 @@
+{
+  "summary": "The enable condition is inverted in the pulse-generation expression.",
+  "likely_files": [
+    "rtl/pulse.v"
+  ],
+  "likely_lines": [
+    7
+  ],
+  "reasoning": "The RTL requires !enable, while the reference requires enable for a rising-edge pulse (tb/pulse_tb.v:11). The first enabled rising edge therefore produces actual 0 instead of expected 1. Compilation, lint, and synthesis passed, so this is a functional rather than structural diagnosis.",
+  "confidence": 0.99,
+  "evidence_ids": [
+    "baseline:simulation",
+    "baseline:compile",
+    "baseline:lint",
+    "baseline:synthesis"
+  ]
+}

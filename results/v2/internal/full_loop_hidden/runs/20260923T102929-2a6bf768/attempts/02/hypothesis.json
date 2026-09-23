@@ -1,0 +1,15 @@
+{
+  "summary": "The pop-only case increments occupancy instead of decrementing it.",
+  "likely_files": [
+    "rtl/fifo.v"
+  ],
+  "likely_lines": [
+    18
+  ],
+  "reasoning": "Case 2'b01 means pop without push, but line 18 adds one. This can make full disagree with the testbench occupancy. The prior proposal was rejected for an invalid diff hunk, not by simulation, so the diagnosis remains unvalidated.",
+  "confidence": 0.98,
+  "evidence_ids": [
+    "baseline:simulation",
+    "guard:1"
+  ]
+}

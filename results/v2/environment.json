@@ -1,0 +1,13 @@
+{
+  "observed_at_utc": "2026-09-23T10:23:46.406675+00:00",
+  "source_commit": "099188fa0b5dee64fe9ec3306ff559101ad728d3",
+  "working_tree_clean_at_start": true,
+  "codex_cli_version": "codex-cli 0.156.1",
+  "model": "gpt-6-sol",
+  "reasoning_effort": "low",
+  "eda_runtime": "docker",
+  "docker_server_version": "29.1.3",
+  "docker_image_id": "sha256:95a8a23137077d52aa61a8adf639831380fcb2648ebbba4633922b90c0ec4290",
+  "v1_baseline_tag": "semidebug-v1-baseline",
+  "external_selection_commit": "9e0bc2b"
+}

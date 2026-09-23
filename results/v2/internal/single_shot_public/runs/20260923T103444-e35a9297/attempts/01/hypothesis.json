@@ -1,0 +1,14 @@
+{
+  "summary": "Subtraction operands are reversed for op 1.",
+  "likely_files": [
+    "rtl/alu.v"
+  ],
+  "likely_lines": [
+    6
+  ],
+  "reasoning": "The RTL computes b - a, while the testbench expects a - b. For a=0 and b=140, 8-bit a - b is 116, matching the reported expected value; the RTL produces 140. This is the most likely cause, though no proposed patch has been independently validated.",
+  "confidence": 0.99,
+  "evidence_ids": [
+    "baseline:simulation"
+  ]
+}

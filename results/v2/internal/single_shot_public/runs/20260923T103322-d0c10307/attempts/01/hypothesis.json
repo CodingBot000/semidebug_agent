@@ -1,0 +1,15 @@
+{
+  "summary": "The reset value of priority_bit is inverted relative to the reference.",
+  "likely_files": [
+    "rtl/arbiter.v"
+  ],
+  "likely_lines": [
+    13
+  ],
+  "reasoning": "After the initial reset clock edge, the testbench reference sets priority_ref to 0 (tb/arbiter_tb.v:23), but the RTL sets priority_bit to 1. With req=11, this produces grant=10 instead of the expected 01 at time 3. This is the most likely cause, though no patched run is available.",
+  "confidence": 0.98,
+  "evidence_ids": [
+    "baseline:simulation",
+    "baseline:compile"
+  ]
+}

@@ -16,3 +16,4 @@ build/
 .coverage
 .build/
 obj_dir/
+external/chipbench/cases/

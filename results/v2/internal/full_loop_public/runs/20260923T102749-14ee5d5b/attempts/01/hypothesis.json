@@ -1,0 +1,14 @@
+{
+  "summary": "Opcode 5 shifts right, but the expected ALU operation shifts left.",
+  "likely_files": [
+    "rtl/alu.v"
+  ],
+  "likely_lines": [
+    10
+  ],
+  "reasoning": "The RTL uses >> at line 10, while the testbench expects << at line 19. The failing case has a=90 and b[2:0]=4: 90>>4 is 5 (actual), whereas the truncated 8-bit result of 90<<4 is 160 (expected). This is the most likely defect; no validation of the proposed change is available.",
+  "confidence": 0.99,
+  "evidence_ids": [
+    "baseline:simulation"
+  ]
+}

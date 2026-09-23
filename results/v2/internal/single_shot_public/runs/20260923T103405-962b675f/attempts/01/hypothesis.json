@@ -1,0 +1,14 @@
+{
+  "summary": "Reset initializes the FSM to busy instead of idle.",
+  "likely_files": [
+    "rtl/controller.v"
+  ],
+  "likely_lines": [
+    6
+  ],
+  "reasoning": "On the first step, rst is asserted and the reference state becomes 0, but busy is 1. The RTL reset assignment sets state to 1, which directly asserts busy. This is the most likely cause, though no patched validation is available.",
+  "confidence": 0.99,
+  "evidence_ids": [
+    "baseline:simulation"
+  ]
+}

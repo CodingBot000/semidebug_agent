@@ -1,0 +1,11 @@
+--- a/rtl/fifo.v
++++ b/rtl/fifo.v
+@@ -5,7 +5,7 @@
+ reg [2:0] count;
+ wire push = wr_en && !full;
+ wire pop = rd_en && !empty;
+-assign full = (count == 3'd3);
++assign full = (count == 3'd4);
+ assign empty = (count == 3'd0);
+ always @(posedge clk) begin
+     if (rst) begin

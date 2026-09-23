@@ -1,0 +1,15 @@
+{
+  "summary": "The reset polarity is inverted in the RTL.",
+  "likely_files": [
+    "rtl/counter.v"
+  ],
+  "likely_lines": [
+    3
+  ],
+  "reasoning": "The testbench expects count to reset when rst is high (tb/counter_tb.v:9), but the RTL resets when rst is low. On the first clock edge, rst=1 and en=0, so count remains unknown, matching the simulation failure. This is the most likely cause, though the proposed change has not been validated.",
+  "confidence": 0.99,
+  "evidence_ids": [
+    "baseline:simulation",
+    "baseline:compile"
+  ]
+}

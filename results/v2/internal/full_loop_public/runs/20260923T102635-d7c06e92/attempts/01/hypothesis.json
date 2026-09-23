@@ -1,0 +1,15 @@
+{
+  "summary": "Reset loads the busy state instead of idle.",
+  "likely_files": [
+    "rtl/controller.v"
+  ],
+  "likely_lines": [
+    6
+  ],
+  "reasoning": "The first test step asserts rst and expects state 0, but the RTL loads state 1, making busy high. This matches the failure at time 2. No prior patch has been tested.",
+  "confidence": 0.99,
+  "evidence_ids": [
+    "baseline:simulation",
+    "baseline:compile"
+  ]
+}

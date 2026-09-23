@@ -1,0 +1,6 @@
+argv: ["iverilog", "-g2012", "-Wall", "-s", "counter_tb", "-o", ".build/target.vvp", "rtl/counter.v", "tb/counter_tb.v"]
+status: pass
+exit: 0
+
+tb/counter_tb.v:5: warning: Port 4 (count) of counter expects 3 bits, got 4.
+tb/counter_tb.v:5:        : Padding 1 high bits of the expression.

@@ -1,0 +1,15 @@
+{
+  "summary": "The enable condition is inverted, so the counter holds when en is asserted.",
+  "likely_files": [
+    "rtl/counter.v"
+  ],
+  "likely_lines": [
+    4
+  ],
+  "reasoning": "The testbench increments its expected count when en is high (tb/counter_tb.v:10-12). After reset it sets en=1 (line 21), but the first enabled step reports expected=1 and actual=0. The RTL instead increments under !en. This is the most likely cause, though the proposed repair has not been validated.",
+  "confidence": 0.99,
+  "evidence_ids": [
+    "baseline:simulation",
+    "baseline:compile"
+  ]
+}
