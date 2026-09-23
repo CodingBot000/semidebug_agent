@@ -1,0 +1,16 @@
+{
+  "observed_at_utc": "2026-09-23T10:43:12.372097+00:00",
+  "source_commit": "a332e03a261f62b569ed86d3039e426bdd58185f",
+  "working_tree_clean_at_start": true,
+  "codex_cli_version": "codex-cli 0.156.1",
+  "model": "gpt-6-sol",
+  "reasoning_effort": "low",
+  "max_iterations": 3,
+  "eda_runtime": "docker",
+  "docker_image_id": "sha256:dea83b8c48152eb87c10808738860a8b9363ad0a1bc962b4e5996a3ccedfc1a1",
+  "upstream": "https://github.com/zhongkaiyu/ChipBench.git",
+  "upstream_commit": "b4ba3a06759804ec88c26c3cf15b28b9a90b3443",
+  "selection_manifest": "external/chipbench/selection_manifest.json",
+  "selected": 12,
+  "qualified_compatible": 12
+}

@@ -1,0 +1,13 @@
+--- a/rtl/TopModule.sv
++++ b/rtl/TopModule.sv
+@@ -10,8 +10,3 @@
+ 	always @(*) begin
+-	   if (!rst_n)
+-		   match = 1'b0;
+-	   else if (a_tem == 8'b0111_0001)
+-		   match = 1'b1;
+-	   else
+-		   match = 1'b0;
+-      end
++		match = (a_tem == 8'b0111_0001);
++	end

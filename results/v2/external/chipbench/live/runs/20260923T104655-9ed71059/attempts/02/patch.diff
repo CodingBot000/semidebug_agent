@@ -1,0 +1,5 @@
+--- a/rtl/TopModule.sv
++++ b/rtl/TopModule.sv
+@@ -24,1 +24,1 @@
+-           sf6=4'd20;
++           sf6=4'd12;

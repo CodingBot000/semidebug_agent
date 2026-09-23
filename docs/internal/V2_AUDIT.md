@@ -38,3 +38,7 @@ Observed 2026-09-23 before V2 implementation. This is an audit of the checked-ou
 ## Priority and acceptance gate
 
 First separate prompt-visible target tests from evaluator-only regression tests and prove the boundary with serialization/integration checks. A shared testbench with a hidden plusarg does not meet this gate. Keep V1 raw files untouched and store all V2 runs under new paths. Before any external model evaluation, freeze the upstream revision, case selection and unsupported-case criteria. Re-measure the internal benchmark after the evaluation protocol changes; V1 results remain historical.
+
+## Resolution (2026-09-23)
+
+`benchmark_v2/` now has separate visible and evaluator-only regression source; the context selector and retry history redact hidden source and detailed mismatch output. A real EDA end-to-end test confirms hidden marker exclusion and final regression execution. V2 gold/broken qualification passed 6/6 and 30/30; the known-fix pipeline passed 30/30. Internal full-loop and separate one-shot runs, a precommitted ChipBench selection, 12/12 pre-model external qualification and all 12 live external outcomes are saved under `results/v2/`. The external adapter keeps upstream reference/test content local and ignored by Git, with only the selection manifest included in the submission ZIP. See `docs/V2_EVALUATION.md` for measured rates and failure interpretation.

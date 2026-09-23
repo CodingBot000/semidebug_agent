@@ -1,0 +1,22 @@
+{
+  "summary": "The expected output is a registered comparison of the stored nine-bit window, rather than the newly shifted window.",
+  "likely_files": [
+    "rtl/TopModule.sv"
+  ],
+  "likely_lines": [
+    12,
+    15,
+    21,
+    26,
+    45
+  ],
+  "reasoning": "The specification says the output is updated sequentially and defines the comparison using a_tem[8:6] and a_tem[2:0]. The previous proposal compared the incoming-bit window and failed the withheld regression, although it passed compile, simulation smoke, lint, and synthesis. Registering a comparison of the existing nine-bit register is a plausible timing correction; the withheld test details leave this uncertain.",
+  "confidence": 0.72,
+  "evidence_ids": [
+    "regression-2:2",
+    "attempt-2:compile",
+    "attempt-2:simulation",
+    "attempt-2:lint",
+    "attempt-2:synthesis"
+  ]
+}

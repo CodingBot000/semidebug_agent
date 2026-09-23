@@ -1,0 +1,16 @@
+{
+  "summary": "The pattern halves are compared against the wrong ends of the shift register.",
+  "likely_files": [
+    "rtl/TopModule.sv"
+  ],
+  "likely_lines": [
+    17,
+    31,
+    47
+  ],
+  "reasoning": "The shift at line 47 inserts each new bit at bit 8, so bits 8:6 hold the newest three bits and bits 2:0 hold the oldest three. For the input sequence 011XXX110, the oldest three must equal 011 and the newest three must equal 110. The first proposal changed comparison timing but left this reversal intact; its regression failed. The expected output latency remains uncertain.",
+  "confidence": 0.82,
+  "evidence_ids": [
+    "regression-1:2"
+  ]
+}

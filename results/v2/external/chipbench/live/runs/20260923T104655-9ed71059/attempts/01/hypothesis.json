@@ -1,0 +1,15 @@
+{
+  "summary": "The `sf6` state value is too large for the four-bit state register and aliases `s4`.",
+  "likely_files": [
+    "rtl/TopModule.sv"
+  ],
+  "likely_lines": [
+    24,
+    64
+  ],
+  "reasoning": "`4'd20` truncates to 4, making `sf6` overlap `s4`. This directly explains the WIDTH and CASEOVERLAP warnings. An unused four-bit value, 12, preserves a distinct sixth failure state. This is the most likely defect, though the repair has not been validated.",
+  "confidence": 0.99,
+  "evidence_ids": [
+    "baseline:lint"
+  ]
+}

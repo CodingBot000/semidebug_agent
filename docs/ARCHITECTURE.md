@@ -1,17 +1,35 @@
-# Architecture
+# Architecture and control boundaries
 
-SemiDebug owns the control flow. The LLM returns hypotheses and candidate diffs through a typed provider boundary; it cannot invoke arbitrary commands or declare validation success.
+The model proposes a diagnosis and an RTL diff. SemiDebug alone applies the diff and decides whether it is accepted. The model has no validation tool access and cannot mark its own patch successful. [Diagram source](architecture.mmd).
 
-`benchmark/loader.py` validates the explicit project manifest and path boundaries. `tools/workspace.py` copies only mutable RTL, immutable testbench/expected files and the manifest into an isolated temporary directory. Gold and mutation definitions are evaluator-only. `tools/validation.py` runs Icarus/VVP, independent Verilator lint, and Yosys structural sanity. The runner uses argv lists, a credential-free environment, bounded output and process-group timeouts.
+```mermaid
+flowchart LR
+    A[Case manifest and baseline] --> B[Visible context selector]
+    B --> C[Host Codex CLI: hypothesis and diff]
+    C --> D[Exact patch guard]
+    D -->|allowed| E[Fresh candidate copy]
+    D -->|rejected| B
+    E --> F[Offline Docker: compile, target, lint, synthesis]
+    F -->|pass| G[Evaluator-only regression]
+    F -->|fail| H[Bounded feedback]
+    G -->|fail| H
+    H --> B
+    G -->|pass and hashes match| I[Accepted RTL and evidence]
+```
 
-`agent/orchestrator.py` collects actual baseline evidence, selects bounded context, asks for a structured analysis and patch, guards the diff, and applies it with exact context matching. Each failed attempt is discarded. Every next attempt starts from the original baseline and includes prior diffs, commands, exit codes and failure logs. Two consecutive invalid patches, repeated diffs, repeated hypotheses/failures, exhausted budget and infrastructure/provider errors terminate the run.
+## What crosses each boundary
 
-A candidate must pass compile, target simulation, critical lint policy, synthesis, two longer regression seeds and immutable integrity before `FIXED`. Original user files remain untouched; accepted RTL and the exact diff are saved under `final/`. Exit zero without a trusted testbench completion marker is failure. Even after success, the original project's complete selected-file fingerprints are checked.
+| Boundary | Permitted data or action | Kept outside |
+|---|---|---|
+| Model request | Mutable RTL, visible target source or problem statement, baseline diagnostics, prior visible validation and bounded retry status | Gold RTL, mutation definition, external reference solution, hidden test source, detailed hidden expected output |
+| Patch guard | Exact unified diff against manifest-listed RTL, at most two files and 40 changed lines | Testbench, manifest, reference files, fuzzy application, verification-bypass directives |
+| EDA worker | A fresh case copy and a fixed validation mode in a network-disabled Docker container | Codex login, API credentials and arbitrary manifest shell commands |
+| Acceptance | Compile, target simulation, critical lint, synthesis sanity, evaluator-only regression and original/immutable SHA256 checks | Model self-assessment or a zero exit code without trusted completion evidence |
 
-Artifact schema: run.json/result.json, events.jsonl, baseline tool logs, attempts/NN/hypothesis.json + patch.diff + validation.json, final/patch.diff + RTL + regression.json + metrics.json, report.md. Reports show actual checks and explicitly mark unexecuted stages. Provider errors do not dump raw API bodies or credentials.
+`benchmark/loader.py` validates manifest identifiers and paths. `tools/workspace.py` copies only selected case files into a temporary workspace. `context/selector.py` chooses provider-visible files; V2 regression sources are deliberately absent. When a hidden regression fails, the full mismatch log stays in the local run artifact. The next model request receives only the failed gate and status, while visible tool failures can provide bounded logs. The previous diff and hypothesis remain available for retry. This preserves useful feedback without disclosing evaluator answers.
 
-See [Mermaid source](architecture.mmd). The design is single-process and sequential to keep retries and evidence understandable. Native subprocesses are not a security sandbox; see SECURITY.md.
+`agent/orchestrator.py` starts every candidate from the original baseline. A rejected or failing patch is never applied cumulatively to the next attempt. It stops on exhausted iterations, repeated diffs or failures, consecutive invalid patches, provider errors and infrastructure errors. The typed `PatchAttempt.retry_reason` distinguishes parse/guard repairs from compile, simulation, lint, synthesis and regression failures. The accepted RTL and exact diff are saved under `final/`; source inputs remain untouched.
 
-## Local CLI inference adapter
+Internal cases use Icarus/VVP with a trusted `SEMIDEBUG_PASS` marker, Verilator lint, Yosys structural checks and a separate hidden regression testbench exercised with two seeds. The ChipBench adapter verifies frozen upstream hashes, extracts buggy `TopModule` and keeps `RefModule` and the official test evaluator-only. It requires the official `Mismatches: 0 in N samples` result in addition to compile, lint, synthesis and integrity gates. External test source is never sent to the provider. V1 used a shared target/regression testbench visible to the model; its measurements are historical and separate from V2.
 
-The default provider is `live-codex-cli`. Host `codex exec` uses normal ChatGPT authentication and returns one structured diagnosis/patch pair per attempt. The orchestrator consumes that pair through its existing analysis/patch interface. The next failed attempt gets new evidence and a new call; the adapter does not reuse a proposal across changed contexts. The CLI cannot execute model tools. Host orchestration dispatches manifest-limited temporary workspaces to credential-free, network-disabled EDA Docker workers. CLI usage and version are attached to each run; subscription cost stays null.
+Each run writes `run.json`/`result.json`, `events.jsonl`, baseline logs, per-attempt hypothesis/diff/validation, final RTL and regression evidence, and `report.md`. Provider failures do not dump raw API bodies or credentials. The process is sequential so the complete decision path can be inspected. Native subprocesses are for trusted HDL; see [execution boundaries](SECURITY.md).

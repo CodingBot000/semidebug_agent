@@ -1,0 +1,14 @@
+{
+  "summary": "The shift register inserts `a` at the MSB instead of the LSB.",
+  "likely_files": [
+    "rtl/TopModule.sv"
+  ],
+  "likely_lines": [
+    31
+  ],
+  "reasoning": "The specification requires a left shift with `a` entering bit 0, but the current concatenation places `a` in bit 7. The withheld regression failure is consistent with this mismatch, though it does not identify the failing case.",
+  "confidence": 0.95,
+  "evidence_ids": [
+    "baseline-regression:2"
+  ]
+}

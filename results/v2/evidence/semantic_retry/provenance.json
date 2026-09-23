@@ -1,0 +1,11 @@
+{
+  "measurement": "live-ai-repair",
+  "source_run": "results/v2/external/chipbench/live/runs/20260923T104318-0a919433",
+  "case_id": "chipbench_arithmetic_Prob001_continuous_input_sequence_detect",
+  "final_status": "FIXED",
+  "model": "gpt-6-sol",
+  "retry_reasons": [
+    "REGRESSION_RETRY",
+    null
+  ]
+}

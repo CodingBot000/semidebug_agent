@@ -1,0 +1,20 @@
+{
+  "summary": "The result may need to be registered when the sixth bit is sampled, rather than decoded from the terminal state.",
+  "likely_files": [
+    "rtl/TopModule.sv"
+  ],
+  "likely_lines": [
+    71,
+    76,
+    80
+  ],
+  "reasoning": "The previous terminal-state combinational decode passed compile, simulation smoke, lint, and synthesis, but failed the withheld regression. A distinct approach is to determine the result from the fifth-bit state and sixth input at the sampling edge. The withheld test details prevent identifying the precise failure.",
+  "confidence": 0.42,
+  "evidence_ids": [
+    "attempt-2:compile",
+    "attempt-2:simulation",
+    "attempt-2:lint",
+    "attempt-2:synthesis",
+    "regression-2:2"
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "summary": "An invalid cycle incorrectly discards the partial 011 match.",
+  "likely_files": [
+    "rtl/TopModule.sv"
+  ],
+  "likely_lines": [
+    54
+  ],
+  "reasoning": "The specification says invalid data must be ignored, but line 54 returns to idle from s3_d011. Both prior proposals also changed completed-match transitions and failed the withheld regression, so the narrower correction is more plausible. The failing cases remain unknown.",
+  "confidence": 0.65,
+  "evidence_ids": [
+    "regression-2:2",
+    "attempt-2:simulation"
+  ]
+}

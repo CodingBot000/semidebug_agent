@@ -1,116 +1,62 @@
 # SemiDebug Agent
 
-RTL 오류의 원인을 추론하고 최소 패치를 제안한 뒤, **실제 EDA 도구와 변경 불가능한 테스트를 통과한 수정만 승인하는** CLI 프로토타입입니다.
-
-## 현재 결과
-
-- 자체 제작 RTL 6종: counter, FIFO, round-robin arbiter, FSM controller, ALU, pulse detector.
-- 오류 사례 **30개**: 공개 24개 / holdout 6개. 정상 버전은 모든 검증·회귀 테스트를 통과하고, 오류 버전 30개 모두 실제 실패를 재현했습니다.
-- 단위·EDA 통합·스크립트 기반 E2E 테스트 **95개 통과**.
-- 알려진 정답 패치를 공급한 **파이프라인 검증 30/30 통과**. 이는 AI 수리 성공률이 아닙니다.
-- **실제 Codex CLI gpt-6-sol / low 평가: 공개 24/24 + holdout 6/6 수정 성공.** 첫 시도 23/30, 중앙 시간 14.68초. [실제 측정 결과](results/live_codex/summary.md) · [CLI 설정](docs/CODEX_CLI.md)
-
-## 왜 필요한가
-
-LLM이 제시한 코드가 컴파일되는 것과 원래 기능을 유지하며 오류를 고치는 것은 다릅니다. SemiDebug는 추론, 최소 변경, 외부 검증, 실패 피드백을 연결하고 원본·테스트 무결성을 확인합니다. 근거 로그와 diff가 함께 남으므로 수리가 실패한 이유도 확인할 수 있습니다.
-
-## 동작 방식
+AI가 RTL 오류의 원인과 최소 수정안을 제안하면, **독립 EDA 검사와 모델에 보이지 않는 회귀 테스트가 통과한 수정만 승인하는** CLI 연구 프로토타입입니다.
 
 ```mermaid
 flowchart LR
-    A[오류 RTL] --> B[Baseline 검증]
-    B --> C[근거 수집 + LLM 추론]
-    C --> D[최소 diff]
-    D --> E[패치 정책 검사]
-    E --> F[격리된 복사본에 적용]
-    F --> G[Compile + Simulation + Lint + Synthesis]
-    G -->|실패| C
-    G -->|통과| H[전체 회귀 + 테스트 해시]
-    H -->|통과| I[수정 승인 + Evidence Report]
-    H -->|실패| C
+    A[오류 RTL과 실패 근거] --> B[AI: 가설과 diff]
+    B --> C[패치 정책 검사]
+    C --> D[격리된 복사본에서 EDA 검증]
+    D --> E[평가 전용 회귀 테스트]
+    E -->|통과| F[수정 승인과 근거 저장]
+    C -->|실패| B
+    D -->|실패| B
+    E -->|실패| B
 ```
 
-원본 소스는 직접 변경하지 않습니다. 승인된 RTL은 실행 결과의 `final/rtl/`에 저장합니다. 모든 재시도는 원래 baseline을 기준으로 하며, 최대 3회·동일 패치 반복·연속 금지 패치 등에서 안전하게 종료합니다.
+## 왜 필요한가
 
-## 빠른 실행
+LLM이 만든 RTL 패치는 문법상 맞아도 동작이 틀리거나 기존 기능을 깨뜨릴 수 있습니다. SemiDebug는 AI에게 진단과 후보 패치만 맡깁니다. 성공 판정은 Icarus/VVP 시뮬레이션, Verilator 린트, Yosys 구조 검사, 평가 전용 회귀 테스트와 원본·테스트 SHA256 검사로 결정합니다. 실패한 패치는 원본에 누적하지 않고, 검증 근거를 다음 시도에 전달합니다. [설계 경계](docs/ARCHITECTURE.md).
 
-필요 도구: Git, [uv](https://docs.astral.sh/uv/getting-started/installation/), 실행 중인 Docker.
+## 실제 측정 결과
+
+| 평가 | 대상 | 최종 수정 | 첫 시도 | 확인할 점 |
+|---|---:|---:|---:|---|
+| V2 내부, 최대 3회 | 자체 RTL 오류 30건 | **30/30** | 23/30 | 회귀 테스트 소스를 모델 입력에서 분리 |
+| V2 내부, 별도 1회 실행 | 같은 30건 | **24/30** | 24/30 | 별도 실행이므로 첫 행과 동일한 모델 샘플은 아님 |
+| V2 외부 ChipBench | 사전 선정 12건 | **5/12** | 2/12 | 실제 semantic retry 성공 3건, 최종 실패 7건 |
+
+내부 최대 3회 실행에서 추가로 통과한 7건은 모두 **diff 형식 오류 복구**였습니다. 외부 사례에서는 공식 회귀 검증이 첫 후보를 거절한 뒤 다른 후보가 통과한 사례 3건을 관찰했습니다. V1의 내부 30/30은 별도의 과거 측정이며 [원본 결과](results/live_codex/summary.md)에 보존했습니다. V1과 V2의 평가 방식이 달라 성능 향상 수치로 직접 비교하지 않습니다. 수치와 실패 사례, 선정 규칙은 [V2 평가 보고서](docs/V2_EVALUATION.md)에서 확인할 수 있습니다.
+
+## 60초 데모
+
+Git, [uv](https://docs.astral.sh/uv/getting-started/installation/)와 실행 중인 Docker가 필요합니다. 프로젝트 폴더에서:
 
 ```bash
-git clone https://github.com/CodingBot000/semidebug_agent.git
-cd semidebug_agent
 ./scripts/bootstrap.sh
 ./scripts/run_demo.sh --scripted
 ```
 
-`--scripted`는 미리 정한 패치를 사용하지만 Icarus·Verilator·Yosys와 회귀 테스트는 **매번 실제 실행**합니다. API 호출은 없습니다.
+이 데모는 알려진 패치를 사용하지만 EDA와 회귀 테스트는 매번 실제 실행합니다. AI 성능 측정은 아닙니다. 기존 기록만 보려면 `./scripts/run_demo.sh --replay`를 실행하세요.
 
-기록만 읽으려면:
-
-```bash
-./scripts/run_demo.sh --replay
-```
-
-화면에 `RECORDED RUN`이 표시되며 도구를 새로 실행하지 않습니다.
-
-실제 AI 실행:
+실제 AI 데모는 호스트의 ChatGPT 인증을 사용합니다.
 
 ```bash
-npm install -g @openai/codex
+npm install -g @openai/codex@latest
 codex login
 ./scripts/doctor.sh
 ./scripts/run_demo.sh
-./scripts/run_benchmark.sh benchmark/public
-./scripts/run_benchmark.sh benchmark/hidden
 ```
 
-기본 실행은 Codex CLI의 ChatGPT 인증을 사용하며 구독 사용 한도를 소비합니다. API 키는 필요하지 않습니다. 실제 확인 모델은 `gpt-6-sol`, 추론 강도는 `low`입니다. [모델 변경·인증·사용량 안내](docs/CODEX_CLI.md). 별도 API 모드는 `.env` 설정 후 `./scripts/run_demo.sh --api`로 실행합니다.
+API 키는 기본 Codex CLI 경로에 필요하지 않습니다. 구독 사용 한도를 소비합니다. [자세한 실행 방법](QUICKSTART.md) · [CLI 설정](docs/CODEX_CLI.md).
 
-## 검증 정책
+## 근거와 재현
 
-| 단계 | 도구 | 승인 조건 |
-|---|---|---|
-| Compile | Icarus 11.0, `-g2012` | 종료 코드 0 |
-| Simulation | VVP `-N` | 종료 코드 0 + immutable testbench 완료 표식 |
-| Lint | Verilator 5.006 | 오류 및 중요 warning 없음 |
-| Synthesis sanity | Yosys 0.23 | hierarchy/proc/opt/check -assert 통과 |
-| Regression | 별도 seed 17, 103 | 더 긴 시나리오 모두 통과 |
-| Integrity | SHA256 | 원본 및 immutable 파일 보존 |
+- [내부 one-shot 대 feedback loop 비교](results/v2/internal/comparison.md)
+- [외부 12건 전체 결과](results/v2/external/chipbench/evaluation.md)와 [사전 고정 선정 규칙](docs/EXTERNAL_BENCHMARK_PROTOCOL.md)
+- [실제 semantic retry](results/v2/evidence/semantic_retry/report.md)와 [최종 실패](results/v2/evidence/final_failure/report.md)
+- [포트폴리오 근거](PORTFOLIO_EVIDENCE.md) · [제출물 안내](SUBMISSION_GUIDE.md)
 
-최신 upstream 대신 고정된 Debian 도구 버전을 사용합니다. Python 3.12.14와 기반 이미지 digest, 잠긴 Python 의존성으로 재현 환경을 제공합니다. [조사](docs/RESEARCH.md) · [결정 근거](docs/DECISIONS.md)
+V2 내부 데이터셋은 `benchmark_v2/`, 실행 코드는 `src/semidebug/`, 모델과 독립된 정답·데이터셋 생성 코드는 `evaluator/`에 있습니다. 외부 원본 데이터는 ZIP에 넣지 않고 [해시가 기록된 선정 목록](external/chipbench/selection_manifest.json)과 가져오기 스크립트를 제공합니다.
 
-## CLI 및 테스트
-
-```bash
-uv run semidebug --help
-./scripts/doctor.sh
-make test             # 호스트 단위 테스트
-make test-integration # Docker에서 정상/오류 RTL 검증
-make e2e              # 실제 EDA + scripted provider
-make test-all
-make lint
-make package
-```
-
-네이티브 EDA 도구가 있으면 `uv run semidebug fix <case-directory>`를 직접 실행할 수 있습니다. 입력 형식은 [예제 manifest](examples/fifo_off_by_one/case.json)와 같습니다. 임의의 shell build 명령은 지원하지 않습니다. 각 명령은 `--help`를 제공합니다.
-
-## 근거와 벤치마크
-
-- [실제 LLM 데모](results/live_demo/report.md) / [실제 AI 벤치마크](results/live_codex/summary.md)
-- [측정 범위와 결과](docs/BENCHMARK.md)
-- [첫 시도 성공](results/sample_run/report.md) / [재시도 성공](results/retry_run/report.md) / [실패 사례](results/failed_run/report.md)
-- [파이프라인 결과 JSON](results/benchmark_results.json) / [CSV](results/benchmark_results.csv)
-- [정상·오류 데이터셋 검증 로그](results/dataset_audit.json)
-- [포트폴리오 설명](PORTFOLIO_EVIDENCE.md)
-
-## 구조
-
-`src/semidebug/`는 CLI·에이전트·provider·패치·검증·리포트를 포함합니다. `benchmark/`에는 오류 사례와 변경 불가능한 테스트가 있습니다. `evaluator/`의 정상 정답과 mutation 정의는 에이전트 입력과 격리됩니다. `tests/`는 단위·통합·E2E 검증, `results/`는 실제 실행 기록, `docs/PROGRESS.md`와 `docs/ISSUES.md`는 개발 이력입니다.
-
-## 한계
-
-소형 자체 제작 RTL을 대상으로 한 연구·포트폴리오 프로토타입입니다. 상용 반도체 EDA, silicon 검증, physical verification, formal equivalence를 대체하지 않습니다. Yosys의 기본 SystemVerilog 지원 범위는 제한적입니다. 테스트 통과가 모든 입력에 대한 정확성 증명은 아닙니다.
-
-Codex CLI 경로에서 실제 AI 수리를 측정했으며 별도 API 경로는 모의 HTTP 테스트만 수행했습니다. Holdout은 다른 mutation을 사용하지만 같은 설계 계열이므로 독립 설계에 대한 일반화 결과가 아닙니다. 임의의 악성 HDL을 안전하게 실행하는 제품이 아니며, native/live 모드는 신뢰하는 입력만 사용합니다. [실행 경계와 보안](docs/SECURITY.md)
-
-MIT 라이선스. 외부 도구 라이선스는 [THIRD_PARTY.md](docs/THIRD_PARTY.md)를 확인하세요.
+이 프로젝트는 소형 RTL을 대상으로 한 연구·포트폴리오 결과입니다. 유한한 테스트 통과가 형식적 정확성이나 실제 silicon 검증을 뜻하지 않습니다. 외부 12건은 작은 표본이며 모델의 사전학습 노출 여부는 확인할 수 없습니다. [한계](docs/LIMITATIONS.md) · [외부 소프트웨어와 데이터 출처](docs/THIRD_PARTY.md). MIT 라이선스.

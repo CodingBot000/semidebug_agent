@@ -1,0 +1,17 @@
+{
+  "summary": "The flag is asserted one clock cycle later than intended.",
+  "likely_files": [
+    "rtl/TopModule.sv"
+  ],
+  "likely_lines": [
+    26,
+    32,
+    36
+  ],
+  "reasoning": "The final `1` of `1011` moves the machine from S3 to S4 at the sampling edge, but `flag <= state==S4` uses the old state and waits for another edge. Assert the flag when S3 samples that final `1`, making it high for the following clock cycle. The baseline regression fails despite passing compilation and other checks; the withheld test details leave this diagnosis uncertain.",
+  "confidence": 0.84,
+  "evidence_ids": [
+    "baseline-regression:2",
+    "baseline:compile"
+  ]
+}

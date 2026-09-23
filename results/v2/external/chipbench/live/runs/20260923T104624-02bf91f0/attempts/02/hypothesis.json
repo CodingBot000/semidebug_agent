@@ -1,0 +1,15 @@
+{
+  "summary": "The leading-bit comparison is wrong: the RTL checks 001 instead of the specified 011. The previous proposal also changed detection timing and failed the hidden regression.",
+  "likely_files": [
+    "rtl/TopModule.sv"
+  ],
+  "likely_lines": [
+    17
+  ],
+  "reasoning": "The specification requires bits 8:6 to equal 011 (problem.txt lines 22\u201325). Keeping the original registered comparisons preserves the baseline timing while correcting the definite pattern mismatch. The regression failure does not reveal its exact cause, so the timing explanation remains uncertain.",
+  "confidence": 0.82,
+  "evidence_ids": [
+    "regression-1:2",
+    "attempt-1:simulation"
+  ]
+}

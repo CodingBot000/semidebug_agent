@@ -2,3 +2,5 @@
 results/**/*.csv whitespace=cr-at-eol
 results/**/*.log -whitespace
 results/*.csv whitespace=cr-at-eol
+# V2 evidence preserves exact upstream RTL/diff whitespace and generated logs.
+results/v2/** -whitespace

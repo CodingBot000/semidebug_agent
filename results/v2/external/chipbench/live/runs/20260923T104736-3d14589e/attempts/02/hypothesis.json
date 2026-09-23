@@ -1,0 +1,17 @@
+{
+  "summary": "The completed-match state should not hold match high through invalid cycles; it should retain the trailing 0 as a prefix instead.",
+  "likely_files": [
+    "rtl/TopModule.sv"
+  ],
+  "likely_lines": [
+    54,
+    59,
+    61
+  ],
+  "reasoning": "The previous patch held s4_d0110 on an invalid cycle, keeping the state-derived match high, and the withheld regression failed. Transitioning to s1_d0 after a completed match deasserts match while preserving the valid trailing 0 for future detection. Invalid cycles during an incomplete match still need to preserve progress. The withheld test does not identify the failing case, so this remains uncertain.",
+  "confidence": 0.62,
+  "evidence_ids": [
+    "regression-1:2",
+    "attempt-1:simulation"
+  ]
+}

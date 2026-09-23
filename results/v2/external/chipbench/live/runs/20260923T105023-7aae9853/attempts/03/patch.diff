@@ -1,0 +1,30 @@
+--- a/rtl/TopModule.sv
++++ b/rtl/TopModule.sv
+@@ -8,13 +8,3 @@
+ 	reg [8:0] a_tem;
+-	reg match_f;
+ 	reg match_b;
+ 	
+-	always @(*) begin
+-        if (!rst_n)
+-            match_f = 1'b0;
+-        else if (a_tem[8:6] == 3'b011)
+-            match_f = 1'b1;
+-        else
+-            match_f = 1'b0;
+-        end
+-
+@@ -26,7 +16,7 @@
+-		else if (a_tem[2:0] == 3'b110)
++		else if ((a_tem[8:6] == 3'b011) && (a_tem[2:0] == 3'b110))
+ 			begin
+ 				match_b <= 1'b1;
+ 			end
+ 		else 
+ 			begin	
+ 				match_b <= 1'b0;
+ 			end
+@@ -45,2 +35,2 @@
+-	assign match = match_b && match_f;
++	assign match = match_b;
+ endmodule

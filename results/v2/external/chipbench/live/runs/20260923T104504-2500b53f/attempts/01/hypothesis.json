@@ -1,0 +1,15 @@
+{
+  "summary": "The counter advances on cycles without valid input, so the output can be framed before six bits have been received.",
+  "likely_files": [
+    "rtl/TopModule.sv"
+  ],
+  "likely_lines": [
+    18,
+    19
+  ],
+  "reasoning": "Once ready_a is high, the existing hold condition is false even when valid_a is low. The counter therefore tracks clock cycles rather than received bits, contrary to the six-bit conversion requirement. The withheld regression failure is consistent with this, but does not identify its cause.",
+  "confidence": 0.9,
+  "evidence_ids": [
+    "baseline-regression:2"
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "summary": "Opcode 6 uses an unsigned comparison, but the expected result is a signed comparison.",
+  "likely_files": [
+    "rtl/alu.v"
+  ],
+  "likely_lines": [
+    11
+  ],
+  "reasoning": "For a=0 and b=140 (signed -116), unsigned 0<140 is true while signed 0<-116 is false, matching the observed mismatch. The testbench explicitly sign-converts both operands before comparing. This is the most likely cause, though only one failing vector is shown.",
+  "confidence": 0.99,
+  "evidence_ids": [
+    "baseline:simulation"
+  ]
+}

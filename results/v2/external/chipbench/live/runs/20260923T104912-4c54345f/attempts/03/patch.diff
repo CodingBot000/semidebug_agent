@@ -1,0 +1,18 @@
+--- a/rtl/TopModule.sv
++++ b/rtl/TopModule.sv
+@@ -10,11 +10,9 @@
+-	always @(*) begin
+-	   if (!rst_n)
+-		   match = 1'b0;
+-	   else if (a_tem == 8'b0111_0001)
+-		   match = 1'b1;
+-	   else
+-		   match = 1'b0;
+-      end
++	always @(posedge clk or negedge rst_n)
++		if (!rst_n)
++			match <= 1'b0;
++		else
++			match <= (a_tem == 8'b0111_0001);
+ 		
+ 	always @(posedge clk or negedge rst_n)

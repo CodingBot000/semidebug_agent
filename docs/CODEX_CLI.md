@@ -15,6 +15,8 @@ codex login status
 ./scripts/run_benchmark.sh benchmark/hidden
 ```
 
+위 benchmark 경로는 보존된 V1 데이터셋입니다. 새 평가에는 `benchmark_v2/public`과 `benchmark_v2/hidden`을 사용하며, 비교 방법과 실제 결과는 [V2 평가](V2_EVALUATION.md)에 기록했습니다.
+
 2026-09-23 실제 실행 환경은 Codex CLI **0.156.1**, ChatGPT 로그인, **gpt-6-sol / low**입니다. 기존 0.147.0은 모델 요청을 거부하여 업데이트했습니다. 사용 가능한 다른 모델은 다음처럼 명시할 수 있습니다.
 
 ```bash

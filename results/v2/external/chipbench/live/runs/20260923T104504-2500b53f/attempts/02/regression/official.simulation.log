@@ -1,0 +1,14 @@
+argv: ["vvp", "-N", ".build/official.vvp"]
+status: fail
+exit: 0
+VCD info: dumpfile wave.vcd opened for output.
+Hint: Output 'ready_a' has 6 mismatches. First mismatch occurred at time 10.
+Hint: Output 'valid_b' has 10 mismatches. First mismatch occurred at time 320.
+Hint: Output 'data_b' has no mismatches.
+Hint: Total mismatched samples is 16 out of 151 samples
+
+Simulation finished at 756 ps
+Mismatches: 16 in 151 samples
+
+
+ChipBench official mismatch result did not pass.

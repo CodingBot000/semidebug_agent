@@ -1,0 +1,10 @@
+{
+  "measurement": "live-ai-repair",
+  "source_run": "results/v2/internal/full_loop_public/runs/20260923T102353-e0706d1a",
+  "case_id": "case_001_counter_syntax",
+  "final_status": "FIXED",
+  "model": "gpt-6-sol",
+  "retry_reasons": [
+    null
+  ]
+}

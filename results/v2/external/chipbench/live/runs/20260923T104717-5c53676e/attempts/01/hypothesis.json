@@ -1,0 +1,15 @@
+{
+  "summary": "After a failed group, the FSM ignores the first bit of the next group.",
+  "likely_files": [
+    "rtl/TopModule.sv"
+  ],
+  "likely_lines": [
+    64,
+    65
+  ],
+  "reasoning": "State sf6 represents completion of a failed six-bit group. Its unconditional transition to s1 treats the next sampled bit as a matching 0, even when data is 1. This conflicts with checking non-overlapping groups beginning at the seventh bit. The withheld regression failure is consistent with this fault, but does not identify its exact test case.",
+  "confidence": 0.9,
+  "evidence_ids": [
+    "baseline-regression:2"
+  ]
+}

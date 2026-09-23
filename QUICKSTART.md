@@ -1,20 +1,36 @@
 # Quickstart
 
-1. Install Git, uv and Docker; start the Docker daemon.
-2. From the project directory run `./scripts/bootstrap.sh` (network needed only to build/install).
-3. Run `./scripts/run_demo.sh --scripted` for real EDA validation with an explicitly scripted patch.
-4. Run `./scripts/run_demo.sh --replay` to read recorded evidence without EDA execution.
-5. Run `make test-all` and `make lint`.
-6. For live AI: `npm install -g @openai/codex`, `codex login`, then `./scripts/run_demo.sh`. Default: ChatGPT-authenticated gpt-6-sol / low; see [Codex setup](docs/CODEX_CLI.md).
-7. Run `./scripts/run_benchmark.sh benchmark/public`; after deciding improvements, repeat the same split and separately evaluate `benchmark/hidden`.
-8. Run `make package`. The ZIP and SHA256 file are written under `dist/`.
+Install Git, [uv](https://docs.astral.sh/uv/getting-started/installation/) and Docker, and start the Docker daemon. From a checkout or the extracted submission ZIP:
 
-The repository is private by default; GitHub authentication with access is required to clone it. An extracted submission ZIP can be used without GitHub access.
+```bash
+./scripts/bootstrap.sh
+./scripts/run_demo.sh --replay
+./scripts/run_demo.sh --scripted
+```
 
-Canonical tools: Docker, Python 3.12, Icarus 11.0, Verilator 5.006, Yosys 0.23. Native alternative on macOS: `brew install icarus-verilog verilator yosys`, `uv sync --frozen`, then `uv run semidebug doctor`. Native tool versions may differ from canonical results.
+Replay reads saved evidence only. Scripted mode uses a supplied known fix while running Icarus, VVP, Verilator, Yosys and regression tests for real. Neither command measures AI repair performance. `make test-all` and `make lint` verify the included source; `make package` creates the V2 ZIP under `dist/`.
 
-A successful fix saves the diff, logs, fingerprint maps and corrected RTL under `artifacts/runs/<run-id>/`; it does not overwrite the input project. CLI exit codes: 0 successful operation, 1 unrepaired case/failed validation, 2 configuration or infrastructure error. A benchmark can finish successfully with unfixed cases; inspect summary.json for actual repair rates.
+For live inference, install/update the Codex CLI, sign in with ChatGPT and run the demo:
 
-No API key is necessary for scripted tests or replay. Recorded/scripted examples must never be presented as live AI inference.
+```bash
+npm install -g @openai/codex@latest
+codex login
+codex login status
+./scripts/doctor.sh
+./scripts/run_demo.sh
+```
 
-If you use Colima on macOS, keep the checkout under your home directory (a shared mount). A host `/tmp` checkout may build an image successfully but appear empty at runtime. The wrapper reports this condition; move the checkout to a shared directory or configure Colima mounts.
+The default is `gpt-6-sol / low` through normal ChatGPT authentication; no API key is required. It consumes Codex subscription allowance. See [provider setup](docs/CODEX_CLI.md). V2 internal benchmark commands are:
+
+```bash
+./scripts/run_benchmark.sh benchmark_v2/public --max-iterations 3
+./scripts/run_benchmark.sh benchmark_v2/hidden --max-iterations 3
+./scripts/run_benchmark.sh benchmark_v2/public --max-iterations 1
+./scripts/run_benchmark.sh benchmark_v2/hidden --max-iterations 1
+```
+
+Each benchmark creates a new timestamped directory under `artifacts/benchmark/` unless you provide a new `--output` path. The historical V1 corpus remains under `benchmark/`; the V2 corpus is under `benchmark_v2/`. Saved [V2 results](docs/V2_EVALUATION.md) should be read before rerunning paid/subscription inference.
+
+For external reproduction, obtain [ChipBench](https://github.com/zhongkaiyu/ChipBench), check out commit `b4ba3a06759804ec88c26c3cf15b28b9a90b3443`, then run `uv run python scripts/import_chipbench.py <checkout>`. The importer verifies the frozen [selection manifest](external/chipbench/selection_manifest.json) and writes local cases under `external/chipbench/cases/` (excluded from Git/ZIP). Run `./scripts/docker_run.sh python evaluator/qualify_chipbench.py` before `./scripts/run_benchmark.sh external/chipbench/cases`. The selected 12 cases and all failures must remain in the result denominator.
+
+The canonical environment is Docker with Python 3.12, Icarus 11.0, Verilator 5.006 and Yosys 0.23. Native macOS tools are possible with `brew install icarus-verilog verilator yosys`, `uv sync --frozen` and `uv run semidebug doctor`, but versions may differ from recorded results. If using Colima, place the checkout under a shared home-directory mount. CLI exit codes: 0 completed operation, 1 unrepaired case, 2 configuration or infrastructure error. A benchmark can exit 0 while containing failed cases; inspect its `summary.json`.

@@ -1,0 +1,16 @@
+{
+  "summary": "The FSM discards partial or complete matches on invalid cycles and loses an overlapping prefix after 01101.",
+  "likely_files": [
+    "rtl/TopModule.sv"
+  ],
+  "likely_lines": [
+    54,
+    59,
+    61
+  ],
+  "reasoning": "Invalid data must be ignored, but lines 54 and 61 reset the state when data_valid is low. After detecting 0110, a valid 1 leaves the suffix 01, so line 59 should transition to s2_d01. The withheld regression failure is consistent with these transition errors, but does not identify the failing case.",
+  "confidence": 0.86,
+  "evidence_ids": [
+    "baseline-regression:2"
+  ]
+}

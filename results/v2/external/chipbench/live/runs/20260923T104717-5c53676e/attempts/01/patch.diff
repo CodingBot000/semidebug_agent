@@ -1,0 +1,11 @@
+--- a/rtl/TopModule.sv
++++ b/rtl/TopModule.sv
+@@ -62,7 +62,7 @@
+         sf5:
+             nstate=sf6;
+         sf6:
+-			nstate=s1;
++			nstate=data?sf1:s1;
+         default:
+             nstate=idle;
+         endcase

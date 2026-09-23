@@ -1,0 +1,14 @@
+{
+  "summary": "The comparator uses the wrong 8-bit pattern.",
+  "likely_files": [
+    "rtl/TopModule.sv"
+  ],
+  "likely_lines": [
+    15
+  ],
+  "reasoning": "The specification requires 8'b0111_0001, but the RTL compares against 8'b0111_0011. This can cause the withheld regression failure, although its test details are unavailable.",
+  "confidence": 0.98,
+  "evidence_ids": [
+    "baseline-regression:2"
+  ]
+}

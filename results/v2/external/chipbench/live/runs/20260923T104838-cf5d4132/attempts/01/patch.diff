@@ -1,0 +1,12 @@
+--- a/rtl/TopModule.sv
++++ b/rtl/TopModule.sv
+@@ -32,9 +32,9 @@
+     always@(posedge clk or negedge rst) begin
+         if(~rst)
+             flag <= 0;
+         else
+-            flag <= state==S4;
++            flag <= (state==S3) && data;
+     end
+ 
+ //*************code***********//

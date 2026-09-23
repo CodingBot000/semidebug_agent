@@ -1,0 +1,5 @@
+--- a/rtl/TopModule.sv
++++ b/rtl/TopModule.sv
+@@ -54 +54 @@
+-			else nstate = idle;					//Data invalid, stay in s3_d011
++			else nstate = s3_d011;				//Data invalid, stay in s3_d011

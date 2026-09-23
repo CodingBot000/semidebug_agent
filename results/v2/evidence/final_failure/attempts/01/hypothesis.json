@@ -1,0 +1,17 @@
+{
+  "summary": "Pattern detection is one clock cycle late because both match flags compare the shift register's pre-shift value.",
+  "likely_files": [
+    "rtl/TopModule.sv"
+  ],
+  "likely_lines": [
+    17,
+    31,
+    47,
+    50
+  ],
+  "reasoning": "At each rising edge, nonblocking assignments make the comparisons at lines 17 and 31 use the old a_tem value while line 47 shifts in a. The sequential output therefore describes the prior nine-bit window, not the window containing the newly sampled bit. The specification calls for shifting the input and updating match on each edge. This is the most likely explanation for the withheld regression failure, but its test details are unavailable.",
+  "confidence": 0.86,
+  "evidence_ids": [
+    "baseline-regression:2"
+  ]
+}

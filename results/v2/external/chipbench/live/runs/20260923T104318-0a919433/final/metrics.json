@@ -1,0 +1,566 @@
+{
+  "run_id": "20260923T104318-0a919433",
+  "case_id": "chipbench_arithmetic_Prob001_continuous_input_sequence_detect",
+  "category": "arithmetic",
+  "provider": "live-codex-cli",
+  "model": "gpt-6-sol",
+  "reasoning_effort": "low",
+  "billing_mode": "chatgpt-subscription",
+  "cached_input_tokens": 7168,
+  "provider_metadata": {
+    "invocations": [
+      {
+        "model": "gpt-6-sol",
+        "cli_version": "codex-cli 0.156.1",
+        "prompt_characters": 5235,
+        "reasoning_effort": "low",
+        "billing_mode": "chatgpt-subscription",
+        "duration_ms": 21355,
+        "process_status": "pass",
+        "tool_events": 0,
+        "item_types": [
+          "error",
+          "agent_message"
+        ],
+        "input_tokens": 6426,
+        "cached_input_tokens": 3584,
+        "output_tokens": 801
+      },
+      {
+        "model": "gpt-6-sol",
+        "cli_version": "codex-cli 0.156.1",
+        "prompt_characters": 7802,
+        "reasoning_effort": "low",
+        "billing_mode": "chatgpt-subscription",
+        "duration_ms": 12243,
+        "process_status": "pass",
+        "tool_events": 0,
+        "item_types": [
+          "error",
+          "agent_message"
+        ],
+        "input_tokens": 7280,
+        "cached_input_tokens": 3584,
+        "output_tokens": 376
+      }
+    ]
+  },
+  "iteration": 2,
+  "max_iterations": 3,
+  "project_root": "arithmetic_Prob001_continuous_input_sequence_detect",
+  "mutable_files": [
+    "rtl/TopModule.sv"
+  ],
+  "immutable_files": [
+    "case.json",
+    "problem.txt",
+    "tb/ref.sv",
+    "tb/smoke.sv",
+    "tb/test.sv",
+    "upstream.json"
+  ],
+  "baseline": {
+    "results": {
+      "compile": {
+        "tool": "iverilog",
+        "command": [
+          "iverilog",
+          "-g2012",
+          "-Wall",
+          "-s",
+          "smoke_tb",
+          "-o",
+          ".build/target.vvp",
+          "rtl/TopModule.sv",
+          "tb/smoke.sv"
+        ],
+        "exit_code": 0,
+        "status": "pass",
+        "stdout": "",
+        "stderr": "",
+        "duration_ms": 11
+      },
+      "simulation": {
+        "tool": "vvp",
+        "command": [
+          "vvp",
+          "-N",
+          ".build/target.vvp"
+        ],
+        "exit_code": 0,
+        "status": "pass",
+        "stdout": "SEMIDEBUG_PASS\n",
+        "stderr": "",
+        "duration_ms": 12
+      },
+      "lint": {
+        "tool": "verilator",
+        "command": [
+          "verilator",
+          "--lint-only",
+          "-Wall",
+          "-Wno-fatal",
+          "--top-module",
+          "TopModule",
+          "rtl/TopModule.sv"
+        ],
+        "exit_code": 0,
+        "status": "pass",
+        "stdout": "",
+        "stderr": "",
+        "duration_ms": 55
+      },
+      "synthesis": {
+        "tool": "yosys",
+        "command": [
+          "yosys",
+          "-Q",
+          "-T",
+          "-p",
+          "read_verilog -sv rtl/TopModule.sv; hierarchy -check -top TopModule; proc; opt; check -assert"
+        ],
+        "exit_code": 0,
+        "status": "pass",
+        "stdout": "\n-- Running command `read_verilog -sv rtl/TopModule.sv; hierarchy -check -top TopModule; proc; opt; check -assert' --\n\n1. Executing Verilog-2005 frontend: rtl/TopModule.sv\nParsing SystemVerilog input from `rtl/TopModule.sv' to AST representation.\nGenerating RTLIL representation for module `\\TopModule'.\nSuccessfully finished Verilog frontend.\n\n2. Executing HIERARCHY pass (managing design hierarchy).\n\n2.1. Analyzing design hierarchy..\nTop module:  \\TopModule\n\n2.2. Analyzing design hierarchy..\nTop module:  \\TopModule\nRemoved 0 unused modules.\n\n3. Executing PROC pass (convert processes to netlists).\n\n3.1. Executing PROC_CLEAN pass (remove empty switches from decision trees).\nCleaned up 0 empty switches.\n\n3.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).\nMarked 1 switch rules as full_case in process $proc$rtl/TopModule.sv:24$4 in module TopModule.\nMarked 2 switch rules as full_case in process $proc$rtl/TopModule.sv:10$1 in module TopModule.\nRemoved a total of 0 dead cases.\n\n3.3. Executing PROC_PRUNE pass (remove redundant assignments in processes).\nRemoved 2 redundant assignments.\nPromoted 0 assignments to connections.\n\n3.4. Executing PROC_INIT pass (extract init attributes).\n\n3.5. Executing PROC_ARST pass (detect async resets in processes).\nFound async reset \\rst_n in `\\TopModule.$proc$rtl/TopModule.sv:24$4'.\nFound async reset \\rst_n in `\\TopModule.$proc$rtl/TopModule.sv:10$1'.\n\n3.6. Executing PROC_ROM pass (convert switches to ROMs).\nConverted 0 switches.\n<suppressed ~1 debug messages>\n\n3.7. Executing PROC_MUX pass (convert decision trees to multiplexers).\nCreating decoders for process `\\TopModule.$proc$rtl/TopModule.sv:24$4'.\n     1/1: $0\\a_tem[7:0]\nCreating decoders for process `\\TopModule.$proc$rtl/TopModule.sv:10$1'.\n     1/1: $0\\match[0:0]\n\n3.8. Executing PROC_DLATCH pass (convert process syncs to latches).\n\n3.9. Executing PROC_DFF pass (convert process syncs to FFs).\nCreating register for signal `\\TopModule.\\a_tem' using process `\\TopModule.$proc$rtl/TopModule.sv:24$4'.\n  created $adff cell `$procdff$9' with positive edge clock and negative level reset.\nCreating register for signal `\\TopModule.\\match' using process `\\TopModule.$proc$rtl/TopModule.sv:10$1'.\n  created $adff cell `$procdff$10' with positive edge clock and negative level reset.\n\n3.10. Executing PROC_MEMWR pass (convert process memory writes to cells).\n\n3.11. Executing PROC_CLEAN pass (remove empty switches from decision trees).\nRemoving empty process `TopModule.$proc$rtl/TopModule.sv:24$4'.\nFound and cleaned up 1 empty switch in `\\TopModule.$proc$rtl/TopModule.sv:10$1'.\nRemoving empty process `TopModule.$proc$rtl/TopModule.sv:10$1'.\nCleaned up 1 empty switch.\n\n3.12. Executing OPT_EXPR pass (perform const folding).\nOptimizing module TopModule.\n\n4. Executing OPT pass (performing simple optimizations).\n\n4.1. Executing OPT_EXPR pass (perform const folding).\nOptimizing module TopModule.\n\n4.2. Executing OPT_MERGE pass (detect identical cells).\nFinding identical cells in module `\\TopModule'.\n<suppressed ~3 debug messages>\nRemoved a total of 1 cells.\n\n4.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).\nRunning muxtree optimizer on module \\TopModule..\n  Creating internal representation of mux trees.\n  Evaluating internal representation of mux trees.\n  Analyzing evaluation results.\nRemoved 0 multiplexer ports.\n<suppressed ~1 debug messages>\n\n4.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).\n  Optimizing cells in module \\TopModule.\nPerformed a total of 0 changes.\n\n4.5. Executing OPT_MERGE pass (detect identical cells).\nFinding identical cells in module `\\TopModule'.\nRemoved a total of 0 cells.\n\n4.6. Executing OPT_DFF pass (perform DFF optimizations).\nAdding EN signal on $procdff$9 ($adff) from module TopModule (D = \\a_tem [6:0], Q = \\a_tem [6:0]).\nHandling D = Q on $auto$ff.cc:266:slice$11 ($adffe) from module TopModule (removing D path).\nSetting constant 0-bit at position 0 on $auto$ff.cc:266:slice$11 ($dlatch) from module TopModule.\nSetting constant 0-bit at position 1 on $auto$ff.cc:266:slice$11 ($dlatch) from module TopModule.\nSetting constant 0-bit at position 2 on $auto$ff.cc:266:slice$11 ($dlatch) from module TopModule.\nSetting constant 0-bit at position 3 on $auto$ff.cc:266:slice$11 ($dlatch) from module TopModule.\nSetting constant 0-bit at position 4 on $auto$ff.cc:266:slice$11 ($dlatch) from module TopModule.\nSetting constant 0-bit at position 5 on $auto$ff.cc:266:slice$11 ($dlatch) from module TopModule.\nSetting constant 0-bit at position 6 on $auto$ff.cc:266:slice$11 ($dlatch) from module TopModule.\n\n4.7. Executing OPT_CLEAN pass (remove unused cells and wires).\nFinding unused cells or wires in module \\TopModule..\nRemoved 2 unused cells and 6 unused wires.\n<suppressed ~3 debug messages>\n\n4.8. Executing OPT_EXPR pass (perform const folding).\nOptimizing module TopModule.\n<suppressed ~2 debug messages>\n\n4.9. Rerunning OPT passes. (Maybe there is more to do..)\n\n4.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).\nRunning muxtree optimizer on module \\TopModule..\n  Creating internal representation of mux trees.\n  No muxes found in this module.\nRemoved 0 multiplexer ports.\n\n4.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).\n  Optimizing cells in module \\TopModule.\nPerformed a total of 0 changes.\n\n4.12. Executing OPT_MERGE pass (detect identical cells).\nFinding identical cells in module `\\TopModule'.\nRemoved a total of 0 cells.\n\n4.13. Executing OPT_DFF pass (perform DFF optimizations).\nSetting constant 0-bit at position 0 on $procdff$10 ($adff) from module TopModule.\n\n4.14. Executing OPT_CLEAN pass (remove unused cells and wires).\nFinding unused cells or wires in module \\TopModule..\nRemoved 1 unused cells and 2 unused wires.\n<suppressed ~2 debug messages>\n\n4.15. Executing OPT_EXPR pass (perform const folding).\nOptimizing module TopModule.\n\n4.16. Rerunning OPT passes. (Maybe there is more to do..)\n\n4.17. Executing OPT_MUXTREE pass (detect dead branches in mux trees).\nRunning muxtree optimizer on module \\TopModule..\n  Creating internal representation of mux trees.\n  No muxes found in this module.\nRemoved 0 multiplexer ports.\n\n4.18. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).\n  Optimizing cells in module \\TopModule.\nPerformed a total of 0 changes.\n\n4.19. Executing OPT_MERGE pass (detect identical cells).\nFinding identical cells in module `\\TopModule'.\nRemoved a total of 0 cells.\n\n4.20. Executing OPT_DFF pass (perform DFF optimizations).\n\n4.21. Executing OPT_CLEAN pass (remove unused cells and wires).\nFinding unused cells or wires in module \\TopModule..\n\n4.22. Executing OPT_EXPR pass (perform const folding).\nOptimizing module TopModule.\n\n4.23. Finished OPT passes. (There is nothing left to do.)\n\n5. Executing CHECK pass (checking for obvious problems).\nChecking module TopModule...\nFound and reported 0 problems.\n",
+        "stderr": "",
+        "duration_ms": 22
+      }
+    }
+  },
+  "current_validation": {
+    "results": {
+      "compile": {
+        "tool": "iverilog",
+        "command": [
+          "iverilog",
+          "-g2012",
+          "-Wall",
+          "-s",
+          "smoke_tb",
+          "-o",
+          ".build/target.vvp",
+          "rtl/TopModule.sv",
+          "tb/smoke.sv"
+        ],
+        "exit_code": 0,
+        "status": "pass",
+        "stdout": "",
+        "stderr": "",
+        "duration_ms": 12
+      },
+      "simulation": {
+        "tool": "vvp",
+        "command": [
+          "vvp",
+          "-N",
+          ".build/target.vvp"
+        ],
+        "exit_code": 0,
+        "status": "pass",
+        "stdout": "SEMIDEBUG_PASS\n",
+        "stderr": "",
+        "duration_ms": 11
+      },
+      "lint": {
+        "tool": "verilator",
+        "command": [
+          "verilator",
+          "--lint-only",
+          "-Wall",
+          "-Wno-fatal",
+          "--top-module",
+          "TopModule",
+          "rtl/TopModule.sv"
+        ],
+        "exit_code": 0,
+        "status": "pass",
+        "stdout": "",
+        "stderr": "",
+        "duration_ms": 32
+      },
+      "synthesis": {
+        "tool": "yosys",
+        "command": [
+          "yosys",
+          "-Q",
+          "-T",
+          "-p",
+          "read_verilog -sv rtl/TopModule.sv; hierarchy -check -top TopModule; proc; opt; check -assert"
+        ],
+        "exit_code": 0,
+        "status": "pass",
+        "stdout": "\n-- Running command `read_verilog -sv rtl/TopModule.sv; hierarchy -check -top TopModule; proc; opt; check -assert' --\n\n1. Executing Verilog-2005 frontend: rtl/TopModule.sv\nParsing SystemVerilog input from `rtl/TopModule.sv' to AST representation.\nGenerating RTLIL representation for module `\\TopModule'.\nSuccessfully finished Verilog frontend.\n\n2. Executing HIERARCHY pass (managing design hierarchy).\n\n2.1. Analyzing design hierarchy..\nTop module:  \\TopModule\n\n2.2. Analyzing design hierarchy..\nTop module:  \\TopModule\nRemoved 0 unused modules.\n\n3. Executing PROC pass (convert processes to netlists).\n\n3.1. Executing PROC_CLEAN pass (remove empty switches from decision trees).\nCleaned up 0 empty switches.\n\n3.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).\nMarked 1 switch rules as full_case in process $proc$rtl/TopModule.sv:24$4 in module TopModule.\nMarked 2 switch rules as full_case in process $proc$rtl/TopModule.sv:10$1 in module TopModule.\nRemoved a total of 0 dead cases.\n\n3.3. Executing PROC_PRUNE pass (remove redundant assignments in processes).\nRemoved 2 redundant assignments.\nPromoted 0 assignments to connections.\n\n3.4. Executing PROC_INIT pass (extract init attributes).\n\n3.5. Executing PROC_ARST pass (detect async resets in processes).\nFound async reset \\rst_n in `\\TopModule.$proc$rtl/TopModule.sv:24$4'.\nFound async reset \\rst_n in `\\TopModule.$proc$rtl/TopModule.sv:10$1'.\n\n3.6. Executing PROC_ROM pass (convert switches to ROMs).\nConverted 0 switches.\n<suppressed ~1 debug messages>\n\n3.7. Executing PROC_MUX pass (convert decision trees to multiplexers).\nCreating decoders for process `\\TopModule.$proc$rtl/TopModule.sv:24$4'.\n     1/1: $0\\a_tem[7:0]\nCreating decoders for process `\\TopModule.$proc$rtl/TopModule.sv:10$1'.\n     1/1: $0\\match[0:0]\n\n3.8. Executing PROC_DLATCH pass (convert process syncs to latches).\n\n3.9. Executing PROC_DFF pass (convert process syncs to FFs).\nCreating register for signal `\\TopModule.\\a_tem' using process `\\TopModule.$proc$rtl/TopModule.sv:24$4'.\n  created $adff cell `$procdff$9' with positive edge clock and negative level reset.\nCreating register for signal `\\TopModule.\\match' using process `\\TopModule.$proc$rtl/TopModule.sv:10$1'.\n  created $adff cell `$procdff$10' with positive edge clock and negative level reset.\n\n3.10. Executing PROC_MEMWR pass (convert process memory writes to cells).\n\n3.11. Executing PROC_CLEAN pass (remove empty switches from decision trees).\nRemoving empty process `TopModule.$proc$rtl/TopModule.sv:24$4'.\nFound and cleaned up 1 empty switch in `\\TopModule.$proc$rtl/TopModule.sv:10$1'.\nRemoving empty process `TopModule.$proc$rtl/TopModule.sv:10$1'.\nCleaned up 1 empty switch.\n\n3.12. Executing OPT_EXPR pass (perform const folding).\nOptimizing module TopModule.\n\n4. Executing OPT pass (performing simple optimizations).\n\n4.1. Executing OPT_EXPR pass (perform const folding).\nOptimizing module TopModule.\n\n4.2. Executing OPT_MERGE pass (detect identical cells).\nFinding identical cells in module `\\TopModule'.\n<suppressed ~3 debug messages>\nRemoved a total of 1 cells.\n\n4.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).\nRunning muxtree optimizer on module \\TopModule..\n  Creating internal representation of mux trees.\n  Evaluating internal representation of mux trees.\n  Analyzing evaluation results.\nRemoved 0 multiplexer ports.\n<suppressed ~1 debug messages>\n\n4.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).\n  Optimizing cells in module \\TopModule.\nPerformed a total of 0 changes.\n\n4.5. Executing OPT_MERGE pass (detect identical cells).\nFinding identical cells in module `\\TopModule'.\nRemoved a total of 0 cells.\n\n4.6. Executing OPT_DFF pass (perform DFF optimizations).\n\n4.7. Executing OPT_CLEAN pass (remove unused cells and wires).\nFinding unused cells or wires in module \\TopModule..\nRemoved 1 unused cells and 5 unused wires.\n<suppressed ~2 debug messages>\n\n4.8. Executing OPT_EXPR pass (perform const folding).\nOptimizing module TopModule.\n\n4.9. Rerunning OPT passes. (Maybe there is more to do..)\n\n4.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).\nRunning muxtree optimizer on module \\TopModule..\n  Creating internal representation of mux trees.\n  Evaluating internal representation of mux trees.\n  Analyzing evaluation results.\nRemoved 0 multiplexer ports.\n<suppressed ~1 debug messages>\n\n4.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).\n  Optimizing cells in module \\TopModule.\nPerformed a total of 0 changes.\n\n4.12. Executing OPT_MERGE pass (detect identical cells).\nFinding identical cells in module `\\TopModule'.\nRemoved a total of 0 cells.\n\n4.13. Executing OPT_DFF pass (perform DFF optimizations).\n\n4.14. Executing OPT_CLEAN pass (remove unused cells and wires).\nFinding unused cells or wires in module \\TopModule..\n\n4.15. Executing OPT_EXPR pass (perform const folding).\nOptimizing module TopModule.\n\n4.16. Finished OPT passes. (There is nothing left to do.)\n\n5. Executing CHECK pass (checking for obvious problems).\nChecking module TopModule...\nFound and reported 0 problems.\n",
+        "stderr": "",
+        "duration_ms": 11
+      }
+    }
+  },
+  "evidence": [
+    {
+      "id": "attempt-2:compile",
+      "tool": "iverilog",
+      "status": "pass",
+      "message": "\n"
+    },
+    {
+      "id": "attempt-2:simulation",
+      "tool": "vvp",
+      "status": "pass",
+      "message": "SEMIDEBUG_PASS\n\n"
+    },
+    {
+      "id": "attempt-2:lint",
+      "tool": "verilator",
+      "status": "pass",
+      "message": "\n"
+    },
+    {
+      "id": "attempt-2:synthesis",
+      "tool": "yosys",
+      "status": "pass",
+      "message": "\n-- Running command `read_verilog -sv rtl/TopModule.sv; hierarchy -check -top TopModule; proc; opt; check -assert' --\n\n1. Executing Verilog-2005 frontend: rtl/TopModule.sv\nParsing SystemVerilog input from `rtl/TopModule.sv' to AST representation.\nGenerating RTLIL representation for module `\\TopModule'.\nSuccessfully finished Verilog frontend.\n\n2. Executing HIERARCHY pass (managing design hierarchy).\n\n2.1. Analyzing design hierarchy..\nTop module:  \\TopModule\n\n2.2. Analyzing design hierarchy..\nTop module:  \\TopModule\nRemoved 0 unused modules.\n\n3. Executing PROC pass (convert processes to netlists).\n\n3.1. Executing PROC_CLEAN pass (remove empty switches from decision trees).\nCleaned up 0 empty switches.\n\n3.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).\nMarked 1 switch rules as full_case in process $proc$rtl/TopModule.sv:24$4 in module TopModule.\nMarked 2 switch rules as full_case in process $proc$rtl/TopModule.sv:10$1 in module TopModule.\nRemoved a total of 0 dead cases.\n\n3.3. Executing PROC_PRUNE pass (remove redundant assignments in processes).\nRemoved 2 redundant assignments.\nPromoted 0 assignments to connections.\n\n3.4. Executing PROC_INIT pass (extract init attributes).\n\n3.5. Executing PROC_ARST pass (detect async resets in processes).\nFound async reset \\rst_n in `\\TopModule.$proc$rtl/TopModule.sv:24$4'.\nFound async reset \\rst_n in `\\TopModule.$proc$rtl/TopModule.sv:10$1'.\n\n3.6. Executing PROC_ROM pass (convert switches to ROMs).\nConverted 0 switches.\n<suppressed ~1 debug messages>\n\n3.7. Executing PROC_MUX pass (convert decision trees to multiplexers).\nCreating decoders for process `\\TopModule.$proc$rtl/TopModule.sv:24$4'.\n     1/1: $0\\a_tem[7:0]\nCreating decoders for process `\\TopModule.$proc$rtl/TopModule.sv:10$1'.\n     1/1: $0\\match[0:0]\n\n3.8. Executing PROC_DLATCH pass (convert process syncs to latches).\n\n3.9. Executing PROC_DFF pass (convert process syncs to FFs).\nCreating register for signal `\\TopModule.\\a_tem' using process `\\TopModule.$proc$rtl/TopModule.sv:24$4'.\n  created $adff cell `$procdff$9' with positive edge clock and negative level reset.\nCreating register for signal `\\TopModule.\\match' using process `\\TopModule.$proc$rtl/TopModule.sv:10$1'.\n  created $adff cell `$procdff$10' with positive edge clock and negative level reset.\n\n3.10. Executing PROC_MEMWR pass (convert process memory writes to cells).\n\n3.11. Executing PROC_CLEAN pass (remove empty switches from decision trees).\nRemoving empty process `TopModule.$proc$rtl/TopModule.sv:24$4'.\nFound and cleaned up 1 empty switch in `\\TopModule.$proc$rtl/TopModule.sv:10$1'.\nRemoving empty process `TopModule.$proc$rtl/TopModule.sv:10$1'.\nCleaned up 1 empty switch.\n\n3.12. Executing OPT_EXPR pass (perform const folding).\nOptimizing module TopModule.\n\n4. Executing OPT pass (performing simple optimizations).\n\n4.1. Executing OPT_EXPR pass (perform const folding).\nOptimizing module TopModule.\n\n4.2. Executing OPT_MERGE pass (detect identical cells).\nFinding identical cells in module `\\TopModule'.\n<suppressed ~3 debug messages>\nRemoved a total of 1 cells.\n\n4.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).\nRunning muxtree optimizer on module \\TopModule..\n  Creating internal representation of mux trees.\n  Evaluating internal representation of mux trees.\n  Analyzing evaluation results.\nRemoved 0 multiplexer ports.\n<suppressed ~1 debug messages>\n\n4.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).\n  Optimizing cells in module \\TopModule.\nPerformed a total of 0 changes.\n\n4.5. Executing OPT_MERGE pass (detect identical cells).\nFinding identical cells in module `\\TopModule'.\nRemoved a total of 0 cells.\n\n4.6. Executing OPT_DFF pass (perform DFF optimizations).\n\n4.7. Executing OPT_CLEAN pass (remove unused cells and wires).\nFinding unused cells or wires in module \\TopModule..\nRemoved 1 unused cells and 5 unused wires.\n<suppressed ~2 debug messages>\n\n4.8. Executing OPT_EXPR pass (perform const folding).\nOptimizing module TopModule.\n\n4.9. Rerunning OPT passes. (Maybe there is more to do..)\n\n4.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).\nRunning muxtree optimizer on module \\TopModule..\n  Creating internal representation of mux trees.\n  Evaluating internal representation of mux trees.\n  Analyzing evaluation results.\nRemoved 0 multiplexer ports.\n<suppressed ~1 debug messages>\n\n4.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).\n  Optimizing cells in module \\TopModule.\nPerformed a total of 0 changes.\n\n4.12. Executing OPT_MERGE pass (detect identical cells).\nFinding identical cells in module `\\TopModule'.\nRemoved a total of 0 cells.\n\n4.13. Executing OPT_DFF pass (perform DFF optimizations).\n\n4.14. Executing OPT_CLEAN pass (remove unused cells and wires).\nFinding unused cells or wires in module \\TopModule..\n\n4.15. Executing OPT_EXPR pass (perform const folding).\nOptimizing module TopModule.\n\n4.16. Finished OPT passes. (There is nothing left to do.)\n\n5. Executing CHECK pass (checking for obvious problems).\nChecking module TopModule...\nFound and reported 0 problems.\n\n"
+    }
+  ],
+  "hypotheses": [
+    {
+      "summary": "The shift register inserts `a` at the MSB instead of the LSB.",
+      "likely_files": [
+        "rtl/TopModule.sv"
+      ],
+      "likely_lines": [
+        31
+      ],
+      "reasoning": "The specification requires a left shift with `a` entering bit 0, but the current concatenation places `a` in bit 7. The withheld regression failure is consistent with this mismatch, though it does not identify the failing case.",
+      "confidence": 0.95,
+      "evidence_ids": [
+        "baseline-regression:2"
+      ]
+    },
+    {
+      "summary": "`match` compares the previous register value, delaying the indication by one clock.",
+      "likely_files": [
+        "rtl/TopModule.sv"
+      ],
+      "likely_lines": [
+        15,
+        31
+      ],
+      "reasoning": "Both assignments are nonblocking, so line 15 sees the pre-shift value of `a_tem`. The specification says `match` should be asserted whenever the shift register contains the pattern. Comparing the next shifted value keeps the registered output aligned with the updated register.",
+      "confidence": 0.8,
+      "evidence_ids": [
+        "baseline-regression:2"
+      ]
+    },
+    {
+      "summary": "The shift direction is wrong, but the registered match timing should remain unchanged.",
+      "likely_files": [
+        "rtl/TopModule.sv"
+      ],
+      "likely_lines": [
+        15,
+        31
+      ],
+      "reasoning": "Line 31 inserts `a` at bit 7, contrary to the specified LSB insertion. The previous proposal also changed line 15 to compare the next register value; its withheld regression failed, so that timing change may have caused the failure. Changing only line 31 preserves the original registered comparison timing.",
+      "confidence": 0.75,
+      "evidence_ids": [
+        "regression-1:2",
+        "attempt-1:simulation"
+      ]
+    }
+  ],
+  "patch_attempts": [
+    {
+      "iteration": 1,
+      "hypothesis": {
+        "summary": "The shift register inserts `a` at the MSB instead of the LSB.",
+        "likely_files": [
+          "rtl/TopModule.sv"
+        ],
+        "likely_lines": [
+          31
+        ],
+        "reasoning": "The specification requires a left shift with `a` entering bit 0, but the current concatenation places `a` in bit 7. The withheld regression failure is consistent with this mismatch, though it does not identify the failing case.",
+        "confidence": 0.95,
+        "evidence_ids": [
+          "baseline-regression:2"
+        ]
+      },
+      "proposal": {
+        "explanation": "Shift `a` into bit 0 and compare the value that will be stored on the current clock edge, so `match` corresponds to the updated shift register.",
+        "unified_diff": "--- a/rtl/TopModule.sv\n+++ b/rtl/TopModule.sv\n@@ -12,7 +12,7 @@\n \t\t\tbegin \n \t\t\t\tmatch <= 1'b0;\n \t\t\tend\n-\t\telse if (a_tem == 8'b0111_0001)\n+\t\telse if ({a_tem[6:0], a} == 8'b0111_0001)\n \t\t\tbegin\n \t\t\t\tmatch <= 1'b1;\n \t\t\tend\n@@ -28,6 +28,6 @@\n \t\t\tend\n \t\telse \n \t\t\tbegin\n-\t\t\t\ta_tem <= {a, a_tem[6:0]};\n+\t\t\t\ta_tem <= {a_tem[6:0], a};\n \t\t\tend\n endmodule\n",
+        "expected_effect": "After each active clock edge, `a_tem` holds the eight most recent input bits in the specified order, and `match` indicates whether that updated value equals `8'b0111_0001`.",
+        "risks": [
+          "The withheld regression details do not confirm whether its expected `match` timing is aligned with the updated or previous register value; this proposal has not been validated."
+        ]
+      },
+      "guard_error": null,
+      "validation": {
+        "results": {
+          "compile": {
+            "tool": "iverilog",
+            "command": [
+              "iverilog",
+              "-g2012",
+              "-Wall",
+              "-s",
+              "smoke_tb",
+              "-o",
+              ".build/target.vvp",
+              "rtl/TopModule.sv",
+              "tb/smoke.sv"
+            ],
+            "exit_code": 0,
+            "status": "pass",
+            "stdout": "",
+            "stderr": "",
+            "duration_ms": 10
+          },
+          "simulation": {
+            "tool": "vvp",
+            "command": [
+              "vvp",
+              "-N",
+              ".build/target.vvp"
+            ],
+            "exit_code": 0,
+            "status": "pass",
+            "stdout": "SEMIDEBUG_PASS\n",
+            "stderr": "",
+            "duration_ms": 10
+          },
+          "lint": {
+            "tool": "verilator",
+            "command": [
+              "verilator",
+              "--lint-only",
+              "-Wall",
+              "-Wno-fatal",
+              "--top-module",
+              "TopModule",
+              "rtl/TopModule.sv"
+            ],
+            "exit_code": 0,
+            "status": "pass",
+            "stdout": "",
+            "stderr": "%Warning-UNUSEDSIGNAL: rtl/TopModule.sv:8:12: Bits of signal are not used: 'a_tem'[7]\n                                            : ... In instance TopModule\n    8 |  reg [7:0] a_tem;\n      |            ^~~~~\n                       ... For warning description see https://verilator.org/warn/UNUSEDSIGNAL?v=5.006\n                       ... Use \"/* verilator lint_off UNUSEDSIGNAL */\" and lint_on around source to disable this message.\n",
+            "duration_ms": 33
+          },
+          "synthesis": {
+            "tool": "yosys",
+            "command": [
+              "yosys",
+              "-Q",
+              "-T",
+              "-p",
+              "read_verilog -sv rtl/TopModule.sv; hierarchy -check -top TopModule; proc; opt; check -assert"
+            ],
+            "exit_code": 0,
+            "status": "pass",
+            "stdout": "\n-- Running command `read_verilog -sv rtl/TopModule.sv; hierarchy -check -top TopModule; proc; opt; check -assert' --\n\n1. Executing Verilog-2005 frontend: rtl/TopModule.sv\nParsing SystemVerilog input from `rtl/TopModule.sv' to AST representation.\nGenerating RTLIL representation for module `\\TopModule'.\nSuccessfully finished Verilog frontend.\n\n2. Executing HIERARCHY pass (managing design hierarchy).\n\n2.1. Analyzing design hierarchy..\nTop module:  \\TopModule\n\n2.2. Analyzing design hierarchy..\nTop module:  \\TopModule\nRemoved 0 unused modules.\n\n3. Executing PROC pass (convert processes to netlists).\n\n3.1. Executing PROC_CLEAN pass (remove empty switches from decision trees).\nCleaned up 0 empty switches.\n\n3.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).\nMarked 1 switch rules as full_case in process $proc$rtl/TopModule.sv:24$4 in module TopModule.\nMarked 2 switch rules as full_case in process $proc$rtl/TopModule.sv:10$1 in module TopModule.\nRemoved a total of 0 dead cases.\n\n3.3. Executing PROC_PRUNE pass (remove redundant assignments in processes).\nRemoved 2 redundant assignments.\nPromoted 0 assignments to connections.\n\n3.4. Executing PROC_INIT pass (extract init attributes).\n\n3.5. Executing PROC_ARST pass (detect async resets in processes).\nFound async reset \\rst_n in `\\TopModule.$proc$rtl/TopModule.sv:24$4'.\nFound async reset \\rst_n in `\\TopModule.$proc$rtl/TopModule.sv:10$1'.\n\n3.6. Executing PROC_ROM pass (convert switches to ROMs).\nConverted 0 switches.\n<suppressed ~1 debug messages>\n\n3.7. Executing PROC_MUX pass (convert decision trees to multiplexers).\nCreating decoders for process `\\TopModule.$proc$rtl/TopModule.sv:24$4'.\n     1/1: $0\\a_tem[7:0]\nCreating decoders for process `\\TopModule.$proc$rtl/TopModule.sv:10$1'.\n     1/1: $0\\match[0:0]\n\n3.8. Executing PROC_DLATCH pass (convert process syncs to latches).\n\n3.9. Executing PROC_DFF pass (convert process syncs to FFs).\nCreating register for signal `\\TopModule.\\a_tem' using process `\\TopModule.$proc$rtl/TopModule.sv:24$4'.\n  created $adff cell `$procdff$9' with positive edge clock and negative level reset.\nCreating register for signal `\\TopModule.\\match' using process `\\TopModule.$proc$rtl/TopModule.sv:10$1'.\n  created $adff cell `$procdff$10' with positive edge clock and negative level reset.\n\n3.10. Executing PROC_MEMWR pass (convert process memory writes to cells).\n\n3.11. Executing PROC_CLEAN pass (remove empty switches from decision trees).\nRemoving empty process `TopModule.$proc$rtl/TopModule.sv:24$4'.\nFound and cleaned up 1 empty switch in `\\TopModule.$proc$rtl/TopModule.sv:10$1'.\nRemoving empty process `TopModule.$proc$rtl/TopModule.sv:10$1'.\nCleaned up 1 empty switch.\n\n3.12. Executing OPT_EXPR pass (perform const folding).\nOptimizing module TopModule.\n\n4. Executing OPT pass (performing simple optimizations).\n\n4.1. Executing OPT_EXPR pass (perform const folding).\nOptimizing module TopModule.\n\n4.2. Executing OPT_MERGE pass (detect identical cells).\nFinding identical cells in module `\\TopModule'.\n<suppressed ~3 debug messages>\nRemoved a total of 1 cells.\n\n4.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).\nRunning muxtree optimizer on module \\TopModule..\n  Creating internal representation of mux trees.\n  Evaluating internal representation of mux trees.\n  Analyzing evaluation results.\nRemoved 0 multiplexer ports.\n<suppressed ~1 debug messages>\n\n4.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).\n  Optimizing cells in module \\TopModule.\nPerformed a total of 0 changes.\n\n4.5. Executing OPT_MERGE pass (detect identical cells).\nFinding identical cells in module `\\TopModule'.\nRemoved a total of 0 cells.\n\n4.6. Executing OPT_DFF pass (perform DFF optimizations).\n\n4.7. Executing OPT_CLEAN pass (remove unused cells and wires).\nFinding unused cells or wires in module \\TopModule..\nRemoved 1 unused cells and 5 unused wires.\n<suppressed ~2 debug messages>\n\n4.8. Executing OPT_EXPR pass (perform const folding).\nOptimizing module TopModule.\n\n4.9. Rerunning OPT passes. (Maybe there is more to do..)\n\n4.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).\nRunning muxtree optimizer on module \\TopModule..\n  Creating internal representation of mux trees.\n  Evaluating internal representation of mux trees.\n  Analyzing evaluation results.\nRemoved 0 multiplexer ports.\n<suppressed ~1 debug messages>\n\n4.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).\n  Optimizing cells in module \\TopModule.\nPerformed a total of 0 changes.\n\n4.12. Executing OPT_MERGE pass (detect identical cells).\nFinding identical cells in module `\\TopModule'.\nRemoved a total of 0 cells.\n\n4.13. Executing OPT_DFF pass (perform DFF optimizations).\n\n4.14. Executing OPT_CLEAN pass (remove unused cells and wires).\nFinding unused cells or wires in module \\TopModule..\n\n4.15. Executing OPT_EXPR pass (perform const folding).\nOptimizing module TopModule.\n\n4.16. Finished OPT passes. (There is nothing left to do.)\n\n5. Executing CHECK pass (checking for obvious problems).\nChecking module TopModule...\nFound and reported 0 problems.\n",
+            "stderr": "",
+            "duration_ms": 10
+          }
+        }
+      },
+      "regression": {
+        "results": {
+          "official.compile": {
+            "tool": "iverilog",
+            "command": [
+              "iverilog",
+              "-g2012",
+              "-Wall",
+              "-s",
+              "tb",
+              "-o",
+              ".build/official.vvp",
+              "rtl/TopModule.sv",
+              "tb/ref.sv",
+              "tb/test.sv"
+            ],
+            "exit_code": 0,
+            "status": "pass",
+            "stdout": "",
+            "stderr": "warning: Some design elements have no explicit time unit and/or\n       : time precision. This may cause confusing timing results.\n       : Affected design elements are:\n       :   -- module RefModule declared here: tb/ref.sv:1\n       :   -- module TopModule declared here: rtl/TopModule.sv:1\n",
+            "duration_ms": 11
+          },
+          "official.simulation": {
+            "tool": "vvp",
+            "command": [
+              "vvp",
+              "-N",
+              ".build/official.vvp"
+            ],
+            "exit_code": 0,
+            "status": "fail",
+            "stdout": "VCD info: dumpfile wave.vcd opened for output.\nHint: Output 'match' has 4 mismatches. First mismatch occurred at time 190.\nHint: Total mismatched samples is 4 out of 455 samples\n\nSimulation finished at 2276 ps\nMismatches: 4 in 455 samples\n",
+            "stderr": "\nChipBench official mismatch result did not pass.",
+            "duration_ms": 11
+          }
+        }
+      },
+      "retry_reason": "REGRESSION_RETRY"
+    },
+    {
+      "iteration": 2,
+      "hypothesis": {
+        "summary": "The shift direction is wrong, but the registered match timing should remain unchanged.",
+        "likely_files": [
+          "rtl/TopModule.sv"
+        ],
+        "likely_lines": [
+          15,
+          31
+        ],
+        "reasoning": "Line 31 inserts `a` at bit 7, contrary to the specified LSB insertion. The previous proposal also changed line 15 to compare the next register value; its withheld regression failed, so that timing change may have caused the failure. Changing only line 31 preserves the original registered comparison timing.",
+        "confidence": 0.75,
+        "evidence_ids": [
+          "regression-1:2",
+          "attempt-1:simulation"
+        ]
+      },
+      "proposal": {
+        "explanation": "Insert `a` at bit 0 while retaining the original comparison against the current `a_tem` value.",
+        "unified_diff": "--- a/rtl/TopModule.sv\n+++ b/rtl/TopModule.sv\n@@ -28,6 +28,6 @@\n \t\t\tend\n \t\telse \n \t\t\tbegin\n-\t\t\t\ta_tem <= {a, a_tem[6:0]};\n+\t\t\t\ta_tem <= {a_tem[6:0], a};\n \t\t\tend\n endmodule\n",
+        "expected_effect": "Each clock shifts existing bits left and inserts `a` into the LSB; `match` retains its existing registered timing.",
+        "risks": [
+          "The specification's wording could instead require `match` to reflect the newly shifted value immediately after the same edge. The withheld regression does not establish the expected timing."
+        ]
+      },
+      "guard_error": null,
+      "validation": {
+        "results": {
+          "compile": {
+            "tool": "iverilog",
+            "command": [
+              "iverilog",
+              "-g2012",
+              "-Wall",
+              "-s",
+              "smoke_tb",
+              "-o",
+              ".build/target.vvp",
+              "rtl/TopModule.sv",
+              "tb/smoke.sv"
+            ],
+            "exit_code": 0,
+            "status": "pass",
+            "stdout": "",
+            "stderr": "",
+            "duration_ms": 12
+          },
+          "simulation": {
+            "tool": "vvp",
+            "command": [
+              "vvp",
+              "-N",
+              ".build/target.vvp"
+            ],
+            "exit_code": 0,
+            "status": "pass",
+            "stdout": "SEMIDEBUG_PASS\n",
+            "stderr": "",
+            "duration_ms": 11
+          },
+          "lint": {
+            "tool": "verilator",
+            "command": [
+              "verilator",
+              "--lint-only",
+              "-Wall",
+              "-Wno-fatal",
+              "--top-module",
+              "TopModule",
+              "rtl/TopModule.sv"
+            ],
+            "exit_code": 0,
+            "status": "pass",
+            "stdout": "",
+            "stderr": "",
+            "duration_ms": 32
+          },
+          "synthesis": {
+            "tool": "yosys",
+            "command": [
+              "yosys",
+              "-Q",
+              "-T",
+              "-p",
+              "read_verilog -sv rtl/TopModule.sv; hierarchy -check -top TopModule; proc; opt; check -assert"
+            ],
+            "exit_code": 0,
+            "status": "pass",
+            "stdout": "\n-- Running command `read_verilog -sv rtl/TopModule.sv; hierarchy -check -top TopModule; proc; opt; check -assert' --\n\n1. Executing Verilog-2005 frontend: rtl/TopModule.sv\nParsing SystemVerilog input from `rtl/TopModule.sv' to AST representation.\nGenerating RTLIL representation for module `\\TopModule'.\nSuccessfully finished Verilog frontend.\n\n2. Executing HIERARCHY pass (managing design hierarchy).\n\n2.1. Analyzing design hierarchy..\nTop module:  \\TopModule\n\n2.2. Analyzing design hierarchy..\nTop module:  \\TopModule\nRemoved 0 unused modules.\n\n3. Executing PROC pass (convert processes to netlists).\n\n3.1. Executing PROC_CLEAN pass (remove empty switches from decision trees).\nCleaned up 0 empty switches.\n\n3.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).\nMarked 1 switch rules as full_case in process $proc$rtl/TopModule.sv:24$4 in module TopModule.\nMarked 2 switch rules as full_case in process $proc$rtl/TopModule.sv:10$1 in module TopModule.\nRemoved a total of 0 dead cases.\n\n3.3. Executing PROC_PRUNE pass (remove redundant assignments in processes).\nRemoved 2 redundant assignments.\nPromoted 0 assignments to connections.\n\n3.4. Executing PROC_INIT pass (extract init attributes).\n\n3.5. Executing PROC_ARST pass (detect async resets in processes).\nFound async reset \\rst_n in `\\TopModule.$proc$rtl/TopModule.sv:24$4'.\nFound async reset \\rst_n in `\\TopModule.$proc$rtl/TopModule.sv:10$1'.\n\n3.6. Executing PROC_ROM pass (convert switches to ROMs).\nConverted 0 switches.\n<suppressed ~1 debug messages>\n\n3.7. Executing PROC_MUX pass (convert decision trees to multiplexers).\nCreating decoders for process `\\TopModule.$proc$rtl/TopModule.sv:24$4'.\n     1/1: $0\\a_tem[7:0]\nCreating decoders for process `\\TopModule.$proc$rtl/TopModule.sv:10$1'.\n     1/1: $0\\match[0:0]\n\n3.8. Executing PROC_DLATCH pass (convert process syncs to latches).\n\n3.9. Executing PROC_DFF pass (convert process syncs to FFs).\nCreating register for signal `\\TopModule.\\a_tem' using process `\\TopModule.$proc$rtl/TopModule.sv:24$4'.\n  created $adff cell `$procdff$9' with positive edge clock and negative level reset.\nCreating register for signal `\\TopModule.\\match' using process `\\TopModule.$proc$rtl/TopModule.sv:10$1'.\n  created $adff cell `$procdff$10' with positive edge clock and negative level reset.\n\n3.10. Executing PROC_MEMWR pass (convert process memory writes to cells).\n\n3.11. Executing PROC_CLEAN pass (remove empty switches from decision trees).\nRemoving empty process `TopModule.$proc$rtl/TopModule.sv:24$4'.\nFound and cleaned up 1 empty switch in `\\TopModule.$proc$rtl/TopModule.sv:10$1'.\nRemoving empty process `TopModule.$proc$rtl/TopModule.sv:10$1'.\nCleaned up 1 empty switch.\n\n3.12. Executing OPT_EXPR pass (perform const folding).\nOptimizing module TopModule.\n\n4. Executing OPT pass (performing simple optimizations).\n\n4.1. Executing OPT_EXPR pass (perform const folding).\nOptimizing module TopModule.\n\n4.2. Executing OPT_MERGE pass (detect identical cells).\nFinding identical cells in module `\\TopModule'.\n<suppressed ~3 debug messages>\nRemoved a total of 1 cells.\n\n4.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).\nRunning muxtree optimizer on module \\TopModule..\n  Creating internal representation of mux trees.\n  Evaluating internal representation of mux trees.\n  Analyzing evaluation results.\nRemoved 0 multiplexer ports.\n<suppressed ~1 debug messages>\n\n4.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).\n  Optimizing cells in module \\TopModule.\nPerformed a total of 0 changes.\n\n4.5. Executing OPT_MERGE pass (detect identical cells).\nFinding identical cells in module `\\TopModule'.\nRemoved a total of 0 cells.\n\n4.6. Executing OPT_DFF pass (perform DFF optimizations).\n\n4.7. Executing OPT_CLEAN pass (remove unused cells and wires).\nFinding unused cells or wires in module \\TopModule..\nRemoved 1 unused cells and 5 unused wires.\n<suppressed ~2 debug messages>\n\n4.8. Executing OPT_EXPR pass (perform const folding).\nOptimizing module TopModule.\n\n4.9. Rerunning OPT passes. (Maybe there is more to do..)\n\n4.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).\nRunning muxtree optimizer on module \\TopModule..\n  Creating internal representation of mux trees.\n  Evaluating internal representation of mux trees.\n  Analyzing evaluation results.\nRemoved 0 multiplexer ports.\n<suppressed ~1 debug messages>\n\n4.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).\n  Optimizing cells in module \\TopModule.\nPerformed a total of 0 changes.\n\n4.12. Executing OPT_MERGE pass (detect identical cells).\nFinding identical cells in module `\\TopModule'.\nRemoved a total of 0 cells.\n\n4.13. Executing OPT_DFF pass (perform DFF optimizations).\n\n4.14. Executing OPT_CLEAN pass (remove unused cells and wires).\nFinding unused cells or wires in module \\TopModule..\n\n4.15. Executing OPT_EXPR pass (perform const folding).\nOptimizing module TopModule.\n\n4.16. Finished OPT passes. (There is nothing left to do.)\n\n5. Executing CHECK pass (checking for obvious problems).\nChecking module TopModule...\nFound and reported 0 problems.\n",
+            "stderr": "",
+            "duration_ms": 11
+          }
+        }
+      },
+      "regression": {
+        "results": {
+          "official.compile": {
+            "tool": "iverilog",
+            "command": [
+              "iverilog",
+              "-g2012",
+              "-Wall",
+              "-s",
+              "tb",
+              "-o",
+              ".build/official.vvp",
+              "rtl/TopModule.sv",
+              "tb/ref.sv",
+              "tb/test.sv"
+            ],
+            "exit_code": 0,
+            "status": "pass",
+            "stdout": "",
+            "stderr": "warning: Some design elements have no explicit time unit and/or\n       : time precision. This may cause confusing timing results.\n       : Affected design elements are:\n       :   -- module RefModule declared here: tb/ref.sv:1\n       :   -- module TopModule declared here: rtl/TopModule.sv:1\n",
+            "duration_ms": 23
+          },
+          "official.simulation": {
+            "tool": "vvp",
+            "command": [
+              "vvp",
+              "-N",
+              ".build/official.vvp"
+            ],
+            "exit_code": 0,
+            "status": "pass",
+            "stdout": "VCD info: dumpfile wave.vcd opened for output.\nHint: Output 'match' has no mismatches.\nHint: Total mismatched samples is 0 out of 455 samples\n\nSimulation finished at 2276 ps\nMismatches: 0 in 455 samples\n",
+            "stderr": "",
+            "duration_ms": 11
+          }
+        }
+      },
+      "retry_reason": null
+    }
+  ],
+  "final_status": "FIXED",
+  "failure_reason": null,
+  "immutable_before": {
+    "case.json": "a06b53c5921828f4eb69e085ce21f4e3cbe19348c50d4f835b590768e4d6ae1b",
+    "problem.txt": "d0887cf0ef8d09263f6be153ad3d2c6c80035a1e9e469c6182dfdc99e7a75a4e",
+    "tb/ref.sv": "2d89253dc526b4fce0534149038f9693d0fac8ef6fcbd4aa1bcea45a7710ee1d",
+    "tb/smoke.sv": "9954c707c902fa5effb9ec29c6667953241bf3664ed110ff18454daa1ac53e3a",
+    "tb/test.sv": "e125f12d26b10d6568064a41c3d1cb1461edf7092ef979e426ad3df11d04149b",
+    "upstream.json": "100a91169e5753ebe8f6577d225b7cb5276d4407547fa5f2e0bd9de3d51bf09e"
+  },
+  "immutable_after": {
+    "case.json": "a06b53c5921828f4eb69e085ce21f4e3cbe19348c50d4f835b590768e4d6ae1b",
+    "problem.txt": "d0887cf0ef8d09263f6be153ad3d2c6c80035a1e9e469c6182dfdc99e7a75a4e",
+    "tb/ref.sv": "2d89253dc526b4fce0534149038f9693d0fac8ef6fcbd4aa1bcea45a7710ee1d",
+    "tb/smoke.sv": "9954c707c902fa5effb9ec29c6667953241bf3664ed110ff18454daa1ac53e3a",
+    "tb/test.sv": "e125f12d26b10d6568064a41c3d1cb1461edf7092ef979e426ad3df11d04149b",
+    "upstream.json": "100a91169e5753ebe8f6577d225b7cb5276d4407547fa5f2e0bd9de3d51bf09e"
+  },
+  "integrity_pass": true,
+  "success": true,
+  "regression_pass": true,
+  "duration_ms": 35790,
+  "llm_calls": 2,
+  "input_tokens": 13706,
+  "output_tokens": 1177,
+  "estimated_cost": null,
+  "price_source": null
+}

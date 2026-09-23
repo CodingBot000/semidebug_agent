@@ -1,0 +1,10 @@
+--- a/rtl/TopModule.sv
++++ b/rtl/TopModule.sv
+@@ -28,6 +28,6 @@
+ 			end
+ 		else 
+ 			begin
+-				a_tem <= {a, a_tem[6:0]};
++				a_tem <= {a_tem[6:0], a};
+ 			end
+ endmodule

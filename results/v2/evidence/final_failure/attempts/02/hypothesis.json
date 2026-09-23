@@ -1,0 +1,17 @@
+{
+  "summary": "The expected timing may require registering the combined detection result, rather than driving match directly from the two flags.",
+  "likely_files": [
+    "rtl/TopModule.sv"
+  ],
+  "likely_lines": [
+    5,
+    17,
+    31,
+    50
+  ],
+  "reasoning": "The prior proposal moved detection one cycle earlier, but the evaluator-only regression failed (regression-1:2). That rules out confidence in the earlier timing hypothesis, not the possibility of a different output-latency requirement. The current match is combinationally derived from registered flags, whereas the specification says the output is updated sequentially (problem.txt:31). The withheld test details make this hypothesis uncertain.",
+  "confidence": 0.25,
+  "evidence_ids": [
+    "regression-1:2"
+  ]
+}

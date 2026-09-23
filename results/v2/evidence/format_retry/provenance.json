@@ -1,0 +1,11 @@
+{
+  "measurement": "live-ai-repair",
+  "source_run": "results/v2/internal/full_loop_public/runs/20260923T102726-1e953272",
+  "case_id": "case_023_alu_width_signedness",
+  "final_status": "FIXED",
+  "model": "gpt-6-sol",
+  "retry_reasons": [
+    "PATCH_PARSE_RETRY",
+    null
+  ]
+}

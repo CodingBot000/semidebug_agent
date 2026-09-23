@@ -1,0 +1,5 @@
+argv: ["iverilog", "-g2012", "-Wall", "-s", "smoke_tb", "-o", ".build/target.vvp", "rtl/TopModule.sv", "tb/smoke.sv"]
+status: pass
+exit: 0
+
+rtl/TopModule.sv:24: warning: Numeric constant truncated to 4 bits.

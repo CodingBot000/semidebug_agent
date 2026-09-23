@@ -1,0 +1,11 @@
+--- a/rtl/TopModule.sv
++++ b/rtl/TopModule.sv
+@@ -54,1 +54,1 @@
+-			else nstate = idle;					//Data invalid, stay in s3_d011
++			else nstate = s3_d011;				//Data invalid, stay in s3_d011
+@@ -59,1 +59,1 @@
+-					else nstate = idle;			//Data valid but is 1, does not match target sequence, next state is idle
++					else nstate = s2_d01;		//Data valid but is 1, suffix 01 matches the first two bits
+@@ -61,1 +61,1 @@
+-			else nstate = idle;					//Data invalid, next state is idle
++			else nstate = s4_d0110;			//Data invalid, stay in s4_d0110

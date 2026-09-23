@@ -1,0 +1,17 @@
+{
+  "summary": "The regression may require `match` to be clocked and asynchronously reset, rather than driven by combinational logic.",
+  "likely_files": [
+    "rtl/TopModule.sv"
+  ],
+  "likely_lines": [
+    10,
+    19,
+    26
+  ],
+  "reasoning": "The current comparison reflects `a_tem` combinationally, while the specification also says the design operates synchronously and that `match` is reset. This is uncertain: the existing behavior otherwise appears consistent with the stated pattern matching.",
+  "confidence": 0.45,
+  "evidence_ids": [
+    "baseline-regression:2",
+    "baseline:simulation"
+  ]
+}

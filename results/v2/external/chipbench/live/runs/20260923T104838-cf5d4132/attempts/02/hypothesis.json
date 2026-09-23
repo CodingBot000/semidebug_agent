@@ -1,0 +1,18 @@
+{
+  "summary": "The output register delays the detection pulse by an extra clock cycle.",
+  "likely_files": [
+    "rtl/TopModule.sv"
+  ],
+  "likely_lines": [
+    26,
+    32,
+    36
+  ],
+  "reasoning": "Sampling the final 1 moves state from S3 to S4, but the separate clocked assignment to flag reads the old state. Driving flag from S4 instead makes it high in the cycle immediately after that sampling edge. The previous proposal was rejected as an invalid patch, not evaluated for behavior; the timing diagnosis remains uncertain.",
+  "confidence": 0.82,
+  "evidence_ids": [
+    "guard:1",
+    "baseline:compile",
+    "baseline:simulation"
+  ]
+}

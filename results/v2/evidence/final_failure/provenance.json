@@ -1,0 +1,12 @@
+{
+  "measurement": "live-ai-repair",
+  "source_run": "results/v2/external/chipbench/live/runs/20260923T104354-05405f0a",
+  "case_id": "chipbench_arithmetic_Prob002_extraneous_items_sequence_detect",
+  "final_status": "MAX_RETRY",
+  "model": "gpt-6-sol",
+  "retry_reasons": [
+    "REGRESSION_RETRY",
+    "PATCH_PARSE_RETRY",
+    "REGRESSION_RETRY"
+  ]
+}

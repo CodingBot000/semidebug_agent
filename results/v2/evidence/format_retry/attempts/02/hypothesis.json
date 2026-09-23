@@ -1,0 +1,15 @@
+{
+  "summary": "Opcode 6 compares unsigned operands, but the expected comparison is signed.",
+  "likely_files": [
+    "rtl/alu.v"
+  ],
+  "likely_lines": [
+    11
+  ],
+  "reasoning": "For a=0 and b=140, unsigned comparison returns 1, while signed comparison (0 < -116) returns 0. The testbench converts both operands to signed values before comparing. The prior proposal was rejected for an invalid diff hunk, not a validation failure; this proposal corrects the hunk count. Only one failing vector is shown.",
+  "confidence": 0.99,
+  "evidence_ids": [
+    "baseline:simulation",
+    "guard:1"
+  ]
+}

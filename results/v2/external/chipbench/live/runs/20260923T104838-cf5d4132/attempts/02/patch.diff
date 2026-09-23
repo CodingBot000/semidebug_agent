@@ -1,0 +1,11 @@
+--- a/rtl/TopModule.sv
++++ b/rtl/TopModule.sv
+@@ -32,6 +32,5 @@
+-    always@(posedge clk or negedge rst) begin
+-        if(~rst)
+-            flag <= 0;
+-        else
+-            flag <= state==S4;
++    always@(*) begin
++        flag = state==S4;
+     end

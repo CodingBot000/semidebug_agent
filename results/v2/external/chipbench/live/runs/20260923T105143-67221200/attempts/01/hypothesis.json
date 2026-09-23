@@ -1,0 +1,16 @@
+{
+  "summary": "The outputs are registered, making each group result appear one clock cycle late.",
+  "likely_files": [
+    "rtl/TopModule.sv"
+  ],
+  "likely_lines": [
+    71,
+    76,
+    80
+  ],
+  "reasoning": "The sixth sampled bit moves the FSM into s6 or sf6, but the output block reads the previous pstate at that same edge. The specification requires combinational output logic, so the result should reflect the terminal state immediately after that edge. This is the most likely explanation for the withheld regression failure, though its details are unavailable.",
+  "confidence": 0.9,
+  "evidence_ids": [
+    "baseline-regression:2"
+  ]
+}

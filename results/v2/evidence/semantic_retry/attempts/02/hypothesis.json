@@ -1,0 +1,16 @@
+{
+  "summary": "The shift direction is wrong, but the registered match timing should remain unchanged.",
+  "likely_files": [
+    "rtl/TopModule.sv"
+  ],
+  "likely_lines": [
+    15,
+    31
+  ],
+  "reasoning": "Line 31 inserts `a` at bit 7, contrary to the specified LSB insertion. The previous proposal also changed line 15 to compare the next register value; its withheld regression failed, so that timing change may have caused the failure. Changing only line 31 preserves the original registered comparison timing.",
+  "confidence": 0.75,
+  "evidence_ids": [
+    "regression-1:2",
+    "attempt-1:simulation"
+  ]
+}

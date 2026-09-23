@@ -1,0 +1,16 @@
+--- a/rtl/TopModule.sv
++++ b/rtl/TopModule.sv
+@@ -73,11 +73,11 @@
+ 		match <= 1'b0;
+ 		not_match <= 1'b0;
+ 	end
+-	else if (pstate == s6) begin
++	else if ((pstate == s5) && !data) begin
+ 		match <= 1'b1;
+ 		not_match <= 1'b0;
+ 	end
+-	else if (pstate == sf6) begin
++	else if ((pstate == sf5) || (pstate == s5)) begin
+ 		match <= 1'b0;
+ 		not_match <= 1'b1;
+ 	end

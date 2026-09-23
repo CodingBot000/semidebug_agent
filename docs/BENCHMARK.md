@@ -1,12 +1,14 @@
 # Benchmark methodology and measured results
 
+This document records the original V1 corpus and historical measurements. The changed hidden-test protocol, independent one-shot comparison and external selected cases are reported in [V2 evaluation](V2_EVALUATION.md).
+
 ## Dataset
 
 Six original designs, each with five distinct mutations: counter/timer, four-entry synchronous FIFO, two-input round-robin arbiter, three-state controller, eight-operation ALU and enabled rising-edge pulse detector. Category coverage includes syntax, width/signedness, reset, sequential logic, boundary, FSM, combinational and connectivity faults. There are 24 public and 6 holdout cases. Only 2/30 are syntax faults; most require functional correction.
 
 `evaluator/build_dataset.py` first constructs each gold RTL and testbench, then runs the target plus two longer regression seeds through real EDA. Only after all six gold designs pass does it emit mutations. Each mutation is validated and must reproduce a failure; infrastructure errors are not accepted as a detected bug. Testbenches use reference state/scoreboards, directed boundary vectors and seeded pseudorandom cases. Target seed is 7; regression seeds are 17 and 103.
 
-Gold and exact mutation definitions remain in evaluator/. Runtime loading copies only manifest-listed RTL, tests, metadata and the manifest. Prompt context includes only selected RTL and read-only testbench source, never gold, mutation definitions or split labels. Holdout means different mutations of the same design families, not secret data or unseen designs.
+Gold and exact mutation definitions remain in evaluator/. Runtime loading copies only manifest-listed RTL, tests, metadata and the manifest. V1 prompt context included selected RTL and testbench source, including the source shared by target and regression; it never included gold, mutation definitions or split labels. Holdout means different mutations of the same design families, not secret data or unseen designs. V2 uses separate evaluator-only regression source and is reported independently.
 
 ## Actual measurements
 

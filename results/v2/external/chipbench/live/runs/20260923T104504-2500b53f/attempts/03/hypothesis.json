@@ -1,0 +1,17 @@
+{
+  "summary": "The previous patch may count an input on the first clock after reset even though the original ready_a is low, violating the input handshake.",
+  "likely_files": [
+    "rtl/TopModule.sv"
+  ],
+  "likely_lines": [
+    18,
+    41,
+    46
+  ],
+  "reasoning": "The counter must advance only on valid_a && ready_a. The previous proposal instead counted on valid_a alone and changed ready_a's reset value. Its compile, simulation, lint, and synthesis checks passed, but an evaluator-only regression failed; the withheld test does not establish the cause. This proposal retains the original reset behavior and makes counting and output validity follow the handshake.",
+  "confidence": 0.62,
+  "evidence_ids": [
+    "regression-2:2",
+    "attempt-2:simulation"
+  ]
+}

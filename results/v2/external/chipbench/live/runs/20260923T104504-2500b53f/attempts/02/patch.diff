@@ -1,0 +1,26 @@
+--- a/rtl/TopModule.sv
++++ b/rtl/TopModule.sv
+@@ -15,7 +15,7 @@
+         if(~rst_n)
+             cnt <= 0;
+         else
+-            cnt <= ~ready_a&&~valid_a? cnt:
++            cnt <= ~valid_a? cnt:
+                    cnt      ==      5? 0  :
+                    cnt+1;
+     end
+@@ -38,12 +38,12 @@
+         if(~rst_n)
+             valid_b <= 0;
+         else
+-            valid_b <= cnt==5;
++            valid_b <= cnt==5&&valid_a;
+     end
+      
+     always@(posedge clk or negedge rst_n) begin
+         if(~rst_n)
+-            ready_a <= 0;
++            ready_a <= 1;
+         else
+             ready_a <= 1;
+     end

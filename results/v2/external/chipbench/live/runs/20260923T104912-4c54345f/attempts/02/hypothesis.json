@@ -1,0 +1,20 @@
+{
+  "summary": "The explicit reset branch in the combinational `match` decoder may be unnecessary; `match` can be decoded directly from the asynchronously reset shift register.",
+  "likely_files": [
+    "rtl/TopModule.sv"
+  ],
+  "likely_lines": [
+    10,
+    11,
+    13,
+    19,
+    22
+  ],
+  "reasoning": "The prior clocked-output proposal was rejected for a hunk-count error, not by behavioral validation, but should not be repeated. Direct decoding follows the specification's requirement to assert `match` whenever `a_tem` equals the pattern. No supplied validation demonstrates a functional failure in the baseline, so this diagnosis is uncertain.",
+  "confidence": 0.2,
+  "evidence_ids": [
+    "baseline:simulation",
+    "baseline:lint",
+    "guard:1"
+  ]
+}

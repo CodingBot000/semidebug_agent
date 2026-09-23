@@ -1,0 +1,16 @@
+{
+  "summary": "`sf6` is assigned a value that cannot fit in four bits, causing it to alias `s4`.",
+  "likely_files": [
+    "rtl/TopModule.sv"
+  ],
+  "likely_lines": [
+    24,
+    64
+  ],
+  "reasoning": "The truncation explains both lint warnings. The previous proposal was rejected because its diff hunk was malformed, not because the RTL change failed validation. A distinct four-bit value is still the most likely repair.",
+  "confidence": 0.99,
+  "evidence_ids": [
+    "baseline:lint",
+    "guard:1"
+  ]
+}

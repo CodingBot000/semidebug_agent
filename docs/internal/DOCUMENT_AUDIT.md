@@ -37,3 +37,7 @@ The model proposes diagnoses and RTL patches; the application decides acceptance
 ## Editing order
 
 Finish the evaluation boundary and freeze the external selection protocol before rewriting result headlines. Then write `docs/V2_EVALUATION.md`, update architecture/benchmark/security/attribution, shorten README/portfolio, add `SUBMISSION_GUIDE.md`, and validate the extracted ZIP. Preserve historical documents and V1 result files.
+
+## Resolution (2026-09-23)
+
+The V2 evaluation and external selected denominator now exist. README, portfolio, quickstart, architecture, benchmark, security and third-party attribution were updated against the raw results. `results/README.md` and the historical pre-CLI note in `docs/DECISIONS.md` were corrected after this audit identified stale wording. The V2 ZIP includes selected evidence and primary documents while excluding `docs/internal/`, `docs/update/` and external reference files. Its package link scan passed, and a clean extraction passed bootstrap, replay, scripted EDA demo, lint and 106 tests. The repository remains private; the ZIP is the independent reviewer entry point.

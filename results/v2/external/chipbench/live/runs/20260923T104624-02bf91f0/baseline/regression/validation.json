@@ -1,0 +1,37 @@
+{
+  "results": {
+    "official.compile": {
+      "tool": "iverilog",
+      "command": [
+        "iverilog",
+        "-g2012",
+        "-Wall",
+        "-s",
+        "tb",
+        "-o",
+        ".build/official.vvp",
+        "rtl/TopModule.sv",
+        "tb/ref.sv",
+        "tb/test.sv"
+      ],
+      "exit_code": 0,
+      "status": "pass",
+      "stdout": "",
+      "stderr": "warning: Some design elements have no explicit time unit and/or\n       : time precision. This may cause confusing timing results.\n       : Affected design elements are:\n       :   -- module RefModule declared here: tb/ref.sv:1\n       :   -- module TopModule declared here: rtl/TopModule.sv:1\n",
+      "duration_ms": 11
+    },
+    "official.simulation": {
+      "tool": "vvp",
+      "command": [
+        "vvp",
+        "-N",
+        ".build/official.vvp"
+      ],
+      "exit_code": 0,
+      "status": "fail",
+      "stdout": "VCD info: dumpfile wave.vcd opened for output.\nHint: Output 'match' has 8 mismatches. First mismatch occurred at time 110.\nHint: Total mismatched samples is 8 out of 237 samples\n\nSimulation finished at 1186 ps\nMismatches: 8 in 237 samples\n",
+      "stderr": "\nChipBench official mismatch result did not pass.",
+      "duration_ms": 10
+    }
+  }
+}

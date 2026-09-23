@@ -1,0 +1,19 @@
+{
+  "summary": "The detector compares misaligned samples and combines a registered suffix check with a combinational prefix check.",
+  "likely_files": [
+    "rtl/TopModule.sv"
+  ],
+  "likely_lines": [
+    12,
+    15,
+    21,
+    26,
+    45
+  ],
+  "reasoning": "The shift register updates on the clock edge, but match_b checks the old low three bits while match_f checks the updated high three bits. Registering a comparison of the nine-bit window that includes the incoming bit should align both checks and make match sequential. The withheld regression failure is consistent with, but does not prove, this timing error.",
+  "confidence": 0.88,
+  "evidence_ids": [
+    "baseline-regression:2",
+    "baseline-regression:1"
+  ]
+}

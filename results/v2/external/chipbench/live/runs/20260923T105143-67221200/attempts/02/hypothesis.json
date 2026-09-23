@@ -1,0 +1,16 @@
+{
+  "summary": "Registered output decoding delays each six-bit group result by one clock cycle.",
+  "likely_files": [
+    "rtl/TopModule.sv"
+  ],
+  "likely_lines": [
+    71,
+    76,
+    80
+  ],
+  "reasoning": "After the sixth bit, the state enters s6 or sf6, but the clocked output block decodes the previous state. The specification explicitly calls for combinational output logic. The previous proposal was rejected for an invalid diff hunk, not an RTL validation failure; its functional hypothesis remains untested.",
+  "confidence": 0.85,
+  "evidence_ids": [
+    "guard:1"
+  ]
+}

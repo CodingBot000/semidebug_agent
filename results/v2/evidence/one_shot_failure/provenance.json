@@ -1,0 +1,10 @@
+{
+  "measurement": "live-ai-repair",
+  "source_run": "results/v2/internal/single_shot_public/runs/20260923T103333-f35f9e7f",
+  "case_id": "case_014_arbiter_combinational",
+  "final_status": "MAX_RETRY",
+  "model": "gpt-6-sol",
+  "retry_reasons": [
+    "PATCH_PARSE_RETRY"
+  ]
+}

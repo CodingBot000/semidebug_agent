@@ -1,0 +1,22 @@
+{
+  "summary": "The prefix and suffix checks use different input windows, so match can assert for bits that were never part of the same nine-bit pattern.",
+  "likely_files": [
+    "rtl/TopModule.sv"
+  ],
+  "likely_lines": [
+    12,
+    15,
+    21,
+    26,
+    45
+  ],
+  "reasoning": "At a rising edge, match_b checks the old shift-register suffix, while match_f subsequently checks the updated prefix. Registering one comparison of the window that includes the incoming bit aligns both checks and makes the output sequential. The available evidence does not include a failing functional trace, so the diagnosis remains uncertain.",
+  "confidence": 0.82,
+  "evidence_ids": [
+    "baseline:compile",
+    "baseline:simulation",
+    "baseline:lint",
+    "baseline:synthesis",
+    "guard:1"
+  ]
+}

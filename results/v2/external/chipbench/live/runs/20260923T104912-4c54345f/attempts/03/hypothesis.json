@@ -1,0 +1,19 @@
+{
+  "summary": "The withheld regression may expect `match` to be a clocked, asynchronously reset output.",
+  "likely_files": [
+    "rtl/TopModule.sv"
+  ],
+  "likely_lines": [
+    10,
+    11,
+    13,
+    19,
+    26
+  ],
+  "reasoning": "Removing the combinational reset condition passed the visible checks but failed the withheld regression. That result does not establish the required timing, but it leaves output registration as a plausible alternative. Comparing the current `a_tem` is distinct from the earlier, malformed proposal that compared the next shift value.",
+  "confidence": 0.25,
+  "evidence_ids": [
+    "regression-2:2",
+    "attempt-2:simulation"
+  ]
+}

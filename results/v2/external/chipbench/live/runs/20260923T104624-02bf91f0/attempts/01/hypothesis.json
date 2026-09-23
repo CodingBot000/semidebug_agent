@@ -1,0 +1,14 @@
+{
+  "summary": "The leading-bit comparison uses 001 instead of the required 011, so valid sequences can be missed.",
+  "likely_files": [
+    "rtl/TopModule.sv"
+  ],
+  "likely_lines": [
+    17
+  ],
+  "reasoning": "The specification requires bits 8:6 to equal 011, but the RTL compares them with 001. This is the clearest functional mismatch. The baseline regression failure is consistent with it, although test details are withheld. The registered comparisons also appear to delay the output by a cycle; the timing intent is less certain.",
+  "confidence": 0.94,
+  "evidence_ids": [
+    "baseline-regression:2"
+  ]
+}

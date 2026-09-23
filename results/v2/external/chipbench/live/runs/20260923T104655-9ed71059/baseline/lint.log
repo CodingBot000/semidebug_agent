@@ -1,0 +1,14 @@
+argv: ["verilator", "--lint-only", "-Wall", "-Wno-fatal", "--top-module", "TopModule", "rtl/TopModule.sv"]
+status: fail
+exit: 0
+
+%Warning-WIDTH: rtl/TopModule.sv:24:15: Value too large for 4 bit number: 20
+   24 |           sf6=4'd20;
+      |               ^~~~~
+                ... For warning description see https://verilator.org/warn/WIDTH?v=5.006
+                ... Use "/* verilator lint_off WIDTH */" and lint_on around source to disable this message.
+%Warning-CASEOVERLAP: rtl/TopModule.sv:64:9: Case values overlap (example pattern 0x4)
+   64 |         sf6:
+      |         ^~~
+
+Critical lint policy: WIDTH

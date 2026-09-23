@@ -1,0 +1,201 @@
+argv: ["yosys", "-Q", "-T", "-p", "read_verilog -sv rtl/TopModule.sv; hierarchy -check -top TopModule; proc; opt; check -assert"]
+status: pass
+exit: 0
+
+-- Running command `read_verilog -sv rtl/TopModule.sv; hierarchy -check -top TopModule; proc; opt; check -assert' --
+
+1. Executing Verilog-2005 frontend: rtl/TopModule.sv
+Parsing SystemVerilog input from `rtl/TopModule.sv' to AST representation.
+Generating RTLIL representation for module `\TopModule'.
+Note: Assuming pure combinatorial block at rtl/TopModule.sv:26.1-65.4 in
+compliance with IEC 62142(E):2005 / IEEE Std. 1364.1(E):2002. Recommending
+use of @* instead of @(...) for better match of synthesis and simulation.
+Note: Assuming pure combinatorial block at rtl/TopModule.sv:67.1-75.4 in
+compliance with IEC 62142(E):2005 / IEEE Std. 1364.1(E):2002. Recommending
+use of @* instead of @(...) for better match of synthesis and simulation.
+Successfully finished Verilog frontend.
+
+2. Executing HIERARCHY pass (managing design hierarchy).
+
+2.1. Analyzing design hierarchy..
+Top module:  \TopModule
+
+2.2. Analyzing design hierarchy..
+Top module:  \TopModule
+Removed 0 unused modules.
+
+3. Executing PROC pass (convert processes to netlists).
+
+3.1. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+3.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).
+Marked 2 switch rules as full_case in process $proc$rtl/TopModule.sv:67$8 in module TopModule.
+Marked 10 switch rules as full_case in process $proc$rtl/TopModule.sv:26$3 in module TopModule.
+Marked 1 switch rules as full_case in process $proc$rtl/TopModule.sv:18$1 in module TopModule.
+Removed a total of 0 dead cases.
+
+3.3. Executing PROC_PRUNE pass (remove redundant assignments in processes).
+Removed 1 redundant assignment.
+Promoted 2 assignments to connections.
+
+3.4. Executing PROC_INIT pass (extract init attributes).
+
+3.5. Executing PROC_ARST pass (detect async resets in processes).
+Found async reset \rst_n in `\TopModule.$proc$rtl/TopModule.sv:18$1'.
+
+3.6. Executing PROC_ROM pass (convert switches to ROMs).
+Converted 0 switches.
+<suppressed ~12 debug messages>
+
+3.7. Executing PROC_MUX pass (convert decision trees to multiplexers).
+Creating decoders for process `\TopModule.$proc$rtl/TopModule.sv:67$8'.
+     1/2: $2\match[0:0]
+     2/2: $1\match[0:0]
+Creating decoders for process `\TopModule.$proc$rtl/TopModule.sv:26$3'.
+     1/10: $10\nstate[3:0]
+     2/10: $9\nstate[3:0]
+     3/10: $8\nstate[3:0]
+     4/10: $7\nstate[3:0]
+     5/10: $6\nstate[3:0]
+     6/10: $5\nstate[3:0]
+     7/10: $4\nstate[3:0]
+     8/10: $3\nstate[3:0]
+     9/10: $2\nstate[3:0]
+    10/10: $1\nstate[3:0]
+Creating decoders for process `\TopModule.$proc$rtl/TopModule.sv:18$1'.
+     1/1: $0\pstate[3:0]
+
+3.8. Executing PROC_DLATCH pass (convert process syncs to latches).
+No latch inferred for signal `\TopModule.\match' from process `\TopModule.$proc$rtl/TopModule.sv:67$8'.
+No latch inferred for signal `\TopModule.\nstate' from process `\TopModule.$proc$rtl/TopModule.sv:26$3'.
+
+3.9. Executing PROC_DFF pass (convert process syncs to FFs).
+Creating register for signal `\TopModule.\pstate' using process `\TopModule.$proc$rtl/TopModule.sv:18$1'.
+  created $adff cell `$procdff$110' with positive edge clock and negative level reset.
+
+3.10. Executing PROC_MEMWR pass (convert process memory writes to cells).
+
+3.11. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Found and cleaned up 2 empty switches in `\TopModule.$proc$rtl/TopModule.sv:67$8'.
+Removing empty process `TopModule.$proc$rtl/TopModule.sv:67$8'.
+Found and cleaned up 10 empty switches in `\TopModule.$proc$rtl/TopModule.sv:26$3'.
+Removing empty process `TopModule.$proc$rtl/TopModule.sv:26$3'.
+Removing empty process `TopModule.$proc$rtl/TopModule.sv:18$1'.
+Cleaned up 12 empty switches.
+
+3.12. Executing OPT_EXPR pass (perform const folding).
+Optimizing module TopModule.
+<suppressed ~4 debug messages>
+
+4. Executing OPT pass (performing simple optimizations).
+
+4.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module TopModule.
+
+4.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\TopModule'.
+<suppressed ~36 debug messages>
+Removed a total of 12 cells.
+
+4.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \TopModule..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+    dead port 2/2 on $mux $procmux$82.
+    dead port 2/2 on $mux $procmux$80.
+    dead port 2/2 on $mux $procmux$70.
+    dead port 2/2 on $mux $procmux$62.
+    dead port 2/2 on $mux $procmux$60.
+    dead port 2/2 on $mux $procmux$51.
+    dead port 2/2 on $mux $procmux$44.
+    dead port 2/2 on $mux $procmux$42.
+    dead port 2/2 on $mux $procmux$34.
+    dead port 2/2 on $mux $procmux$101.
+    dead port 2/2 on $mux $procmux$28.
+    dead port 2/2 on $mux $procmux$26.
+    dead port 1/2 on $mux $procmux$16.
+    dead port 2/2 on $mux $procmux$91.
+Removed 14 multiplexer ports.
+<suppressed ~2 debug messages>
+
+4.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \TopModule.
+Performed a total of 0 changes.
+
+4.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\TopModule'.
+<suppressed ~6 debug messages>
+Removed a total of 2 cells.
+
+4.6. Executing OPT_DFF pass (perform DFF optimizations).
+
+4.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \TopModule..
+Removed 1 unused cells and 62 unused wires.
+<suppressed ~2 debug messages>
+
+4.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module TopModule.
+
+4.9. Rerunning OPT passes. (Maybe there is more to do..)
+
+4.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \TopModule..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~2 debug messages>
+
+4.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \TopModule.
+    New ctrl vector for $pmux cell $procmux$104: { $procmux$102_CMP $procmux$107_CMP $procmux$106_CMP $auto$opt_reduce.cc:134:opt_pmux$112 }
+  Optimizing cells in module \TopModule.
+Performed a total of 1 changes.
+
+4.12. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\TopModule'.
+Removed a total of 0 cells.
+
+4.13. Executing OPT_DFF pass (perform DFF optimizations).
+
+4.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \TopModule..
+
+4.15. Executing OPT_EXPR pass (perform const folding).
+Optimizing module TopModule.
+
+4.16. Rerunning OPT passes. (Maybe there is more to do..)
+
+4.17. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \TopModule..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~2 debug messages>
+
+4.18. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \TopModule.
+Performed a total of 0 changes.
+
+4.19. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\TopModule'.
+Removed a total of 0 cells.
+
+4.20. Executing OPT_DFF pass (perform DFF optimizations).
+
+4.21. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \TopModule..
+
+4.22. Executing OPT_EXPR pass (perform const folding).
+Optimizing module TopModule.
+
+4.23. Finished OPT passes. (There is nothing left to do.)
+
+5. Executing CHECK pass (checking for obvious problems).
+Checking module TopModule...
+Found and reported 0 problems.
+
