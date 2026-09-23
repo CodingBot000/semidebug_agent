@@ -103,9 +103,22 @@ make package
 - [정상·오류 데이터셋 검증 로그](results/dataset_audit.json)
 - [포트폴리오 설명](PORTFOLIO_EVIDENCE.md)
 
-## 구조
+## 저장소 구조와 문서 안내
 
-`src/semidebug/`는 CLI·에이전트·provider·패치·검증·리포트를 포함합니다. `benchmark/`에는 오류 사례와 변경 불가능한 테스트가 있습니다. `evaluator/`의 정상 정답과 mutation 정의는 에이전트 입력과 격리됩니다. `tests/`는 단위·통합·E2E 검증, `results/`는 실제 실행 기록, `docs/PROGRESS.md`와 `docs/ISSUES.md`는 개발 이력입니다.
+```text
+src/semidebug/       CLI, 오케스트레이터, LLM provider, diff 검사, EDA 실행, 리포트
+benchmark/           모델 평가용 공개 사례와 holdout 사례, manifest 및 immutable 테스트
+examples/            FIFO 데모 입력과 scripted 응답
+evaluator/           정상 RTL 정답과 mutation 정의; 런타임 모델 입력에서 격리
+tests/               unit, integration, end-to-end 테스트
+results/             검증 결과, 실행 추적, 데모 및 실제 모델 벤치마크
+scripts/             설치, 진단, 데모, 벤치마크, 제출물 패키징 명령
+docs/                아키텍처, 설정, 보안, 결정, 진행 및 이슈 기록
+```
+
+정상 정답과 mutation 정의는 모델 입력에 전달하지 않습니다.
+
+처음 보는 개발자는 **이 README → [빠른 시작](QUICKSTART.md) → [아키텍처](docs/ARCHITECTURE.md) → [실제 벤치마크와 방법](docs/BENCHMARK.md)** 순서로 읽으면 됩니다. 로컬 AI 실행은 [Codex CLI 설정](docs/CODEX_CLI.md), OpenAI API 설정은 `.env.example` 및 `--api` 실행 경로를 참고하세요. 주요 결정·보안 경계·외부 의존성은 각각 [DECISIONS](docs/DECISIONS.md), [SECURITY](docs/SECURITY.md), [THIRD_PARTY](docs/THIRD_PARTY.md)에 있습니다. 개발 진행과 해결된 이슈는 [PROGRESS](docs/PROGRESS.md), [ISSUES](docs/ISSUES.md)에 기록합니다.
 
 ## 한계
 

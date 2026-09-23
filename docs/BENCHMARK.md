@@ -13,7 +13,7 @@ Gold and exact mutation definitions remain in evaluator/. Runtime loading copies
 - Dataset qualification: **6/6 gold designs passed all target and regression checks**.
 - Broken qualification: **30/30 mutations reproduce an EDA failure**.
 - Known-fix pipeline acceptance: **30/30 fixed on first supplied patch**, full regression and immutable integrity passed. Median measured wall time was **360.5 ms** in the first run; two scripted provider calls per case, no API tokens. This tests the implementation against known fixes and does **not** measure AI repair success.
-- Live Codex CLI public benchmark: **24/24 repaired**, 20/24 first attempt, median 14,507.5 ms. Model gpt-6-sol, low effort, CLI 0.156.1, ChatGPT subscription. Full records: `results/live_codex/public_v1/`.
+- Live Codex CLI benchmark: **public 24/24 and holdout 6/6 repaired**; first attempt 23/30; overall median 14,679.5 ms. Model gpt-6-sol, low effort, CLI 0.156.1, ChatGPT subscription. Full records: `results/live_codex/`.
 
 Raw dataset records: `results/dataset_audit.json`. Pipeline summary/rows: `results/benchmark_summary.json`, `results/benchmark_results.json`, `results/benchmark_results.csv`. Each row includes before/after validation, proposals, statuses and hashes. Example full traces are under sample_run/, retry_run/, failed_run/.
 
@@ -25,7 +25,7 @@ Repair success and first-attempt rates divide accepted fixes by all cases. Inval
 
 `benchmark_v1.json` and `benchmark_v2.json` are historical *known-fix pipeline* reproducibility runs, not AI improvements. The new CLI path performed one FIFO prompt-overhead pilot: input tokens 16,854 → 6,520, both first-attempt fixes. This single-case comparison does not establish a general repair-quality improvement. The optimized inference configuration was frozen before the 24 public and 6 holdout evaluation; holdout results did not drive tuning. Gold, tests and assertions were not modified.
 
-Codex usage is charged against the ChatGPT plan allowance; API cost remains null. Input tokens include cached input tokens. End-to-end timing includes CLI startup, inference and Docker EDA execution on this local machine; this is not an isolated latency experiment. Four public proposals had malformed diff hunks and were rejected, then corrected through feedback; see ISSUE-010. A successful final score does not hide these rejected proposals.
+Codex usage is charged against the ChatGPT plan allowance; API cost remains null. Input tokens include cached input tokens. End-to-end timing includes CLI startup, inference and Docker EDA execution on this local machine; this is not an isolated latency experiment. Four public proposals and three holdout proposals had malformed diff hunks and were rejected, then corrected through feedback; see ISSUE-010. A successful final score does not hide these rejected proposals.
 
 ## Completed live evaluation (2026-09-23)
 
