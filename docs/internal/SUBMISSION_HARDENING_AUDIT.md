@@ -43,3 +43,9 @@ Critical file SHA256 before work:
 ## Implementation decision
 
 Copy a V2 FIFO case into an independent `examples/` fixture, with explicit `prompt_visible` and separate target plus two evaluator-only regression source files. Keep the core validation gates unchanged. Use a source commit followed by a provenance/package commit: the tracked provenance records the source commit and explains why a self-referential final commit cannot be embedded in the same file. The final completion report outside the ZIP records the packaging commit and ZIP hash. Package-internal verification logs will be captured before packaging; `package_scan.json` and `clean_extract.log` will be kept outside the ZIP because they describe the finished archive and would otherwise create a hash cycle.
+
+## Resolution
+
+The V2 default demo source commit is `b145999d2540cd955b5f8afdd6382e67fe66a134`; provenance, verification logs and packager source were committed at `fdd135b56cd9449c188e8be842f969e2cba6b08b`. `results/v2/PROVENANCE.json` points to the first commit as its non-self-referential source and verifies all required ancestry. The completed ZIP was built from the second commit. Final package scan and clean extraction evidence were generated afterward and deliberately excluded from the ZIP; the completion report records the second commit and ZIP hash.
+
+The final scripted V2 demo, lint and 109-test suite passed. The ZIP scanner and clean extraction also passed. The first test run after adding two required evidence files failed because its synthetic ZIP fixture lacked those files; the failed log was preserved, then the test and full suite passed. The first clean-extraction harness used Python `zipfile.extractall`, which dropped script execute bits; the documented `unzip` workflow passed. `results/v2/verification/final_audit.json` programmatically confirms the protected V1/V2 raw hashes and Git tree IDs did not change.

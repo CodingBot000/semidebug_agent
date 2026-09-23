@@ -1,0 +1,14 @@
+{
+  "status": "PASS",
+  "observed_at_utc": "2026-09-23T11:52:39.319881+00:00",
+  "zip_bytes": 707252,
+  "file_count": 642,
+  "zip_sha256": "f15c1602ec46e1afc9d6e3804c95d4d812ce735d3eefc46d6225f2e9f4bcb5b2",
+  "under_50mb": true,
+  "secret_scan": "PASS",
+  "markdown_links": "PASS",
+  "absolute_paths": "PASS",
+  "git_metadata_absent": true,
+  "credential_files_absent": true,
+  "external_reference_solutions_absent": true
+}

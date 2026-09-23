@@ -1,0 +1,42 @@
+{
+  "status": "PASS",
+  "observed_at_utc": "2026-09-23T11:55:41.156773+00:00",
+  "package_source_commit": "fdd135b56cd9449c188e8be842f969e2cba6b08b",
+  "checks": {
+    "raw_file_hashes_unchanged": true,
+    "raw_tree_oids_unchanged": true,
+    "v1_tag_resolves": true,
+    "selection_hash_frozen": true,
+    "commit_ancestry": true,
+    "target_and_regression_disjoint": true,
+    "visible_target_in_context": true,
+    "hidden_path_and_marker_absent_from_context": true,
+    "verification_passed": true,
+    "package_scan_passed": true,
+    "clean_extract_passed": true,
+    "archive_contains_verification": true
+  },
+  "raw_file_hashes": {
+    "results/live_codex/summary.md": true,
+    "results/v2/internal/comparison.json": true,
+    "results/v2/external/chipbench/evaluation.json": true,
+    "results/v2/internal/full_loop_public/results.json": true,
+    "results/v2/internal/full_loop_hidden/results.json": true,
+    "results/v2/external/chipbench/live/results.json": true
+  },
+  "raw_tree_oids": {
+    "results/live_codex": true,
+    "results/v2/internal": true,
+    "results/v2/external": true
+  },
+  "ancestry": {
+    "v1_to_package": true,
+    "selection_to_external": true,
+    "internal_to_package": true,
+    "external_to_package": true,
+    "demo_source_to_package": true
+  },
+  "zip_sha256": "f15c1602ec46e1afc9d6e3804c95d4d812ce735d3eefc46d6225f2e9f4bcb5b2",
+  "zip_bytes": 707252,
+  "zip_file_count": 642
+}

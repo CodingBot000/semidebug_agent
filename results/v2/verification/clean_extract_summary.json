@@ -1,0 +1,52 @@
+{
+  "status": "PASS",
+  "observed_at_utc": "2026-09-23T11:54:37.677594+00:00",
+  "zip_sha256": "f15c1602ec46e1afc9d6e3804c95d4d812ce735d3eefc46d6225f2e9f4bcb5b2",
+  "extractor": "unzip -q",
+  "commands": [
+    {
+      "command": [
+        "./scripts/bootstrap.sh"
+      ],
+      "exit_code": 0,
+      "duration_ms": 12278
+    },
+    {
+      "command": [
+        "./scripts/run_demo.sh",
+        "--replay"
+      ],
+      "exit_code": 0,
+      "duration_ms": 454,
+      "recorded_v2_replay": true
+    },
+    {
+      "command": [
+        "./scripts/run_demo.sh",
+        "--scripted"
+      ],
+      "exit_code": 0,
+      "duration_ms": 884,
+      "v2_hidden_demo_fixed": true
+    },
+    {
+      "command": [
+        "make",
+        "lint"
+      ],
+      "exit_code": 0,
+      "duration_ms": 529
+    },
+    {
+      "command": [
+        "make",
+        "test-all"
+      ],
+      "exit_code": 0,
+      "duration_ms": 6936,
+      "passed_count": 109
+    }
+  ],
+  "log": "results/v2/verification/clean_extract.log",
+  "log_sha256": "d2125b0524f8f76724382a4ca4a0664f4fd5a8051eae804343e639ed0e3131df"
+}
