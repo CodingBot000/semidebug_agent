@@ -75,3 +75,4 @@ All timestamps use UTC unless specified. Test and benchmark numbers come from ex
 - Source implementation committed and pushed as c024c43859128190a8e6afe26f54e1a0a53e6d45. GitHub Actions run 35824003905 started; final result will be recorded below.
 - Frozen holdout completed 6/6; first attempt 3/6. Overall 30/30, first attempt 23/30, 37 actual CLI calls, median 14,679.5ms. Input 234,948 including cached 78,848; output 12,223. Seven malformed diff proposals safely rejected then corrected. All raw runs, CSV/JSON summaries, optimized demo and pilot usage comparison exported under results/.
 - GitHub Actions run 35824003905 completed successfully for c024c43859128190a8e6afe26f54e1a0a53e6d45. Local 95-test suite and cloud CI both pass. API costs stay null because ChatGPT subscription authentication was used.
+- 2026-09-23: 사용자가 요청한 완료된 개발 계획 문서 `docs/SemiDebug_Agent_Codex_Development_Plan.md`를 저장소에서 삭제. 코드·가이드 문서 참조가 없는 것을 확인했으며, 제출 ZIP도 삭제 내용을 반영해 다시 생성함.
