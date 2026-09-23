@@ -55,14 +55,16 @@ def response(root, replacement=None):
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--output", type=Path, required=True)
+    parser.add_argument("--benchmark-root", type=Path, default=ROOT / "benchmark")
+    parser.add_argument("--expected-count", type=int, default=30)
     args = parser.parse_args()
     responses = []
-    for manifest in sorted((ROOT / "benchmark").rglob("case.json")):
+    for manifest in sorted(args.benchmark_root.rglob("case.json")):
         responses += response(manifest.parent)
     summary = run_benchmark(
-        ROOT / "benchmark", ScriptedProvider(responses), args.output, Settings()
+        args.benchmark_root, ScriptedProvider(responses), args.output, Settings()
     )
-    if summary["fixed"] != 30:
+    if summary["fixed"] != args.expected_count or summary["total"] != args.expected_count:
         raise SystemExit("Pipeline acceptance failed; inspect individual evidence")
     print(json.dumps(summary, indent=2))
 

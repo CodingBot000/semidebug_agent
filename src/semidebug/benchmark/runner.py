@@ -45,6 +45,7 @@ def run_benchmark(root: Path, provider, output: Path, settings):
             "regression_pass": r.regression_pass,
             "integrity_pass": r.integrity_pass,
             "invalid_patch_attempts": sum(a.guard_error is not None for a in r.patch_attempts),
+            "retry_reasons": ";".join(a.retry_reason or "" for a in r.patch_attempts),
             "duration_ms": r.duration_ms,
             "input_tokens": r.input_tokens,
             "output_tokens": r.output_tokens,

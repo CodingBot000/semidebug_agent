@@ -5,27 +5,31 @@ from semidebug.models import Case, EvidenceItem, ValidationBundle
 from semidebug.tools.workspace import safe_path
 
 
-def evidence_from(bundle: ValidationBundle, prefix: str) -> list[EvidenceItem]:
+def evidence_from(
+    bundle: ValidationBundle, prefix: str, *, evaluator_only: bool = False
+) -> list[EvidenceItem]:
     return [
         EvidenceItem(
-            id=f"{prefix}:{name}",
+            id=f"{prefix}:{index}" if evaluator_only else f"{prefix}:{name}",
             tool=r.tool,
             status=r.status,
-            message=(r.stdout + "\n" + r.stderr)[-8000:],
+            message=(
+                f"Evaluator-only regression {r.status}; test details withheld."
+                if evaluator_only
+                else (r.stdout + "\n" + r.stderr)[-8000:]
+            ),
         )
-        for name, r in bundle.results.items()
+        for index, (name, r) in enumerate(bundle.results.items(), 1)
     ]
 
 
 def select_context(
     root: Path, case: Case, evidence: list[EvidenceItem], limit: int = 40000
 ) -> dict:
-    # No directory walk: only manifest mutable RTL and immutable testbench sources are eligible.
+    # The evaluator runs regression sources, but only target sources enter a model request.
     logs = "\n".join(e.message for e in evidence)
     sources = {}
-    files = list(case.mutable) + list(
-        dict.fromkeys(s for t in [case.target, *case.regression] for s in t.sources)
-    )
+    files = list(case.mutable) + list(dict.fromkeys(case.target.sources))
     files.sort(key=lambda name: (name not in logs, name not in case.mutable))
     remaining = limit
     for name in files:
@@ -44,7 +48,7 @@ def select_context(
         remaining -= len(sources[name])
     return {
         "mutable": case.mutable,
-        "immutable": case.immutable,
+        "immutable": case.target.sources,
         "sources_with_line_numbers": sources,
         "evidence": [e.model_dump() for e in evidence],
     }

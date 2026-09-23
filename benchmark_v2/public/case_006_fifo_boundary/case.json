@@ -1,0 +1,46 @@
+{
+  "id": "case_006_fifo_boundary",
+  "category": "boundary",
+  "design_top": "fifo",
+  "mutable": [
+    "rtl/fifo.v"
+  ],
+  "immutable": [
+    "tb/fifo_tb.v",
+    "expected/metadata.json",
+    "tb/fifo_tb_hidden.v"
+  ],
+  "target": {
+    "name": "target",
+    "top": "fifo_tb",
+    "sources": [
+      "tb/fifo_tb.v"
+    ],
+    "plusargs": [
+      "+SEED=7"
+    ]
+  },
+  "regression": [
+    {
+      "name": "regression_17",
+      "top": "fifo_hidden_tb",
+      "sources": [
+        "tb/fifo_tb_hidden.v"
+      ],
+      "plusargs": [
+        "+SEED=17"
+      ]
+    },
+    {
+      "name": "regression_103",
+      "top": "fifo_hidden_tb",
+      "sources": [
+        "tb/fifo_tb_hidden.v"
+      ],
+      "plusargs": [
+        "+SEED=103"
+      ]
+    }
+  ],
+  "timeout_sec": 10
+}

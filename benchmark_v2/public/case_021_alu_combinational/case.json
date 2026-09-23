@@ -1,0 +1,46 @@
+{
+  "id": "case_021_alu_combinational",
+  "category": "combinational",
+  "design_top": "alu",
+  "mutable": [
+    "rtl/alu.v"
+  ],
+  "immutable": [
+    "tb/alu_tb.v",
+    "expected/metadata.json",
+    "tb/alu_tb_hidden.v"
+  ],
+  "target": {
+    "name": "target",
+    "top": "alu_tb",
+    "sources": [
+      "tb/alu_tb.v"
+    ],
+    "plusargs": [
+      "+SEED=7"
+    ]
+  },
+  "regression": [
+    {
+      "name": "regression_17",
+      "top": "alu_hidden_tb",
+      "sources": [
+        "tb/alu_tb_hidden.v"
+      ],
+      "plusargs": [
+        "+SEED=17"
+      ]
+    },
+    {
+      "name": "regression_103",
+      "top": "alu_hidden_tb",
+      "sources": [
+        "tb/alu_tb_hidden.v"
+      ],
+      "plusargs": [
+        "+SEED=103"
+      ]
+    }
+  ],
+  "timeout_sec": 10
+}

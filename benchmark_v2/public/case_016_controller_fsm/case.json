@@ -1,0 +1,46 @@
+{
+  "id": "case_016_controller_fsm",
+  "category": "fsm",
+  "design_top": "controller",
+  "mutable": [
+    "rtl/controller.v"
+  ],
+  "immutable": [
+    "tb/controller_tb.v",
+    "expected/metadata.json",
+    "tb/controller_tb_hidden.v"
+  ],
+  "target": {
+    "name": "target",
+    "top": "controller_tb",
+    "sources": [
+      "tb/controller_tb.v"
+    ],
+    "plusargs": [
+      "+SEED=7"
+    ]
+  },
+  "regression": [
+    {
+      "name": "regression_17",
+      "top": "controller_hidden_tb",
+      "sources": [
+        "tb/controller_tb_hidden.v"
+      ],
+      "plusargs": [
+        "+SEED=17"
+      ]
+    },
+    {
+      "name": "regression_103",
+      "top": "controller_hidden_tb",
+      "sources": [
+        "tb/controller_tb_hidden.v"
+      ],
+      "plusargs": [
+        "+SEED=103"
+      ]
+    }
+  ],
+  "timeout_sec": 10
+}

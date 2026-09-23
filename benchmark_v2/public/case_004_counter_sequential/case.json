@@ -1,0 +1,46 @@
+{
+  "id": "case_004_counter_sequential",
+  "category": "sequential",
+  "design_top": "counter",
+  "mutable": [
+    "rtl/counter.v"
+  ],
+  "immutable": [
+    "tb/counter_tb.v",
+    "expected/metadata.json",
+    "tb/counter_tb_hidden.v"
+  ],
+  "target": {
+    "name": "target",
+    "top": "counter_tb",
+    "sources": [
+      "tb/counter_tb.v"
+    ],
+    "plusargs": [
+      "+SEED=7"
+    ]
+  },
+  "regression": [
+    {
+      "name": "regression_17",
+      "top": "counter_hidden_tb",
+      "sources": [
+        "tb/counter_tb_hidden.v"
+      ],
+      "plusargs": [
+        "+SEED=17"
+      ]
+    },
+    {
+      "name": "regression_103",
+      "top": "counter_hidden_tb",
+      "sources": [
+        "tb/counter_tb_hidden.v"
+      ],
+      "plusargs": [
+        "+SEED=103"
+      ]
+    }
+  ],
+  "timeout_sec": 10
+}

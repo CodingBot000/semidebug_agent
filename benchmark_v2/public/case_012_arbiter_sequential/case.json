@@ -1,0 +1,46 @@
+{
+  "id": "case_012_arbiter_sequential",
+  "category": "sequential",
+  "design_top": "arbiter",
+  "mutable": [
+    "rtl/arbiter.v"
+  ],
+  "immutable": [
+    "tb/arbiter_tb.v",
+    "expected/metadata.json",
+    "tb/arbiter_tb_hidden.v"
+  ],
+  "target": {
+    "name": "target",
+    "top": "arbiter_tb",
+    "sources": [
+      "tb/arbiter_tb.v"
+    ],
+    "plusargs": [
+      "+SEED=7"
+    ]
+  },
+  "regression": [
+    {
+      "name": "regression_17",
+      "top": "arbiter_hidden_tb",
+      "sources": [
+        "tb/arbiter_tb_hidden.v"
+      ],
+      "plusargs": [
+        "+SEED=17"
+      ]
+    },
+    {
+      "name": "regression_103",
+      "top": "arbiter_hidden_tb",
+      "sources": [
+        "tb/arbiter_tb_hidden.v"
+      ],
+      "plusargs": [
+        "+SEED=103"
+      ]
+    }
+  ],
+  "timeout_sec": 10
+}

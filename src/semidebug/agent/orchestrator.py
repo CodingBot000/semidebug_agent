@@ -14,7 +14,7 @@ from semidebug.llm.base import LLMProvider, ProviderError
 from semidebug.models import Analysis, EvidenceItem, PatchAttempt, PatchProposal, RunState
 from semidebug.patch.apply import apply_patches
 from semidebug.patch.guard import guard_patch
-from semidebug.patch.parser import PatchError
+from semidebug.patch.parser import PatchError, parse_diff
 from semidebug.report.renderer import save_report
 from semidebug.tools.validation import regress, validate
 from semidebug.tools.workspace import copy_project, hashes
@@ -36,6 +36,34 @@ def save_bundle(directory, bundle):
             + "\n"
             + result.stderr
         )
+
+
+def provider_history(attempts: list[PatchAttempt]) -> list[dict]:
+    """Return retry context without evaluator-only commands or expected values."""
+    entries = []
+    for attempt in attempts:
+        entry = attempt.model_dump()
+        if entry["validation"]:
+            for result in entry["validation"]["results"].values():
+                result["stdout"] = result["stdout"][-4000:]
+                result["stderr"] = result["stderr"][-4000:]
+        if entry["regression"]:
+            entry["regression"] = {
+                "results": {
+                    f"check_{index}": {"tool": result["tool"], "status": result["status"]}
+                    for index, result in enumerate(entry["regression"]["results"].values(), 1)
+                }
+            }
+        entries.append(entry)
+    return entries
+
+
+def validation_retry_reason(bundle) -> str | None:
+    for check in ("compile", "simulation", "lint", "synthesis"):
+        result = bundle.results.get(check)
+        if result and result.status != "pass":
+            return f"{check.upper()}_RETRY"
+    return None
 
 
 def repair(
@@ -96,19 +124,6 @@ def repair(
         ):
             raise PatchError("Project or immutable files changed outside permitted patch")
 
-    def history():
-        # Bounded summaries retain actual commands and failures without huge repeated synthesis logs.
-        entries = []
-        for a in state.patch_attempts:
-            entry = a.model_dump()
-            for key in ["validation", "regression"]:
-                if entry[key]:
-                    for result in entry[key]["results"].values():
-                        result["stdout"] = result["stdout"][-4000:]
-                        result["stderr"] = result["stderr"][-4000:]
-            entries.append(entry)
-        return entries
-
     def validation(workspace, regression=False):
         function = regress if regression else validate
         if settings.eda_runtime == "native":
@@ -149,7 +164,9 @@ def repair(
                     state.final_status = "ALREADY_PASS"
                     state.regression_pass = True
                 else:
-                    state.evidence += evidence_from(baseline_regression, "baseline-regression")
+                    state.evidence += evidence_from(
+                        baseline_regression, "baseline-regression", evaluator_only=True
+                    )
             seen = set()
             rejected = 0
             fingerprints = set()
@@ -159,7 +176,7 @@ def repair(
                 state.iteration = iteration
                 event("COLLECT_EVIDENCE")
                 context = select_context(baseline_root, case, state.evidence)
-                context["previous_attempts"] = history()
+                context["previous_attempts"] = provider_history(state.patch_attempts)
                 event("ANALYZE")
                 analysis = provider.generate_structured(
                     {"system": ANALYZER, "context": context}, Analysis
@@ -179,6 +196,7 @@ def repair(
                 (attempt_dir / "patch.diff").write_text(proposal.unified_diff)
                 digest = hashlib.sha256(proposal.unified_diff.encode()).hexdigest()
                 if digest in seen:
+                    attempt.retry_reason = "REPEATED_PATCH_STOP"
                     state.final_status = "REPEATED_PATCH"
                     state.failure_reason = "Provider repeated a previous diff"
                     event("FAILED", state.failure_reason)
@@ -188,11 +206,18 @@ def repair(
                 copy_project(project, candidate, files)
                 event("GUARD_PATCH")
                 try:
+                    parse_diff(proposal.unified_diff)
                     patches = guard_patch(proposal.unified_diff, candidate, case)
                     event("APPLY_PATCH")
                     apply_patches(candidate, patches)
                 except (PatchError, ValueError) as exc:
                     attempt.guard_error = str(exc)
+                    try:
+                        parse_diff(proposal.unified_diff)
+                    except PatchError:
+                        attempt.retry_reason = "PATCH_PARSE_RETRY"
+                    else:
+                        attempt.retry_reason = "PATCH_GUARD_RETRY"
                     rejected += 1
                     state.evidence = evidence_from(state.baseline, "baseline") + [
                         EvidenceItem(
@@ -218,6 +243,7 @@ def repair(
                 integrity(candidate)
                 state.evidence = evidence_from(attempt.validation, f"attempt-{iteration}")
                 if attempt.validation.infrastructure_error:
+                    attempt.retry_reason = "INFRA_ERROR"
                     state.final_status = "INFRA_ERROR"
                     state.failure_reason = "Validation infrastructure failure"
                     break
@@ -237,11 +263,17 @@ def repair(
                             destination.write_bytes((candidate / name).read_bytes())
                         event("SUCCESS", "All independent validators and regression passed")
                         break
-                    state.evidence += evidence_from(attempt.regression, f"regression-{iteration}")
+                    attempt.retry_reason = "REGRESSION_RETRY"
+                    state.evidence += evidence_from(
+                        attempt.regression, f"regression-{iteration}", evaluator_only=True
+                    )
                     if attempt.regression.infrastructure_error:
+                        attempt.retry_reason = "INFRA_ERROR"
                         state.final_status = "INFRA_ERROR"
                         state.failure_reason = "Regression infrastructure failure"
                         break
+                else:
+                    attempt.retry_reason = validation_retry_reason(attempt.validation)
                 fingerprint = (
                     hypothesis.summary,
                     tuple(
@@ -249,6 +281,7 @@ def repair(
                     ),
                 )
                 if fingerprint in fingerprints:
+                    attempt.retry_reason = "REPEATED_FAILURE_STOP"
                     state.final_status = "REPEATED_FAILURE"
                     state.failure_reason = "Repeated hypothesis and failure evidence"
                     break
@@ -261,6 +294,8 @@ def repair(
             state.immutable_after = hashes(baseline_root, immutable)
             state.integrity_pass = True
     except ProviderError as exc:
+        if state.patch_attempts and state.patch_attempts[-1].proposal is None:
+            state.patch_attempts[-1].retry_reason = "LLM_ERROR"
         state.final_status = "LLM_ERROR"
         state.failure_reason = str(exc)
     except PatchError as exc:

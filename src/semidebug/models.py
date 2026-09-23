@@ -83,6 +83,22 @@ class PatchAttempt(Model):
     guard_error: str | None = None
     validation: ValidationBundle | None = None
     regression: ValidationBundle | None = None
+    retry_reason: (
+        Literal[
+            "PATCH_PARSE_RETRY",
+            "PATCH_GUARD_RETRY",
+            "COMPILE_RETRY",
+            "SIMULATION_RETRY",
+            "LINT_RETRY",
+            "SYNTHESIS_RETRY",
+            "REGRESSION_RETRY",
+            "REPEATED_PATCH_STOP",
+            "REPEATED_FAILURE_STOP",
+            "LLM_ERROR",
+            "INFRA_ERROR",
+        ]
+        | None
+    ) = None
 
 
 class RunState(Model):
