@@ -91,6 +91,10 @@ class RunState(Model):
     category: str
     provider: str
     model: str
+    reasoning_effort: str | None = None
+    billing_mode: str | None = None
+    cached_input_tokens: int = 0
+    provider_metadata: dict = Field(default_factory=dict)
     iteration: int = 0
     max_iterations: int
     project_root: str

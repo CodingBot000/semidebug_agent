@@ -31,6 +31,10 @@ def aggregate(runs: list[RunState]) -> dict:
         "median_repair_time_ms": statistics.median(r.duration_ms for r in runs) if runs else 0,
         "average_llm_calls": statistics.mean(r.llm_calls for r in runs) if runs else 0,
         "input_tokens": sum(r.input_tokens for r in runs),
+        "cached_input_tokens": sum(r.cached_input_tokens for r in runs),
+        "models": sorted({r.model for r in runs}),
+        "reasoning_efforts": sorted({r.reasoning_effort for r in runs if r.reasoning_effort}),
+        "billing_modes": sorted({r.billing_mode for r in runs if r.billing_mode}),
         "output_tokens": sum(r.output_tokens for r in runs),
         "estimated_cost": sum(r.estimated_cost for r in runs)
         if runs and all(r.estimated_cost is not None for r in runs)

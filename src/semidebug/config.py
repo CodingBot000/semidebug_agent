@@ -6,6 +6,10 @@ from dotenv import load_dotenv
 
 @dataclass(frozen=True)
 class Settings:
+    codex_model: str = "gpt-6-sol"
+    reasoning_effort: str = "low"
+    codex_timeout: float = 180
+    eda_runtime: str = "native"
     api_key: str = ""
     model: str = ""
     base_url: str = "https://api.openai.com/v1"
@@ -25,6 +29,10 @@ class Settings:
             return float(value) if value else None
 
         result = cls(
+            codex_model=os.getenv("SEMIDEBUG_CODEX_MODEL", "gpt-6-sol"),
+            reasoning_effort=os.getenv("SEMIDEBUG_REASONING_EFFORT", "low"),
+            codex_timeout=float(os.getenv("SEMIDEBUG_CODEX_TIMEOUT", "180")),
+            eda_runtime=os.getenv("SEMIDEBUG_EDA_RUNTIME", "native"),
             api_key=os.getenv("OPENAI_API_KEY", ""),
             model=os.getenv("OPENAI_MODEL", ""),
             base_url=os.getenv("OPENAI_BASE_URL", "https://api.openai.com/v1"),
@@ -37,6 +45,12 @@ class Settings:
         )
         if not 1 <= result.max_iterations <= 10 or not 0 < result.api_timeout <= 300:
             raise ValueError("Invalid iteration or API timeout limits")
+        if result.eda_runtime not in {"native", "docker"}:
+            raise ValueError("EDA runtime must be native or docker")
+        if result.reasoning_effort not in {"low", "medium", "high", "xhigh", "max"}:
+            raise ValueError("Unsupported reasoning effort")
+        if not 0 < result.codex_timeout <= 600:
+            raise ValueError("Codex timeout must be 1..600 seconds")
         if any(p is not None and p < 0 for p in [result.input_price, result.output_price]):
             raise ValueError("Token prices must be non-negative")
         return result

@@ -10,6 +10,7 @@ def render_run(state: RunState) -> str:
         f"**{state.final_status}** — provider `{state.provider}`, model `{state.model}`.",
         "",
         f"Category: {state.category}. Immutable integrity: {state.integrity_pass}.",
+        f"Reasoning: {state.reasoning_effort or 'unspecified'}; billing: {state.billing_mode or 'unspecified'}.",
         f"Failure reason: {state.failure_reason or 'none'}",
         "",
         "| Check | Baseline | "

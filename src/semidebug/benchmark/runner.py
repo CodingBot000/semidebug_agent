@@ -15,6 +15,18 @@ def run_benchmark(root: Path, provider, output: Path, settings):
     for case in cases:
         result = repair(case, provider, output / "runs", settings)
         runs.append(result)
+        (output / "checkpoint.json").write_text(
+            json.dumps(
+                {
+                    "completed": len(runs),
+                    "total": len(cases),
+                    "last_case": result.case_id,
+                    "results": [r.model_dump() for r in runs],
+                },
+                indent=2,
+            )
+            + "\n"
+        )
         print(f"{result.case_id}: {result.final_status} ({result.iteration} attempts)", flush=True)
     summary = aggregate(runs)
     (output / "summary.json").write_text(json.dumps(summary, indent=2) + "\n")

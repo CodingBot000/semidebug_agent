@@ -48,6 +48,8 @@ def repair(
     case = load_case(project)
     started = time.monotonic()
     initial_usage = (provider.calls, provider.input_tokens, provider.output_tokens)
+    initial_cached = getattr(provider, "cached_input_tokens", 0)
+    initial_records = len(getattr(provider, "invocations", []))
     run_id = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%S") + "-" + uuid.uuid4().hex[:8]
     directory = output / run_id
     directory.mkdir(parents=True, exist_ok=False)
@@ -60,6 +62,8 @@ def repair(
         category=case.category,
         provider=provider.name,
         model=provider.model,
+        reasoning_effort=getattr(provider, "reasoning_effort", None),
+        billing_mode=getattr(provider, "billing_mode", None),
         max_iterations=settings.max_iterations,
         project_root=project.name,
         mutable_files=case.mutable,
@@ -105,14 +109,26 @@ def repair(
             entries.append(entry)
         return entries
 
+    def validation(workspace, regression=False):
+        function = regress if regression else validate
+        if settings.eda_runtime == "native":
+            return function(workspace, case)
+        from semidebug.tools.docker import docker_validation
+
+        return docker_validation(workspace, "regression" if regression else "target", case)
+
+    work_parent = None
+    if settings.eda_runtime == "docker":
+        work_parent = Path.home() / ".cache" / "semidebug" / "workspaces"
+        work_parent.mkdir(parents=True, exist_ok=True)
     try:
         event("LOAD_PROJECT")
-        with tempfile.TemporaryDirectory(prefix="semidebug-") as temporary:
+        with tempfile.TemporaryDirectory(prefix="semidebug-", dir=work_parent) as temporary:
             root = Path(temporary)
             baseline_root = root / "baseline"
             copy_project(project, baseline_root, files)
             event("BASELINE")
-            state.baseline = validate(baseline_root, case)
+            state.baseline = validation(baseline_root)
             state.current_validation = state.baseline
             save_bundle(directory / "baseline", state.baseline)
             integrity(baseline_root)
@@ -123,7 +139,7 @@ def repair(
                     "Required EDA executable unavailable or output limit exceeded"
                 )
             elif state.baseline.passed:
-                baseline_regression = regress(baseline_root, case)
+                baseline_regression = validation(baseline_root, regression=True)
                 save_bundle(directory / "baseline" / "regression", baseline_regression)
                 integrity(baseline_root)
                 if baseline_regression.infrastructure_error:
@@ -196,7 +212,7 @@ def repair(
                 rejected = 0
                 integrity(candidate)
                 event("VALIDATE_TARGET")
-                attempt.validation = validate(candidate, case)
+                attempt.validation = validation(candidate)
                 state.current_validation = attempt.validation
                 save_bundle(attempt_dir, attempt.validation)
                 integrity(candidate)
@@ -207,7 +223,7 @@ def repair(
                     break
                 if attempt.validation.passed:
                     event("VALIDATE_REGRESSION")
-                    attempt.regression = regress(candidate, case)
+                    attempt.regression = validation(candidate, regression=True)
                     save_bundle(attempt_dir / "regression", attempt.regression)
                     integrity(candidate)
                     if attempt.regression.passed:
@@ -273,8 +289,15 @@ def repair(
         state.llm_calls = provider.calls - initial_usage[0]
         state.input_tokens = provider.input_tokens - initial_usage[1]
         state.output_tokens = provider.output_tokens - initial_usage[2]
+        state.cached_input_tokens = getattr(provider, "cached_input_tokens", 0) - initial_cached
+        state.provider_metadata = (
+            {"invocations": getattr(provider, "invocations", [])[initial_records:]}
+            if hasattr(provider, "invocations")
+            else {}
+        )
         if (
-            settings.input_price is not None
+            state.billing_mode != "chatgpt-subscription"
+            and settings.input_price is not None
             and settings.output_price is not None
             and settings.price_source
         ):
