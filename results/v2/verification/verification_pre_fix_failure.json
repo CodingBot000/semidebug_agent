@@ -1,0 +1,56 @@
+{
+  "observed_at_utc": "2026-09-23T11:51:04.541526+00:00",
+  "source_commit": "b145999d2540cd955b5f8afdd6382e67fe66a134",
+  "status": "FAIL",
+  "checks": {
+    "lint": {
+      "command": [
+        "make",
+        "lint"
+      ],
+      "exit_code": 0,
+      "duration_ms": 66,
+      "log": "results/v2/verification/lint.log",
+      "log_sha256": "70715e1b3018a380262fdaf919aa4e1e40b3ca612f3445c498f667b5ef57cafd",
+      "status": "PASS"
+    },
+    "tests": {
+      "command": [
+        "make",
+        "test-all"
+      ],
+      "exit_code": 2,
+      "duration_ms": 7058,
+      "log": "results/v2/verification/test_all.log",
+      "log_sha256": "f40e7727fb038f5aeac2a05699764556b40a2693baf1e9452e1be7d726f1d6b7",
+      "passed_count": 108,
+      "status": "FAIL"
+    },
+    "scripted_v2_demo": {
+      "command": [
+        "./scripts/run_demo.sh",
+        "--scripted"
+      ],
+      "exit_code": 0,
+      "duration_ms": 585,
+      "log": "results/v2/verification/scripted_demo.log",
+      "log_sha256": "22f88bacfd201cfa446d46d29ef943368a3b989f867e8387bcbd8d88e43768e0",
+      "status": "PASS",
+      "result": "results/v2/verification/scripted_demo_result.json",
+      "report": "results/v2/verification/scripted_demo_report.md",
+      "gates": {
+        "case_is_v2_demo": true,
+        "scripted_provider": true,
+        "baseline_failed": true,
+        "patch_accepted": true,
+        "compile_pass": true,
+        "simulation_pass": true,
+        "lint_pass": true,
+        "synthesis_pass": true,
+        "hidden_regression_pass": true,
+        "integrity_pass": true,
+        "final_fixed": true
+      }
+    }
+  }
+}

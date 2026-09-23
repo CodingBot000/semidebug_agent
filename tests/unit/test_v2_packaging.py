@@ -1,4 +1,5 @@
 import importlib.util
+import zipfile
 from pathlib import Path
 
 import pytest
@@ -24,3 +25,24 @@ def test_v2_package_rejects_missing_link_local_path_and_secret(tmp_path):
     source.write_text("sk-" + "a" * 30)
     with pytest.raises(ValueError, match="Potential secret"):
         package_v2.verify({"README.md": source})
+
+
+def test_v2_package_scan_rejects_external_reference(tmp_path):
+    archive = tmp_path / "submission.zip"
+    required = {
+        "README.md",
+        "PORTFOLIO_EVIDENCE.md",
+        "results/v2/PROVENANCE.json",
+        "results/v2/verification/verification_summary.json",
+        "results/v2/verification/lint.log",
+        "results/v2/verification/test_all.log",
+        "results/v2/verification/scripted_demo.log",
+        "results/v2/verification/scripted_demo_result.json",
+        "results/v2/verification/scripted_demo_report.md",
+    }
+    with zipfile.ZipFile(archive, "w") as stream:
+        for name in required:
+            stream.writestr(f"{package_v2.PREFIX}/{name}", "ok")
+        stream.writestr(f"{package_v2.PREFIX}/external/chipbench/cases/item_ref.sv", "ref")
+    with pytest.raises(ValueError, match="Forbidden"):
+        package_v2.scan_archive(archive)

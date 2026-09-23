@@ -1,0 +1,21 @@
+Command: make test-all
+Exit code: 2
+
+./scripts/docker_run.sh pytest -p no:cacheprovider -q
+........................................................................ [ 66%]
+....................................F                                    [100%]
+=================================== FAILURES ===================================
+_______________ test_v2_package_scan_rejects_external_reference ________________
+
+tmp_path = PosixPath('/tmp/pytest-of-unknown/pytest-0/test_v2_package_scan_rejects_e0')
+
+>   ???
+E   AssertionError: Regex pattern did not match.
+E     Expected regex: 'Forbidden'
+E     Actual message: "Required ZIP members missing: ['results/v2/verification/scripted_demo_report.md', 'results/v2/verification/scripted_demo_result.json']"
+
+/Users/switch/Development/Web/semidebug_agent/tests/unit/test_v2_packaging.py:45: AssertionError
+=========================== short test summary info ============================
+FAILED tests/unit/test_v2_packaging.py::test_v2_package_scan_rejects_external_reference
+1 failed, 108 passed in 6.27s
+make: *** [test-all] Error 1

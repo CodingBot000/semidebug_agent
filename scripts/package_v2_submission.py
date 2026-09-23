@@ -2,9 +2,11 @@
 """Build a self-contained V2 submission ZIP with selected, inspectable evidence."""
 
 import hashlib
+import json
 import posixpath
 import re
 import zipfile
+from datetime import datetime, timezone
 from pathlib import Path
 from urllib.parse import unquote
 
@@ -45,6 +47,14 @@ DOC_FILES = (
 RESULT_FILES = (
     "results/README.md",
     "results/v2/README.md",
+    "results/v2/PROVENANCE.json",
+    "results/v2/verification/environment.json",
+    "results/v2/verification/lint.log",
+    "results/v2/verification/test_all.log",
+    "results/v2/verification/scripted_demo.log",
+    "results/v2/verification/scripted_demo_result.json",
+    "results/v2/verification/scripted_demo_report.md",
+    "results/v2/verification/verification_summary.json",
     "results/dataset_audit.json",
     "results/benchmark_results.json",
     "results/benchmark_results.csv",
@@ -129,9 +139,12 @@ def entries(root: Path) -> dict[str, Path]:
 
 
 def verify(selected: dict[str, Path]) -> None:
+    verify_bytes({name: path.read_bytes() for name, path in selected.items()})
+
+
+def verify_bytes(selected: dict[str, bytes]) -> None:
     names = set(selected)
-    for name, path in selected.items():
-        data = path.read_bytes()
+    for name, data in selected.items():
         if any(pattern.search(data) for pattern in SECRETS):
             raise ValueError(f"Potential secret in {name}; value withheld")
         if LOCAL_PATH.search(data):
@@ -150,6 +163,63 @@ def verify(selected: dict[str, Path]) -> None:
                     raise ValueError(f"Broken relative Markdown link in {name}: {target}")
 
 
+def scan_archive(output: Path) -> dict:
+    with zipfile.ZipFile(output) as archive:
+        members = archive.namelist()
+        if len(members) != len(set(members)):
+            raise ValueError("Duplicate ZIP member")
+        if any(not name.startswith(PREFIX + "/") for name in members):
+            raise ValueError("ZIP member outside submission root")
+        if any(
+            not (relative := name.removeprefix(PREFIX + "/"))
+            or posixpath.normpath(relative) != relative
+            or relative.startswith("/")
+            for name in members
+        ):
+            raise ValueError("Unsafe ZIP member path")
+        files = {name.removeprefix(PREFIX + "/"): archive.read(name) for name in members}
+    names = set(files)
+    required = {
+        "README.md",
+        "PORTFOLIO_EVIDENCE.md",
+        "results/v2/PROVENANCE.json",
+        "results/v2/verification/verification_summary.json",
+        "results/v2/verification/lint.log",
+        "results/v2/verification/test_all.log",
+        "results/v2/verification/scripted_demo.log",
+        "results/v2/verification/scripted_demo_result.json",
+        "results/v2/verification/scripted_demo_report.md",
+    }
+    if not required <= names:
+        raise ValueError(f"Required ZIP members missing: {sorted(required - names)}")
+    if any(
+        name.startswith("external/chipbench/cases/")
+        or name.endswith(("_ref.sv", "_test.sv"))
+        or any(part in {".git", ".codex", "auth.json", "credentials"} for part in name.split("/"))
+        or (Path(name).name.startswith(".env") and Path(name).name != ".env.example")
+        for name in names
+    ):
+        raise ValueError("Forbidden credential, metadata or external reference ZIP member")
+    verify_bytes(files)
+    size = output.stat().st_size
+    if size >= LIMIT:
+        raise ValueError(f"Submission size {size} is not below {LIMIT} bytes")
+    return {
+        "status": "PASS",
+        "observed_at_utc": datetime.now(timezone.utc).isoformat(),
+        "zip_bytes": size,
+        "file_count": len(files),
+        "zip_sha256": hashlib.sha256(output.read_bytes()).hexdigest(),
+        "under_50mb": True,
+        "secret_scan": "PASS",
+        "markdown_links": "PASS",
+        "absolute_paths": "PASS",
+        "git_metadata_absent": True,
+        "credential_files_absent": True,
+        "external_reference_solutions_absent": True,
+    }
+
+
 def package(root: Path = ROOT) -> Path:
     selected = entries(root)
     verify(selected)
@@ -161,11 +231,16 @@ def package(root: Path = ROOT) -> Path:
             info.compress_type = zipfile.ZIP_DEFLATED
             info.external_attr = (0o100755 if path.suffix == ".sh" else 0o100644) << 16
             archive.writestr(info, path.read_bytes())
-    size = output.stat().st_size
-    if size >= LIMIT:
+    try:
+        scan = scan_archive(output)
+    except ValueError:
         output.unlink()
-        raise ValueError(f"Submission size {size} is not below {LIMIT} bytes")
-    digest = hashlib.sha256(output.read_bytes()).hexdigest()
+        raise
+    scan_path = root / "results/v2/verification/package_scan.json"
+    scan_path.parent.mkdir(parents=True, exist_ok=True)
+    scan_path.write_text(json.dumps(scan, indent=2) + "\n")
+    size = scan["zip_bytes"]
+    digest = scan["zip_sha256"]
     output.with_suffix(".sha256").write_text(f"{digest}  {output.name}\n")
     print(f"ZIP: {output}\nBytes: {size}\nSHA256: {digest}\nFiles: {len(selected)}")
     return output

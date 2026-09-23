@@ -1,0 +1,76 @@
+{
+  "generated_at_utc": "2026-09-23T11:46:55.394368+00:00",
+  "repository": "SemiDebug Agent",
+  "method": "Tracked source commit precedes this provenance/package commit; a file cannot contain its own final commit hash. The package source commit is recorded in the completion report outside the ZIP.",
+  "v1": {
+    "tag": "semidebug-v1-baseline",
+    "commit": {
+      "commit": "afc0582e08ba5463a0d4e35630dbebc7432028d4",
+      "committed_at": "2026-09-23T16:41:21+09:00",
+      "subject": "docs: remove completed development plan"
+    },
+    "tag_resolves_to_expected_commit": true
+  },
+  "chipbench_selection": {
+    "commit": {
+      "commit": "9e0bc2b3190ba2f1db0ffd391081240730b5f89d",
+      "committed_at": "2026-09-23T19:19:02+09:00",
+      "subject": "Freeze ChipBench external evaluation selection"
+    },
+    "manifest_sha256_at_commit": "sha256:827371795f7def7709c74f58ae0358e4476f46326227e3cfc88adf04fd4b6874",
+    "working_tree_manifest_sha256": "sha256:827371795f7def7709c74f58ae0358e4476f46326227e3cfc88adf04fd4b6874",
+    "manifest_unchanged_since_selection": true
+  },
+  "evaluations": {
+    "internal_source": {
+      "commit": "099188fa0b5dee64fe9ec3306ff559101ad728d3",
+      "committed_at": "2026-09-23T19:23:20+09:00",
+      "subject": "Separate V2 hidden regression and classify retries"
+    },
+    "external_source": {
+      "commit": "a332e03a261f62b569ed86d3039e426bdd58185f",
+      "committed_at": "2026-09-23T19:42:58+09:00",
+      "subject": "Add V2 internal measurements and ChipBench adapter"
+    }
+  },
+  "submission": {
+    "source_commit": {
+      "commit": "b145999d2540cd955b5f8afdd6382e67fe66a134",
+      "committed_at": "2026-09-23T20:45:20+09:00",
+      "subject": "Use V2 hidden regression in default demo"
+    },
+    "packaging_commit": null
+  },
+  "ancestry": {
+    "v1_to_submission_source": {
+      "is_ancestor": true,
+      "exit_code": 0
+    },
+    "selection_to_external_evaluation": {
+      "is_ancestor": true,
+      "exit_code": 0
+    },
+    "internal_evaluation_to_submission_source": {
+      "is_ancestor": true,
+      "exit_code": 0
+    },
+    "external_evaluation_to_submission_source": {
+      "is_ancestor": true,
+      "exit_code": 0
+    }
+  },
+  "raw_result_tree_oids": {
+    "results/live_codex": "a72334b98cb01c2494c5c33a68aefafcd09c98ab",
+    "results/v2/internal": "737212e5b9663af0edcd4cf68c8fdc88a3849297",
+    "results/v2/external": "97513240fedc9be459810bc61e44a79444d57c8e"
+  },
+  "artifacts": {
+    "external/chipbench/selection_manifest.json": "sha256:827371795f7def7709c74f58ae0358e4476f46326227e3cfc88adf04fd4b6874",
+    "results/v2/internal/comparison.json": "sha256:77c3073d4e42e427797ae5e1431ac43445bd9c0c7e3b243fcfa710e8d42cf2a8",
+    "results/v2/external/chipbench/evaluation.json": "sha256:0767744b74dc555d5f9a0d7cfbab308460374b2e7a6158d498db23234e5897aa",
+    "docs/V2_EVALUATION.md": "sha256:da7387bdf0c393a2b1f39576a498efa620c05f55bc114c3461624159fc45a880",
+    "PORTFOLIO_EVIDENCE.md": "sha256:b73a9f298c16a0aefbf95ed3def8749efcf4b964a5d647bef1b66de3e46882c4",
+    "README.md": "sha256:2cebc6987fdd04ed6166a3768ddd5b035e02b49c5dd066bab809e0e04e6d901d",
+    "results/live_codex/summary.md": "sha256:8682b2a4c85c61eb3c67eb8286f59038cd5390a769db50780d9a3220e0aa05e7"
+  }
+}

@@ -1,0 +1,7 @@
+Command: make test-all
+Exit code: 0
+
+./scripts/docker_run.sh pytest -p no:cacheprovider -q
+........................................................................ [ 66%]
+.....................................                                    [100%]
+109 passed in 6.37s
