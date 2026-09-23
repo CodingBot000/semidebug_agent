@@ -8,7 +8,7 @@ Install Git, [uv](https://docs.astral.sh/uv/getting-started/installation/) and D
 ./scripts/run_demo.sh --scripted
 ```
 
-Replay reads saved evidence only. Scripted mode uses a supplied known fix while running Icarus, VVP, Verilator, Yosys and regression tests for real. Neither command measures AI repair performance. `make test-all` and `make lint` verify the included source; `make package` creates the V2 ZIP under `dist/`.
+Replay reads the saved V2 semantic-retry evidence only (`--replay-v1` shows the historical V1 sample). Scripted mode uses the new V2 FIFO fixture with separate visible target and evaluator-only regression sources. It supplies a known fix while running Icarus, VVP, Verilator, Yosys and hidden regression tests for real. Neither command measures AI repair performance. `make test-all` and `make lint` verify the included source; `make package` creates the V2 ZIP under `dist/`.
 
 For live inference, install/update the Codex CLI, sign in with ChatGPT and run the demo:
 

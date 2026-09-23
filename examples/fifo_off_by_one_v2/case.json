@@ -1,0 +1,51 @@
+{
+  "id": "demo_fifo_off_by_one_v2",
+  "category": "boundary",
+  "design_top": "fifo",
+  "mutable": [
+    "rtl/fifo.v"
+  ],
+  "immutable": [
+    "tb/fifo_target_tb.v",
+    "tb/fifo_hidden_regression_17_tb.v",
+    "tb/fifo_hidden_regression_103_tb.v",
+    "expected/metadata.json"
+  ],
+  "target": {
+    "name": "target",
+    "top": "fifo_target_tb",
+    "sources": [
+      "tb/fifo_target_tb.v"
+    ],
+    "plusargs": [
+      "+SEED=7"
+    ]
+  },
+  "regression": [
+    {
+      "name": "regression_17",
+      "top": "fifo_hidden_regression_17_tb",
+      "sources": [
+        "tb/fifo_hidden_regression_17_tb.v"
+      ],
+      "plusargs": [
+        "+SEED=17"
+      ]
+    },
+    {
+      "name": "regression_103",
+      "top": "fifo_hidden_regression_103_tb",
+      "sources": [
+        "tb/fifo_hidden_regression_103_tb.v"
+      ],
+      "plusargs": [
+        "+SEED=103"
+      ]
+    }
+  ],
+  "timeout_sec": 10,
+  "prompt_visible": [
+    "rtl/fifo.v",
+    "tb/fifo_target_tb.v"
+  ]
+}

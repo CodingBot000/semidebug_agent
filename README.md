@@ -37,7 +37,7 @@ Git, [uv](https://docs.astral.sh/uv/getting-started/installation/)와 실행 중
 ./scripts/run_demo.sh --scripted
 ```
 
-이 데모는 알려진 패치를 사용하지만 EDA와 회귀 테스트는 매번 실제 실행합니다. AI 성능 측정은 아닙니다. 기존 기록만 보려면 `./scripts/run_demo.sh --replay`를 실행하세요.
+기본 데모와 scripted 데모는 모두 V2 FIFO fixture를 사용합니다. 모델에 보이는 target 테스트와 평가 전용 hidden regression 소스가 분리되어 있고, 이 데모는 알려진 패치를 사용하더라도 EDA와 hidden regression을 매번 실제 실행합니다. AI 성능 측정은 아닙니다. `./scripts/run_demo.sh --replay`는 기록된 V2 semantic retry를 보여주며, V1 기록은 `--replay-v1`로 볼 수 있습니다.
 
 실제 AI 데모는 호스트의 ChatGPT 인증을 사용합니다.
 
@@ -55,6 +55,7 @@ API 키는 기본 Codex CLI 경로에 필요하지 않습니다. 구독 사용 �
 - [내부 one-shot 대 feedback loop 비교](results/v2/internal/comparison.md)
 - [외부 12건 전체 결과](results/v2/external/chipbench/evaluation.md)와 [사전 고정 선정 규칙](docs/EXTERNAL_BENCHMARK_PROTOCOL.md)
 - [실제 semantic retry](results/v2/evidence/semantic_retry/report.md)와 [최종 실패](results/v2/evidence/final_failure/report.md)
+- [Git 기반 provenance](results/v2/PROVENANCE.json)와 [최신 로컬 검증 기록](results/v2/verification/verification_summary.json)
 - [포트폴리오 근거](PORTFOLIO_EVIDENCE.md) · [제출물 안내](SUBMISSION_GUIDE.md)
 
 V2 내부 데이터셋은 `benchmark_v2/`, 실행 코드는 `src/semidebug/`, 모델과 독립된 정답·데이터셋 생성 코드는 `evaluator/`에 있습니다. 외부 원본 데이터는 ZIP에 넣지 않고 [해시가 기록된 선정 목록](external/chipbench/selection_manifest.json)과 가져오기 스크립트를 제공합니다.
