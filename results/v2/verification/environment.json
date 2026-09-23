@@ -1,5 +1,5 @@
 {
-  "observed_at_utc": "2026-09-23T11:51:41.298284+00:00",
+  "observed_at_utc": "2026-09-23T13:39:08.252966+00:00",
   "os": "Darwin",
   "os_release": "25.5.0",
   "architecture": "arm64",
@@ -24,5 +24,5 @@
     "available": true,
     "detail": "codex-cli 0.156.1"
   },
-  "git_source_commit": "b145999d2540cd955b5f8afdd6382e67fe66a134"
+  "git_source_commit": "7e13e28eefa1a3b7dda314e7b5b602ae051f929e"
 }

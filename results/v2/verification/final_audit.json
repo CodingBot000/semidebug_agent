@@ -1,20 +1,19 @@
 {
   "status": "PASS",
-  "observed_at_utc": "2026-09-23T11:55:41.156773+00:00",
-  "package_source_commit": "fdd135b56cd9449c188e8be842f969e2cba6b08b",
+  "observed_at_utc": "2026-09-23T13:42:36.336485+00:00",
+  "package_content_commit": "bec245665b08663d025bf1907fe91b607a9af821",
   "checks": {
     "raw_file_hashes_unchanged": true,
     "raw_tree_oids_unchanged": true,
     "v1_tag_resolves": true,
     "selection_hash_frozen": true,
     "commit_ancestry": true,
-    "target_and_regression_disjoint": true,
-    "visible_target_in_context": true,
-    "hidden_path_and_marker_absent_from_context": true,
-    "verification_passed": true,
-    "package_scan_passed": true,
-    "clean_extract_passed": true,
-    "archive_contains_verification": true
+    "demo_target_and_regressions_disjoint": true,
+    "hidden_context_excluded": true,
+    "source_verification_passed": true,
+    "package_scan_matches_final_zip": true,
+    "clean_extract_matches_final_zip": true,
+    "archive_includes_instructions_and_verifier": true
   },
   "raw_file_hashes": {
     "results/live_codex/summary.md": true,
@@ -30,13 +29,13 @@
     "results/v2/external": true
   },
   "ancestry": {
-    "v1_to_package": true,
+    "v1_to_final": true,
     "selection_to_external": true,
-    "internal_to_package": true,
-    "external_to_package": true,
-    "demo_source_to_package": true
+    "internal_to_final": true,
+    "external_to_final": true,
+    "recorded_demo_source_to_final": true
   },
-  "zip_sha256": "f15c1602ec46e1afc9d6e3804c95d4d812ce735d3eefc46d6225f2e9f4bcb5b2",
-  "zip_bytes": 707252,
-  "zip_file_count": 642
+  "zip_sha256": "2d74ff57f241cdda7b755839724d30461cef63d36d9bcff672dddbcc9e57d61d",
+  "zip_bytes": 708248,
+  "zip_file_count": 643
 }

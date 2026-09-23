@@ -1,9 +1,9 @@
 {
   "status": "PASS",
-  "observed_at_utc": "2026-09-23T11:52:39.319881+00:00",
-  "zip_bytes": 707252,
-  "file_count": 642,
-  "zip_sha256": "f15c1602ec46e1afc9d6e3804c95d4d812ce735d3eefc46d6225f2e9f4bcb5b2",
+  "observed_at_utc": "2026-09-23T13:40:13.743192+00:00",
+  "zip_bytes": 708248,
+  "file_count": 643,
+  "zip_sha256": "2d74ff57f241cdda7b755839724d30461cef63d36d9bcff672dddbcc9e57d61d",
   "under_50mb": true,
   "secret_scan": "PASS",
   "markdown_links": "PASS",

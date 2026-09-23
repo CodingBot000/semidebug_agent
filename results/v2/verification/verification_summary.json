@@ -1,6 +1,6 @@
 {
-  "observed_at_utc": "2026-09-23T11:51:49.732278+00:00",
-  "source_commit": "b145999d2540cd955b5f8afdd6382e67fe66a134",
+  "observed_at_utc": "2026-09-23T13:39:16.409181+00:00",
+  "source_commit": "7e13e28eefa1a3b7dda314e7b5b602ae051f929e",
   "status": "PASS",
   "checks": {
     "lint": {
@@ -9,7 +9,7 @@
         "lint"
       ],
       "exit_code": 0,
-      "duration_ms": 105,
+      "duration_ms": 114,
       "log": "results/v2/verification/lint.log",
       "log_sha256": "70715e1b3018a380262fdaf919aa4e1e40b3ca612f3445c498f667b5ef57cafd",
       "status": "PASS"
@@ -20,9 +20,9 @@
         "test-all"
       ],
       "exit_code": 0,
-      "duration_ms": 7108,
+      "duration_ms": 6848,
       "log": "results/v2/verification/test_all.log",
-      "log_sha256": "bfdee4b335bbb3c4781ef250c30b6857b1762d29b35c38707bb60f93b8c98c6c",
+      "log_sha256": "da6cda1e23a04979752255115cb668c52c0c88600c32554655d1f2ed9c11fa3d",
       "passed_count": 109,
       "status": "PASS"
     },
@@ -32,9 +32,9 @@
         "--scripted"
       ],
       "exit_code": 0,
-      "duration_ms": 637,
+      "duration_ms": 592,
       "log": "results/v2/verification/scripted_demo.log",
-      "log_sha256": "e98ef6556fe4421deb51ade19ed1f0ef36b931c9ae9f91ec9823aef5d08029bc",
+      "log_sha256": "2ddae86b4d35145a5e34d0b26051ec11f686f5e9b7273c44432841ac3e9d139e",
       "status": "PASS",
       "result": "results/v2/verification/scripted_demo_result.json",
       "report": "results/v2/verification/scripted_demo_report.md",

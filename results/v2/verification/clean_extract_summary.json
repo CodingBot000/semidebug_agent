@@ -1,52 +1,27 @@
 {
   "status": "PASS",
-  "observed_at_utc": "2026-09-23T11:54:37.677594+00:00",
-  "zip_sha256": "f15c1602ec46e1afc9d6e3804c95d4d812ce735d3eefc46d6225f2e9f4bcb5b2",
+  "observed_at_utc": "2026-09-23T13:41:55.299813+00:00",
+  "zip_sha256": "2d74ff57f241cdda7b755839724d30461cef63d36d9bcff672dddbcc9e57d61d",
+  "zip_bytes": 708248,
+  "zip_file_count": 643,
   "extractor": "unzip -q",
-  "commands": [
-    {
-      "command": [
-        "./scripts/bootstrap.sh"
-      ],
-      "exit_code": 0,
-      "duration_ms": 12278
+  "verification_command": "./scripts/verify_submission.sh",
+  "exit_code": 0,
+  "checks": {
+    "fresh_extraction_steps": {
+      "bootstrap": true,
+      "replay": true,
+      "scripted_v2_demo": true,
+      "lint": true,
+      "test_all": true
     },
-    {
-      "command": [
-        "./scripts/run_demo.sh",
-        "--replay"
-      ],
-      "exit_code": 0,
-      "duration_ms": 454,
-      "recorded_v2_replay": true
-    },
-    {
-      "command": [
-        "./scripts/run_demo.sh",
-        "--scripted"
-      ],
-      "exit_code": 0,
-      "duration_ms": 884,
-      "v2_hidden_demo_fixed": true
-    },
-    {
-      "command": [
-        "make",
-        "lint"
-      ],
-      "exit_code": 0,
-      "duration_ms": 529
-    },
-    {
-      "command": [
-        "make",
-        "test-all"
-      ],
-      "exit_code": 0,
-      "duration_ms": 6936,
-      "passed_count": 109
-    }
-  ],
+    "recorded_v2_replay": true,
+    "scripted_v2_hidden_demo_fixed": true,
+    "lint_pass": true,
+    "test_all_pass": true
+  },
+  "test_count": 109,
   "log": "results/v2/verification/clean_extract.log",
-  "log_sha256": "d2125b0524f8f76724382a4ca4a0664f4fd5a8051eae804343e639ed0e3131df"
+  "log_sha256": "7006d157e72f066818d8ca4d4ae6b0692dab55ede54f3c76ee18cc59b8b3cdc1",
+  "note": "A first summary parser expected a different PASS label format; the captured verification command itself exited 0. This summary is derived from the preserved raw output and the verifier logs."
 }

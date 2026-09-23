@@ -3,7 +3,7 @@ Exit code: 0
 
 SCRIPTED TEST MODE — not live AI
 demo_fifo_off_by_one_v2: FIXED; iterations=1; integrity=True
-Evidence: artifacts/runs/20260923T115149-43d3de5f/report.md
+Evidence: artifacts/runs/20260923T133916-4497219a/report.md
 # Evidence: demo_fifo_off_by_one_v2
 
 **FIXED** — provider `scripted-test-double`, model `not-an-ai-model`.
@@ -41,7 +41,7 @@ Known fix supplied only for the V2 hidden-regression demo
 
 Regression: PASS
 
-Duration: 256 ms; Provider calls: 2; tokens in/out: 0/0.
+Duration: 226 ms; Provider calls: 2; tokens in/out: 0/0.
 Estimated cost: unknown/unconfigured.
 
 Scripted providers and replay output are not live AI benchmark results.
