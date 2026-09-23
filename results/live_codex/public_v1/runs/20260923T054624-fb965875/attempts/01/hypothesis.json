@@ -1,0 +1,14 @@
+{
+  "summary": "Opcode 5 shifts right instead of left.",
+  "likely_files": [
+    "rtl/alu.v"
+  ],
+  "likely_lines": [
+    10
+  ],
+  "reasoning": "The testbench specifies a left shift for opcode 5 (tb/alu_tb.v:19). The baseline failure reports expected 160 but actual 5 for a=90, b=92; shifting by b[2:0]=4 gives 160 left and 5 right. This is the most likely defect, though no patched result has been independently validated.",
+  "confidence": 0.99,
+  "evidence_ids": [
+    "baseline:simulation"
+  ]
+}

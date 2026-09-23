@@ -1,0 +1,15 @@
+{
+  "summary": "The FIFO increments occupancy on a pop-only cycle instead of decrementing it.",
+  "likely_files": [
+    "rtl/fifo.v"
+  ],
+  "likely_lines": [
+    16,
+    18
+  ],
+  "reasoning": "The 2'b01 case represents pop without push, but line 18 adds one to count. The simulation reports full=0 while the reference occupancy is 4 after the drain sequence begins, consistent with incorrect count updates. No prior patch was tested.",
+  "confidence": 0.98,
+  "evidence_ids": [
+    "baseline:simulation"
+  ]
+}

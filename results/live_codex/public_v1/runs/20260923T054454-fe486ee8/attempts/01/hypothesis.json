@@ -1,0 +1,17 @@
+{
+  "summary": "The idle-to-busy transition uses the wrong start polarity.",
+  "likely_files": [
+    "rtl/controller.v"
+  ],
+  "likely_lines": [
+    8
+  ],
+  "reasoning": "The RTL enters busy when start is low, but the reference enters busy when start is high. The directed sequence sets start=1 after reset, matching the reported busy mismatch. Compilation, lint, and synthesis passing do not establish functional correctness.",
+  "confidence": 0.99,
+  "evidence_ids": [
+    "baseline:simulation",
+    "baseline:compile",
+    "baseline:lint",
+    "baseline:synthesis"
+  ]
+}

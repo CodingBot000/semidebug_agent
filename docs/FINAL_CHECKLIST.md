@@ -15,9 +15,9 @@
 - [x] Docker base digest, exact EDA versions, locked Python dependencies and CI.
 - [x] Package allowlist, secret scan, SHA256 and 50 MB limit implemented.
 
-## External dependency
-- [ ] Live API/model compatibility and actual AI repair benchmark: blocked by missing OPENAI_API_KEY / OPENAI_MODEL (ISSUE-001).
-- [ ] Evidence-based live model improvement and public/holdout comparison: requires the live baseline above. Scripted pipeline repeat is not a substitute.
+## Live inference follow-up
+- [x] Actual ChatGPT-authenticated Codex CLI inference and demo; ISSUE-001 resolved via CLI. Separate API endpoint remains unmeasured.
+- [x] Token overhead reduced in one real demo comparison; fixed prompt used for public/holdout measurement. This is not a controlled repair-quality improvement experiment.
 
 Packaging, clean-clone reproduction and GitHub publication execution results are appended to PROGRESS.md. This checklist does not claim unexecuted live AI work is complete.
 
@@ -29,3 +29,10 @@ Packaging, clean-clone reproduction and GitHub publication execution results are
 - [x] Test output and dataset fingerprint preserved in results/verification/.
 - [x] GitHub private repository created and main pushed with upstream tracking.
 - [x] GitHub Actions image build, lint/format and complete test suite passed on the published source commit.
+
+## CLI integration validation (2026-09-23)
+
+- Complete suite: **95 passed in 10.19 seconds**. Ruff check and format passed.
+- Host Codex login stays outside credential-free EDA containers.
+- Live evaluation complete: public 24/24, holdout 6/6; first attempt 23/30; 37 actual CLI calls. Raw results preserved.
+- GitHub Actions run 35824003905 passed for source commit c024c43859128190a8e6afe26f54e1a0a53e6d45.

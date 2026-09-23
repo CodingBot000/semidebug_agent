@@ -1,0 +1,15 @@
+{
+  "summary": "Push is incorrectly enabled when the FIFO is full rather than when it has space.",
+  "likely_files": [
+    "rtl/fifo.v"
+  ],
+  "likely_lines": [
+    6
+  ],
+  "reasoning": "At step 0, the testbench expects the first write to raise occupancy to 1, but empty remains asserted. The push expression blocks writes while empty. This is the most likely cause, though no patched validation is available.",
+  "confidence": 0.98,
+  "evidence_ids": [
+    "baseline:simulation",
+    "baseline:compile"
+  ]
+}

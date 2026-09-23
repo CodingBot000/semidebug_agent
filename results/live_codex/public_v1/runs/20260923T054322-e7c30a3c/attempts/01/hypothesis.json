@@ -1,0 +1,14 @@
+{
+  "summary": "The sole-request case for requester 0 grants requester 1 instead.",
+  "likely_files": [
+    "rtl/arbiter.v"
+  ],
+  "likely_lines": [
+    6
+  ],
+  "reasoning": "For req=01, the RTL assigns grant=10, while the reference expects 01; the baseline simulation fails on exactly this mismatch (baseline:simulation). The contention and priority-update logic appear consistent with the reference, so a one-line correction is most likely.",
+  "confidence": 0.99,
+  "evidence_ids": [
+    "baseline:simulation"
+  ]
+}

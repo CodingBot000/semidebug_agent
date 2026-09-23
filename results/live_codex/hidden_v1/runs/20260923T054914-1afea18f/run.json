@@ -1,0 +1,479 @@
+{
+  "run_id": "20260923T054914-1afea18f",
+  "case_id": "case_020_controller_fsm",
+  "category": "fsm",
+  "provider": "live-codex-cli",
+  "model": "gpt-6-sol",
+  "reasoning_effort": "low",
+  "billing_mode": "chatgpt-subscription",
+  "cached_input_tokens": 7168,
+  "provider_metadata": {
+    "invocations": [
+      {
+        "model": "gpt-6-sol",
+        "cli_version": "codex-cli 0.156.1",
+        "prompt_characters": 4231,
+        "reasoning_effort": "low",
+        "billing_mode": "chatgpt-subscription",
+        "duration_ms": 11042,
+        "process_status": "pass",
+        "tool_events": 0,
+        "item_types": [
+          "error",
+          "agent_message"
+        ],
+        "input_tokens": 6150,
+        "cached_input_tokens": 3584,
+        "output_tokens": 332
+      },
+      {
+        "model": "gpt-6-sol",
+        "cli_version": "codex-cli 0.156.1",
+        "prompt_characters": 5709,
+        "reasoning_effort": "low",
+        "billing_mode": "chatgpt-subscription",
+        "duration_ms": 14975,
+        "process_status": "pass",
+        "tool_events": 0,
+        "item_types": [
+          "error",
+          "agent_message"
+        ],
+        "input_tokens": 6547,
+        "cached_input_tokens": 3584,
+        "output_tokens": 372
+      }
+    ]
+  },
+  "iteration": 2,
+  "max_iterations": 3,
+  "project_root": "case_020_controller_fsm",
+  "mutable_files": [
+    "rtl/controller.v"
+  ],
+  "immutable_files": [
+    "case.json",
+    "expected/metadata.json",
+    "tb/controller_tb.v"
+  ],
+  "baseline": {
+    "results": {
+      "compile": {
+        "tool": "iverilog",
+        "command": [
+          "iverilog",
+          "-g2012",
+          "-Wall",
+          "-s",
+          "controller_tb",
+          "-o",
+          ".build/target.vvp",
+          "rtl/controller.v",
+          "tb/controller_tb.v"
+        ],
+        "exit_code": 0,
+        "status": "pass",
+        "stdout": "",
+        "stderr": "",
+        "duration_ms": 12
+      },
+      "simulation": {
+        "tool": "vvp",
+        "command": [
+          "vvp",
+          "-N",
+          ".build/target.vvp",
+          "+SEED=7"
+        ],
+        "exit_code": 1,
+        "status": "fail",
+        "stdout": "FATAL: tb/controller_tb.v:17: FSM state=0 busy=1 done=0\n       Time: 11 Scope: controller_tb.step\n",
+        "stderr": "",
+        "duration_ms": 11
+      },
+      "lint": {
+        "tool": "verilator",
+        "command": [
+          "verilator",
+          "--lint-only",
+          "-Wall",
+          "-Wno-fatal",
+          "--top-module",
+          "controller",
+          "rtl/controller.v"
+        ],
+        "exit_code": 0,
+        "status": "pass",
+        "stdout": "",
+        "stderr": "",
+        "duration_ms": 73
+      },
+      "synthesis": {
+        "tool": "yosys",
+        "command": [
+          "yosys",
+          "-Q",
+          "-T",
+          "-p",
+          "read_verilog -sv rtl/controller.v; hierarchy -check -top controller; proc; opt; check -assert"
+        ],
+        "exit_code": 0,
+        "status": "pass",
+        "stdout": "\n-- Running command `read_verilog -sv rtl/controller.v; hierarchy -check -top controller; proc; opt; check -assert' --\n\n1. Executing Verilog-2005 frontend: rtl/controller.v\nParsing SystemVerilog input from `rtl/controller.v' to AST representation.\nGenerating RTLIL representation for module `\\controller'.\nSuccessfully finished Verilog frontend.\n\n2. Executing HIERARCHY pass (managing design hierarchy).\n\n2.1. Analyzing design hierarchy..\nTop module:  \\controller\n\n2.2. Analyzing design hierarchy..\nTop module:  \\controller\nRemoved 0 unused modules.\n\n3. Executing PROC pass (convert processes to netlists).\n\n3.1. Executing PROC_CLEAN pass (remove empty switches from decision trees).\nCleaned up 0 empty switches.\n\n3.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).\nMarked 2 switch rules as full_case in process $proc$rtl/controller.v:5$3 in module controller.\nRemoved a total of 0 dead cases.\n\n3.3. Executing PROC_PRUNE pass (remove redundant assignments in processes).\nRemoved 0 redundant assignments.\nPromoted 0 assignments to connections.\n\n3.4. Executing PROC_INIT pass (extract init attributes).\n\n3.5. Executing PROC_ARST pass (detect async resets in processes).\n\n3.6. Executing PROC_ROM pass (convert switches to ROMs).\nConverted 0 switches.\n<suppressed ~4 debug messages>\n\n3.7. Executing PROC_MUX pass (convert decision trees to multiplexers).\nCreating decoders for process `\\controller.$proc$rtl/controller.v:5$3'.\n     1/1: $0\\state[1:0]\n\n3.8. Executing PROC_DLATCH pass (convert process syncs to latches).\n\n3.9. Executing PROC_DFF pass (convert process syncs to FFs).\nCreating register for signal `\\controller.\\state' using process `\\controller.$proc$rtl/controller.v:5$3'.\n  created $dff cell `$procdff$16' with positive edge clock.\n\n3.10. Executing PROC_MEMWR pass (convert process memory writes to cells).\n\n3.11. Executing PROC_CLEAN pass (remove empty switches from decision trees).\nFound and cleaned up 4 empty switches in `\\controller.$proc$rtl/controller.v:5$3'.\nRemoving empty process `controller.$proc$rtl/controller.v:5$3'.\nCleaned up 4 empty switches.\n\n3.12. Executing OPT_EXPR pass (perform const folding).\nOptimizing module controller.\n<suppressed ~1 debug messages>\n\n4. Executing OPT pass (performing simple optimizations).\n\n4.1. Executing OPT_EXPR pass (perform const folding).\nOptimizing module controller.\n\n4.2. Executing OPT_MERGE pass (detect identical cells).\nFinding identical cells in module `\\controller'.\n<suppressed ~6 debug messages>\nRemoved a total of 2 cells.\n\n4.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).\nRunning muxtree optimizer on module \\controller..\n  Creating internal representation of mux trees.\n  Evaluating internal representation of mux trees.\n  Analyzing evaluation results.\nRemoved 0 multiplexer ports.\n<suppressed ~1 debug messages>\n\n4.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).\n  Optimizing cells in module \\controller.\nPerformed a total of 0 changes.\n\n4.5. Executing OPT_MERGE pass (detect identical cells).\nFinding identical cells in module `\\controller'.\nRemoved a total of 0 cells.\n\n4.6. Executing OPT_DFF pass (perform DFF optimizations).\nAdding SRST signal on $procdff$16 ($dff) from module controller (D = $procmux$5_Y, Q = \\state, rval = 2'00).\nAdding EN signal on $auto$ff.cc:266:slice$17 ($sdff) from module controller (D = $procmux$5_Y, Q = \\state).\n\n4.7. Executing OPT_CLEAN pass (remove unused cells and wires).\nFinding unused cells or wires in module \\controller..\nRemoved 1 unused cells and 9 unused wires.\n<suppressed ~2 debug messages>\n\n4.8. Executing OPT_EXPR pass (perform const folding).\nOptimizing module controller.\n\n4.9. Rerunning OPT passes. (Maybe there is more to do..)\n\n4.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).\nRunning muxtree optimizer on module \\controller..\n  Creating internal representation of mux trees.\n  Evaluating internal representation of mux trees.\n  Analyzing evaluation results.\nRemoved 0 multiplexer ports.\n<suppressed ~1 debug messages>\n\n4.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).\n  Optimizing cells in module \\controller.\nPerformed a total of 0 changes.\n\n4.12. Executing OPT_MERGE pass (detect identical cells).\nFinding identical cells in module `\\controller'.\nRemoved a total of 0 cells.\n\n4.13. Executing OPT_DFF pass (perform DFF optimizations).\n\n4.14. Executing OPT_CLEAN pass (remove unused cells and wires).\nFinding unused cells or wires in module \\controller..\n\n4.15. Executing OPT_EXPR pass (perform const folding).\nOptimizing module controller.\n\n4.16. Finished OPT passes. (There is nothing left to do.)\n\n5. Executing CHECK pass (checking for obvious problems).\nChecking module controller...\nFound and reported 0 problems.\n",
+        "stderr": "",
+        "duration_ms": 23
+      }
+    }
+  },
+  "current_validation": {
+    "results": {
+      "compile": {
+        "tool": "iverilog",
+        "command": [
+          "iverilog",
+          "-g2012",
+          "-Wall",
+          "-s",
+          "controller_tb",
+          "-o",
+          ".build/target.vvp",
+          "rtl/controller.v",
+          "tb/controller_tb.v"
+        ],
+        "exit_code": 0,
+        "status": "pass",
+        "stdout": "",
+        "stderr": "",
+        "duration_ms": 12
+      },
+      "simulation": {
+        "tool": "vvp",
+        "command": [
+          "vvp",
+          "-N",
+          ".build/target.vvp",
+          "+SEED=7"
+        ],
+        "exit_code": 0,
+        "status": "pass",
+        "stdout": "SEMIDEBUG_PASS\n",
+        "stderr": "",
+        "duration_ms": 12
+      },
+      "lint": {
+        "tool": "verilator",
+        "command": [
+          "verilator",
+          "--lint-only",
+          "-Wall",
+          "-Wno-fatal",
+          "--top-module",
+          "controller",
+          "rtl/controller.v"
+        ],
+        "exit_code": 0,
+        "status": "pass",
+        "stdout": "",
+        "stderr": "",
+        "duration_ms": 84
+      },
+      "synthesis": {
+        "tool": "yosys",
+        "command": [
+          "yosys",
+          "-Q",
+          "-T",
+          "-p",
+          "read_verilog -sv rtl/controller.v; hierarchy -check -top controller; proc; opt; check -assert"
+        ],
+        "exit_code": 0,
+        "status": "pass",
+        "stdout": "\n-- Running command `read_verilog -sv rtl/controller.v; hierarchy -check -top controller; proc; opt; check -assert' --\n\n1. Executing Verilog-2005 frontend: rtl/controller.v\nParsing SystemVerilog input from `rtl/controller.v' to AST representation.\nGenerating RTLIL representation for module `\\controller'.\nSuccessfully finished Verilog frontend.\n\n2. Executing HIERARCHY pass (managing design hierarchy).\n\n2.1. Analyzing design hierarchy..\nTop module:  \\controller\n\n2.2. Analyzing design hierarchy..\nTop module:  \\controller\nRemoved 0 unused modules.\n\n3. Executing PROC pass (convert processes to netlists).\n\n3.1. Executing PROC_CLEAN pass (remove empty switches from decision trees).\nCleaned up 0 empty switches.\n\n3.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).\nMarked 2 switch rules as full_case in process $proc$rtl/controller.v:5$3 in module controller.\nRemoved a total of 0 dead cases.\n\n3.3. Executing PROC_PRUNE pass (remove redundant assignments in processes).\nRemoved 0 redundant assignments.\nPromoted 0 assignments to connections.\n\n3.4. Executing PROC_INIT pass (extract init attributes).\n\n3.5. Executing PROC_ARST pass (detect async resets in processes).\n\n3.6. Executing PROC_ROM pass (convert switches to ROMs).\nConverted 0 switches.\n<suppressed ~4 debug messages>\n\n3.7. Executing PROC_MUX pass (convert decision trees to multiplexers).\nCreating decoders for process `\\controller.$proc$rtl/controller.v:5$3'.\n     1/1: $0\\state[1:0]\n\n3.8. Executing PROC_DLATCH pass (convert process syncs to latches).\n\n3.9. Executing PROC_DFF pass (convert process syncs to FFs).\nCreating register for signal `\\controller.\\state' using process `\\controller.$proc$rtl/controller.v:5$3'.\n  created $dff cell `$procdff$16' with positive edge clock.\n\n3.10. Executing PROC_MEMWR pass (convert process memory writes to cells).\n\n3.11. Executing PROC_CLEAN pass (remove empty switches from decision trees).\nFound and cleaned up 4 empty switches in `\\controller.$proc$rtl/controller.v:5$3'.\nRemoving empty process `controller.$proc$rtl/controller.v:5$3'.\nCleaned up 4 empty switches.\n\n3.12. Executing OPT_EXPR pass (perform const folding).\nOptimizing module controller.\n<suppressed ~1 debug messages>\n\n4. Executing OPT pass (performing simple optimizations).\n\n4.1. Executing OPT_EXPR pass (perform const folding).\nOptimizing module controller.\n\n4.2. Executing OPT_MERGE pass (detect identical cells).\nFinding identical cells in module `\\controller'.\n<suppressed ~3 debug messages>\nRemoved a total of 1 cells.\n\n4.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).\nRunning muxtree optimizer on module \\controller..\n  Creating internal representation of mux trees.\n  Evaluating internal representation of mux trees.\n  Analyzing evaluation results.\nRemoved 0 multiplexer ports.\n<suppressed ~1 debug messages>\n\n4.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).\n  Optimizing cells in module \\controller.\nPerformed a total of 0 changes.\n\n4.5. Executing OPT_MERGE pass (detect identical cells).\nFinding identical cells in module `\\controller'.\nRemoved a total of 0 cells.\n\n4.6. Executing OPT_DFF pass (perform DFF optimizations).\nAdding SRST signal on $procdff$16 ($dff) from module controller (D = $procmux$8_Y, Q = \\state, rval = 2'00).\nAdding EN signal on $auto$ff.cc:266:slice$17 ($sdff) from module controller (D = $procmux$8_Y, Q = \\state).\n\n4.7. Executing OPT_CLEAN pass (remove unused cells and wires).\nFinding unused cells or wires in module \\controller..\nRemoved 1 unused cells and 8 unused wires.\n<suppressed ~2 debug messages>\n\n4.8. Executing OPT_EXPR pass (perform const folding).\nOptimizing module controller.\n\n4.9. Rerunning OPT passes. (Maybe there is more to do..)\n\n4.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).\nRunning muxtree optimizer on module \\controller..\n  Creating internal representation of mux trees.\n  Evaluating internal representation of mux trees.\n  Analyzing evaluation results.\nRemoved 0 multiplexer ports.\n<suppressed ~1 debug messages>\n\n4.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).\n  Optimizing cells in module \\controller.\nPerformed a total of 0 changes.\n\n4.12. Executing OPT_MERGE pass (detect identical cells).\nFinding identical cells in module `\\controller'.\nRemoved a total of 0 cells.\n\n4.13. Executing OPT_DFF pass (perform DFF optimizations).\n\n4.14. Executing OPT_CLEAN pass (remove unused cells and wires).\nFinding unused cells or wires in module \\controller..\n\n4.15. Executing OPT_EXPR pass (perform const folding).\nOptimizing module controller.\n\n4.16. Finished OPT passes. (There is nothing left to do.)\n\n5. Executing CHECK pass (checking for obvious problems).\nChecking module controller...\nFound and reported 0 problems.\n",
+        "stderr": "",
+        "duration_ms": 21
+      }
+    }
+  },
+  "evidence": [
+    {
+      "id": "attempt-2:compile",
+      "tool": "iverilog",
+      "status": "pass",
+      "message": "\n"
+    },
+    {
+      "id": "attempt-2:simulation",
+      "tool": "vvp",
+      "status": "pass",
+      "message": "SEMIDEBUG_PASS\n\n"
+    },
+    {
+      "id": "attempt-2:lint",
+      "tool": "verilator",
+      "status": "pass",
+      "message": "\n"
+    },
+    {
+      "id": "attempt-2:synthesis",
+      "tool": "yosys",
+      "status": "pass",
+      "message": "\n-- Running command `read_verilog -sv rtl/controller.v; hierarchy -check -top controller; proc; opt; check -assert' --\n\n1. Executing Verilog-2005 frontend: rtl/controller.v\nParsing SystemVerilog input from `rtl/controller.v' to AST representation.\nGenerating RTLIL representation for module `\\controller'.\nSuccessfully finished Verilog frontend.\n\n2. Executing HIERARCHY pass (managing design hierarchy).\n\n2.1. Analyzing design hierarchy..\nTop module:  \\controller\n\n2.2. Analyzing design hierarchy..\nTop module:  \\controller\nRemoved 0 unused modules.\n\n3. Executing PROC pass (convert processes to netlists).\n\n3.1. Executing PROC_CLEAN pass (remove empty switches from decision trees).\nCleaned up 0 empty switches.\n\n3.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).\nMarked 2 switch rules as full_case in process $proc$rtl/controller.v:5$3 in module controller.\nRemoved a total of 0 dead cases.\n\n3.3. Executing PROC_PRUNE pass (remove redundant assignments in processes).\nRemoved 0 redundant assignments.\nPromoted 0 assignments to connections.\n\n3.4. Executing PROC_INIT pass (extract init attributes).\n\n3.5. Executing PROC_ARST pass (detect async resets in processes).\n\n3.6. Executing PROC_ROM pass (convert switches to ROMs).\nConverted 0 switches.\n<suppressed ~4 debug messages>\n\n3.7. Executing PROC_MUX pass (convert decision trees to multiplexers).\nCreating decoders for process `\\controller.$proc$rtl/controller.v:5$3'.\n     1/1: $0\\state[1:0]\n\n3.8. Executing PROC_DLATCH pass (convert process syncs to latches).\n\n3.9. Executing PROC_DFF pass (convert process syncs to FFs).\nCreating register for signal `\\controller.\\state' using process `\\controller.$proc$rtl/controller.v:5$3'.\n  created $dff cell `$procdff$16' with positive edge clock.\n\n3.10. Executing PROC_MEMWR pass (convert process memory writes to cells).\n\n3.11. Executing PROC_CLEAN pass (remove empty switches from decision trees).\nFound and cleaned up 4 empty switches in `\\controller.$proc$rtl/controller.v:5$3'.\nRemoving empty process `controller.$proc$rtl/controller.v:5$3'.\nCleaned up 4 empty switches.\n\n3.12. Executing OPT_EXPR pass (perform const folding).\nOptimizing module controller.\n<suppressed ~1 debug messages>\n\n4. Executing OPT pass (performing simple optimizations).\n\n4.1. Executing OPT_EXPR pass (perform const folding).\nOptimizing module controller.\n\n4.2. Executing OPT_MERGE pass (detect identical cells).\nFinding identical cells in module `\\controller'.\n<suppressed ~3 debug messages>\nRemoved a total of 1 cells.\n\n4.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).\nRunning muxtree optimizer on module \\controller..\n  Creating internal representation of mux trees.\n  Evaluating internal representation of mux trees.\n  Analyzing evaluation results.\nRemoved 0 multiplexer ports.\n<suppressed ~1 debug messages>\n\n4.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).\n  Optimizing cells in module \\controller.\nPerformed a total of 0 changes.\n\n4.5. Executing OPT_MERGE pass (detect identical cells).\nFinding identical cells in module `\\controller'.\nRemoved a total of 0 cells.\n\n4.6. Executing OPT_DFF pass (perform DFF optimizations).\nAdding SRST signal on $procdff$16 ($dff) from module controller (D = $procmux$8_Y, Q = \\state, rval = 2'00).\nAdding EN signal on $auto$ff.cc:266:slice$17 ($sdff) from module controller (D = $procmux$8_Y, Q = \\state).\n\n4.7. Executing OPT_CLEAN pass (remove unused cells and wires).\nFinding unused cells or wires in module \\controller..\nRemoved 1 unused cells and 8 unused wires.\n<suppressed ~2 debug messages>\n\n4.8. Executing OPT_EXPR pass (perform const folding).\nOptimizing module controller.\n\n4.9. Rerunning OPT passes. (Maybe there is more to do..)\n\n4.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).\nRunning muxtree optimizer on module \\controller..\n  Creating internal representation of mux trees.\n  Evaluating internal representation of mux trees.\n  Analyzing evaluation results.\nRemoved 0 multiplexer ports.\n<suppressed ~1 debug messages>\n\n4.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).\n  Optimizing cells in module \\controller.\nPerformed a total of 0 changes.\n\n4.12. Executing OPT_MERGE pass (detect identical cells).\nFinding identical cells in module `\\controller'.\nRemoved a total of 0 cells.\n\n4.13. Executing OPT_DFF pass (perform DFF optimizations).\n\n4.14. Executing OPT_CLEAN pass (remove unused cells and wires).\nFinding unused cells or wires in module \\controller..\n\n4.15. Executing OPT_EXPR pass (perform const folding).\nOptimizing module controller.\n\n4.16. Finished OPT passes. (There is nothing left to do.)\n\n5. Executing CHECK pass (checking for obvious problems).\nChecking module controller...\nFound and reported 0 problems.\n\n"
+    }
+  ],
+  "hypotheses": [
+    {
+      "summary": "The done state transitions to busy instead of idle.",
+      "likely_files": [
+        "rtl/controller.v"
+      ],
+      "likely_lines": [
+        10
+      ],
+      "reasoning": "The reference transitions from state 2 to state 0 (tb/controller_tb.v:13), while the RTL transitions to state 1. The simulation reports expected state 0 but busy=1, consistent with this mismatch. Compilation, lint, and synthesis passed, so the observed failure is behavioral. This is the most likely cause, though no patched validation is available.",
+      "confidence": 0.99,
+      "evidence_ids": [
+        "baseline:simulation",
+        "baseline:compile",
+        "baseline:lint",
+        "baseline:synthesis"
+      ]
+    },
+    {
+      "summary": "The done state returns to busy instead of idle.",
+      "likely_files": [
+        "rtl/controller.v"
+      ],
+      "likely_lines": [
+        10
+      ],
+      "reasoning": "The reference moves from state 2 to state 0 (tb/controller_tb.v:13), but the RTL moves to state 1. The reported expected idle state with busy asserted is consistent with that mismatch. The previous proposal was rejected for an invalid diff hunk, not for a demonstrated behavioral failure; this corrected diff remains unvalidated.",
+      "confidence": 0.99,
+      "evidence_ids": [
+        "baseline:simulation",
+        "guard:1"
+      ]
+    }
+  ],
+  "patch_attempts": [
+    {
+      "iteration": 1,
+      "hypothesis": {
+        "summary": "The done state transitions to busy instead of idle.",
+        "likely_files": [
+          "rtl/controller.v"
+        ],
+        "likely_lines": [
+          10
+        ],
+        "reasoning": "The reference transitions from state 2 to state 0 (tb/controller_tb.v:13), while the RTL transitions to state 1. The simulation reports expected state 0 but busy=1, consistent with this mismatch. Compilation, lint, and synthesis passed, so the observed failure is behavioral. This is the most likely cause, though no patched validation is available.",
+        "confidence": 0.99,
+        "evidence_ids": [
+          "baseline:simulation",
+          "baseline:compile",
+          "baseline:lint",
+          "baseline:synthesis"
+        ]
+      },
+      "proposal": {
+        "explanation": "Make the done-state transition return to idle, matching the reference FSM.",
+        "unified_diff": "--- a/rtl/controller.v\n+++ b/rtl/controller.v\n@@ -7,7 +7,7 @@\n     else case (state)\n         2'd0: if (start) state <= 2'd1;\n         2'd1: if (finish) state <= 2'd2;\n-        2'd2: state <= 2'd1;\n+        2'd2: state <= 2'd0;\n         default: state <= 2'd0;\n     endcase\n",
+        "expected_effect": "After a done cycle, busy and done both deassert as the FSM enters idle.",
+        "risks": [
+          "The intended hardware behavior could differ from the supplied reference; the proposed change has not been independently validated."
+        ]
+      },
+      "guard_error": "Hunk truncated or invalid",
+      "validation": null,
+      "regression": null
+    },
+    {
+      "iteration": 2,
+      "hypothesis": {
+        "summary": "The done state returns to busy instead of idle.",
+        "likely_files": [
+          "rtl/controller.v"
+        ],
+        "likely_lines": [
+          10
+        ],
+        "reasoning": "The reference moves from state 2 to state 0 (tb/controller_tb.v:13), but the RTL moves to state 1. The reported expected idle state with busy asserted is consistent with that mismatch. The previous proposal was rejected for an invalid diff hunk, not for a demonstrated behavioral failure; this corrected diff remains unvalidated.",
+        "confidence": 0.99,
+        "evidence_ids": [
+          "baseline:simulation",
+          "guard:1"
+        ]
+      },
+      "proposal": {
+        "explanation": "Correct the done-state transition to idle. Unlike the rejected proposal, the hunk header accurately counts its six context and changed lines.",
+        "unified_diff": "--- a/rtl/controller.v\n+++ b/rtl/controller.v\n@@ -7,6 +7,6 @@\n     else case (state)\n         2'd0: if (start) state <= 2'd1;\n         2'd1: if (finish) state <= 2'd2;\n-        2'd2: state <= 2'd1;\n+        2'd2: state <= 2'd0;\n         default: state <= 2'd0;\n     endcase\n",
+        "expected_effect": "After one done cycle, the FSM enters idle and deasserts busy and done.",
+        "risks": [
+          "The corrected patch has not been independently validated."
+        ]
+      },
+      "guard_error": null,
+      "validation": {
+        "results": {
+          "compile": {
+            "tool": "iverilog",
+            "command": [
+              "iverilog",
+              "-g2012",
+              "-Wall",
+              "-s",
+              "controller_tb",
+              "-o",
+              ".build/target.vvp",
+              "rtl/controller.v",
+              "tb/controller_tb.v"
+            ],
+            "exit_code": 0,
+            "status": "pass",
+            "stdout": "",
+            "stderr": "",
+            "duration_ms": 12
+          },
+          "simulation": {
+            "tool": "vvp",
+            "command": [
+              "vvp",
+              "-N",
+              ".build/target.vvp",
+              "+SEED=7"
+            ],
+            "exit_code": 0,
+            "status": "pass",
+            "stdout": "SEMIDEBUG_PASS\n",
+            "stderr": "",
+            "duration_ms": 12
+          },
+          "lint": {
+            "tool": "verilator",
+            "command": [
+              "verilator",
+              "--lint-only",
+              "-Wall",
+              "-Wno-fatal",
+              "--top-module",
+              "controller",
+              "rtl/controller.v"
+            ],
+            "exit_code": 0,
+            "status": "pass",
+            "stdout": "",
+            "stderr": "",
+            "duration_ms": 84
+          },
+          "synthesis": {
+            "tool": "yosys",
+            "command": [
+              "yosys",
+              "-Q",
+              "-T",
+              "-p",
+              "read_verilog -sv rtl/controller.v; hierarchy -check -top controller; proc; opt; check -assert"
+            ],
+            "exit_code": 0,
+            "status": "pass",
+            "stdout": "\n-- Running command `read_verilog -sv rtl/controller.v; hierarchy -check -top controller; proc; opt; check -assert' --\n\n1. Executing Verilog-2005 frontend: rtl/controller.v\nParsing SystemVerilog input from `rtl/controller.v' to AST representation.\nGenerating RTLIL representation for module `\\controller'.\nSuccessfully finished Verilog frontend.\n\n2. Executing HIERARCHY pass (managing design hierarchy).\n\n2.1. Analyzing design hierarchy..\nTop module:  \\controller\n\n2.2. Analyzing design hierarchy..\nTop module:  \\controller\nRemoved 0 unused modules.\n\n3. Executing PROC pass (convert processes to netlists).\n\n3.1. Executing PROC_CLEAN pass (remove empty switches from decision trees).\nCleaned up 0 empty switches.\n\n3.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).\nMarked 2 switch rules as full_case in process $proc$rtl/controller.v:5$3 in module controller.\nRemoved a total of 0 dead cases.\n\n3.3. Executing PROC_PRUNE pass (remove redundant assignments in processes).\nRemoved 0 redundant assignments.\nPromoted 0 assignments to connections.\n\n3.4. Executing PROC_INIT pass (extract init attributes).\n\n3.5. Executing PROC_ARST pass (detect async resets in processes).\n\n3.6. Executing PROC_ROM pass (convert switches to ROMs).\nConverted 0 switches.\n<suppressed ~4 debug messages>\n\n3.7. Executing PROC_MUX pass (convert decision trees to multiplexers).\nCreating decoders for process `\\controller.$proc$rtl/controller.v:5$3'.\n     1/1: $0\\state[1:0]\n\n3.8. Executing PROC_DLATCH pass (convert process syncs to latches).\n\n3.9. Executing PROC_DFF pass (convert process syncs to FFs).\nCreating register for signal `\\controller.\\state' using process `\\controller.$proc$rtl/controller.v:5$3'.\n  created $dff cell `$procdff$16' with positive edge clock.\n\n3.10. Executing PROC_MEMWR pass (convert process memory writes to cells).\n\n3.11. Executing PROC_CLEAN pass (remove empty switches from decision trees).\nFound and cleaned up 4 empty switches in `\\controller.$proc$rtl/controller.v:5$3'.\nRemoving empty process `controller.$proc$rtl/controller.v:5$3'.\nCleaned up 4 empty switches.\n\n3.12. Executing OPT_EXPR pass (perform const folding).\nOptimizing module controller.\n<suppressed ~1 debug messages>\n\n4. Executing OPT pass (performing simple optimizations).\n\n4.1. Executing OPT_EXPR pass (perform const folding).\nOptimizing module controller.\n\n4.2. Executing OPT_MERGE pass (detect identical cells).\nFinding identical cells in module `\\controller'.\n<suppressed ~3 debug messages>\nRemoved a total of 1 cells.\n\n4.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).\nRunning muxtree optimizer on module \\controller..\n  Creating internal representation of mux trees.\n  Evaluating internal representation of mux trees.\n  Analyzing evaluation results.\nRemoved 0 multiplexer ports.\n<suppressed ~1 debug messages>\n\n4.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).\n  Optimizing cells in module \\controller.\nPerformed a total of 0 changes.\n\n4.5. Executing OPT_MERGE pass (detect identical cells).\nFinding identical cells in module `\\controller'.\nRemoved a total of 0 cells.\n\n4.6. Executing OPT_DFF pass (perform DFF optimizations).\nAdding SRST signal on $procdff$16 ($dff) from module controller (D = $procmux$8_Y, Q = \\state, rval = 2'00).\nAdding EN signal on $auto$ff.cc:266:slice$17 ($sdff) from module controller (D = $procmux$8_Y, Q = \\state).\n\n4.7. Executing OPT_CLEAN pass (remove unused cells and wires).\nFinding unused cells or wires in module \\controller..\nRemoved 1 unused cells and 8 unused wires.\n<suppressed ~2 debug messages>\n\n4.8. Executing OPT_EXPR pass (perform const folding).\nOptimizing module controller.\n\n4.9. Rerunning OPT passes. (Maybe there is more to do..)\n\n4.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).\nRunning muxtree optimizer on module \\controller..\n  Creating internal representation of mux trees.\n  Evaluating internal representation of mux trees.\n  Analyzing evaluation results.\nRemoved 0 multiplexer ports.\n<suppressed ~1 debug messages>\n\n4.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).\n  Optimizing cells in module \\controller.\nPerformed a total of 0 changes.\n\n4.12. Executing OPT_MERGE pass (detect identical cells).\nFinding identical cells in module `\\controller'.\nRemoved a total of 0 cells.\n\n4.13. Executing OPT_DFF pass (perform DFF optimizations).\n\n4.14. Executing OPT_CLEAN pass (remove unused cells and wires).\nFinding unused cells or wires in module \\controller..\n\n4.15. Executing OPT_EXPR pass (perform const folding).\nOptimizing module controller.\n\n4.16. Finished OPT passes. (There is nothing left to do.)\n\n5. Executing CHECK pass (checking for obvious problems).\nChecking module controller...\nFound and reported 0 problems.\n",
+            "stderr": "",
+            "duration_ms": 21
+          }
+        }
+      },
+      "regression": {
+        "results": {
+          "regression_17.compile": {
+            "tool": "iverilog",
+            "command": [
+              "iverilog",
+              "-g2012",
+              "-Wall",
+              "-s",
+              "controller_tb",
+              "-o",
+              ".build/regression_17.vvp",
+              "rtl/controller.v",
+              "tb/controller_tb.v"
+            ],
+            "exit_code": 0,
+            "status": "pass",
+            "stdout": "",
+            "stderr": "",
+            "duration_ms": 11
+          },
+          "regression_17.simulation": {
+            "tool": "vvp",
+            "command": [
+              "vvp",
+              "-N",
+              ".build/regression_17.vvp",
+              "+REGRESSION",
+              "+SEED=17"
+            ],
+            "exit_code": 0,
+            "status": "pass",
+            "stdout": "SEMIDEBUG_PASS\n",
+            "stderr": "",
+            "duration_ms": 12
+          },
+          "regression_103.compile": {
+            "tool": "iverilog",
+            "command": [
+              "iverilog",
+              "-g2012",
+              "-Wall",
+              "-s",
+              "controller_tb",
+              "-o",
+              ".build/regression_103.vvp",
+              "rtl/controller.v",
+              "tb/controller_tb.v"
+            ],
+            "exit_code": 0,
+            "status": "pass",
+            "stdout": "",
+            "stderr": "",
+            "duration_ms": 11
+          },
+          "regression_103.simulation": {
+            "tool": "vvp",
+            "command": [
+              "vvp",
+              "-N",
+              ".build/regression_103.vvp",
+              "+REGRESSION",
+              "+SEED=103"
+            ],
+            "exit_code": 0,
+            "status": "pass",
+            "stdout": "SEMIDEBUG_PASS\n",
+            "stderr": "",
+            "duration_ms": 11
+          }
+        }
+      }
+    }
+  ],
+  "final_status": "FIXED",
+  "failure_reason": null,
+  "immutable_before": {
+    "case.json": "22e393334a5cd07a2e22f391f7a5b962c240b9678a962e3f2c39f0b6d27bcdc1",
+    "expected/metadata.json": "debb84aa5767c2399e45855c7cca0e2991a23bb6e122eff53fac346c84ab59f7",
+    "tb/controller_tb.v": "cf816f2a8966ec638e9bf4f55ade62458a7df23e876852dd4286c8d16ade5bb7"
+  },
+  "immutable_after": {
+    "case.json": "22e393334a5cd07a2e22f391f7a5b962c240b9678a962e3f2c39f0b6d27bcdc1",
+    "expected/metadata.json": "debb84aa5767c2399e45855c7cca0e2991a23bb6e122eff53fac346c84ab59f7",
+    "tb/controller_tb.v": "cf816f2a8966ec638e9bf4f55ade62458a7df23e876852dd4286c8d16ade5bb7"
+  },
+  "integrity_pass": true,
+  "success": true,
+  "regression_pass": true,
+  "duration_ms": 28226,
+  "llm_calls": 2,
+  "input_tokens": 12697,
+  "output_tokens": 704,
+  "estimated_cost": null,
+  "price_source": null
+}

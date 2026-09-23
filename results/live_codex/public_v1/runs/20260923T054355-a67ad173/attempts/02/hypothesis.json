@@ -1,0 +1,15 @@
+{
+  "summary": "Reset initializes the arbitration priority opposite to the reference model.",
+  "likely_files": [
+    "rtl/arbiter.v"
+  ],
+  "likely_lines": [
+    13
+  ],
+  "reasoning": "At the first contested request, the DUT grants 10 while the reference expects 01. The reference sets priority_ref to 0 on reset, but the RTL sets priority_bit to 1. The previous proposal was rejected for an invalid diff hunk, so its behavior was not validated.",
+  "confidence": 0.98,
+  "evidence_ids": [
+    "baseline:simulation",
+    "guard:1"
+  ]
+}

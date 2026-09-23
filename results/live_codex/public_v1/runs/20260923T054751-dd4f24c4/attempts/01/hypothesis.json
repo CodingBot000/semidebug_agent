@@ -1,0 +1,14 @@
+{
+  "summary": "Reset assigns pulse_out high, but the reference expects it low.",
+  "likely_files": [
+    "rtl/pulse.v"
+  ],
+  "likely_lines": [
+    4
+  ],
+  "reasoning": "The first step holds rst high; the testbench sets expected=0, while the RTL assigns pulse_out=1. The reported time-2 mismatch is expected=0, actual=1. This is the most likely cause, though no patch validation is available.",
+  "confidence": 0.99,
+  "evidence_ids": [
+    "baseline:simulation"
+  ]
+}

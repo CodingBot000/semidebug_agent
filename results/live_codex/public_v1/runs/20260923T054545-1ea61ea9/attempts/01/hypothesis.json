@@ -1,0 +1,14 @@
+{
+  "summary": "Opcode 0 subtracts instead of adding.",
+  "likely_files": [
+    "rtl/alu.v"
+  ],
+  "likely_lines": [
+    5
+  ],
+  "reasoning": "The testbench expects addition for opcode 0, but line 5 duplicates opcode 1's subtraction. At a=0, b=140, 8-bit subtraction yields 116, matching the observed failure. This is the most likely defect; other opcodes have not been validated by the failing run.",
+  "confidence": 0.99,
+  "evidence_ids": [
+    "baseline:simulation"
+  ]
+}

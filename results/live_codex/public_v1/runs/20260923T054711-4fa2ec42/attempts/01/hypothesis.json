@@ -1,0 +1,15 @@
+{
+  "summary": "The pulse condition detects a high level held across cycles rather than a rising edge.",
+  "likely_files": [
+    "rtl/pulse.v"
+  ],
+  "likely_lines": [
+    7
+  ],
+  "reasoning": "The reference expects enable && signal_in && !previous_ref at tb/pulse_tb.v:11. After reset, previous is zero, so the first enabled high input should produce a pulse; the baseline instead produced zero. Negating previous aligns the RTL with the reference. This is strongly supported, though the proposed patch has not been independently validated.",
+  "confidence": 0.99,
+  "evidence_ids": [
+    "baseline:simulation",
+    "baseline:compile"
+  ]
+}

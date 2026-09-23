@@ -1,0 +1,5 @@
+argv: ["vvp", "-N", ".build/regression_17.vvp", "+REGRESSION", "+SEED=17"]
+status: pass
+exit: 0
+SEMIDEBUG_PASS
+

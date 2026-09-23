@@ -1,0 +1,70 @@
+{
+  "measurement": "live-ai-repair",
+  "total": 30,
+  "fixed": 30,
+  "repair_success_rate": 1.0,
+  "first_attempt_fix_rate": 0.7666666666666667,
+  "regression_integrity_rate": 1.0,
+  "patch_attempts": 37,
+  "invalid_patch_attempts": 7,
+  "invalid_patch_rate": 0.1891891891891892,
+  "average_retry_count": 0.23333333333333334,
+  "median_repair_time_ms": 14679.5,
+  "average_llm_calls": 1.2333333333333334,
+  "input_tokens": 234948,
+  "cached_input_tokens": 78848,
+  "models": [
+    "gpt-6-sol"
+  ],
+  "reasoning_efforts": [
+    "low"
+  ],
+  "billing_modes": [
+    "chatgpt-subscription"
+  ],
+  "output_tokens": 12223,
+  "estimated_cost": null,
+  "failure_breakdown": {},
+  "categories": {
+    "boundary": {
+      "total": 3,
+      "fixed": 3
+    },
+    "combinational": {
+      "total": 6,
+      "fixed": 6
+    },
+    "connectivity": {
+      "total": 4,
+      "fixed": 4
+    },
+    "fsm": {
+      "total": 3,
+      "fixed": 3
+    },
+    "reset": {
+      "total": 5,
+      "fixed": 5
+    },
+    "sequential": {
+      "total": 5,
+      "fixed": 5
+    },
+    "syntax": {
+      "total": 2,
+      "fixed": 2
+    },
+    "width_signedness": {
+      "total": 2,
+      "fixed": 2
+    }
+  },
+  "retry_distribution": {
+    "0": 23,
+    "1": 7
+  },
+  "llm_calls": 37,
+  "cli_version": "codex-cli 0.156.1",
+  "source_commit": "c024c43859128190a8e6afe26f54e1a0a53e6d45",
+  "observed_at_utc": "2026-09-23"
+}

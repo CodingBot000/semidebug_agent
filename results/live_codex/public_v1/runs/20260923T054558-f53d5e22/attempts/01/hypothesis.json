@@ -1,0 +1,14 @@
+{
+  "summary": "The subtraction operands are reversed for op 1.",
+  "likely_files": [
+    "rtl/alu.v"
+  ],
+  "likely_lines": [
+    6
+  ],
+  "reasoning": "The RTL computes b-a, while the testbench expects a-b. For a=0 and b=140, the observed 140 matches the RTL; the expected 116 is the 8-bit result of 0-140. This is the most likely cause of the simulation failure.",
+  "confidence": 0.99,
+  "evidence_ids": [
+    "baseline:simulation"
+  ]
+}

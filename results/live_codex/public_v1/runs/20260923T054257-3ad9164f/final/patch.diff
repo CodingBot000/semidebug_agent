@@ -1,0 +1,5 @@
+--- a/rtl/fifo.v
++++ b/rtl/fifo.v
+@@ -6,1 +6,1 @@
+-wire push = wr_en && full;
++wire push = wr_en && !full;

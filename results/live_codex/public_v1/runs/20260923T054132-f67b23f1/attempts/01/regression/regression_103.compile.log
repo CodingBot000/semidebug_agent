@@ -1,0 +1,4 @@
+argv: ["iverilog", "-g2012", "-Wall", "-s", "counter_tb", "-o", ".build/regression_103.vvp", "rtl/counter.v", "tb/counter_tb.v"]
+status: pass
+exit: 0
+

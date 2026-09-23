@@ -1,0 +1,10 @@
+{"timestamp": "2026-09-23T05:43:40.311240+00:00", "run_id": "20260923T054340-d561d1dd", "case_id": "case_012_arbiter_sequential", "iteration": 0, "event_type": "LOAD_PROJECT", "status": null, "summary": ""}
+{"timestamp": "2026-09-23T05:43:40.315975+00:00", "run_id": "20260923T054340-d561d1dd", "case_id": "case_012_arbiter_sequential", "iteration": 0, "event_type": "BASELINE", "status": null, "summary": ""}
+{"timestamp": "2026-09-23T05:43:41.025030+00:00", "run_id": "20260923T054340-d561d1dd", "case_id": "case_012_arbiter_sequential", "iteration": 1, "event_type": "COLLECT_EVIDENCE", "status": null, "summary": ""}
+{"timestamp": "2026-09-23T05:43:41.026767+00:00", "run_id": "20260923T054340-d561d1dd", "case_id": "case_012_arbiter_sequential", "iteration": 1, "event_type": "ANALYZE", "status": null, "summary": ""}
+{"timestamp": "2026-09-23T05:43:54.233443+00:00", "run_id": "20260923T054340-d561d1dd", "case_id": "case_012_arbiter_sequential", "iteration": 1, "event_type": "GENERATE_PATCH", "status": null, "summary": ""}
+{"timestamp": "2026-09-23T05:43:54.239223+00:00", "run_id": "20260923T054340-d561d1dd", "case_id": "case_012_arbiter_sequential", "iteration": 1, "event_type": "GUARD_PATCH", "status": null, "summary": ""}
+{"timestamp": "2026-09-23T05:43:54.240741+00:00", "run_id": "20260923T054340-d561d1dd", "case_id": "case_012_arbiter_sequential", "iteration": 1, "event_type": "APPLY_PATCH", "status": null, "summary": ""}
+{"timestamp": "2026-09-23T05:43:54.244307+00:00", "run_id": "20260923T054340-d561d1dd", "case_id": "case_012_arbiter_sequential", "iteration": 1, "event_type": "VALIDATE_TARGET", "status": null, "summary": ""}
+{"timestamp": "2026-09-23T05:43:54.968112+00:00", "run_id": "20260923T054340-d561d1dd", "case_id": "case_012_arbiter_sequential", "iteration": 1, "event_type": "VALIDATE_REGRESSION", "status": null, "summary": ""}
+{"timestamp": "2026-09-23T05:43:55.612110+00:00", "run_id": "20260923T054340-d561d1dd", "case_id": "case_012_arbiter_sequential", "iteration": 1, "event_type": "SUCCESS", "status": null, "summary": "All independent validators and regression passed"}

@@ -1,0 +1,16 @@
+{
+  "summary": "Pop-only cycles increment occupancy instead of decrementing it.",
+  "likely_files": [
+    "rtl/fifo.v"
+  ],
+  "likely_lines": [
+    16,
+    18
+  ],
+  "reasoning": "The 2'b01 branch is a pop without a push, but line 18 increments count. This can corrupt full and empty after reads. The prior proposal was rejected for an invalid diff hunk, not tested for behavior, so this diagnosis remains uncertain but most likely.",
+  "confidence": 0.96,
+  "evidence_ids": [
+    "baseline:simulation",
+    "guard:1"
+  ]
+}

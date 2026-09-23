@@ -1,0 +1,15 @@
+{
+  "summary": "Reset initializes the FSM to busy instead of idle.",
+  "likely_files": [
+    "rtl/controller.v"
+  ],
+  "likely_lines": [
+    6
+  ],
+  "reasoning": "The testbench sets its reference state to idle on reset (tb/controller_tb.v:9), while the RTL sets state to 1, which asserts busy. The first simulation failure reports reference state 0 with busy=1 at time 2. This is the most likely cause, though no patched validation is available.",
+  "confidence": 0.99,
+  "evidence_ids": [
+    "baseline:simulation",
+    "baseline:compile"
+  ]
+}

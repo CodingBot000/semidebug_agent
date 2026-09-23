@@ -1,0 +1,4 @@
+argv: ["iverilog", "-g2012", "-Wall", "-s", "arbiter_tb", "-o", ".build/regression_103.vvp", "rtl/arbiter.v", "tb/arbiter_tb.v"]
+status: pass
+exit: 0
+

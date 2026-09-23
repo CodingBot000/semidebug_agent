@@ -1,0 +1,15 @@
+{
+  "summary": "The done output decodes the busy state instead of the completion state.",
+  "likely_files": [
+    "rtl/controller.v"
+  ],
+  "likely_lines": [
+    4
+  ],
+  "reasoning": "Line 4 asserts done in state 1, while the reference expects done only in state 2. The first reported failure is state 1 with done=1; the existing transition reaches state 2 on finish. This is the most likely cause, though the proposed change has not been validated.",
+  "confidence": 0.99,
+  "evidence_ids": [
+    "baseline:simulation",
+    "baseline:compile"
+  ]
+}

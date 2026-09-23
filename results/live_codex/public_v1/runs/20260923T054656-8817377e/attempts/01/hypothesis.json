@@ -1,0 +1,16 @@
+{
+  "summary": "A blocking assignment updates `previous` before the rising-edge test uses it, suppressing the pulse.",
+  "likely_files": [
+    "rtl/pulse.v"
+  ],
+  "likely_lines": [
+    6,
+    7
+  ],
+  "reasoning": "At the first enabled rising edge, simulation reports expected 1 but actual 0. The blocking assignment makes `previous` equal `signal_in` before line 7 evaluates, so `signal_in && !previous` is false. Lint also identifies the blocking assignment and mixed assignment styles. A nonblocking assignment should preserve the prior sampled value for the pulse calculation. This is the most likely cause, though the patch has not been validated.",
+  "confidence": 0.98,
+  "evidence_ids": [
+    "baseline:simulation",
+    "baseline:lint"
+  ]
+}

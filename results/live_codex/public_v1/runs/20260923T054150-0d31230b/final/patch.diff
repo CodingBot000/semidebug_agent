@@ -1,0 +1,7 @@
+--- a/rtl/counter.v
++++ b/rtl/counter.v
+@@ -4,3 +4,3 @@
+     else if (en) begin
+-        if (count == 4'd8) count <= 4'd0;
++        if (count == 4'd9) count <= 4'd0;
+         else count <= count + 4'd1;

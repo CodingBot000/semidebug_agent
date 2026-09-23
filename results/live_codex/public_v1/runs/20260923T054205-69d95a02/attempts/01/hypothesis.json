@@ -1,0 +1,15 @@
+{
+  "summary": "The enable condition is inverted: the counter increments when en is low instead of high.",
+  "likely_files": [
+    "rtl/counter.v"
+  ],
+  "likely_lines": [
+    4
+  ],
+  "reasoning": "The testbench increments its expected count when en is high (tb/counter_tb.v:10-12). After reset it sets en=1, but the baseline remains at zero on the first enabled cycle (baseline:simulation). Changing the condition at rtl/counter.v:4 aligns the counter with that behavior; no prior patch has been tested.",
+  "confidence": 0.99,
+  "evidence_ids": [
+    "baseline:simulation",
+    "baseline:compile"
+  ]
+}

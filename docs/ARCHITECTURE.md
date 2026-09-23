@@ -11,3 +11,7 @@ A candidate must pass compile, target simulation, critical lint policy, synthesi
 Artifact schema: run.json/result.json, events.jsonl, baseline tool logs, attempts/NN/hypothesis.json + patch.diff + validation.json, final/patch.diff + RTL + regression.json + metrics.json, report.md. Reports show actual checks and explicitly mark unexecuted stages. Provider errors do not dump raw API bodies or credentials.
 
 See [Mermaid source](architecture.mmd). The design is single-process and sequential to keep retries and evidence understandable. Native subprocesses are not a security sandbox; see SECURITY.md.
+
+## Local CLI inference adapter
+
+The default provider is `live-codex-cli`. Host `codex exec` uses normal ChatGPT authentication and returns one structured diagnosis/patch pair per attempt. The orchestrator consumes that pair through its existing analysis/patch interface. The next failed attempt gets new evidence and a new call; the adapter does not reuse a proposal across changed contexts. The CLI cannot execute model tools. Host orchestration dispatches manifest-limited temporary workspaces to credential-free, network-disabled EDA Docker workers. CLI usage and version are attached to each run; subscription cost stays null.

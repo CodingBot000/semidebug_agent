@@ -1,0 +1,14 @@
+{
+  "summary": "The pop path reads the write pointer instead of the read pointer.",
+  "likely_files": [
+    "rtl/fifo.v"
+  ],
+  "likely_lines": [
+    15
+  ],
+  "reasoning": "A FIFO pop must return the oldest queued entry. Line 15 advances rd_ptr but reads mem[wr_ptr], which can return a newer entry. The simulation reports expected_out=12 and actual=11; this is consistent with an incorrect read address, though the failure alone does not prove the cause.",
+  "confidence": 0.98,
+  "evidence_ids": [
+    "baseline:simulation"
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "summary": "Opcode 5 uses a right shift where the testbench expects a left shift.",
+  "likely_files": [
+    "rtl/alu.v"
+  ],
+  "likely_lines": [
+    10
+  ],
+  "reasoning": "The reported inputs shift by b[2:0]=4: 90 >> 4 is 5, while 90 << 4 truncates to 160. The previous proposal was rejected for an invalid diff hunk, not for RTL behavior; the corrected patch remains unvalidated.",
+  "confidence": 0.99,
+  "evidence_ids": [
+    "baseline:simulation",
+    "guard:1"
+  ]
+}

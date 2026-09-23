@@ -1,0 +1,15 @@
+{
+  "summary": "The both-request grant selection is reversed.",
+  "likely_files": [
+    "rtl/arbiter.v"
+  ],
+  "likely_lines": [
+    8
+  ],
+  "reasoning": "With priority_bit reset to 0, req=11 produces grant=10, but the reference expects grant=01. Reversing only the two choices for req=11 aligns this case with the reference; the other request cases and priority update already match its behavior.",
+  "confidence": 0.98,
+  "evidence_ids": [
+    "baseline:simulation",
+    "baseline:compile"
+  ]
+}

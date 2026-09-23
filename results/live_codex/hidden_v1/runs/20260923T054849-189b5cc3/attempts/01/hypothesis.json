@@ -1,0 +1,15 @@
+{
+  "summary": "The default case incorrectly grants requester 0 when req is 00.",
+  "likely_files": [
+    "rtl/arbiter.v"
+  ],
+  "likely_lines": [
+    9
+  ],
+  "reasoning": "The simulation reports req=00, expected=00, got=01. The default branch assigns 01 for this otherwise unmatched request value. Changing it to 00 preserves all explicitly handled requests. No validation of this proposed change is available.",
+  "confidence": 0.98,
+  "evidence_ids": [
+    "baseline:simulation",
+    "baseline:compile"
+  ]
+}

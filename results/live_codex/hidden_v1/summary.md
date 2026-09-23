@@ -1,0 +1,66 @@
+# Benchmark
+
+Measurement: **live-ai-repair**
+
+Fixed 6/6 cases.
+
+```json
+{
+  "measurement": "live-ai-repair",
+  "total": 6,
+  "fixed": 6,
+  "repair_success_rate": 1.0,
+  "first_attempt_fix_rate": 0.5,
+  "regression_integrity_rate": 1.0,
+  "patch_attempts": 9,
+  "invalid_patch_attempts": 3,
+  "invalid_patch_rate": 0.3333333333333333,
+  "average_retry_count": 0.5,
+  "median_repair_time_ms": 21391.5,
+  "average_llm_calls": 1.5,
+  "input_tokens": 58940,
+  "cached_input_tokens": 25088,
+  "models": [
+    "gpt-6-sol"
+  ],
+  "reasoning_efforts": [
+    "low"
+  ],
+  "billing_modes": [
+    "chatgpt-subscription"
+  ],
+  "output_tokens": 3089,
+  "estimated_cost": null,
+  "failure_breakdown": {},
+  "categories": {
+    "boundary": {
+      "total": 1,
+      "fixed": 1
+    },
+    "combinational": {
+      "total": 1,
+      "fixed": 1
+    },
+    "connectivity": {
+      "total": 1,
+      "fixed": 1
+    },
+    "fsm": {
+      "total": 1,
+      "fixed": 1
+    },
+    "syntax": {
+      "total": 1,
+      "fixed": 1
+    },
+    "width_signedness": {
+      "total": 1,
+      "fixed": 1
+    }
+  },
+  "retry_distribution": {
+    "0": 3,
+    "1": 3
+  }
+}
+```

@@ -1,0 +1,72 @@
+{
+  "results": {
+    "regression_17.compile": {
+      "tool": "iverilog",
+      "command": [
+        "iverilog",
+        "-g2012",
+        "-Wall",
+        "-s",
+        "counter_tb",
+        "-o",
+        ".build/regression_17.vvp",
+        "rtl/counter.v",
+        "tb/counter_tb.v"
+      ],
+      "exit_code": 0,
+      "status": "pass",
+      "stdout": "",
+      "stderr": "",
+      "duration_ms": 22
+    },
+    "regression_17.simulation": {
+      "tool": "vvp",
+      "command": [
+        "vvp",
+        "-N",
+        ".build/regression_17.vvp",
+        "+REGRESSION",
+        "+SEED=17"
+      ],
+      "exit_code": 0,
+      "status": "pass",
+      "stdout": "SEMIDEBUG_PASS\n",
+      "stderr": "",
+      "duration_ms": 14
+    },
+    "regression_103.compile": {
+      "tool": "iverilog",
+      "command": [
+        "iverilog",
+        "-g2012",
+        "-Wall",
+        "-s",
+        "counter_tb",
+        "-o",
+        ".build/regression_103.vvp",
+        "rtl/counter.v",
+        "tb/counter_tb.v"
+      ],
+      "exit_code": 0,
+      "status": "pass",
+      "stdout": "",
+      "stderr": "",
+      "duration_ms": 12
+    },
+    "regression_103.simulation": {
+      "tool": "vvp",
+      "command": [
+        "vvp",
+        "-N",
+        ".build/regression_103.vvp",
+        "+REGRESSION",
+        "+SEED=103"
+      ],
+      "exit_code": 0,
+      "status": "pass",
+      "stdout": "SEMIDEBUG_PASS\n",
+      "stderr": "",
+      "duration_ms": 13
+    }
+  }
+}

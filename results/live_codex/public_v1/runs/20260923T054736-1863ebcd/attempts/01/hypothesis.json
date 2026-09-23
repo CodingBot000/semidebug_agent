@@ -1,0 +1,14 @@
+{
+  "summary": "The enable condition is inverted in the pulse-generation expression.",
+  "likely_files": [
+    "rtl/pulse.v"
+  ],
+  "likely_lines": [
+    7
+  ],
+  "reasoning": "The RTL requires !enable, while the reference requires enable. The reported failure occurs with enable=1 and a rising signal: expected=1, actual=0. This one-token polarity error is the most likely cause; no repair has been independently validated.",
+  "confidence": 0.99,
+  "evidence_ids": [
+    "baseline:simulation"
+  ]
+}

@@ -16,9 +16,9 @@ RTL allowlist, 정확한 hunk 적용, 최대 2파일/40줄 제한, 테스트·ma
 
 - 자체 제작 6종 RTL, 오류 30개(공개 24 / holdout 6), 8종 오류 범주.
 - 정상 6종의 compile/simulation/lint/synthesis/회귀 통과, 오류 30개의 실제 실패 확인.
-- 초기 최종 통합 실행에서 테스트 86개 통과.
+- CLI 연동 후 전체 테스트 95개 통과.
 - 미리 정한 올바른 패치를 넣은 파이프라인 검증 30/30 승인, 첫 실행 median 360.5 ms.
-- **API 키가 없어 live LLM을 실행하지 않았으므로 AI 수리 성공률은 제시하지 않습니다.** 위 30/30은 정답을 공급한 파이프라인 테스트입니다.
+- **실제 Codex CLI gpt-6-sol / low 전체 평가: 공개 24/24 + holdout 6/6 수정, 첫 시도 23/30, 중앙 시간 14.68초.** [실제 결과](results/live_codex/summary.md). 위 알려진 정답 기반 결과와 별도로 측정했습니다.
 
 ## Evidence examples
 
@@ -30,4 +30,4 @@ RTL allowlist, 정확한 hunk 적용, 최대 2파일/40줄 제한, 테스트·ma
 
 ## Limitations and next measurement
 
-소형 RTL 연구용 프로토타입이며 실제 반도체 생산환경·silicon·physical verification을 수행하지 않았습니다. 유한 테스트는 formal correctness 증명이 아닙니다. lexical patch guard는 모든 악성 HDL 우회를 증명 수준으로 차단하지 못합니다. live provider는 HTTP 모의 테스트를 통과했지만 실제 endpoint 호환성과 모델 성능은 아직 검증되지 않았습니다. 다음 단계는 API 설정 후 공개 벤치마크의 실제 실패를 분석하고 동일 조건 재실행 및 holdout 평가를 수행하는 것입니다.
+소형 RTL 연구용 프로토타입이며 실제 반도체 생산환경·silicon·physical verification을 수행하지 않았습니다. 유한 테스트는 formal correctness 증명이 아닙니다. lexical patch guard는 모든 악성 HDL 우회를 증명 수준으로 차단하지 못합니다. Codex CLI 경로에서 실제 모델을 평가했습니다. 별도 API 경로는 HTTP 모의 테스트만 수행했습니다. Holdout은 같은 설계의 다른 mutation이므로 독립 설계에 대한 일반화 증거가 아닙니다.

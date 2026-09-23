@@ -1,0 +1,69 @@
+{
+  "results": {
+    "compile": {
+      "tool": "iverilog",
+      "command": [
+        "iverilog",
+        "-g2012",
+        "-Wall",
+        "-s",
+        "arbiter_tb",
+        "-o",
+        ".build/target.vvp",
+        "rtl/arbiter.v",
+        "tb/arbiter_tb.v"
+      ],
+      "exit_code": 0,
+      "status": "pass",
+      "stdout": "",
+      "stderr": "",
+      "duration_ms": 12
+    },
+    "simulation": {
+      "tool": "vvp",
+      "command": [
+        "vvp",
+        "-N",
+        ".build/target.vvp",
+        "+SEED=7"
+      ],
+      "exit_code": 1,
+      "status": "fail",
+      "stdout": "FATAL: tb/arbiter_tb.v:17: arbiter req=11 priority=1 expected=10 got=01\n       Time: 4 Scope: arbiter_tb.check_grant\n",
+      "stderr": "",
+      "duration_ms": 11
+    },
+    "lint": {
+      "tool": "verilator",
+      "command": [
+        "verilator",
+        "--lint-only",
+        "-Wall",
+        "-Wno-fatal",
+        "--top-module",
+        "arbiter",
+        "rtl/arbiter.v"
+      ],
+      "exit_code": 0,
+      "status": "pass",
+      "stdout": "",
+      "stderr": "",
+      "duration_ms": 73
+    },
+    "synthesis": {
+      "tool": "yosys",
+      "command": [
+        "yosys",
+        "-Q",
+        "-T",
+        "-p",
+        "read_verilog -sv rtl/arbiter.v; hierarchy -check -top arbiter; proc; opt; check -assert"
+      ],
+      "exit_code": 0,
+      "status": "pass",
+      "stdout": "\n-- Running command `read_verilog -sv rtl/arbiter.v; hierarchy -check -top arbiter; proc; opt; check -assert' --\n\n1. Executing Verilog-2005 frontend: rtl/arbiter.v\nParsing SystemVerilog input from `rtl/arbiter.v' to AST representation.\nGenerating RTLIL representation for module `\\arbiter'.\nSuccessfully finished Verilog frontend.\n\n2. Executing HIERARCHY pass (managing design hierarchy).\n\n2.1. Analyzing design hierarchy..\nTop module:  \\arbiter\n\n2.2. Analyzing design hierarchy..\nTop module:  \\arbiter\nRemoved 0 unused modules.\n\n3. Executing PROC pass (convert processes to netlists).\n\n3.1. Executing PROC_CLEAN pass (remove empty switches from decision trees).\nCleaned up 0 empty switches.\n\n3.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).\nMarked 2 switch rules as full_case in process $proc$rtl/arbiter.v:12$3 in module arbiter.\nMarked 1 switch rules as full_case in process $proc$rtl/arbiter.v:3$1 in module arbiter.\nRemoved a total of 0 dead cases.\n\n3.3. Executing PROC_PRUNE pass (remove redundant assignments in processes).\nRemoved 0 redundant assignments.\nPromoted 1 assignment to connection.\n\n3.4. Executing PROC_INIT pass (extract init attributes).\n\n3.5. Executing PROC_ARST pass (detect async resets in processes).\n\n3.6. Executing PROC_ROM pass (convert switches to ROMs).\nConverted 0 switches.\n<suppressed ~4 debug messages>\n\n3.7. Executing PROC_MUX pass (convert decision trees to multiplexers).\nCreating decoders for process `\\arbiter.$proc$rtl/arbiter.v:12$3'.\n     1/1: $0\\priority_bit[0:0]\nCreating decoders for process `\\arbiter.$proc$rtl/arbiter.v:3$1'.\n     1/1: $1\\grant[1:0]\n\n3.8. Executing PROC_DLATCH pass (convert process syncs to latches).\nNo latch inferred for signal `\\arbiter.\\grant' from process `\\arbiter.$proc$rtl/arbiter.v:3$1'.\n\n3.9. Executing PROC_DFF pass (convert process syncs to FFs).\nCreating register for signal `\\arbiter.\\priority_bit' using process `\\arbiter.$proc$rtl/arbiter.v:12$3'.\n  created $dff cell `$procdff$17' with positive edge clock.\n\n3.10. Executing PROC_MEMWR pass (convert process memory writes to cells).\n\n3.11. Executing PROC_CLEAN pass (remove empty switches from decision trees).\nFound and cleaned up 3 empty switches in `\\arbiter.$proc$rtl/arbiter.v:12$3'.\nRemoving empty process `arbiter.$proc$rtl/arbiter.v:12$3'.\nFound and cleaned up 1 empty switch in `\\arbiter.$proc$rtl/arbiter.v:3$1'.\nRemoving empty process `arbiter.$proc$rtl/arbiter.v:3$1'.\nCleaned up 4 empty switches.\n\n3.12. Executing OPT_EXPR pass (perform const folding).\nOptimizing module arbiter.\n\n4. Executing OPT pass (performing simple optimizations).\n\n4.1. Executing OPT_EXPR pass (perform const folding).\nOptimizing module arbiter.\n\n4.2. Executing OPT_MERGE pass (detect identical cells).\nFinding identical cells in module `\\arbiter'.\nRemoved a total of 0 cells.\n\n4.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).\nRunning muxtree optimizer on module \\arbiter..\n  Creating internal representation of mux trees.\n  Evaluating internal representation of mux trees.\n  Analyzing evaluation results.\nRemoved 0 multiplexer ports.\n<suppressed ~2 debug messages>\n\n4.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).\n  Optimizing cells in module \\arbiter.\nPerformed a total of 0 changes.\n\n4.5. Executing OPT_MERGE pass (detect identical cells).\nFinding identical cells in module `\\arbiter'.\nRemoved a total of 0 cells.\n\n4.6. Executing OPT_DFF pass (perform DFF optimizations).\nAdding SRST signal on $procdff$17 ($dff) from module arbiter (D = $procmux$4_Y, Q = \\priority_bit, rval = 1'0).\nAdding EN signal on $auto$ff.cc:266:slice$18 ($sdff) from module arbiter (D = 1'0, Q = \\priority_bit).\nSetting constant 0-bit at position 0 on $auto$ff.cc:266:slice$21 ($sdffe) from module arbiter.\n\n4.7. Executing OPT_CLEAN pass (remove unused cells and wires).\nFinding unused cells or wires in module \\arbiter..\nRemoved 4 unused cells and 11 unused wires.\n<suppressed ~5 debug messages>\n\n4.8. Executing OPT_EXPR pass (perform const folding).\nOptimizing module arbiter.\n<suppressed ~1 debug messages>\n\n4.9. Rerunning OPT passes. (Maybe there is more to do..)\n\n4.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).\nRunning muxtree optimizer on module \\arbiter..\n  Creating internal representation of mux trees.\n  Evaluating internal representation of mux trees.\n  Analyzing evaluation results.\nRemoved 0 multiplexer ports.\n<suppressed ~1 debug messages>\n\n4.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).\n  Optimizing cells in module \\arbiter.\n    New ctrl vector for $pmux cell $procmux$13: { $procmux$15_CMP $auto$opt_reduce.cc:134:opt_pmux$23 }\n  Optimizing cells in module \\arbiter.\nPerformed a total of 1 changes.\n\n4.12. Executing OPT_MERGE pass (detect identical cells).\nFinding identical cells in module `\\arbiter'.\nRemoved a total of 0 cells.\n\n4.13. Executing OPT_DFF pass (perform DFF optimizations).\n\n4.14. Executing OPT_CLEAN pass (remove unused cells and wires).\nFinding unused cells or wires in module \\arbiter..\nRemoved 0 unused cells and 1 unused wires.\n<suppressed ~1 debug messages>\n\n4.15. Executing OPT_EXPR pass (perform const folding).\nOptimizing module arbiter.\n\n4.16. Rerunning OPT passes. (Maybe there is more to do..)\n\n4.17. Executing OPT_MUXTREE pass (detect dead branches in mux trees).\nRunning muxtree optimizer on module \\arbiter..\n  Creating internal representation of mux trees.\n  Evaluating internal representation of mux trees.\n  Analyzing evaluation results.\nRemoved 0 multiplexer ports.\n<suppressed ~1 debug messages>\n\n4.18. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).\n  Optimizing cells in module \\arbiter.\nPerformed a total of 0 changes.\n\n4.19. Executing OPT_MERGE pass (detect identical cells).\nFinding identical cells in module `\\arbiter'.\nRemoved a total of 0 cells.\n\n4.20. Executing OPT_DFF pass (perform DFF optimizations).\n\n4.21. Executing OPT_CLEAN pass (remove unused cells and wires).\nFinding unused cells or wires in module \\arbiter..\n\n4.22. Executing OPT_EXPR pass (perform const folding).\nOptimizing module arbiter.\n\n4.23. Finished OPT passes. (There is nothing left to do.)\n\n5. Executing CHECK pass (checking for obvious problems).\nChecking module arbiter...\nFound and reported 0 problems.\n",
+      "stderr": "",
+      "duration_ms": 21
+    }
+  }
+}

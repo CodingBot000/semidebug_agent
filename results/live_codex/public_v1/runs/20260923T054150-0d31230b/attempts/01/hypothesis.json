@@ -1,0 +1,14 @@
+{
+  "summary": "The counter wraps one count too early.",
+  "likely_files": [
+    "rtl/counter.v"
+  ],
+  "likely_lines": [
+    5
+  ],
+  "reasoning": "Line 5 resets at 8, but the testbench expects 9 before wrapping (tb/counter_tb.v:11). The observed failure is expected=9, actual=0 at cycle 8 (baseline:simulation).",
+  "confidence": 0.99,
+  "evidence_ids": [
+    "baseline:simulation"
+  ]
+}

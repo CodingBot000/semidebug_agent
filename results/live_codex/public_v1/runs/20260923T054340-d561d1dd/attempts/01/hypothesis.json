@@ -1,0 +1,14 @@
+{
+  "summary": "The priority bit does not advance after granting requester 0.",
+  "likely_files": [
+    "rtl/arbiter.v"
+  ],
+  "likely_lines": [
+    14
+  ],
+  "reasoning": "Line 14 clears priority_bit after grant[0], but the reference sets it to 1. Consequently, with both requests asserted, the arbiter grants requester 0 again; the simulation reports expected 10 but got 01. This is the most likely cause, though the proposed change has not been validated.",
+  "confidence": 0.99,
+  "evidence_ids": [
+    "baseline:simulation"
+  ]
+}

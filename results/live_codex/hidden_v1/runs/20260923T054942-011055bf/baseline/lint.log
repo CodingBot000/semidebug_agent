@@ -1,0 +1,8 @@
+argv: ["verilator", "--lint-only", "-Wall", "-Wno-fatal", "--top-module", "alu", "rtl/alu.v"]
+status: fail
+exit: 1
+
+%Error: rtl/alu.v:9:28: Can't find definition of variable: 'nonexistent'
+    9 |         3'd4: result = a ^ nonexistent;
+      |                            ^~~~~~~~~~~
+%Error: Exiting due to 1 error(s)

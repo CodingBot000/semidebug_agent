@@ -57,3 +57,21 @@ All timestamps use UTC unless specified. Test and benchmark numbers come from ex
 - GitHub Actions [validation run 35782805742](https://github.com/CodingBot000/semidebug_agent/actions/runs/35782805742) completed successfully: image build, lint/format and the complete test suite passed on GitHub's runner. Machine-readable status: `results/verification/github_ci.json`.
 - Final publication record is a documentation/evidence-only follow-up commit; application/test sources are unchanged from the successful CI commit. The follow-up uses `[skip ci]` to avoid rerunning identical source checks.
 - Final submission ZIP and its SHA256 sidecar are generated in `dist/` after this record; the archive excludes .git, .env, caches and build outputs and remains below 50 MB.
+
+## Codex CLI provider — 2026-09-23
+- User requested ChatGPT-authenticated local Codex CLI instead of a separately billed API key, with GPT-6 Astra low or Sol.
+- Verified installed CLI 0.147.0 and `codex login status`: logged in using ChatGPT. Local model catalog lists `gpt-6-sol` with low reasoning supported.
+- Selected `gpt-6-sol`, low reasoning. Keep authentication managed by the CLI; do not extract tokens or mount credentials into EDA containers.
+- Implement a host CLI provider plus network-disabled Docker EDA execution. Combine hypothesis and patch in one structured CLI response to reduce model calls per attempt.
+- Existing scripted measurements remain preserved; new live measurements will be recorded separately.
+- Initial CLI requests exposed outdated-version/model-catalog mismatch (ISSUE-008). Updated official Codex CLI from 0.147.0 to 0.156.1 while preserving ChatGPT login.
+- Corrected CLI event classification (ISSUE-009); diagnostic metadata warnings are distinct from actual tool calls.
+- First real GPT-6 Sol / low FIFO demo: FIXED on first candidate, all independent EDA + regression + immutable checks passed; one CLI invocation, 16,854 input / 251 output tokens. This is a pilot, separate from benchmark measurements.
+- Applying usage reduction before the fixed benchmark protocol: short stateless model instructions, minimal unused skill catalog, and omission of verbose successful-validator logs from prompts only. Full validation artifacts remain preserved.
+- Optimized real FIFO demo: FIXED on the first candidate, one CLI call, 6,520 input / 322 output tokens, zero model tool calls. The previous successful pilot used 16,854 input tokens: a 61.3% input reduction on this one example, not a general cost guarantee.
+- Freeze the optimized provider/prompt for the live benchmark: GPT-6 Sol, low, max 3 attempts, public 24 then holdout 6, one structured CLI request per attempt, same original immutable corpus.
+- Local Codex integration verification: Docker full suite 95 passed in 10.19s; Ruff check/format pass. Host doctor confirms CLI ChatGPT login and Docker EDA versions. Raw verification saved under results/verification/codex_*.
+- Frozen live public benchmark: 24/24 fixed, first attempt 20/24, median 14,507.5ms, 28 inference calls. Four malformed proposals were rejected and corrected on retry; ISSUE-010 records them.
+- Source implementation committed and pushed as c024c43859128190a8e6afe26f54e1a0a53e6d45. GitHub Actions run 35824003905 started; final result will be recorded below.
+- Frozen holdout completed 6/6; first attempt 3/6. Overall 30/30, first attempt 23/30, 37 actual CLI calls, median 14,679.5ms. Input 234,948 including cached 78,848; output 12,223. Seven malformed diff proposals safely rejected then corrected. All raw runs, CSV/JSON summaries, optimized demo and pilot usage comparison exported under results/.
+- GitHub Actions run 35824003905 completed successfully for c024c43859128190a8e6afe26f54e1a0a53e6d45. Local 95-test suite and cloud CI both pass. API costs stay null because ChatGPT subscription authentication was used.

@@ -1,0 +1,15 @@
+{
+  "summary": "The grant choices for simultaneous requests are reversed; the previous proposal was rejected for an invalid diff hunk, not by RTL validation.",
+  "likely_files": [
+    "rtl/arbiter.v"
+  ],
+  "likely_lines": [
+    8
+  ],
+  "reasoning": "After reset, priority_bit is 0. For req=11, line 8 produces 10, while the testbench expects 01. The previous patch's hunk header claimed seven lines but contained only six, consistent with the guard error. The functional fix remains unvalidated.",
+  "confidence": 0.98,
+  "evidence_ids": [
+    "baseline:simulation",
+    "guard:1"
+  ]
+}

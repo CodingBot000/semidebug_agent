@@ -1,0 +1,14 @@
+{
+  "summary": "Opcode 6 compares unsigned operands, but the expected behavior is signed comparison.",
+  "likely_files": [
+    "rtl/alu.v"
+  ],
+  "likely_lines": [
+    11
+  ],
+  "reasoning": "The testbench converts both operands to signed values before comparing them at line 20. For a=0 and b=140 (signed -116), it expects 0, while the unsigned RTL comparison produces 1. [baseline:simulation]",
+  "confidence": 0.99,
+  "evidence_ids": [
+    "baseline:simulation"
+  ]
+}

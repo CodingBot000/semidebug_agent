@@ -1,0 +1,9 @@
+--- a/rtl/fifo.v
++++ b/rtl/fifo.v
+@@ -16,5 +16,5 @@
+         case ({push,pop})
+             2'b10: count <= count + 3'd1;
+-            2'b01: count <= count + 3'd1;
++            2'b01: count <= count - 3'd1;
+             default: count <= count;
+         endcase

@@ -1,0 +1,14 @@
+{
+  "summary": "The finish transition skips the done state.",
+  "likely_files": [
+    "rtl/controller.v"
+  ],
+  "likely_lines": [
+    9
+  ],
+  "reasoning": "The RTL returns directly to idle on finish, while the testbench reference enters state 2 and expects done high. The failure at state 2 with done low is consistent with this mismatch. Evidence: baseline:simulation and tb/controller_tb.v lines 12\u201316. This is the most likely cause, though the patch has not been validated.",
+  "confidence": 0.99,
+  "evidence_ids": [
+    "baseline:simulation"
+  ]
+}

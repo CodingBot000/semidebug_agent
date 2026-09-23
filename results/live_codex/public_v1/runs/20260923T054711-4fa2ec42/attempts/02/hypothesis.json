@@ -1,0 +1,15 @@
+{
+  "summary": "The pulse condition uses the previous input without negation, detecting a sustained high rather than a rising edge.",
+  "likely_files": [
+    "rtl/pulse.v"
+  ],
+  "likely_lines": [
+    7
+  ],
+  "reasoning": "The reference at tb/pulse_tb.v:11 requires !previous_ref. The baseline fails on the first enabled high sample after reset. The previous proposal was rejected for an invalid diff hunk, not for RTL behavior; this proposal corrects the hunk count. Functional correctness remains unvalidated.",
+  "confidence": 0.99,
+  "evidence_ids": [
+    "baseline:simulation",
+    "guard:1"
+  ]
+}

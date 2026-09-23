@@ -6,9 +6,9 @@ RTL 오류의 원인을 추론하고 최소 패치를 제안한 뒤, **실제 ED
 
 - 자체 제작 RTL 6종: counter, FIFO, round-robin arbiter, FSM controller, ALU, pulse detector.
 - 오류 사례 **30개**: 공개 24개 / holdout 6개. 정상 버전은 모든 검증·회귀 테스트를 통과하고, 오류 버전 30개 모두 실제 실패를 재현했습니다.
-- 단위·EDA 통합·스크립트 기반 E2E 테스트 **86개 통과**.
+- 단위·EDA 통합·스크립트 기반 E2E 테스트 **95개 통과**.
 - 알려진 정답 패치를 공급한 **파이프라인 검증 30/30 통과**. 이는 AI 수리 성공률이 아닙니다.
-- **실제 LLM 데모·AI 벤치마크는 API 키 미설정으로 미실행**입니다. AI 성공률·토큰 비용은 측정하지 않았습니다. [상태 기록](docs/issues/ISSUE-001-live-credentials.md)
+- **실제 Codex CLI gpt-6-sol / low 평가: 공개 24/24 + holdout 6/6 수정 성공.** 첫 시도 23/30, 중앙 시간 14.68초. [실제 측정 결과](results/live_codex/summary.md) · [CLI 설정](docs/CODEX_CLI.md)
 
 ## 왜 필요한가
 
@@ -56,15 +56,15 @@ cd semidebug_agent
 실제 AI 실행:
 
 ```bash
-cp .env.example .env
-# .env에 OPENAI_API_KEY, OPENAI_MODEL 설정
-# 필요하면 OPENAI_BASE_URL 및 SEMIDEBUG_JSON_MODE=true 설정
+npm install -g @openai/codex
+codex login
+./scripts/doctor.sh
 ./scripts/run_demo.sh
 ./scripts/run_benchmark.sh benchmark/public
 ./scripts/run_benchmark.sh benchmark/hidden
 ```
 
-키는 `.env`에만 보관하고 Git에 추가하지 않습니다. 모델명은 사용할 provider에서 지원하는 값으로 지정합니다. 호환 provider가 strict JSON schema를 지원하지 않을 때만 JSON mode를 명시적으로 켭니다. 가격은 설정하지 않으면 `unknown`으로 남습니다.
+기본 실행은 Codex CLI의 ChatGPT 인증을 사용하며 구독 사용 한도를 소비합니다. API 키는 필요하지 않습니다. 실제 확인 모델은 `gpt-6-sol`, 추론 강도는 `low`입니다. [모델 변경·인증·사용량 안내](docs/CODEX_CLI.md). 별도 API 모드는 `.env` 설정 후 `./scripts/run_demo.sh --api`로 실행합니다.
 
 ## 검증 정책
 
@@ -96,6 +96,7 @@ make package
 
 ## 근거와 벤치마크
 
+- [실제 LLM 데모](results/live_demo/report.md) / [실제 AI 벤치마크](results/live_codex/summary.md)
 - [측정 범위와 결과](docs/BENCHMARK.md)
 - [첫 시도 성공](results/sample_run/report.md) / [재시도 성공](results/retry_run/report.md) / [실패 사례](results/failed_run/report.md)
 - [파이프라인 결과 JSON](results/benchmark_results.json) / [CSV](results/benchmark_results.csv)
@@ -110,6 +111,6 @@ make package
 
 소형 자체 제작 RTL을 대상으로 한 연구·포트폴리오 프로토타입입니다. 상용 반도체 EDA, silicon 검증, physical verification, formal equivalence를 대체하지 않습니다. Yosys의 기본 SystemVerilog 지원 범위는 제한적입니다. 테스트 통과가 모든 입력에 대한 정확성 증명은 아닙니다.
 
-현재 live API 호출과 AI 수리 성능은 검증되지 않았습니다. Holdout은 다른 mutation을 사용하지만 같은 설계 계열이므로 독립 설계에 대한 일반화 결과가 아닙니다. 임의의 악성 HDL을 안전하게 실행하는 제품이 아니며, native/live 모드는 신뢰하는 입력만 사용합니다. [실행 경계와 보안](docs/SECURITY.md)
+Codex CLI 경로에서 실제 AI 수리를 측정했으며 별도 API 경로는 모의 HTTP 테스트만 수행했습니다. Holdout은 다른 mutation을 사용하지만 같은 설계 계열이므로 독립 설계에 대한 일반화 결과가 아닙니다. 임의의 악성 HDL을 안전하게 실행하는 제품이 아니며, native/live 모드는 신뢰하는 입력만 사용합니다. [실행 경계와 보안](docs/SECURITY.md)
 
 MIT 라이선스. 외부 도구 라이선스는 [THIRD_PARTY.md](docs/THIRD_PARTY.md)를 확인하세요.

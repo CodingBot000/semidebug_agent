@@ -5,7 +5,7 @@
 3. Run `./scripts/run_demo.sh --scripted` for real EDA validation with an explicitly scripted patch.
 4. Run `./scripts/run_demo.sh --replay` to read recorded evidence without EDA execution.
 5. Run `make test-all` and `make lint`.
-6. For live AI: copy `.env.example` to `.env`, set OPENAI_API_KEY and OPENAI_MODEL, then run `./scripts/run_demo.sh`.
+6. For live AI: `npm install -g @openai/codex`, `codex login`, then `./scripts/run_demo.sh`. Default: ChatGPT-authenticated gpt-6-sol / low; see [Codex setup](docs/CODEX_CLI.md).
 7. Run `./scripts/run_benchmark.sh benchmark/public`; after deciding improvements, repeat the same split and separately evaluate `benchmark/hidden`.
 8. Run `make package`. The ZIP and SHA256 file are written under `dist/`.
 

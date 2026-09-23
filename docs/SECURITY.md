@@ -9,3 +9,7 @@
 - `scripts/docker_run.sh` defaults to no network, 2 CPUs, 2 GiB memory, PID limit 128, dropped capabilities, no-new-privileges, non-root user and read-only project mount. Only artifacts are writable. Live mode enables network for the provider. Do not feed hostile RTL to live mode; API credentials in a process/container do not constitute a safe boundary against arbitrary HDL system tasks. Stronger arbitrary-code support requires a separate disposable worker VM/container with no credentials or project secret mounts.
 - API keys come from .env/environment; .env is excluded from Git, Docker build context and ZIP. No Codex login credentials are reused. Prompts are not persisted; returned explanation/diff and relevant EDA logs are evidence and may contain source code.
 - Package scanning detects common key formats/private keys; it is a heuristic, not a guarantee. Review what is shared. Repository visibility defaults to private.
+
+## Codex CLI mode
+
+The trusted host CLI uses normal ChatGPT login. Authentication storage is never read/copied by the adapter or mounted into EDA containers. Explicit CLI subprocess environment omits API-key/token overrides. Stateless inference uses read-only/ephemeral mode, disables tools and user plugins, and rejects detected tool events. Only manifest-selected evidence reaches the prompt; evaluator gold stays outside inference. Local CLI configuration and model diagnostics can vary with CLI versions; successful completion and valid structured output are still required.

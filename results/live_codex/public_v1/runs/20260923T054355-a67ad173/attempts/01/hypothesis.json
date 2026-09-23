@@ -1,0 +1,17 @@
+{
+  "summary": "Reset initializes priority_bit to the opposite value from the reference model.",
+  "likely_files": [
+    "rtl/arbiter.v"
+  ],
+  "likely_lines": [
+    13
+  ],
+  "reasoning": "At the first contested request after reset, the DUT grants requester 1 while the reference expects requester 0. The reference sets priority_ref to 0 on reset, but the RTL sets priority_bit to 1. Changing only the reset value aligns their contested-request selection; subsequent priority updates already match. This is inferred from the supplied testbench, not independently validated after patching.",
+  "confidence": 0.98,
+  "evidence_ids": [
+    "baseline:simulation",
+    "baseline:compile",
+    "baseline:lint",
+    "baseline:synthesis"
+  ]
+}

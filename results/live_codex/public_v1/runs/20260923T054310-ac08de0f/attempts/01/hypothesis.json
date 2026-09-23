@@ -1,0 +1,14 @@
+{
+  "summary": "Reset initializes occupancy to one instead of zero.",
+  "likely_files": [
+    "rtl/fifo.v"
+  ],
+  "likely_lines": [
+    12
+  ],
+  "reasoning": "The testbench expects an empty FIFO immediately after reset (line 15), but count=1 makes empty low. The baseline fails at step 0 with occupancy 0 and empty=0. This is the most likely cause; no post-reset behavior has yet been validated.",
+  "confidence": 0.99,
+  "evidence_ids": [
+    "baseline:simulation"
+  ]
+}

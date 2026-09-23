@@ -1,0 +1,14 @@
+{
+  "summary": "The full flag asserts at occupancy 3 instead of the FIFO\u2019s capacity of 4.",
+  "likely_files": [
+    "rtl/fifo.v"
+  ],
+  "likely_lines": [
+    8
+  ],
+  "reasoning": "The memory has four entries, and the testbench expects full only when n==4. Simulation fails at occupancy 3 with full=1. Evidence: baseline:simulation; source lines 3 and 8; testbench lines 13 and 22.",
+  "confidence": 0.99,
+  "evidence_ids": [
+    "baseline:simulation"
+  ]
+}

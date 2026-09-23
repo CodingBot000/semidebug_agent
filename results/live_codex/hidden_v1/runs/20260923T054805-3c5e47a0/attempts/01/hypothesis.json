@@ -1,0 +1,15 @@
+{
+  "summary": "The counter is only 3 bits wide, so it wraps from 7 to 0 instead of reaching 8 and 9.",
+  "likely_files": [
+    "rtl/counter.v"
+  ],
+  "likely_lines": [
+    1
+  ],
+  "reasoning": "The testbench expects a 4-bit count, and simulation fails when expected 8 but actual is 0. Widening count also matches the existing 4-bit constants and addresses the reported width warnings. This is the most likely cause, though the proposed change has not been validated.",
+  "confidence": 0.99,
+  "evidence_ids": [
+    "baseline:simulation",
+    "baseline:lint"
+  ]
+}

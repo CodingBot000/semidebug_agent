@@ -1,0 +1,15 @@
+{
+  "summary": "Reset polarity is reversed: the testbench asserts rst high, but the RTL clears count when rst is low.",
+  "likely_files": [
+    "rtl/counter.v"
+  ],
+  "likely_lines": [
+    3
+  ],
+  "reasoning": "At the first clock edge, rst is high and en is low, so count remains unknown instead of clearing to zero. The testbench expects zero when rst is high. This is the most likely cause, though no patch has been validated.",
+  "confidence": 0.99,
+  "evidence_ids": [
+    "baseline:simulation",
+    "baseline:compile"
+  ]
+}

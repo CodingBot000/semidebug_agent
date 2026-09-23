@@ -1,0 +1,4 @@
+argv: ["verilator", "--lint-only", "-Wall", "-Wno-fatal", "--top-module", "counter", "rtl/counter.v"]
+status: pass
+exit: 0
+

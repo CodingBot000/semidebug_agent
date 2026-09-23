@@ -9,3 +9,7 @@
 7. No API credentials: record live benchmark as unavailable. Scripted E2E tests and dataset integrity checks are real EDA executions, explicitly not measurements of AI repair ability.
 8. Default remote: private GitHub repository CodingBot000/semidebug_agent, per the approved plan.
 9. Native runtime supports trusted projects only. Docker offline execution is recommended; adversarial HDL needs a dedicated disposable VM/container boundary beyond lexical patch guards.
+
+## 2026-09-23 — Local Codex inference
+
+Use official host Codex CLI ChatGPT authentication at the user’s request. One structured call returns diagnosis and patch per attempt. A short dedicated instruction file and successful-log compaction reduced input tokens from 16,854 to 6,520 in one FIFO pilot; both proposals passed independent verification. Use the optimized prompt unchanged for the 24 public and 6 holdout cases. Record subscription usage as tokens with null API cost; do not equate this pilot with a general repair-quality improvement. EDA remains in credential-free, network-disabled Docker containers.

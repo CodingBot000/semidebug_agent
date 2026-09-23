@@ -1,0 +1,5 @@
+--- a/rtl/fifo.v
++++ b/rtl/fifo.v
+@@ -8,1 +8,1 @@
+-assign full = (count == 3'd3);
++assign full = (count == 3'd4);

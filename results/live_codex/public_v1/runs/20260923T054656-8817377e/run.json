@@ -1,0 +1,416 @@
+{
+  "run_id": "20260923T054656-8817377e",
+  "case_id": "case_026_pulse_sequential",
+  "category": "sequential",
+  "provider": "live-codex-cli",
+  "model": "gpt-6-sol",
+  "reasoning_effort": "low",
+  "billing_mode": "chatgpt-subscription",
+  "cached_input_tokens": 0,
+  "provider_metadata": {
+    "invocations": [
+      {
+        "model": "gpt-6-sol",
+        "cli_version": "codex-cli 0.156.1",
+        "prompt_characters": 4993,
+        "reasoning_effort": "low",
+        "billing_mode": "chatgpt-subscription",
+        "duration_ms": 12725,
+        "process_status": "pass",
+        "tool_events": 0,
+        "item_types": [
+          "error",
+          "agent_message"
+        ],
+        "input_tokens": 6296,
+        "cached_input_tokens": 0,
+        "output_tokens": 340
+      }
+    ]
+  },
+  "iteration": 1,
+  "max_iterations": 3,
+  "project_root": "case_026_pulse_sequential",
+  "mutable_files": [
+    "rtl/pulse.v"
+  ],
+  "immutable_files": [
+    "case.json",
+    "expected/metadata.json",
+    "tb/pulse_tb.v"
+  ],
+  "baseline": {
+    "results": {
+      "compile": {
+        "tool": "iverilog",
+        "command": [
+          "iverilog",
+          "-g2012",
+          "-Wall",
+          "-s",
+          "pulse_tb",
+          "-o",
+          ".build/target.vvp",
+          "rtl/pulse.v",
+          "tb/pulse_tb.v"
+        ],
+        "exit_code": 0,
+        "status": "pass",
+        "stdout": "",
+        "stderr": "",
+        "duration_ms": 12
+      },
+      "simulation": {
+        "tool": "vvp",
+        "command": [
+          "vvp",
+          "-N",
+          ".build/target.vvp",
+          "+SEED=7"
+        ],
+        "exit_code": 1,
+        "status": "fail",
+        "stdout": "FATAL: tb/pulse_tb.v:13: pulse signal=1 enable=1 expected=1 actual=0\n       Time: 5 Scope: pulse_tb.step\n",
+        "stderr": "",
+        "duration_ms": 13
+      },
+      "lint": {
+        "tool": "verilator",
+        "command": [
+          "verilator",
+          "--lint-only",
+          "-Wall",
+          "-Wno-fatal",
+          "--top-module",
+          "pulse",
+          "rtl/pulse.v"
+        ],
+        "exit_code": 1,
+        "status": "fail",
+        "stdout": "",
+        "stderr": "%Warning-BLKSEQ: rtl/pulse.v:6:18: Blocking assignment '=' in sequential logic process\n                                 : ... Suggest using delayed assignment '<='\n    6 |         previous = signal_in;\n      |                  ^\n                 ... For warning description see https://verilator.org/warn/BLKSEQ?v=5.006\n                 ... Use \"/* verilator lint_off BLKSEQ */\" and lint_on around source to disable this message.\n%Error-BLKANDNBLK: rtl/pulse.v:2:5: Unsupported: Blocked and non-blocking assignments to same variable: 'pulse.previous'\n    2 | reg previous;\n      |     ^~~~~~~~\n                   rtl/pulse.v:6:18: ... Location of blocking assignment\n    6 |         previous = signal_in;\n      |                  ^\n                   rtl/pulse.v:4:20: ... Location of nonblocking assignment\n    4 |     if (rst) begin previous <= 1'b0; pulse_out <= 1'b0; end\n      |                    ^~~~~~~~\n%Error: Exiting due to 1 error(s)\n",
+        "duration_ms": 74
+      },
+      "synthesis": {
+        "tool": "yosys",
+        "command": [
+          "yosys",
+          "-Q",
+          "-T",
+          "-p",
+          "read_verilog -sv rtl/pulse.v; hierarchy -check -top pulse; proc; opt; check -assert"
+        ],
+        "exit_code": 0,
+        "status": "pass",
+        "stdout": "\n-- Running command `read_verilog -sv rtl/pulse.v; hierarchy -check -top pulse; proc; opt; check -assert' --\n\n1. Executing Verilog-2005 frontend: rtl/pulse.v\nParsing SystemVerilog input from `rtl/pulse.v' to AST representation.\nGenerating RTLIL representation for module `\\pulse'.\nSuccessfully finished Verilog frontend.\n\n2. Executing HIERARCHY pass (managing design hierarchy).\n\n2.1. Analyzing design hierarchy..\nTop module:  \\pulse\n\n2.2. Analyzing design hierarchy..\nTop module:  \\pulse\nRemoved 0 unused modules.\n\n3. Executing PROC pass (convert processes to netlists).\n\n3.1. Executing PROC_CLEAN pass (remove empty switches from decision trees).\nCleaned up 0 empty switches.\n\n3.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).\nMarked 1 switch rules as full_case in process $proc$rtl/pulse.v:3$1 in module pulse.\nRemoved a total of 0 dead cases.\n\n3.3. Executing PROC_PRUNE pass (remove redundant assignments in processes).\nRemoved 1 redundant assignment.\nPromoted 1 assignment to connection.\n\n3.4. Executing PROC_INIT pass (extract init attributes).\n\n3.5. Executing PROC_ARST pass (detect async resets in processes).\n\n3.6. Executing PROC_ROM pass (convert switches to ROMs).\nConverted 0 switches.\n<suppressed ~1 debug messages>\n\n3.7. Executing PROC_MUX pass (convert decision trees to multiplexers).\nCreating decoders for process `\\pulse.$proc$rtl/pulse.v:3$1'.\n     1/2: $0\\pulse_out[0:0]\n     2/2: $1\\previous[0:0]\n\n3.8. Executing PROC_DLATCH pass (convert process syncs to latches).\n\n3.9. Executing PROC_DFF pass (convert process syncs to FFs).\nCreating register for signal `\\pulse.\\pulse_out' using process `\\pulse.$proc$rtl/pulse.v:3$1'.\n  created $dff cell `$procdff$11' with positive edge clock.\nCreating register for signal `\\pulse.\\previous' using process `\\pulse.$proc$rtl/pulse.v:3$1'.\n  created $dff cell `$procdff$12' with positive edge clock.\n\n3.10. Executing PROC_MEMWR pass (convert process memory writes to cells).\n\n3.11. Executing PROC_CLEAN pass (remove empty switches from decision trees).\nFound and cleaned up 1 empty switch in `\\pulse.$proc$rtl/pulse.v:3$1'.\nRemoving empty process `pulse.$proc$rtl/pulse.v:3$1'.\nCleaned up 1 empty switch.\n\n3.12. Executing OPT_EXPR pass (perform const folding).\nOptimizing module pulse.\n\n4. Executing OPT pass (performing simple optimizations).\n\n4.1. Executing OPT_EXPR pass (perform const folding).\nOptimizing module pulse.\n\n4.2. Executing OPT_MERGE pass (detect identical cells).\nFinding identical cells in module `\\pulse'.\nRemoved a total of 0 cells.\n\n4.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).\nRunning muxtree optimizer on module \\pulse..\n  Creating internal representation of mux trees.\n  Evaluating internal representation of mux trees.\n  Analyzing evaluation results.\nRemoved 0 multiplexer ports.\n<suppressed ~2 debug messages>\n\n4.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).\n  Optimizing cells in module \\pulse.\nPerformed a total of 0 changes.\n\n4.5. Executing OPT_MERGE pass (detect identical cells).\nFinding identical cells in module `\\pulse'.\nRemoved a total of 0 cells.\n\n4.6. Executing OPT_DFF pass (perform DFF optimizations).\nAdding SRST signal on $procdff$11 ($dff) from module pulse (D = $logic_and$rtl/pulse.v:7$4_Y, Q = \\pulse_out, rval = 1'0).\nAdding SRST signal on $procdff$12 ($dff) from module pulse (D = \\signal_in, Q = \\previous, rval = 1'0).\n\n4.7. Executing OPT_CLEAN pass (remove unused cells and wires).\nFinding unused cells or wires in module \\pulse..\nRemoved 3 unused cells and 8 unused wires.\n<suppressed ~5 debug messages>\n\n4.8. Executing OPT_EXPR pass (perform const folding).\nOptimizing module pulse.\n\n4.9. Rerunning OPT passes. (Maybe there is more to do..)\n\n4.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).\nRunning muxtree optimizer on module \\pulse..\n  Creating internal representation of mux trees.\n  No muxes found in this module.\nRemoved 0 multiplexer ports.\n\n4.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).\n  Optimizing cells in module \\pulse.\nPerformed a total of 0 changes.\n\n4.12. Executing OPT_MERGE pass (detect identical cells).\nFinding identical cells in module `\\pulse'.\nRemoved a total of 0 cells.\n\n4.13. Executing OPT_DFF pass (perform DFF optimizations).\n\n4.14. Executing OPT_CLEAN pass (remove unused cells and wires).\nFinding unused cells or wires in module \\pulse..\n\n4.15. Executing OPT_EXPR pass (perform const folding).\nOptimizing module pulse.\n\n4.16. Finished OPT passes. (There is nothing left to do.)\n\n5. Executing CHECK pass (checking for obvious problems).\nChecking module pulse...\nFound and reported 0 problems.\n",
+        "stderr": "",
+        "duration_ms": 21
+      }
+    }
+  },
+  "current_validation": {
+    "results": {
+      "compile": {
+        "tool": "iverilog",
+        "command": [
+          "iverilog",
+          "-g2012",
+          "-Wall",
+          "-s",
+          "pulse_tb",
+          "-o",
+          ".build/target.vvp",
+          "rtl/pulse.v",
+          "tb/pulse_tb.v"
+        ],
+        "exit_code": 0,
+        "status": "pass",
+        "stdout": "",
+        "stderr": "",
+        "duration_ms": 22
+      },
+      "simulation": {
+        "tool": "vvp",
+        "command": [
+          "vvp",
+          "-N",
+          ".build/target.vvp",
+          "+SEED=7"
+        ],
+        "exit_code": 0,
+        "status": "pass",
+        "stdout": "SEMIDEBUG_PASS\n",
+        "stderr": "",
+        "duration_ms": 12
+      },
+      "lint": {
+        "tool": "verilator",
+        "command": [
+          "verilator",
+          "--lint-only",
+          "-Wall",
+          "-Wno-fatal",
+          "--top-module",
+          "pulse",
+          "rtl/pulse.v"
+        ],
+        "exit_code": 0,
+        "status": "pass",
+        "stdout": "",
+        "stderr": "",
+        "duration_ms": 95
+      },
+      "synthesis": {
+        "tool": "yosys",
+        "command": [
+          "yosys",
+          "-Q",
+          "-T",
+          "-p",
+          "read_verilog -sv rtl/pulse.v; hierarchy -check -top pulse; proc; opt; check -assert"
+        ],
+        "exit_code": 0,
+        "status": "pass",
+        "stdout": "\n-- Running command `read_verilog -sv rtl/pulse.v; hierarchy -check -top pulse; proc; opt; check -assert' --\n\n1. Executing Verilog-2005 frontend: rtl/pulse.v\nParsing SystemVerilog input from `rtl/pulse.v' to AST representation.\nGenerating RTLIL representation for module `\\pulse'.\nSuccessfully finished Verilog frontend.\n\n2. Executing HIERARCHY pass (managing design hierarchy).\n\n2.1. Analyzing design hierarchy..\nTop module:  \\pulse\n\n2.2. Analyzing design hierarchy..\nTop module:  \\pulse\nRemoved 0 unused modules.\n\n3. Executing PROC pass (convert processes to netlists).\n\n3.1. Executing PROC_CLEAN pass (remove empty switches from decision trees).\nCleaned up 0 empty switches.\n\n3.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).\nMarked 1 switch rules as full_case in process $proc$rtl/pulse.v:3$1 in module pulse.\nRemoved a total of 0 dead cases.\n\n3.3. Executing PROC_PRUNE pass (remove redundant assignments in processes).\nRemoved 2 redundant assignments.\nPromoted 0 assignments to connections.\n\n3.4. Executing PROC_INIT pass (extract init attributes).\n\n3.5. Executing PROC_ARST pass (detect async resets in processes).\n\n3.6. Executing PROC_ROM pass (convert switches to ROMs).\nConverted 0 switches.\n<suppressed ~1 debug messages>\n\n3.7. Executing PROC_MUX pass (convert decision trees to multiplexers).\nCreating decoders for process `\\pulse.$proc$rtl/pulse.v:3$1'.\n     1/2: $0\\pulse_out[0:0]\n     2/2: $0\\previous[0:0]\n\n3.8. Executing PROC_DLATCH pass (convert process syncs to latches).\n\n3.9. Executing PROC_DFF pass (convert process syncs to FFs).\nCreating register for signal `\\pulse.\\pulse_out' using process `\\pulse.$proc$rtl/pulse.v:3$1'.\n  created $dff cell `$procdff$11' with positive edge clock.\nCreating register for signal `\\pulse.\\previous' using process `\\pulse.$proc$rtl/pulse.v:3$1'.\n  created $dff cell `$procdff$12' with positive edge clock.\n\n3.10. Executing PROC_MEMWR pass (convert process memory writes to cells).\n\n3.11. Executing PROC_CLEAN pass (remove empty switches from decision trees).\nFound and cleaned up 1 empty switch in `\\pulse.$proc$rtl/pulse.v:3$1'.\nRemoving empty process `pulse.$proc$rtl/pulse.v:3$1'.\nCleaned up 1 empty switch.\n\n3.12. Executing OPT_EXPR pass (perform const folding).\nOptimizing module pulse.\n\n4. Executing OPT pass (performing simple optimizations).\n\n4.1. Executing OPT_EXPR pass (perform const folding).\nOptimizing module pulse.\n\n4.2. Executing OPT_MERGE pass (detect identical cells).\nFinding identical cells in module `\\pulse'.\nRemoved a total of 0 cells.\n\n4.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).\nRunning muxtree optimizer on module \\pulse..\n  Creating internal representation of mux trees.\n  Evaluating internal representation of mux trees.\n  Analyzing evaluation results.\nRemoved 0 multiplexer ports.\n<suppressed ~2 debug messages>\n\n4.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).\n  Optimizing cells in module \\pulse.\nPerformed a total of 0 changes.\n\n4.5. Executing OPT_MERGE pass (detect identical cells).\nFinding identical cells in module `\\pulse'.\nRemoved a total of 0 cells.\n\n4.6. Executing OPT_DFF pass (perform DFF optimizations).\nAdding SRST signal on $procdff$11 ($dff) from module pulse (D = $logic_and$rtl/pulse.v:7$4_Y, Q = \\pulse_out, rval = 1'0).\nAdding SRST signal on $procdff$12 ($dff) from module pulse (D = \\signal_in, Q = \\previous, rval = 1'0).\n\n4.7. Executing OPT_CLEAN pass (remove unused cells and wires).\nFinding unused cells or wires in module \\pulse..\nRemoved 2 unused cells and 6 unused wires.\n<suppressed ~3 debug messages>\n\n4.8. Executing OPT_EXPR pass (perform const folding).\nOptimizing module pulse.\n\n4.9. Rerunning OPT passes. (Maybe there is more to do..)\n\n4.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).\nRunning muxtree optimizer on module \\pulse..\n  Creating internal representation of mux trees.\n  No muxes found in this module.\nRemoved 0 multiplexer ports.\n\n4.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).\n  Optimizing cells in module \\pulse.\nPerformed a total of 0 changes.\n\n4.12. Executing OPT_MERGE pass (detect identical cells).\nFinding identical cells in module `\\pulse'.\nRemoved a total of 0 cells.\n\n4.13. Executing OPT_DFF pass (perform DFF optimizations).\n\n4.14. Executing OPT_CLEAN pass (remove unused cells and wires).\nFinding unused cells or wires in module \\pulse..\n\n4.15. Executing OPT_EXPR pass (perform const folding).\nOptimizing module pulse.\n\n4.16. Finished OPT passes. (There is nothing left to do.)\n\n5. Executing CHECK pass (checking for obvious problems).\nChecking module pulse...\nFound and reported 0 problems.\n",
+        "stderr": "",
+        "duration_ms": 35
+      }
+    }
+  },
+  "evidence": [
+    {
+      "id": "attempt-1:compile",
+      "tool": "iverilog",
+      "status": "pass",
+      "message": "\n"
+    },
+    {
+      "id": "attempt-1:simulation",
+      "tool": "vvp",
+      "status": "pass",
+      "message": "SEMIDEBUG_PASS\n\n"
+    },
+    {
+      "id": "attempt-1:lint",
+      "tool": "verilator",
+      "status": "pass",
+      "message": "\n"
+    },
+    {
+      "id": "attempt-1:synthesis",
+      "tool": "yosys",
+      "status": "pass",
+      "message": "\n-- Running command `read_verilog -sv rtl/pulse.v; hierarchy -check -top pulse; proc; opt; check -assert' --\n\n1. Executing Verilog-2005 frontend: rtl/pulse.v\nParsing SystemVerilog input from `rtl/pulse.v' to AST representation.\nGenerating RTLIL representation for module `\\pulse'.\nSuccessfully finished Verilog frontend.\n\n2. Executing HIERARCHY pass (managing design hierarchy).\n\n2.1. Analyzing design hierarchy..\nTop module:  \\pulse\n\n2.2. Analyzing design hierarchy..\nTop module:  \\pulse\nRemoved 0 unused modules.\n\n3. Executing PROC pass (convert processes to netlists).\n\n3.1. Executing PROC_CLEAN pass (remove empty switches from decision trees).\nCleaned up 0 empty switches.\n\n3.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).\nMarked 1 switch rules as full_case in process $proc$rtl/pulse.v:3$1 in module pulse.\nRemoved a total of 0 dead cases.\n\n3.3. Executing PROC_PRUNE pass (remove redundant assignments in processes).\nRemoved 2 redundant assignments.\nPromoted 0 assignments to connections.\n\n3.4. Executing PROC_INIT pass (extract init attributes).\n\n3.5. Executing PROC_ARST pass (detect async resets in processes).\n\n3.6. Executing PROC_ROM pass (convert switches to ROMs).\nConverted 0 switches.\n<suppressed ~1 debug messages>\n\n3.7. Executing PROC_MUX pass (convert decision trees to multiplexers).\nCreating decoders for process `\\pulse.$proc$rtl/pulse.v:3$1'.\n     1/2: $0\\pulse_out[0:0]\n     2/2: $0\\previous[0:0]\n\n3.8. Executing PROC_DLATCH pass (convert process syncs to latches).\n\n3.9. Executing PROC_DFF pass (convert process syncs to FFs).\nCreating register for signal `\\pulse.\\pulse_out' using process `\\pulse.$proc$rtl/pulse.v:3$1'.\n  created $dff cell `$procdff$11' with positive edge clock.\nCreating register for signal `\\pulse.\\previous' using process `\\pulse.$proc$rtl/pulse.v:3$1'.\n  created $dff cell `$procdff$12' with positive edge clock.\n\n3.10. Executing PROC_MEMWR pass (convert process memory writes to cells).\n\n3.11. Executing PROC_CLEAN pass (remove empty switches from decision trees).\nFound and cleaned up 1 empty switch in `\\pulse.$proc$rtl/pulse.v:3$1'.\nRemoving empty process `pulse.$proc$rtl/pulse.v:3$1'.\nCleaned up 1 empty switch.\n\n3.12. Executing OPT_EXPR pass (perform const folding).\nOptimizing module pulse.\n\n4. Executing OPT pass (performing simple optimizations).\n\n4.1. Executing OPT_EXPR pass (perform const folding).\nOptimizing module pulse.\n\n4.2. Executing OPT_MERGE pass (detect identical cells).\nFinding identical cells in module `\\pulse'.\nRemoved a total of 0 cells.\n\n4.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).\nRunning muxtree optimizer on module \\pulse..\n  Creating internal representation of mux trees.\n  Evaluating internal representation of mux trees.\n  Analyzing evaluation results.\nRemoved 0 multiplexer ports.\n<suppressed ~2 debug messages>\n\n4.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).\n  Optimizing cells in module \\pulse.\nPerformed a total of 0 changes.\n\n4.5. Executing OPT_MERGE pass (detect identical cells).\nFinding identical cells in module `\\pulse'.\nRemoved a total of 0 cells.\n\n4.6. Executing OPT_DFF pass (perform DFF optimizations).\nAdding SRST signal on $procdff$11 ($dff) from module pulse (D = $logic_and$rtl/pulse.v:7$4_Y, Q = \\pulse_out, rval = 1'0).\nAdding SRST signal on $procdff$12 ($dff) from module pulse (D = \\signal_in, Q = \\previous, rval = 1'0).\n\n4.7. Executing OPT_CLEAN pass (remove unused cells and wires).\nFinding unused cells or wires in module \\pulse..\nRemoved 2 unused cells and 6 unused wires.\n<suppressed ~3 debug messages>\n\n4.8. Executing OPT_EXPR pass (perform const folding).\nOptimizing module pulse.\n\n4.9. Rerunning OPT passes. (Maybe there is more to do..)\n\n4.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).\nRunning muxtree optimizer on module \\pulse..\n  Creating internal representation of mux trees.\n  No muxes found in this module.\nRemoved 0 multiplexer ports.\n\n4.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).\n  Optimizing cells in module \\pulse.\nPerformed a total of 0 changes.\n\n4.12. Executing OPT_MERGE pass (detect identical cells).\nFinding identical cells in module `\\pulse'.\nRemoved a total of 0 cells.\n\n4.13. Executing OPT_DFF pass (perform DFF optimizations).\n\n4.14. Executing OPT_CLEAN pass (remove unused cells and wires).\nFinding unused cells or wires in module \\pulse..\n\n4.15. Executing OPT_EXPR pass (perform const folding).\nOptimizing module pulse.\n\n4.16. Finished OPT passes. (There is nothing left to do.)\n\n5. Executing CHECK pass (checking for obvious problems).\nChecking module pulse...\nFound and reported 0 problems.\n\n"
+    }
+  ],
+  "hypotheses": [
+    {
+      "summary": "A blocking assignment updates `previous` before the rising-edge test uses it, suppressing the pulse.",
+      "likely_files": [
+        "rtl/pulse.v"
+      ],
+      "likely_lines": [
+        6,
+        7
+      ],
+      "reasoning": "At the first enabled rising edge, simulation reports expected 1 but actual 0. The blocking assignment makes `previous` equal `signal_in` before line 7 evaluates, so `signal_in && !previous` is false. Lint also identifies the blocking assignment and mixed assignment styles. A nonblocking assignment should preserve the prior sampled value for the pulse calculation. This is the most likely cause, though the patch has not been validated.",
+      "confidence": 0.98,
+      "evidence_ids": [
+        "baseline:simulation",
+        "baseline:lint"
+      ]
+    }
+  ],
+  "patch_attempts": [
+    {
+      "iteration": 1,
+      "hypothesis": {
+        "summary": "A blocking assignment updates `previous` before the rising-edge test uses it, suppressing the pulse.",
+        "likely_files": [
+          "rtl/pulse.v"
+        ],
+        "likely_lines": [
+          6,
+          7
+        ],
+        "reasoning": "At the first enabled rising edge, simulation reports expected 1 but actual 0. The blocking assignment makes `previous` equal `signal_in` before line 7 evaluates, so `signal_in && !previous` is false. Lint also identifies the blocking assignment and mixed assignment styles. A nonblocking assignment should preserve the prior sampled value for the pulse calculation. This is the most likely cause, though the patch has not been validated.",
+        "confidence": 0.98,
+        "evidence_ids": [
+          "baseline:simulation",
+          "baseline:lint"
+        ]
+      },
+      "proposal": {
+        "explanation": "Use a nonblocking assignment for the sampled input so `pulse_out` compares the current input with the previous clock's sample.",
+        "unified_diff": "--- a/rtl/pulse.v\n+++ b/rtl/pulse.v\n@@ -3,7 +3,7 @@\n always @(posedge clk) begin\n     if (rst) begin previous <= 1'b0; pulse_out <= 1'b0; end\n     else begin\n-        previous = signal_in;\n+        previous <= signal_in;\n         pulse_out <= enable && signal_in && !previous;\n     end\n end\n",
+        "expected_effect": "An enabled rising edge produces a one-cycle pulse, and `previous` uses only nonblocking assignments.",
+        "risks": [
+          "The change is unvalidated; other behavioral requirements are not available."
+        ]
+      },
+      "guard_error": null,
+      "validation": {
+        "results": {
+          "compile": {
+            "tool": "iverilog",
+            "command": [
+              "iverilog",
+              "-g2012",
+              "-Wall",
+              "-s",
+              "pulse_tb",
+              "-o",
+              ".build/target.vvp",
+              "rtl/pulse.v",
+              "tb/pulse_tb.v"
+            ],
+            "exit_code": 0,
+            "status": "pass",
+            "stdout": "",
+            "stderr": "",
+            "duration_ms": 22
+          },
+          "simulation": {
+            "tool": "vvp",
+            "command": [
+              "vvp",
+              "-N",
+              ".build/target.vvp",
+              "+SEED=7"
+            ],
+            "exit_code": 0,
+            "status": "pass",
+            "stdout": "SEMIDEBUG_PASS\n",
+            "stderr": "",
+            "duration_ms": 12
+          },
+          "lint": {
+            "tool": "verilator",
+            "command": [
+              "verilator",
+              "--lint-only",
+              "-Wall",
+              "-Wno-fatal",
+              "--top-module",
+              "pulse",
+              "rtl/pulse.v"
+            ],
+            "exit_code": 0,
+            "status": "pass",
+            "stdout": "",
+            "stderr": "",
+            "duration_ms": 95
+          },
+          "synthesis": {
+            "tool": "yosys",
+            "command": [
+              "yosys",
+              "-Q",
+              "-T",
+              "-p",
+              "read_verilog -sv rtl/pulse.v; hierarchy -check -top pulse; proc; opt; check -assert"
+            ],
+            "exit_code": 0,
+            "status": "pass",
+            "stdout": "\n-- Running command `read_verilog -sv rtl/pulse.v; hierarchy -check -top pulse; proc; opt; check -assert' --\n\n1. Executing Verilog-2005 frontend: rtl/pulse.v\nParsing SystemVerilog input from `rtl/pulse.v' to AST representation.\nGenerating RTLIL representation for module `\\pulse'.\nSuccessfully finished Verilog frontend.\n\n2. Executing HIERARCHY pass (managing design hierarchy).\n\n2.1. Analyzing design hierarchy..\nTop module:  \\pulse\n\n2.2. Analyzing design hierarchy..\nTop module:  \\pulse\nRemoved 0 unused modules.\n\n3. Executing PROC pass (convert processes to netlists).\n\n3.1. Executing PROC_CLEAN pass (remove empty switches from decision trees).\nCleaned up 0 empty switches.\n\n3.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).\nMarked 1 switch rules as full_case in process $proc$rtl/pulse.v:3$1 in module pulse.\nRemoved a total of 0 dead cases.\n\n3.3. Executing PROC_PRUNE pass (remove redundant assignments in processes).\nRemoved 2 redundant assignments.\nPromoted 0 assignments to connections.\n\n3.4. Executing PROC_INIT pass (extract init attributes).\n\n3.5. Executing PROC_ARST pass (detect async resets in processes).\n\n3.6. Executing PROC_ROM pass (convert switches to ROMs).\nConverted 0 switches.\n<suppressed ~1 debug messages>\n\n3.7. Executing PROC_MUX pass (convert decision trees to multiplexers).\nCreating decoders for process `\\pulse.$proc$rtl/pulse.v:3$1'.\n     1/2: $0\\pulse_out[0:0]\n     2/2: $0\\previous[0:0]\n\n3.8. Executing PROC_DLATCH pass (convert process syncs to latches).\n\n3.9. Executing PROC_DFF pass (convert process syncs to FFs).\nCreating register for signal `\\pulse.\\pulse_out' using process `\\pulse.$proc$rtl/pulse.v:3$1'.\n  created $dff cell `$procdff$11' with positive edge clock.\nCreating register for signal `\\pulse.\\previous' using process `\\pulse.$proc$rtl/pulse.v:3$1'.\n  created $dff cell `$procdff$12' with positive edge clock.\n\n3.10. Executing PROC_MEMWR pass (convert process memory writes to cells).\n\n3.11. Executing PROC_CLEAN pass (remove empty switches from decision trees).\nFound and cleaned up 1 empty switch in `\\pulse.$proc$rtl/pulse.v:3$1'.\nRemoving empty process `pulse.$proc$rtl/pulse.v:3$1'.\nCleaned up 1 empty switch.\n\n3.12. Executing OPT_EXPR pass (perform const folding).\nOptimizing module pulse.\n\n4. Executing OPT pass (performing simple optimizations).\n\n4.1. Executing OPT_EXPR pass (perform const folding).\nOptimizing module pulse.\n\n4.2. Executing OPT_MERGE pass (detect identical cells).\nFinding identical cells in module `\\pulse'.\nRemoved a total of 0 cells.\n\n4.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).\nRunning muxtree optimizer on module \\pulse..\n  Creating internal representation of mux trees.\n  Evaluating internal representation of mux trees.\n  Analyzing evaluation results.\nRemoved 0 multiplexer ports.\n<suppressed ~2 debug messages>\n\n4.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).\n  Optimizing cells in module \\pulse.\nPerformed a total of 0 changes.\n\n4.5. Executing OPT_MERGE pass (detect identical cells).\nFinding identical cells in module `\\pulse'.\nRemoved a total of 0 cells.\n\n4.6. Executing OPT_DFF pass (perform DFF optimizations).\nAdding SRST signal on $procdff$11 ($dff) from module pulse (D = $logic_and$rtl/pulse.v:7$4_Y, Q = \\pulse_out, rval = 1'0).\nAdding SRST signal on $procdff$12 ($dff) from module pulse (D = \\signal_in, Q = \\previous, rval = 1'0).\n\n4.7. Executing OPT_CLEAN pass (remove unused cells and wires).\nFinding unused cells or wires in module \\pulse..\nRemoved 2 unused cells and 6 unused wires.\n<suppressed ~3 debug messages>\n\n4.8. Executing OPT_EXPR pass (perform const folding).\nOptimizing module pulse.\n\n4.9. Rerunning OPT passes. (Maybe there is more to do..)\n\n4.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).\nRunning muxtree optimizer on module \\pulse..\n  Creating internal representation of mux trees.\n  No muxes found in this module.\nRemoved 0 multiplexer ports.\n\n4.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).\n  Optimizing cells in module \\pulse.\nPerformed a total of 0 changes.\n\n4.12. Executing OPT_MERGE pass (detect identical cells).\nFinding identical cells in module `\\pulse'.\nRemoved a total of 0 cells.\n\n4.13. Executing OPT_DFF pass (perform DFF optimizations).\n\n4.14. Executing OPT_CLEAN pass (remove unused cells and wires).\nFinding unused cells or wires in module \\pulse..\n\n4.15. Executing OPT_EXPR pass (perform const folding).\nOptimizing module pulse.\n\n4.16. Finished OPT passes. (There is nothing left to do.)\n\n5. Executing CHECK pass (checking for obvious problems).\nChecking module pulse...\nFound and reported 0 problems.\n",
+            "stderr": "",
+            "duration_ms": 35
+          }
+        }
+      },
+      "regression": {
+        "results": {
+          "regression_17.compile": {
+            "tool": "iverilog",
+            "command": [
+              "iverilog",
+              "-g2012",
+              "-Wall",
+              "-s",
+              "pulse_tb",
+              "-o",
+              ".build/regression_17.vvp",
+              "rtl/pulse.v",
+              "tb/pulse_tb.v"
+            ],
+            "exit_code": 0,
+            "status": "pass",
+            "stdout": "",
+            "stderr": "",
+            "duration_ms": 12
+          },
+          "regression_17.simulation": {
+            "tool": "vvp",
+            "command": [
+              "vvp",
+              "-N",
+              ".build/regression_17.vvp",
+              "+REGRESSION",
+              "+SEED=17"
+            ],
+            "exit_code": 0,
+            "status": "pass",
+            "stdout": "SEMIDEBUG_PASS\n",
+            "stderr": "",
+            "duration_ms": 12
+          },
+          "regression_103.compile": {
+            "tool": "iverilog",
+            "command": [
+              "iverilog",
+              "-g2012",
+              "-Wall",
+              "-s",
+              "pulse_tb",
+              "-o",
+              ".build/regression_103.vvp",
+              "rtl/pulse.v",
+              "tb/pulse_tb.v"
+            ],
+            "exit_code": 0,
+            "status": "pass",
+            "stdout": "",
+            "stderr": "",
+            "duration_ms": 11
+          },
+          "regression_103.simulation": {
+            "tool": "vvp",
+            "command": [
+              "vvp",
+              "-N",
+              ".build/regression_103.vvp",
+              "+REGRESSION",
+              "+SEED=103"
+            ],
+            "exit_code": 0,
+            "status": "pass",
+            "stdout": "SEMIDEBUG_PASS\n",
+            "stderr": "",
+            "duration_ms": 13
+          }
+        }
+      }
+    }
+  ],
+  "final_status": "FIXED",
+  "failure_reason": null,
+  "immutable_before": {
+    "case.json": "35e34cb9c358e159a179b8cc282c2c0f5180666fe36426afee30a79e285505d6",
+    "expected/metadata.json": "debb84aa5767c2399e45855c7cca0e2991a23bb6e122eff53fac346c84ab59f7",
+    "tb/pulse_tb.v": "c2b64f8e1b0c69f065a656cba53515e64a497e06893424c018e44661e56d8f88"
+  },
+  "immutable_after": {
+    "case.json": "35e34cb9c358e159a179b8cc282c2c0f5180666fe36426afee30a79e285505d6",
+    "expected/metadata.json": "debb84aa5767c2399e45855c7cca0e2991a23bb6e122eff53fac346c84ab59f7",
+    "tb/pulse_tb.v": "c2b64f8e1b0c69f065a656cba53515e64a497e06893424c018e44661e56d8f88"
+  },
+  "integrity_pass": true,
+  "success": true,
+  "regression_pass": true,
+  "duration_ms": 15115,
+  "llm_calls": 1,
+  "input_tokens": 6296,
+  "output_tokens": 340,
+  "estimated_cost": null,
+  "price_source": null
+}

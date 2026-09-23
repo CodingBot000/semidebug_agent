@@ -1,0 +1,15 @@
+{
+  "summary": "The FIFO asserts full at occupancy 3 instead of its four-entry capacity.",
+  "likely_files": [
+    "rtl/fifo.v"
+  ],
+  "likely_lines": [
+    8
+  ],
+  "reasoning": "The memory has four entries (line 3), and the testbench expects full only when occupancy reaches 4 (tb/fifo_tb.v:13,22). Simulation fails at occupancy 3 with full=1. Changing the threshold to 4 is the minimal likely repair; it has not been validated.",
+  "confidence": 0.99,
+  "evidence_ids": [
+    "baseline:simulation",
+    "baseline:compile"
+  ]
+}

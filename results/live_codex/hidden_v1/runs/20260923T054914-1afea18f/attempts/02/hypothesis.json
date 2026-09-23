@@ -1,0 +1,15 @@
+{
+  "summary": "The done state returns to busy instead of idle.",
+  "likely_files": [
+    "rtl/controller.v"
+  ],
+  "likely_lines": [
+    10
+  ],
+  "reasoning": "The reference moves from state 2 to state 0 (tb/controller_tb.v:13), but the RTL moves to state 1. The reported expected idle state with busy asserted is consistent with that mismatch. The previous proposal was rejected for an invalid diff hunk, not for a demonstrated behavioral failure; this corrected diff remains unvalidated.",
+  "confidence": 0.99,
+  "evidence_ids": [
+    "baseline:simulation",
+    "guard:1"
+  ]
+}

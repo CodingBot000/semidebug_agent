@@ -1,0 +1,4 @@
+argv: ["verilator", "--lint-only", "-Wall", "-Wno-fatal", "--top-module", "fifo", "rtl/fifo.v"]
+status: pass
+exit: 0
+

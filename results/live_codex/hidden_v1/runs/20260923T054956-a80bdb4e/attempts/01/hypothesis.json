@@ -1,0 +1,18 @@
+{
+  "summary": "The edge-history register tracks enable instead of signal_in.",
+  "likely_files": [
+    "rtl/pulse.v"
+  ],
+  "likely_lines": [
+    6,
+    7
+  ],
+  "reasoning": "The reference updates previous_ref from signal_in, while RTL updates previous from enable. This can generate a pulse when signal_in remains high after enable changes. The observed expected=0, actual=1 failure is consistent with that mismatch. Compilation, lint, and synthesis passed, so the evidence points to behavior rather than syntax. This is not independently validated as a repair.",
+  "confidence": 0.98,
+  "evidence_ids": [
+    "baseline:simulation",
+    "baseline:compile",
+    "baseline:lint",
+    "baseline:synthesis"
+  ]
+}
